@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 4 13
+Sheet 4 15
 Title ""
 Date "2019-04-11"
 Rev "A"
@@ -25,11 +25,11 @@ F 3 "~" H 1070 1990 50  0001 C CNN
 	1    1070 1990
 	-1   0    0    -1  
 $EndComp
-Text GLabel 1270 1790 2    50   UnSpc ~ 0
+Text GLabel 1270 1790 2    50   UnSpc ~ 10
 ~MCLR
-Text GLabel 1270 2090 2    50   BiDi ~ 0
+Text GLabel 1270 2090 2    50   BiDi ~ 10
 ICSPDAT
-Text GLabel 1270 2190 2    50   Output ~ 0
+Text GLabel 1270 2190 2    50   Output ~ 10
 ICSPCLK
 $Comp
 L power:GND #PWR?
@@ -170,7 +170,7 @@ Wire Wire Line
 Connection ~ 7550 2250
 Wire Wire Line
 	7550 2250 7550 2340
-Text GLabel 8230 2250 2    50   UnSpc ~ 0
+Text GLabel 8230 2250 2    50   UnSpc ~ 10
 ~MCLR
 $Comp
 L Switch:SW_Push SW?

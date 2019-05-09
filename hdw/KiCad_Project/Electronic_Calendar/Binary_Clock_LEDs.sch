@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 13 13
+Sheet 12 15
 Title ""
 Date ""
 Rev ""
@@ -1158,47 +1158,47 @@ Wire Wire Line
 	6550 4050 6550 3950
 Wire Wire Line
 	6550 4150 6550 4050
-Text GLabel 4240 2750 0    40   Input ~ 0
+Text GLabel 4240 2750 0    40   Input ~ 8
 ~Hours0_LED
-Text GLabel 4240 2850 0    40   Input ~ 0
+Text GLabel 4240 2850 0    40   Input ~ 8
 ~Hours1_LED
-Text GLabel 4240 2950 0    40   Input ~ 0
+Text GLabel 4240 2950 0    40   Input ~ 8
 ~Hours2_LED
-Text GLabel 4240 3050 0    40   Input ~ 0
+Text GLabel 4240 3050 0    40   Input ~ 8
 ~Hours3_LED
-Text GLabel 4240 3150 0    40   Input ~ 0
+Text GLabel 4240 3150 0    40   Input ~ 8
 ~Hours4_LED
-Text GLabel 4240 3250 0    40   Input ~ 0
+Text GLabel 4240 3250 0    40   Input ~ 8
 ~Hours5_LED
-Text GLabel 4240 3350 0    40   Input ~ 0
+Text GLabel 4240 3350 0    40   Input ~ 8
 ~Hours6_LED
-Text GLabel 4240 3550 0    40   Input ~ 0
+Text GLabel 4240 3550 0    40   Input ~ 8
 ~Minutes0_LED
-Text GLabel 4240 3650 0    40   Input ~ 0
+Text GLabel 4240 3650 0    40   Input ~ 8
 ~Minutes1_LED
-Text GLabel 4240 3750 0    40   Input ~ 0
+Text GLabel 4240 3750 0    40   Input ~ 8
 ~Minutes2_LED
-Text GLabel 4240 3850 0    40   Input ~ 0
+Text GLabel 4240 3850 0    40   Input ~ 8
 ~Minutes3_LED
-Text GLabel 4240 3950 0    40   Input ~ 0
+Text GLabel 4240 3950 0    40   Input ~ 8
 ~Minutes4_LED
-Text GLabel 4240 4050 0    40   Input ~ 0
+Text GLabel 4240 4050 0    40   Input ~ 8
 ~Minutes5_LED
-Text GLabel 4240 4150 0    40   Input ~ 0
+Text GLabel 4240 4150 0    40   Input ~ 8
 ~Minutes6_LED
-Text GLabel 4240 4350 0    40   Input ~ 0
+Text GLabel 4240 4350 0    40   Input ~ 8
 ~Seconds0_LED
-Text GLabel 4240 4450 0    40   Input ~ 0
+Text GLabel 4240 4450 0    40   Input ~ 8
 ~Seconds1_LED
-Text GLabel 4240 4550 0    40   Input ~ 0
+Text GLabel 4240 4550 0    40   Input ~ 8
 ~Seconds2_LED
-Text GLabel 4240 4650 0    40   Input ~ 0
+Text GLabel 4240 4650 0    40   Input ~ 8
 ~Seconds3_LED
-Text GLabel 4240 4750 0    40   Input ~ 0
+Text GLabel 4240 4750 0    40   Input ~ 8
 ~Seconds4_LED
-Text GLabel 4240 4850 0    40   Input ~ 0
+Text GLabel 4240 4850 0    40   Input ~ 8
 ~Seconds5_LED
-Text GLabel 4240 4950 0    40   Input ~ 0
+Text GLabel 4240 4950 0    40   Input ~ 8
 ~Seconds6_LED
 Wire Wire Line
 	4240 3250 5620 3250

@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 8 13
+Sheet 8 15
 Title ""
 Date ""
 Rev ""
@@ -292,7 +292,7 @@ F 3 "" H 4060 1750 50  0001 C CNN
 	1    4060 1750
 	1    0    0    -1  
 $EndComp
-Text GLabel 1870 2290 0    50   Input ~ 0
+Text GLabel 1870 2290 0    50   Input ~ 10
 POS12_PGOOD
 $Comp
 L Custom_Library:74LVC1G06_Power U?
@@ -318,7 +318,7 @@ F 4 "296-8484-1-ND" H 4170 2290 50  0001 C CNN "Digi-Key PN"
 	1    4170 2290
 	1    0    0    -1  
 $EndComp
-Text GLabel 3870 2290 0    50   Input ~ 0
+Text GLabel 3870 2290 0    50   Input ~ 10
 POS3P3_PGOOD
 $Comp
 L Custom_Library:C_Custom C?
@@ -911,11 +911,11 @@ F 4 "296-8484-1-ND" H 6170 4040 50  0001 C CNN "Digi-Key PN"
 	1    6170 4040
 	1    0    0    -1  
 $EndComp
-Text GLabel 1870 4040 0    50   Input ~ 0
+Text GLabel 1870 4040 0    50   Input ~ 10
 BCKP_SYSGD
-Text GLabel 3870 4040 0    50   Input ~ 0
+Text GLabel 3870 4040 0    50   Input ~ 10
 BCKP_CAPGD
-Text GLabel 5870 2290 0    40   Input ~ 0
+Text GLabel 5870 2290 0    40   Input ~ 8
 ~BCKP_CAPFLT
 $Comp
 L Custom_Library:74LVC1G17_Power U?

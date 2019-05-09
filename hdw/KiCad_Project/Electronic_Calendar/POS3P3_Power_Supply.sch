@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 3 13
+Sheet 3 15
 Title "Electronic Display Logic Board"
 Date "2018-12-15"
 Rev "A"
@@ -498,7 +498,7 @@ Wire Wire Line
 	3550 4210 1890 4210
 Wire Wire Line
 	1890 4210 1890 3980
-Text GLabel 1810 4210 0    50   Output ~ 0
+Text GLabel 1810 4210 0    50   Output ~ 10
 POS3P3_PGOOD
 Wire Wire Line
 	1810 4210 1890 4210
@@ -587,9 +587,9 @@ F 7 "1/10W" H 2770 3260 50  0000 L CNN "Wattage"
 	1    2690 3340
 	-1   0    0    -1  
 $EndComp
-Text Notes 7410 4290 0    50   ~ 0
+Text Notes 7410 4290 0    50   ~ 10
 Designed for 5A Max Iout
-Text Notes 1160 3280 0    50   ~ 0
+Text Notes 1160 3280 0    50   ~ 10
 Turn on threshold set to 6.6V
 $Comp
 L Custom_Library:R_Custom R?
@@ -609,7 +609,7 @@ F 7 "1/10W" H 2760 3750 50  0000 L CNN "Wattage"
 	1    2690 3830
 	-1   0    0    -1  
 $EndComp
-Text Notes 2320 6200 0    50   ~ 0
+Text Notes 2320 6200 0    50   ~ 10
 Switching frequency set to 2.5 MHz
 $Comp
 L Custom_Library:C_Custom C?
@@ -987,12 +987,12 @@ F 3 "" H 9800 6160 50  0001 C CNN
 	1    9800 6160
 	1    0    0    -1  
 $EndComp
-Text GLabel 9880 5780 2    50   Output ~ 0
+Text GLabel 9880 5780 2    50   Output ~ 10
 POS3P3_ISNS
 Wire Wire Line
 	9880 5780 9800 5780
 Connection ~ 9800 5780
-Text Notes 8790 6640 0    50   ~ 0
+Text Notes 8790 6640 0    50   ~ 10
 1.996 V/A
 $Comp
 L Custom_Library:C_Custom C?

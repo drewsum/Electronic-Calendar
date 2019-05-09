@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 5 13
+Sheet 5 15
 Title ""
 Date "2019-04-11"
 Rev "A"
@@ -149,7 +149,7 @@ F 3 "" H 4810 880 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	4810 880  4810 960 
-Text GLabel 3460 5910 0    40   Input ~ 0
+Text GLabel 3460 5910 0    40   Input ~ 8
 ~MCLR
 NoConn ~ 3460 5510
 NoConn ~ 3460 5610

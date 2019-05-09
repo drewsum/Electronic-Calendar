@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 9 13
+Sheet 9 15
 Title ""
 Date ""
 Rev ""
@@ -188,7 +188,7 @@ Wire Wire Line
 	3170 3060 2920 3060
 Wire Wire Line
 	2920 3060 2920 3140
-Text GLabel 2840 3060 0    50   Input ~ 0
+Text GLabel 2840 3060 0    50   Input ~ 10
 Heartbeat_LED
 Wire Wire Line
 	2840 3060 2920 3060
@@ -351,7 +351,7 @@ F 7 "RMCF0603FT10K0CT-ND" H 4920 2830 50  0001 C CNN "Digi-Key PN"
 	1    4920 2830
 	-1   0    0    -1  
 $EndComp
-Text GLabel 4840 3060 0    50   Input ~ 0
+Text GLabel 4840 3060 0    50   Input ~ 10
 Reset_LED
 Wire Wire Line
 	4840 3060 4920 3060
@@ -527,7 +527,7 @@ Wire Wire Line
 	7170 3060 6920 3060
 Wire Wire Line
 	6920 3060 6920 3140
-Text GLabel 6840 3060 0    50   Input ~ 0
+Text GLabel 6840 3060 0    50   Input ~ 10
 USB_Error_LED
 Wire Wire Line
 	6840 3060 6920 3060
@@ -881,7 +881,7 @@ Wire Wire Line
 	3170 5060 2920 5060
 Wire Wire Line
 	2920 5060 2920 5140
-Text GLabel 2840 5060 0    50   Input ~ 0
+Text GLabel 2840 5060 0    50   Input ~ 10
 Analog_Error_LED
 Wire Wire Line
 	2840 5060 2920 5060
@@ -1079,8 +1079,8 @@ F 3 "~" H 6040 4790 50  0001 C CNN
 	1    6040 4790
 	0    -1   -1   0   
 $EndComp
-Text GLabel 4840 5060 0    50   Input ~ 0
+Text GLabel 4840 5060 0    50   Input ~ 10
 Exception_LED
-Text GLabel 6840 5060 0    50   Input ~ 0
+Text GLabel 6840 5060 0    50   Input ~ 10
 Other_Error_LED
 $EndSCHEMATC

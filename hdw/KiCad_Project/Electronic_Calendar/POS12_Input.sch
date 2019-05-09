@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 2 13
+Sheet 2 15
 Title ""
 Date "2019-01-03"
 Rev "A"
@@ -430,7 +430,7 @@ Wire Wire Line
 	4840 4340 5130 4340
 Wire Wire Line
 	5130 4340 5130 4110
-Text GLabel 5210 4340 2    50   Output ~ 0
+Text GLabel 5210 4340 2    50   Output ~ 10
 POS12_PGOOD
 Wire Wire Line
 	5210 4340 5130 4340
@@ -553,7 +553,7 @@ Wire Wire Line
 Wire Wire Line
 	1530 2370 1450 2370
 Connection ~ 1530 2470
-Text Notes 2730 5270 0    50   ~ 0
+Text Notes 2730 5270 0    50   ~ 10
 UVLO threshold set to 10V\nOVLO threshold set to 14V
 $Comp
 L Custom_Library:C_Custom C?
@@ -812,12 +812,12 @@ F 3 "" H 9030 3800 50  0001 C CNN
 	1    9030 3800
 	1    0    0    -1  
 $EndComp
-Text GLabel 9110 3420 2    50   Output ~ 0
+Text GLabel 9110 3420 2    50   Output ~ 10
 POS12_ISNS
 Wire Wire Line
 	9110 3420 9030 3420
 Connection ~ 9030 3420
-Text Notes 8290 4280 0    50   ~ 0
+Text Notes 8290 4280 0    50   ~ 10
 1.996 V/A
 $Comp
 L Custom_Library:C_Custom C?

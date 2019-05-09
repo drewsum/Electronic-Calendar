@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 7 13
+Sheet 7 15
 Title "QI Charger"
 Date "2019-01-03"
 Rev "A"
@@ -225,7 +225,7 @@ F 3 "" H 3390 3530 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	3390 3530 3700 3530
-Text GLabel 6450 3730 2    50   Output ~ 0
+Text GLabel 6450 3730 2    50   Output ~ 10
 Cap_Touch_Power
 Wire Wire Line
 	6450 3730 6370 3730

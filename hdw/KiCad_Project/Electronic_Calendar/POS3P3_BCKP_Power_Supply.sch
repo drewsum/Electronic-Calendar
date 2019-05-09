@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 11 13
+Sheet 11 15
 Title ""
 Date "2019-04-11"
 Rev "A"
@@ -520,15 +520,15 @@ Wire Wire Line
 	3610 4980 3610 5160
 Wire Wire Line
 	3610 5160 4500 5160
-Text GLabel 1910 4060 0    40   Output ~ 0
+Text GLabel 1910 4060 0    40   Output ~ 8
 ~BCKP_PFO
-Text GLabel 1910 4160 0    50   Output ~ 0
+Text GLabel 1910 4160 0    50   Output ~ 10
 BCKP_SYSGD
-Text GLabel 1910 4260 0    50   Output ~ 0
+Text GLabel 1910 4260 0    50   Output ~ 10
 BCKP_CAPGD
-Text GLabel 1910 4360 0    40   Output ~ 0
+Text GLabel 1910 4360 0    40   Output ~ 8
 ~BCKP_CAPFLT
-Text GLabel 1910 4460 0    50   Output ~ 0
+Text GLabel 1910 4460 0    50   Output ~ 10
 BCKP_IMON
 $Comp
 L Custom_Library:R_Custom R?
@@ -667,7 +667,7 @@ F 4 "36-5000-ND" H 7730 2050 50  0001 C CNN "Digi-Key PN"
 $EndComp
 Wire Wire Line
 	7730 2130 7730 2050
-Text Notes 8120 4080 0    50   ~ 0
+Text Notes 8120 4080 0    50   ~ 10
 Need to make custom horizontal footprint for SCC cap
 $Comp
 L Custom_Library:+3.3V_BCKP #PWR?
@@ -784,9 +784,9 @@ Wire Wire Line
 	5510 1510 4750 1510
 Wire Wire Line
 	4750 1510 4750 2130
-Text GLabel 1910 5060 0    40   Input ~ 0
+Text GLabel 1910 5060 0    40   Input ~ 8
 ~BCKP_CHGEN
-Text GLabel 1910 5160 0    40   Input ~ 0
+Text GLabel 1910 5160 0    40   Input ~ 8
 ~BCKP_BSTEN
 Wire Wire Line
 	1910 5060 3130 5060
