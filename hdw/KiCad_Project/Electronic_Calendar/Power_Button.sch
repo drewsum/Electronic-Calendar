@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 7 15
+Sheet 7 17
 Title "QI Charger"
 Date "2019-01-03"
 Rev "A"
@@ -184,35 +184,6 @@ Connection ~ 4330 3530
 Wire Wire Line
 	4330 3530 4970 3530
 $Comp
-L Custom_Library:R_Custom R?
-U 1 1 5C28ACBD
-P 5370 2650
-AR Path="/5C3165D8/5C28ACBD" Ref="R?"  Part="1" 
-AR Path="/5C26E09A/5C28ACBD" Ref="R?"  Part="1" 
-AR Path="/5CE10A38/5C28ACBD" Ref="R?"  Part="1" 
-F 0 "R?" V 5270 2650 50  0000 C CNN
-F 1 "0" V 5370 2650 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 5370 2650 50  0001 C CNN
-F 3 "" H 5370 2650 50  0001 C CNN
-F 4 "DNP" V 5190 2650 50  0000 C CNN "Config"
-F 5 "P0.0GCT-ND" H 5670 3050 60  0001 C CNN "Digi-Key PN"
-F 6 "0603" V 5470 2650 50  0000 C CNN "display_footprint"
-F 7 "1%" V 5570 2650 50  0000 C CNN "Tolerance"
-F 8 "1/10W" V 5670 2650 50  0000 C CNN "Wattage"
-	1    5370 2650
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	5220 2650 4330 2650
-Wire Wire Line
-	4330 2650 4330 3530
-Wire Wire Line
-	5520 2650 6370 2650
-Wire Wire Line
-	6370 2650 6370 3730
-Wire Wire Line
-	6370 3730 5770 3730
-$Comp
 L Custom_Library:Cap_Touch SW?
 U 1 1 5C29240E
 P 3390 3530
@@ -227,9 +198,6 @@ Wire Wire Line
 	3390 3530 3700 3530
 Text GLabel 6450 3730 2    50   Output ~ 10
 Cap_Touch_Power
-Wire Wire Line
-	6450 3730 6370 3730
-Connection ~ 6370 3730
 Text Notes 540  690  0    100  ~ 20
 08. Capacitive Touch Sensors
 $Comp
@@ -265,4 +233,6 @@ F 3 "" H 5770 3530 50  0001 C CNN
 	1    5770 3530
 	0    1    1    0   
 $EndComp
+Wire Wire Line
+	5770 3730 6450 3730
 $EndSCHEMATC

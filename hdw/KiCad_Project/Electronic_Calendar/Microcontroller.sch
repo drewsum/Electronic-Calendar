@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 5 15
+Sheet 5 17
 Title ""
 Date "2019-04-11"
 Rev "A"
@@ -169,4 +169,156 @@ Wire Wire Line
 	3290 5490 3290 5410
 Wire Wire Line
 	3290 5410 3460 5410
+Text GLabel 3460 2310 0    50   BiDi ~ 0
+TEMP_I2C_SDA
+Text GLabel 3460 2210 0    50   Output ~ 0
+TEMP_I2C_SCL
+Text GLabel 3460 5010 0    50   Input ~ 0
+POS12_PGOOD
+Text GLabel 7460 5310 2    50   Input ~ 0
+POS3P3_PGOOD
+Text GLabel 7460 5210 2    50   Input ~ 0
+Cap_Touch_Power
+Text GLabel 7460 3910 2    50   Output ~ 0
+Heartbeat_LED
+Text GLabel 7460 2410 2    50   Output ~ 0
+Reset_LED
+Text GLabel 7460 4010 2    50   Output ~ 0
+USB_Error_LED
+Text GLabel 7460 1210 2    40   Output ~ 0
+~JAN_LED
+Text GLabel 7460 1310 2    40   Output ~ 0
+~FEB_LED
+Text GLabel 7460 1410 2    40   Output ~ 0
+~MAR_LED
+Text GLabel 7460 1510 2    40   Output ~ 0
+~APR_LED
+Text GLabel 7460 1610 2    40   Output ~ 0
+~MAY_LED
+Text GLabel 7460 1710 2    40   Output ~ 0
+~JUN_LED
+Text GLabel 7460 1810 2    40   Output ~ 0
+~JUL_LED
+Text GLabel 7460 1910 2    40   Output ~ 0
+~AUG_LED
+Text GLabel 7460 2010 2    40   Output ~ 0
+~SEP_LED
+Text GLabel 7460 2110 2    40   Output ~ 0
+~OCT_LED
+Text GLabel 7460 2210 2    40   Output ~ 0
+~NOV_LED
+Text GLabel 7460 2310 2    40   Output ~ 0
+~DEC_LED
+Text GLabel 7460 4410 2    40   Input ~ 0
+~BCKP_PFO
+Text GLabel 7460 4510 2    50   Input ~ 0
+BCKP_SYSGD
+Text GLabel 7460 4610 2    50   Input ~ 0
+BCKP_CAPGD
+Text GLabel 7460 4710 2    40   Input ~ 0
+~BCKP_CAPFLT
+Text GLabel 3460 1710 0    50   Input ~ 0
+POS3P3_ADC
+Text GLabel 3460 1410 0    50   Input ~ 0
+POS12_ISNS_ADC
+Text GLabel 3460 1310 0    50   Input ~ 0
+POS3P3_ISNS_ADC
+Text GLabel 3460 1610 0    50   Input ~ 0
+BCKP_IMON_ADC
+Text GLabel 3460 1210 0    50   Input ~ 0
+POS12_ADC
+Text GLabel 3460 1510 0    50   Input ~ 0
+POS5_USB_ADC
+Text GLabel 7460 5410 2    50   Input ~ 0
+POS3P3_PGOOD
+Text Notes 8250 5390 0    50   ~ 0
+Intentionally Duplicated, using INT3 and INT4 for edge detection
+Text GLabel 7460 3310 2    40   Output ~ 0
+~SAT_LED
+Text GLabel 7460 3210 2    40   Output ~ 0
+~FRI_LED
+Text GLabel 7460 3110 2    40   Output ~ 0
+~THR_LED
+Text GLabel 7460 3010 2    40   Output ~ 0
+~WED_LED
+Text GLabel 7460 2910 2    40   Output ~ 0
+~TUE_LED
+Text GLabel 7460 2810 2    40   Output ~ 0
+~MON_LED
+Text GLabel 7460 2710 2    40   Output ~ 0
+~SUN_LED
+Text GLabel 3460 2760 0    40   Output ~ 0
+~Hours0_LED
+Text GLabel 3460 2860 0    40   Output ~ 0
+~Hours1_LED
+Text GLabel 3460 2960 0    40   Output ~ 0
+~Hours2_LED
+Text GLabel 3460 3060 0    40   Output ~ 0
+~Hours3_LED
+Text GLabel 3460 3160 0    40   Output ~ 0
+~Hours4_LED
+Text GLabel 3460 3260 0    40   Output ~ 0
+~Hours5_LED
+Text GLabel 3460 3360 0    40   Output ~ 0
+~Hours6_LED
+Text GLabel 3460 4060 0    40   Output ~ 0
+~Minutes6_LED
+Text GLabel 3460 3960 0    40   Output ~ 0
+~Minutes5_LED
+Text GLabel 3460 3860 0    40   Output ~ 0
+~Minutes4_LED
+Text GLabel 3460 3760 0    40   Output ~ 0
+~Minutes3_LED
+Text GLabel 3460 3660 0    40   Output ~ 0
+~Minutes2_LED
+Text GLabel 3460 3560 0    40   Output ~ 0
+~Minutes1_LED
+Text GLabel 3460 3460 0    40   Output ~ 0
+~Minutes0_LED
+Text GLabel 3460 4310 0    40   Output ~ 0
+~Seconds0_LED
+Text GLabel 3460 4410 0    40   Output ~ 0
+~Seconds1_LED
+Text GLabel 3460 4510 0    40   Output ~ 0
+~Seconds2_LED
+Text GLabel 3460 4610 0    40   Output ~ 0
+~Seconds3_LED
+Text GLabel 3460 4710 0    40   Output ~ 0
+~Seconds4_LED
+Text GLabel 3460 4810 0    40   Output ~ 0
+~Seconds5_LED
+Text GLabel 3460 4910 0    40   Output ~ 0
+~Seconds6_LED
+Text GLabel 7460 5110 2    50   Output ~ 0
+USB_UART_TX
+Text GLabel 7460 5010 2    50   Input ~ 0
+USB_UART_RX
+Text GLabel 7460 5510 2    50   Output ~ 0
+Date_B0
+Text GLabel 7460 5610 2    50   Output ~ 0
+Date_B1
+Text GLabel 7460 5710 2    50   Output ~ 0
+Date_B2
+Text GLabel 7460 5810 2    50   Output ~ 0
+Date_B3
+Text GLabel 7460 5910 2    50   Output ~ 0
+Date_B4
+Text GLabel 7460 3410 2    50   Output ~ 0
+Year_B0
+Text GLabel 7460 3510 2    50   Output ~ 0
+Year_B1
+Text GLabel 7460 3610 2    50   Output ~ 0
+Year_B2
+Text GLabel 7460 4110 2    50   Output ~ 0
+Other_Error_LED
+Text GLabel 7460 4310 2    50   Output ~ 0
+Exception_LED
+Text GLabel 7460 4210 2    50   Output ~ 0
+Analog_Error_LED
+Text GLabel 3460 2110 0    50   Output ~ 0
+Date_Decode_Enable
+Text GLabel 3460 2560 0    50   BiDi ~ 0
+ICSPDAT
+Text GLabel 3460 2660 0    50   Input ~ 0
+ICSPCLK
 $EndSCHEMATC

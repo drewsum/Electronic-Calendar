@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 13 15
+Sheet 13 17
 Title "QI Charger"
 Date "2019-01-03"
 Rev "A"
@@ -325,5 +325,48 @@ F 2 "" H 4440 2470 50  0001 C CNN
 F 3 "" H 4440 2470 50  0001 C CNN
 	1    4440 2470
 	1    0    0    -1  
+$EndComp
+$Comp
+L Custom_Library:C_Custom C?
+U 1 1 5D0C70C7
+P 5330 4420
+AR Path="/5C1D5CD8/5D0C70C7" Ref="C?"  Part="1" 
+AR Path="/5C1D5CCA/5D0C70C7" Ref="C?"  Part="1" 
+AR Path="/5C1E3A0B/5D0C70C7" Ref="C?"  Part="1" 
+AR Path="/5C26E09A/5D0C70C7" Ref="C?"  Part="1" 
+AR Path="/5CE10A38/5D0C70C7" Ref="C?"  Part="1" 
+AR Path="/5CD9EF77/5D0C70C7" Ref="C?"  Part="1" 
+F 0 "C?" V 4806 4420 50  0000 C CNN
+F 1 "10nF" V 4897 4420 50  0000 C CNN
+F 2 "Capacitors_SMD:C_0603" H 5368 4270 50  0001 C CNN
+F 3 "" H 5355 4520 50  0001 C CNN
+F 4 "1276-1921-1-ND" H 540 2200 50  0001 C CNN "Digi-Key PN"
+F 5 "0603" V 4988 4420 50  0000 C CNN "display_footprint"
+F 6 "50V" V 5079 4420 50  0000 C CNN "Voltage"
+F 7 "X7R" V 5170 4420 50  0000 C CNN "Dielectric"
+	1    5330 4420
+	0    1    -1   0   
+$EndComp
+$Comp
+L Custom_Library:GND_USB #PWR?
+U 1 1 5D0C759A
+P 5480 4420
+F 0 "#PWR?" H 5480 4170 50  0001 C CNN
+F 1 "GND_USB" V 5480 4270 50  0000 R CNN
+F 2 "" H 5480 4420 50  0001 C CNN
+F 3 "" H 5480 4420 50  0001 C CNN
+	1    5480 4420
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5D0C7A2B
+P 5180 4420
+F 0 "#PWR?" H 5180 4170 50  0001 C CNN
+F 1 "GND" V 5180 4270 50  0000 R CNN
+F 2 "" H 5180 4420 50  0001 C CNN
+F 3 "" H 5180 4420 50  0001 C CNN
+	1    5180 4420
+	0    1    1    0   
 $EndComp
 $EndSCHEMATC

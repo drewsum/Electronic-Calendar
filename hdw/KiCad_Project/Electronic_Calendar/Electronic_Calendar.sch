@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 1 15
+Sheet 1 17
 Title ""
 Date ""
 Rev ""
@@ -75,18 +75,6 @@ F0 "+3.3V BCKP Power Supply" 50
 F1 "POS3P3_BCKP_Power_Supply.sch" 50
 $EndSheet
 $Sheet
-S 1510 4550 500  150 
-U 5D009B7F
-F0 "Binary Clock LEDs" 50
-F1 "Binary_Clock_LEDs.sch" 50
-$EndSheet
-$Sheet
-S 1510 4900 500  150 
-U 5CD9EF77
-F0 "USB UART Isolation" 50
-F1 "USB_UART_Isolation.sch" 50
-$EndSheet
-$Sheet
 S 1510 5250 500  150 
 U 5CD9EF7E
 F0 "USB UART Bridge" 50
@@ -97,5 +85,29 @@ S 1510 5600 500  150
 U 5CD3BBF8
 F0 "Temperature Sensors" 50
 F1 "Temperature_Sensors.sch" 50
+$EndSheet
+$Sheet
+S 3170 5250 500  150 
+U 5D14F1F6
+F0 "Power Supply Sequencing" 50
+F1 "Power_Supply_Sequencing.sch" 50
+$EndSheet
+$Sheet
+S 3170 4900 500  150 
+U 5D161EEF
+F0 "Analog Conditioning" 50
+F1 "Analog_Conditioning.sch" 50
+$EndSheet
+$Sheet
+S 1510 4550 500  150 
+U 5D009B7F
+F0 "Binary Clock LEDs" 50
+F1 "Binary_Clock_LEDs.sch" 50
+$EndSheet
+$Sheet
+S 1510 4900 500  150 
+U 5D265DF8
+F0 "Date Decoder" 50
+F1 "Date_Decoder.sch" 50
 $EndSheet
 $EndSCHEMATC

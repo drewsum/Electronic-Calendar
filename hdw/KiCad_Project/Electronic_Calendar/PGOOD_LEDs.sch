@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 8 15
+Sheet 8 17
 Title ""
 Date ""
 Rev ""
@@ -929,4 +929,6 @@ F 4 "296-11934-1-ND" H 6170 2290 50  0001 C CNN "Digi-Key PN"
 	1    6170 2290
 	1    0    0    -1  
 $EndComp
+Text GLabel 5870 4040 0    50   Input ~ 0
+POS5_USB_PGOOD
 $EndSCHEMATC
