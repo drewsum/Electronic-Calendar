@@ -299,10 +299,6 @@ Text GLabel 7460 5610 2    50   Output ~ 0
 Date_B1
 Text GLabel 7460 5710 2    50   Output ~ 0
 Date_B2
-Text GLabel 7460 5810 2    50   Output ~ 0
-Date_B3
-Text GLabel 7460 5910 2    50   Output ~ 0
-Date_B4
 Text GLabel 7460 3410 2    50   Output ~ 0
 Year_B0
 Text GLabel 7460 3510 2    50   Output ~ 0
@@ -321,4 +317,12 @@ Text GLabel 3460 2560 0    50   BiDi ~ 0
 ICSPDAT
 Text GLabel 3460 2660 0    50   Input ~ 0
 ICSPCLK
+Text GLabel 7460 5810 2    40   Output ~ 0
+~Date_Decode_1
+Text GLabel 7460 5910 2    40   Output ~ 0
+~Date_Decode_2
+Text GLabel 3460 1810 0    40   Output ~ 0
+~Date_Decode_3
+Text GLabel 3460 1910 0    40   Output ~ 0
+~Date_Decode_4
 $EndSCHEMATC
