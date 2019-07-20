@@ -935,28 +935,6 @@ F 7 "1W" V 9360 3310 50  0000 C CNN "Wattage"
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CD6E30C
-P 9060 6010
-AR Path="/5BB2595E/5CD6E30C" Ref="R?"  Part="1" 
-AR Path="/5BAAE0FA/5CD6E30C" Ref="R?"  Part="1" 
-AR Path="/5BB86F23/5CD6E30C" Ref="R?"  Part="1" 
-AR Path="/5C1D5C9E/5CD6E30C" Ref="R?"  Part="1" 
-AR Path="/5CB6F1ED/5CD6E30C" Ref="R?"  Part="1" 
-AR Path="/5CD35FB7/5CD6E30C" Ref="R?"  Part="1" 
-AR Path="/5CD35FCB/5CD6E30C" Ref="R?"  Part="1" 
-F 0 "R?" H 9000 6010 50  0000 R CNN
-F 1 "499k" V 9060 6010 40  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 9060 6010 50  0001 C CNN
-F 3 "" H 9060 6010 50  0001 C CNN
-F 4 "0603" H 9140 6090 50  0000 L CNN "display_footprint"
-F 5 "1%" H 9140 6010 50  0000 L CNN "Tolerance"
-F 6 "1/10W" H 9140 5930 50  0000 L CNN "Wattage"
-F 7 "RMCF0603FT499KCT-ND" H 770 2360 50  0001 C CNN "Digi-Key PN"
-	1    9060 6010
-	-1   0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR?
 U 1 1 5CD6E312
 P 9060 6160
@@ -992,8 +970,6 @@ POS3P3_ISNS
 Wire Wire Line
 	9880 5780 9800 5780
 Connection ~ 9800 5780
-Text Notes 8790 6640 0    50   ~ 10
-1.996 V/A
 $Comp
 L Custom_Library:C_Custom C?
 U 1 1 5CD6E333
@@ -1249,4 +1225,28 @@ Wire Wire Line
 Wire Wire Line
 	6500 2890 7110 2890
 Connection ~ 7110 2890
+Text Notes 8790 6640 0    50   ~ 10
+1.996 V/A
+$Comp
+L Custom_Library:R_Custom R?
+U 1 1 5CD6E30C
+P 9060 6010
+AR Path="/5BB2595E/5CD6E30C" Ref="R?"  Part="1" 
+AR Path="/5BAAE0FA/5CD6E30C" Ref="R?"  Part="1" 
+AR Path="/5BB86F23/5CD6E30C" Ref="R?"  Part="1" 
+AR Path="/5C1D5C9E/5CD6E30C" Ref="R?"  Part="1" 
+AR Path="/5CB6F1ED/5CD6E30C" Ref="R?"  Part="1" 
+AR Path="/5CD35FB7/5CD6E30C" Ref="R?"  Part="1" 
+AR Path="/5CD35FCB/5CD6E30C" Ref="R?"  Part="1" 
+F 0 "R?" H 9000 6010 50  0000 R CNN
+F 1 "499k" V 9060 6010 40  0000 C CNN
+F 2 "Resistors_SMD:R_0603" H 9060 6010 50  0001 C CNN
+F 3 "" H 9060 6010 50  0001 C CNN
+F 4 "0603" H 9140 6090 50  0000 L CNN "display_footprint"
+F 5 "1%" H 9140 6010 50  0000 L CNN "Tolerance"
+F 6 "1/10W" H 9140 5930 50  0000 L CNN "Wattage"
+F 7 "RMCF0603FT499KCT-ND" H 770 2360 50  0001 C CNN "Digi-Key PN"
+	1    9060 6010
+	-1   0    0    -1  
+$EndComp
 $EndSCHEMATC

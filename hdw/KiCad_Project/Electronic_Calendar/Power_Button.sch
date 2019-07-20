@@ -234,5 +234,44 @@ F 3 "" H 5770 3530 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	5770 3730 6450 3730
+	5770 3730 6200 3730
+$Comp
+L Custom_Library:R_Custom R?
+U 1 1 5D338125
+P 6200 3980
+AR Path="/5BAAE1F3/5D338125" Ref="R?"  Part="1" 
+AR Path="/5BAAE1DC/5D338125" Ref="R?"  Part="1" 
+AR Path="/5BAAE16C/5D338125" Ref="R?"  Part="1" 
+AR Path="/5BB844FD/5D338125" Ref="R?"  Part="1" 
+AR Path="/5BF346B3/5D338125" Ref="R?"  Part="1" 
+AR Path="/5CAD2D97/5D338125" Ref="R?"  Part="1" 
+AR Path="/5CB7A8BC/5D338125" Ref="R?"  Part="1" 
+AR Path="/5CE10A46/5D338125" Ref="R?"  Part="1" 
+F 0 "R?" H 6140 3980 50  0000 R CNN
+F 1 "10k" V 6200 3980 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" H 6200 3980 50  0001 C CNN
+F 3 "" H 6200 3980 50  0001 C CNN
+F 4 "0603" H 6270 4060 50  0000 L CNN "display_footprint"
+F 5 "1%" H 6270 3980 50  0000 L CNN "Tolerance"
+F 6 "1/10W" H 6270 3910 50  0000 L CNN "Wattage"
+F 7 "RMCF0603FT10K0CT-ND" H 6200 3980 50  0001 C CNN "Digi-Key PN"
+	1    6200 3980
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5D3382A4
+P 6200 4130
+F 0 "#PWR?" H 6200 3880 50  0001 C CNN
+F 1 "GND" H 6200 3980 50  0000 C CNN
+F 2 "" H 6200 4130 50  0001 C CNN
+F 3 "" H 6200 4130 50  0001 C CNN
+	1    6200 4130
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	6200 3830 6200 3730
+Connection ~ 6200 3730
+Wire Wire Line
+	6200 3730 6450 3730
 $EndSCHEMATC
