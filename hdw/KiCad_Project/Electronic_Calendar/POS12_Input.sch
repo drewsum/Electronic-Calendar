@@ -5,10 +5,10 @@ EELAYER END
 $Descr A 11000 8500
 encoding utf-8
 Sheet 2 17
-Title ""
-Date "2019-01-03"
+Title "Electronic Calendar"
+Date "2019-07-25"
 Rev "A"
-Comp ""
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""

@@ -5,10 +5,10 @@ EELAYER END
 $Descr A 11000 8500
 encoding utf-8
 Sheet 15 17
-Title "QI Charger"
-Date "2019-01-03"
+Title "Electronic Calendar"
+Date "2019-07-25"
 Rev "A"
-Comp ""
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -629,7 +629,7 @@ F 4 "S1111EC-01-ND" H 9880 4440 50  0001 C CNN "Digi-Key PN"
 	1    0    0    -1  
 $EndComp
 Text Notes 540  690  0    100  ~ 20
-10. USB UART Bridge
+15. USB UART Bridge
 $Comp
 L power:GND #PWR01528
 U 1 1 5D1A491C
@@ -935,4 +935,26 @@ Text GLabel 3550 6590 2    50   Output ~ 0
 POS5_USB_PGOOD
 Wire Wire Line
 	3550 6590 3470 6590
+$Comp
+L Custom_Library:+3.3V #PWR0101
+U 1 1 5D3A880F
+P 3420 2890
+F 0 "#PWR0101" H 3420 2740 50  0001 C CNN
+F 1 "+3.3V" H 3420 3030 50  0000 C CNN
+F 2 "" H 3420 2890 50  0001 C CNN
+F 3 "" H 3420 2890 50  0001 C CNN
+	1    3420 2890
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom_Library:+3.3V #PWR0102
+U 1 1 5D3A8F35
+P 3280 4690
+F 0 "#PWR0102" H 3280 4540 50  0001 C CNN
+F 1 "+3.3V" H 3280 4830 50  0000 C CNN
+F 2 "" H 3280 4690 50  0001 C CNN
+F 3 "" H 3280 4690 50  0001 C CNN
+	1    3280 4690
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

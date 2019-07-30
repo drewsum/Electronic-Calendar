@@ -5,8 +5,8 @@ EELAYER END
 $Descr A 11000 8500
 encoding utf-8
 Sheet 4 17
-Title ""
-Date "2019-04-11"
+Title "Electronic Calendar"
+Date "2019-07-25"
 Rev "A"
 Comp "Drew Maatman"
 Comment1 ""
@@ -881,4 +881,20 @@ Wire Wire Line
 Connection ~ 8390 2130
 Wire Wire Line
 	8390 2130 9050 2130
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 5D3F0B1A
+P 8490 3680
+F 0 "#FLG0101" H 8490 3755 50  0001 C CNN
+F 1 "PWR_FLAG" H 8490 3830 50  0000 C CNN
+F 2 "" H 8490 3680 50  0001 C CNN
+F 3 "~" H 8490 3680 50  0001 C CNN
+	1    8490 3680
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8490 3680 8490 3760
+Wire Wire Line
+	8490 3760 8080 3760
+Connection ~ 8080 3760
 $EndSCHEMATC

@@ -5,10 +5,10 @@ EELAYER END
 $Descr A 11000 8500
 encoding utf-8
 Sheet 5 17
-Title ""
-Date ""
-Rev ""
-Comp ""
+Title "Electronic Calendar"
+Date "2019-07-25"
+Rev "A"
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -196,4 +196,6 @@ F 4 "296-11608-1-ND" H 6640 3870 50  0001 C CNN "Digi-Key PN"
 	1    6340 3520
 	1    0    0    -1  
 $EndComp
+Text Notes 540  690  0    100  ~ 20
+05. Power Supply Sequencing
 $EndSCHEMATC

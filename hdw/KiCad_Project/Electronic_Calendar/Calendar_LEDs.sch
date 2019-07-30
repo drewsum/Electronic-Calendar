@@ -5,10 +5,10 @@ EELAYER END
 $Descr A 11000 8500
 encoding utf-8
 Sheet 12 17
-Title ""
-Date ""
-Rev ""
-Comp ""
+Title "Electronic Calendar"
+Date "2019-07-25"
+Rev "A"
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -1858,4 +1858,6 @@ Wire Wire Line
 Connection ~ 8870 6160
 Wire Wire Line
 	8870 6160 8870 6060
+Text Notes 540  690  0    100  ~ 20
+12. Calendar LEDs
 $EndSCHEMATC

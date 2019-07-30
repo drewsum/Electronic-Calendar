@@ -5,10 +5,10 @@ EELAYER END
 $Descr A 11000 8500
 encoding utf-8
 Sheet 9 17
-Title "QI Charger"
-Date "2019-01-03"
+Title "Electronic Calendar"
+Date "2019-07-25"
 Rev "A"
-Comp ""
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -199,7 +199,7 @@ Wire Wire Line
 Text GLabel 6450 3730 2    50   Output ~ 10
 Cap_Touch_Power
 Text Notes 540  690  0    100  ~ 20
-08. Capacitive Touch Sensors
+09. Capacitive Touch Sensors
 $Comp
 L Custom_Library:+3.3V #PWR0903
 U 1 1 5CE7112D

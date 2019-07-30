@@ -5,10 +5,10 @@ EELAYER END
 $Descr A 11000 8500
 encoding utf-8
 Sheet 10 17
-Title ""
-Date ""
-Rev ""
-Comp ""
+Title "Electronic Calendar"
+Date "2019-07-25"
+Rev "A"
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -292,7 +292,7 @@ F 3 "" H 5190 2430 50  0001 C CNN
 	1    5190 2430
 	1    0    0    -1  
 $EndComp
-Text GLabel 3000 2970 0    50   Input ~ 10
+Text GLabel 3000 2970 0    50   Input ~ 0
 POS12_PGOOD
 $Comp
 L Custom_Library:74LVC1G06_Power U1001
@@ -318,7 +318,7 @@ F 4 "296-8484-1-ND" H 5300 2970 50  0001 C CNN "Digi-Key PN"
 	1    5300 2970
 	1    0    0    -1  
 $EndComp
-Text GLabel 5000 2970 0    50   Input ~ 10
+Text GLabel 5000 2970 0    50   Input ~ 0
 POS3P3_PGOOD
 $Comp
 L Custom_Library:C_Custom C?
@@ -912,11 +912,11 @@ F 4 "296-8484-1-ND" H 7300 4720 50  0001 C CNN "Digi-Key PN"
 	1    7300 4720
 	1    0    0    -1  
 $EndComp
-Text GLabel 3000 4720 0    50   Input ~ 10
+Text GLabel 3000 4720 0    50   Input ~ 0
 BCKP_SYSGD
-Text GLabel 5000 4720 0    50   Input ~ 10
+Text GLabel 5000 4720 0    50   Input ~ 0
 BCKP_CAPGD
-Text GLabel 7000 2970 0    40   Input ~ 8
+Text GLabel 7000 2970 0    40   Input ~ 0
 ~BCKP_CAPFLT
 $Comp
 L Custom_Library:74LVC1G17_Power U1005
@@ -932,4 +932,6 @@ F 4 "296-11934-1-ND" H 7300 2970 50  0001 C CNN "Digi-Key PN"
 $EndComp
 Text GLabel 7000 4720 0    50   Input ~ 0
 POS5_USB_PGOOD
+Text Notes 540  690  0    100  ~ 20
+10. PGOOD LEDs
 $EndSCHEMATC
