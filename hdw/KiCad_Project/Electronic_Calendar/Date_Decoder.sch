@@ -67,7 +67,7 @@ Text GLabel 4800 2050 2    40   Output ~ 0
 Text GLabel 4800 2150 2    40   Output ~ 0
 ~Date8_LED
 $Comp
-L Custom_Library:+3.3V #PWR01418
+L power:+3.3V #PWR01418
 U 1 1 5D3020F1
 P 4300 1150
 F 0 "#PWR01418" H 4300 1000 50  0001 C CNN
@@ -299,7 +299,7 @@ F 7 "311-1344-1-ND" H 5305 3140 60  0001 C CNN "Digi-Key PN"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01424
+L power:+3.3V #PWR01424
 U 1 1 5D30219D
 P 4880 2490
 F 0 "#PWR01424" H 4880 2340 50  0001 C CNN
@@ -335,7 +335,7 @@ Wire Wire Line
 Wire Wire Line
 	3540 2050 3540 1400
 $Comp
-L Custom_Library:+3.3V #PWR01413
+L power:+3.3V #PWR01413
 U 1 1 5D3091CB
 P 3540 1100
 F 0 "#PWR01413" H 3540 950 50  0001 C CNN
@@ -373,7 +373,7 @@ Date_B1
 Text GLabel 1420 3400 0    50   Input ~ 0
 Date_B2
 $Comp
-L Custom_Library:+3.3V #PWR01420
+L power:+3.3V #PWR01420
 U 1 1 5D335D7F
 P 4300 2900
 F 0 "#PWR01420" H 4300 2750 50  0001 C CNN
@@ -605,7 +605,7 @@ F 7 "311-1344-1-ND" H 5305 4890 60  0001 C CNN "Digi-Key PN"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01426
+L power:+3.3V #PWR01426
 U 1 1 5D335E28
 P 4880 4240
 F 0 "#PWR01426" H 4880 4090 50  0001 C CNN
@@ -641,7 +641,7 @@ Wire Wire Line
 Wire Wire Line
 	3540 3800 3540 3150
 $Comp
-L Custom_Library:+3.3V #PWR01414
+L power:+3.3V #PWR01414
 U 1 1 5D335E42
 P 3540 2850
 F 0 "#PWR01414" H 3540 2700 50  0001 C CNN
@@ -663,7 +663,7 @@ Date_B1
 Text GLabel 6230 1850 0    50   Input ~ 0
 Date_B2
 $Comp
-L Custom_Library:+3.3V #PWR01442
+L power:+3.3V #PWR01442
 U 1 1 5D34E0AB
 P 9110 1350
 F 0 "#PWR01442" H 9110 1200 50  0001 C CNN
@@ -895,7 +895,7 @@ F 7 "311-1344-1-ND" H 10115 3340 60  0001 C CNN "Digi-Key PN"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01446
+L power:+3.3V #PWR01446
 U 1 1 5D34E154
 P 9690 2690
 F 0 "#PWR01446" H 9690 2540 50  0001 C CNN
@@ -931,7 +931,7 @@ Wire Wire Line
 Wire Wire Line
 	8350 2250 8350 1600
 $Comp
-L Custom_Library:+3.3V #PWR01438
+L power:+3.3V #PWR01438
 U 1 1 5D34E16E
 P 8350 1300
 F 0 "#PWR01438" H 8350 1150 50  0001 C CNN
@@ -953,7 +953,7 @@ Date_B1
 Text GLabel 6230 3600 0    50   Input ~ 0
 Date_B2
 $Comp
-L Custom_Library:+3.3V #PWR01444
+L power:+3.3V #PWR01444
 U 1 1 5D34E190
 P 9110 3100
 F 0 "#PWR01444" H 9110 2950 50  0001 C CNN
@@ -1185,7 +1185,7 @@ F 7 "311-1344-1-ND" H 10115 5090 60  0001 C CNN "Digi-Key PN"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01448
+L power:+3.3V #PWR01448
 U 1 1 5D34E239
 P 9690 4440
 F 0 "#PWR01448" H 9690 4290 50  0001 C CNN
@@ -1221,7 +1221,7 @@ Wire Wire Line
 Wire Wire Line
 	8350 4000 8350 3350
 $Comp
-L Custom_Library:+3.3V #PWR01439
+L power:+3.3V #PWR01439
 U 1 1 5D34E253
 P 8350 3050
 F 0 "#PWR01439" H 8350 2900 50  0001 C CNN
@@ -1243,7 +1243,7 @@ Wire Wire Line
 Wire Wire Line
 	3720 6210 3720 6110
 $Comp
-L Custom_Library:+3.3V #PWR01428
+L power:+3.3V #PWR01428
 U 1 1 5D383BA1
 P 4880 6550
 F 0 "#PWR01428" H 4880 6400 50  0001 C CNN
@@ -1475,7 +1475,7 @@ F 3 "" H 4300 6510 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01422
+L power:+3.3V #PWR01422
 U 1 1 5D383AF8
 P 4300 5210
 F 0 "#PWR01422" H 4300 5060 50  0001 C CNN

@@ -390,7 +390,7 @@ Connection ~ 6550 3250
 Wire Wire Line
 	6550 3250 6550 3150
 $Comp
-L Custom_Library:+3.3V #PWR?
+L power:+3.3V #PWR?
 U 1 1 5D01195B
 P 6550 2670
 AR Path="/5CF09D4A/5D01195B" Ref="#PWR?"  Part="1" 

@@ -201,7 +201,7 @@ Cap_Touch_Power
 Text Notes 540  690  0    100  ~ 20
 09. Capacitive Touch Sensors
 $Comp
-L Custom_Library:+3.3V #PWR0903
+L power:+3.3V #PWR0903
 U 1 1 5CE7112D
 P 5370 4480
 F 0 "#PWR0903" H 5370 4330 50  0001 C CNN
@@ -212,7 +212,7 @@ F 3 "" H 5370 4480 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR0901
+L power:+3.3V #PWR0901
 U 1 1 5CE714E1
 P 5370 3330
 F 0 "#PWR0901" H 5370 3180 50  0001 C CNN
@@ -223,7 +223,7 @@ F 3 "" H 5370 3330 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR0905
+L power:+3.3V #PWR0905
 U 1 1 5CE71CFB
 P 5770 3530
 F 0 "#PWR0905" H 5770 3380 50  0001 C CNN

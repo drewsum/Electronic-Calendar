@@ -949,7 +949,7 @@ $EndComp
 Text GLabel 9800 1830 2    50   Output ~ 0
 POS12_ADC
 $Comp
-L Custom_Library:+3.3V #PWR01727
+L power:+3.3V #PWR01727
 U 1 1 5D171087
 P 8270 1530
 F 0 "#PWR01727" H 8270 1380 50  0001 C CNN
@@ -960,7 +960,7 @@ F 3 "" H 8270 1530 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01729
+L power:+3.3V #PWR01729
 U 1 1 5D1715BA
 P 8270 2670
 F 0 "#PWR01729" H 8270 2520 50  0001 C CNN
@@ -973,7 +973,7 @@ $EndComp
 Wire Wire Line
 	5100 2670 5100 2710
 $Comp
-L Custom_Library:+3.3V #PWR01715
+L power:+3.3V #PWR01715
 U 1 1 5D172C85
 P 5100 2670
 F 0 "#PWR01715" H 5100 2520 50  0001 C CNN
@@ -984,7 +984,7 @@ F 3 "" H 5100 2670 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01713
+L power:+3.3V #PWR01713
 U 1 1 5D17330D
 P 5100 1530
 F 0 "#PWR01713" H 5100 1380 50  0001 C CNN
@@ -995,7 +995,7 @@ F 3 "" H 5100 1530 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01705
+L power:+3.3V #PWR01705
 U 1 1 5D17393C
 P 1930 2670
 F 0 "#PWR01705" H 1930 2520 50  0001 C CNN
@@ -1006,7 +1006,7 @@ F 3 "" H 1930 2670 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01703
+L power:+3.3V #PWR01703
 U 1 1 5D174110
 P 1930 1530
 F 0 "#PWR01703" H 1930 1380 50  0001 C CNN
@@ -1017,7 +1017,7 @@ F 3 "" H 1930 1530 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01707
+L power:+3.3V #PWR01707
 U 1 1 5D175BE1
 P 1930 3880
 F 0 "#PWR01707" H 1930 3730 50  0001 C CNN
@@ -1028,7 +1028,7 @@ F 3 "" H 1930 3880 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01709
+L power:+3.3V #PWR01709
 U 1 1 5D176217
 P 1930 5020
 F 0 "#PWR01709" H 1930 4870 50  0001 C CNN
@@ -1039,7 +1039,7 @@ F 3 "" H 1930 5020 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01701
+L power:+3.3V #PWR01701
 U 1 1 5D17692E
 P 1160 3700
 F 0 "#PWR01701" H 1160 3550 50  0001 C CNN
@@ -1261,7 +1261,7 @@ $EndComp
 Wire Wire Line
 	5100 5020 5100 5060
 $Comp
-L Custom_Library:+3.3V #PWR01719
+L power:+3.3V #PWR01719
 U 1 1 5D189E05
 P 5100 5020
 F 0 "#PWR01719" H 5100 4870 50  0001 C CNN
@@ -1272,7 +1272,7 @@ F 3 "" H 5100 5020 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01717
+L power:+3.3V #PWR01717
 U 1 1 5D189E0F
 P 5100 3880
 F 0 "#PWR01717" H 5100 3730 50  0001 C CNN
@@ -1546,7 +1546,7 @@ F 7 "RHM10KADCT-ND" H 7800 4710 60  0001 C CNN "Digi-Key PN"
 	1    0    0    1   
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01731
+L power:+3.3V #PWR01731
 U 1 1 5D1CD100
 P 8270 3880
 F 0 "#PWR01731" H 8270 3730 50  0001 C CNN
@@ -1557,7 +1557,7 @@ F 3 "" H 8270 3880 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01733
+L power:+3.3V #PWR01733
 U 1 1 5D1CD10A
 P 8270 5020
 F 0 "#PWR01733" H 8270 4870 50  0001 C CNN

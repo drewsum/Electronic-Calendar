@@ -875,7 +875,7 @@ Connection ~ 2220 3190
 Wire Wire Line
 	2220 3190 2000 3190
 $Comp
-L Custom_Library:+3.3V #PWR01506
+L power:+3.3V #PWR01506
 U 1 1 5D1C314B
 P 2770 2580
 F 0 "#PWR01506" H 2770 2430 50  0001 C CNN
@@ -886,7 +886,7 @@ F 3 "" H 2770 2580 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01505
+L power:+3.3V #PWR01505
 U 1 1 5D1C3706
 P 2220 2580
 F 0 "#PWR01505" H 2220 2430 50  0001 C CNN
@@ -899,7 +899,7 @@ $EndComp
 Text Notes 3220 2460 0    50   ~ 0
 Tie VCCIO to +3.3V???
 $Comp
-L Custom_Library:+3.3V #PWR01507
+L power:+3.3V #PWR01507
 U 1 1 5D1C5426
 P 2790 6240
 F 0 "#PWR01507" H 2790 6090 50  0001 C CNN
@@ -910,7 +910,7 @@ F 3 "" H 2790 6240 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01511
+L power:+3.3V #PWR01511
 U 1 1 5D1C5BDF
 P 3470 6090
 F 0 "#PWR01511" H 3470 5940 50  0001 C CNN
@@ -921,7 +921,7 @@ F 3 "" H 3470 6090 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01512
+L power:+3.3V #PWR01512
 U 1 1 5D1C6CBE
 P 3540 7400
 F 0 "#PWR01512" H 3540 7250 50  0001 C CNN
@@ -936,7 +936,7 @@ POS5_USB_PGOOD
 Wire Wire Line
 	3550 6590 3470 6590
 $Comp
-L Custom_Library:+3.3V #PWR0101
+L power:+3.3V #PWR0101
 U 1 1 5D3A880F
 P 3420 2890
 F 0 "#PWR0101" H 3420 2740 50  0001 C CNN
@@ -947,7 +947,7 @@ F 3 "" H 3420 2890 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR0102
+L power:+3.3V #PWR0102
 U 1 1 5D3A8F35
 P 3280 4690
 F 0 "#PWR0102" H 3280 4540 50  0001 C CNN
