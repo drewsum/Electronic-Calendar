@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 3 17
+Sheet 3 16
 Title "Electronic Calendar"
 Date "2019-07-25"
 Rev "A"
@@ -544,28 +544,6 @@ F 2 "" H 9750 3230 50  0001 C CNN
 F 3 "" H 9750 3230 50  0001 C CNN
 	1    9750 3230
 	1    0    0    -1  
-$EndComp
-$Comp
-L power:PWR_FLAG #FLG0301
-U 1 1 5C151BA4
-P 9570 2810
-F 0 "#FLG0301" H 9570 2885 50  0001 C CNN
-F 1 "PWR_FLAG" H 9570 2960 50  0000 C CNN
-F 2 "" H 9570 2810 50  0001 C CNN
-F 3 "~" H 9570 2810 50  0001 C CNN
-	1    9570 2810
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3.3V #PWR0326
-U 1 1 5C151C3E
-P 9570 2810
-F 0 "#PWR0326" H 9570 2660 50  0001 C CNN
-F 1 "+3.3V" H 9570 2950 50  0000 C CNN
-F 2 "" H 9570 2810 50  0001 C CNN
-F 3 "" H 9570 2810 50  0001 C CNN
-	1    9570 2810
-	-1   0    0    1   
 $EndComp
 $Comp
 L Custom_Library:R_Custom R?
@@ -1249,4 +1227,33 @@ F 7 "A106046CT-ND" H 9060 6010 50  0001 C CNN "Digi-Key PN"
 	1    9060 6010
 	-1   0    0    -1  
 $EndComp
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 5D4F6C7D
+P 10250 3240
+F 0 "#FLG0101" H 10250 3315 50  0001 C CNN
+F 1 "PWR_FLAG" H 10250 3390 50  0000 C CNN
+F 2 "" H 10250 3240 50  0001 C CNN
+F 3 "~" H 10250 3240 50  0001 C CNN
+	1    10250 3240
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 3240 10250 3310
+Wire Wire Line
+	10250 3310 9750 3310
+$Comp
+L Custom_Library:TP TP301
+U 1 1 5D496AD7
+P 9270 2810
+F 0 "TP301" H 9270 2960 50  0000 C CNN
+F 1 "TP" H 9270 2960 50  0001 C CNN
+F 2 "Custom Footprints Library:Test_Point" H 9270 2810 60  0001 C CNN
+F 3 "" H 9270 2810 60  0000 C CNN
+	1    9270 2810
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9270 2810 9270 2890
+Connection ~ 9270 2890
 $EndSCHEMATC

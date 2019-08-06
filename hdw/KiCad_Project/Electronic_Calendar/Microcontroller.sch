@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 7 17
+Sheet 6 16
 Title "Electronic Calendar"
 Date "2019-07-25"
 Rev "A"
@@ -172,9 +172,9 @@ Text GLabel 3220 2580 0    50   BiDi ~ 0
 TEMP_I2C_SDA
 Text GLabel 3220 2480 0    50   Output ~ 0
 TEMP_I2C_SCL
-Text GLabel 3220 5280 0    50   Input ~ 0
-POS12_PGOOD
 Text GLabel 7220 5580 2    50   Input ~ 0
+POS12_PGOOD
+Text GLabel 3220 5280 0    50   Input ~ 0
 POS3P3_PGOOD
 Text GLabel 7220 5480 2    50   Input ~ 0
 Cap_Touch_Power
@@ -208,28 +208,16 @@ Text GLabel 7220 2480 2    40   Output ~ 0
 ~NOV_LED
 Text GLabel 7220 2580 2    40   Output ~ 0
 ~DEC_LED
-Text GLabel 7220 4680 2    40   Input ~ 0
-~BCKP_PFO
-Text GLabel 7220 4780 2    50   Input ~ 0
-BCKP_SYSGD
-Text GLabel 7220 4880 2    50   Input ~ 0
-BCKP_CAPGD
-Text GLabel 7220 4980 2    40   Input ~ 0
-~BCKP_CAPFLT
 Text GLabel 3220 1980 0    50   Input ~ 0
 POS3P3_ADC
 Text GLabel 3220 1680 0    50   Input ~ 0
 POS12_ISNS_ADC
 Text GLabel 3220 1580 0    50   Input ~ 0
 POS3P3_ISNS_ADC
-Text GLabel 3220 1880 0    50   Input ~ 0
-BCKP_IMON_ADC
 Text GLabel 3220 1480 0    50   Input ~ 0
 POS12_ADC
 Text GLabel 3220 1780 0    50   Input ~ 0
 POS5_USB_ADC
-Text GLabel 7220 5680 2    50   Input ~ 0
-POS3P3_PGOOD
 Text GLabel 7220 3580 2    40   Output ~ 0
 ~SAT_LED
 Text GLabel 7220 3480 2    40   Output ~ 0
@@ -324,5 +312,14 @@ Text GLabel 3220 2180 0    40   Output ~ 0
 ~Date_Decode_4
 Text Notes 540  690  0    100  ~ 20
 07. Microcontroller
-NoConn ~ 3220 2280
+Text GLabel 7220 5680 2    50   Input ~ 0
+POS12_PGOOD
+NoConn ~ 7220 4680
+NoConn ~ 7220 4780
+NoConn ~ 7220 4880
+NoConn ~ 3220 1880
+Text GLabel 3220 2280 0    50   Input ~ 0
+VBAT_ADC
+Text GLabel 7220 4980 2    40   Input ~ 0
+~DIODE_FAULT
 $EndSCHEMATC
