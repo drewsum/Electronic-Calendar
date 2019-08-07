@@ -113,50 +113,6 @@ Wire Wire Line
 	2670 1540 2670 1830
 Wire Wire Line
 	2670 1830 2790 1830
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CB2CD4A
-P 1380 1730
-AR Path="/5BAAE2B6/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CB2CD4A" Ref="R1605"  Part="1" 
-F 0 "R1605" V 1340 1590 50  0000 R CNN
-F 1 "100" V 1380 1730 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1380 1730 50  0001 C CNN
-F 3 "" H 1380 1730 50  0001 C CNN
-F 4 "0603" V 1480 1730 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1580 1730 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1680 1730 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1680 2130 60  0001 C CNN "Digi-Key PN"
-	1    1380 1730
-	0    -1   1    0   
-$EndComp
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CB2CD54
-P 1380 1830
-AR Path="/5BAAE2B6/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CB2CD54" Ref="R1606"  Part="1" 
-F 0 "R1606" V 1340 1690 50  0000 R CNN
-F 1 "100" V 1380 1830 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1380 1830 50  0001 C CNN
-F 3 "" H 1380 1830 50  0001 C CNN
-F 4 "0603" V 1480 1830 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1580 1830 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1680 1830 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1680 2230 60  0001 C CNN "Digi-Key PN"
-	1    1380 1830
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	1970 1730 2790 1730
 Wire Wire Line
@@ -369,50 +325,6 @@ Wire Wire Line
 	2660 3380 2660 3670
 Wire Wire Line
 	2660 3670 2780 3670
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CD42274
-P 1370 3570
-AR Path="/5BAAE2B6/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CD42274" Ref="R1601"  Part="1" 
-F 0 "R1601" V 1330 3430 50  0000 R CNN
-F 1 "100" V 1370 3570 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1370 3570 50  0001 C CNN
-F 3 "" H 1370 3570 50  0001 C CNN
-F 4 "0603" V 1470 3570 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1570 3570 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1670 3570 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1670 3970 60  0001 C CNN "Digi-Key PN"
-	1    1370 3570
-	0    -1   1    0   
-$EndComp
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CD42282
-P 1370 3670
-AR Path="/5BAAE2B6/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CD42282" Ref="R1602"  Part="1" 
-F 0 "R1602" V 1330 3530 50  0000 R CNN
-F 1 "100" V 1370 3670 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1370 3670 50  0001 C CNN
-F 3 "" H 1370 3670 50  0001 C CNN
-F 4 "0603" V 1470 3670 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1570 3670 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1670 3670 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1670 4070 60  0001 C CNN "Digi-Key PN"
-	1    1370 3670
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	1960 3570 2780 3570
 Wire Wire Line
@@ -625,50 +537,6 @@ Wire Wire Line
 	2660 5230 2660 5520
 Wire Wire Line
 	2660 5520 2780 5520
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CD4CF02
-P 1370 5420
-AR Path="/5BAAE2B6/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CD4CF02" Ref="R1603"  Part="1" 
-F 0 "R1603" V 1330 5280 50  0000 R CNN
-F 1 "100" V 1370 5420 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1370 5420 50  0001 C CNN
-F 3 "" H 1370 5420 50  0001 C CNN
-F 4 "0603" V 1470 5420 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1570 5420 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1670 5420 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1670 5820 60  0001 C CNN "Digi-Key PN"
-	1    1370 5420
-	0    -1   1    0   
-$EndComp
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CD4CF10
-P 1370 5520
-AR Path="/5BAAE2B6/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CD4CF10" Ref="R1604"  Part="1" 
-F 0 "R1604" V 1330 5380 50  0000 R CNN
-F 1 "100" V 1370 5520 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1370 5520 50  0001 C CNN
-F 3 "" H 1370 5520 50  0001 C CNN
-F 4 "0603" V 1470 5520 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1570 5520 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1670 5520 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1670 5920 60  0001 C CNN "Digi-Key PN"
-	1    1370 5520
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	1960 5420 2780 5420
 Wire Wire Line
@@ -677,9 +545,9 @@ Connection ~ 1960 5420
 Wire Wire Line
 	1520 5520 2660 5520
 Connection ~ 2660 5520
-Text GLabel 1220 5420 0    50   BiDi ~ 0
+Text GLabel 1520 5420 0    50   BiDi ~ 0
 TEMP_I2C_SDA
-Text GLabel 1220 5520 0    50   Input ~ 0
+Text GLabel 1520 5520 0    50   Input ~ 0
 TEMP_I2C_SCL
 $Comp
 L power:GND #PWR01604
@@ -774,13 +642,13 @@ Wire Wire Line
 	1750 6300 2070 6300
 Wire Wire Line
 	1750 6300 1750 6340
-Text GLabel 1220 3570 0    50   BiDi ~ 0
+Text GLabel 1520 3570 0    50   BiDi ~ 0
 TEMP_I2C_SDA
-Text GLabel 1220 3670 0    50   Input ~ 0
+Text GLabel 1520 3670 0    50   Input ~ 0
 TEMP_I2C_SCL
-Text GLabel 1230 1730 0    50   BiDi ~ 0
+Text GLabel 1530 1730 0    50   BiDi ~ 0
 TEMP_I2C_SDA
-Text GLabel 1230 1830 0    50   Input ~ 0
+Text GLabel 1530 1830 0    50   Input ~ 0
 TEMP_I2C_SCL
 Text Notes 3780 1890 0    50   ~ 0
 Place near Input MOSFETs
@@ -932,50 +800,6 @@ Wire Wire Line
 	7670 1540 7670 1830
 Wire Wire Line
 	7670 1830 7790 1830
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5D0E5B6D
-P 6380 1730
-AR Path="/5BAAE2B6/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5D0E5B6D" Ref="R1613"  Part="1" 
-F 0 "R1613" V 6340 1590 50  0000 R CNN
-F 1 "100" V 6380 1730 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 6380 1730 50  0001 C CNN
-F 3 "" H 6380 1730 50  0001 C CNN
-F 4 "0603" V 6480 1730 50  0001 C CNN "display_footprint"
-F 5 "1%" V 6580 1730 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 6680 1730 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 6680 2130 60  0001 C CNN "Digi-Key PN"
-	1    6380 1730
-	0    -1   1    0   
-$EndComp
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5D0E5B7B
-P 6380 1830
-AR Path="/5BAAE2B6/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5D0E5B7B" Ref="R1614"  Part="1" 
-F 0 "R1614" V 6340 1690 50  0000 R CNN
-F 1 "100" V 6380 1830 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 6380 1830 50  0001 C CNN
-F 3 "" H 6380 1830 50  0001 C CNN
-F 4 "0603" V 6480 1830 50  0001 C CNN "display_footprint"
-F 5 "1%" V 6580 1830 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 6680 1830 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 6680 2230 60  0001 C CNN "Digi-Key PN"
-	1    6380 1830
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	6970 1730 7790 1730
 Wire Wire Line
@@ -1077,9 +901,9 @@ Wire Wire Line
 	6760 2610 7080 2610
 Wire Wire Line
 	6760 2610 6760 2650
-Text GLabel 6230 1730 0    50   BiDi ~ 0
+Text GLabel 6530 1730 0    50   BiDi ~ 0
 TEMP_I2C_SDA
-Text GLabel 6230 1830 0    50   Input ~ 0
+Text GLabel 6530 1830 0    50   Input ~ 0
 TEMP_I2C_SCL
 Text Notes 8780 1890 0    50   ~ 0
 Place near +3.3V BCKP Supply
