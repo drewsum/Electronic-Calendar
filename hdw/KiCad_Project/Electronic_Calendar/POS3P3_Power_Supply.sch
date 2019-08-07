@@ -907,7 +907,7 @@ F 3 "" H 9800 6160 50  0001 C CNN
 	1    9800 6160
 	1    0    0    -1  
 $EndComp
-Text GLabel 9880 5780 2    50   Output ~ 10
+Text GLabel 9880 5780 2    50   Output ~ 0
 POS3P3_ISNS
 Wire Wire Line
 	9880 5780 9800 5780
