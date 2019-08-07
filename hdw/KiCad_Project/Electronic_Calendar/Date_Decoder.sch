@@ -1568,5 +1568,5 @@ F 4 "296-8228-1-ND" H 4300 5810 50  0001 C CNN "Digi-Key PN"
 	1    0    0    -1  
 $EndComp
 Text Notes 540  690  0    100  ~ 20
-14. Date Decoder
+13. Date Decoder
 $EndSCHEMATC

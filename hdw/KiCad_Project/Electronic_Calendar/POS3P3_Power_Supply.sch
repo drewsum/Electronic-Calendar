@@ -227,24 +227,6 @@ F 7 "311-1344-1-ND" H 3685 3630 60  0001 C CNN "Digi-Key PN"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:C_Custom C?
-U 1 1 5C0BAED6
-P 2260 2740
-AR Path="/5BAAE10E/5C0BAED6" Ref="C?"  Part="1" 
-AR Path="/5BE5222A/5C0BAED6" Ref="C?"  Part="1" 
-AR Path="/5CD35FCB/5C0BAED6" Ref="C303"  Part="1" 
-F 0 "C303" H 2285 2840 50  0000 L CNN
-F 1 "22uF" H 2285 2640 50  0000 L CNN
-F 2 "Capacitors_SMD:C_2220" H 2298 2590 50  0001 C CNN
-F 3 "" H 2285 2840 50  0001 C CNN
-F 4 "445-1453-1-ND" H 2685 3240 60  0001 C CNN "Digi-Key PN"
-F 5 "2220" H 2110 2840 50  0000 R CNN "display_footprint"
-F 6 "25V" H 2110 2740 50  0000 R CNN "Voltage"
-F 7 "X7R" H 2110 2640 50  0000 R CNN "Dielectric"
-	1    2260 2740
-	1    0    0    -1  
-$EndComp
-$Comp
 L Custom_Library:R_Custom R?
 U 1 1 5C0BDA59
 P 3470 5640
@@ -385,21 +367,6 @@ Wire Wire Line
 Wire Wire Line
 	2690 2510 3260 2510
 Connection ~ 3260 2510
-$Comp
-L power:GND #PWR0305
-U 1 1 5C0E2267
-P 2260 2890
-F 0 "#PWR0305" H 2260 2640 50  0001 C CNN
-F 1 "GND" H 2260 2740 50  0000 C CNN
-F 2 "" H 2260 2890 50  0001 C CNN
-F 3 "" H 2260 2890 50  0001 C CNN
-	1    2260 2890
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2260 2590 2260 2510
-Wire Wire Line
-	2260 2510 2690 2510
 Connection ~ 2690 2510
 $Comp
 L Custom_Library:C_Custom C?
@@ -463,12 +430,9 @@ Wire Wire Line
 	900  2590 900  2510
 Wire Wire Line
 	900  2510 1580 2510
-Connection ~ 2260 2510
 Wire Wire Line
 	1580 2590 1580 2510
 Connection ~ 1580 2510
-Wire Wire Line
-	1580 2510 2260 2510
 $Comp
 L power:+12V #PWR0301
 U 1 1 5C0EC008
@@ -1256,4 +1220,6 @@ $EndComp
 Wire Wire Line
 	9270 2810 9270 2890
 Connection ~ 9270 2890
+Wire Wire Line
+	1580 2510 2690 2510
 $EndSCHEMATC

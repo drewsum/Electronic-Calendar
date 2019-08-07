@@ -1859,5 +1859,5 @@ Connection ~ 8870 6160
 Wire Wire Line
 	8870 6160 8870 6060
 Text Notes 540  690  0    100  ~ 20
-12. Calendar LEDs
+11. Calendar LEDs
 $EndSCHEMATC

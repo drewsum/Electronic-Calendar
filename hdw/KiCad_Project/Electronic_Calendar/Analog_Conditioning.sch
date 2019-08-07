@@ -921,7 +921,7 @@ F 7 "RHM10KADCT-ND" H 1460 4710 60  0001 C CNN "Digi-Key PN"
 	1    0    0    1   
 $EndComp
 Text Notes 540  690  0    100  ~ 20
-17. Analog Conditioning
+16. Analog Conditioning
 $Comp
 L Amplifier_Operational:OPA340NA U1703
 U 1 1 5C3B2762

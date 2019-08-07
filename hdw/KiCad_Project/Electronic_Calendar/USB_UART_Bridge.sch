@@ -249,10 +249,10 @@ Wire Wire Line
 Connection ~ 1000 3590
 Wire Wire Line
 	1000 3590 1000 3680
-Text GLabel 4170 3590 2    50   UnSpc ~ 0
-~USB_ACTIVE
+Text GLabel 4170 3590 2    40   UnSpc ~ 0
+~USB_TRAFFIC
 Text GLabel 6640 5270 3    50   UnSpc ~ 0
-~USB_ACTIVE
+~USB_TRAFFIC
 $Comp
 L Custom_Library:R_Custom R1510
 U 1 1 5BB07016
@@ -629,7 +629,7 @@ F 4 "S1111EC-01-ND" H 9880 4440 50  0001 C CNN "Digi-Key PN"
 	1    0    0    -1  
 $EndComp
 Text Notes 540  690  0    100  ~ 20
-15. USB UART Bridge
+14. USB UART Bridge
 $Comp
 L power:GND #PWR01528
 U 1 1 5D1A491C
@@ -896,8 +896,6 @@ F 3 "" H 2220 2580 50  0001 C CNN
 	1    2220 2580
 	1    0    0    -1  
 $EndComp
-Text Notes 3220 2460 0    50   ~ 0
-Tie VCCIO to +3.3V???
 $Comp
 L power:+3.3V #PWR01507
 U 1 1 5D1C5426
@@ -940,7 +938,7 @@ L power:+3.3V #PWR0101
 U 1 1 5D3A880F
 P 3420 2890
 F 0 "#PWR0101" H 3420 2740 50  0001 C CNN
-F 1 "+3.3V" H 3420 3030 50  0000 C CNN
+F 1 "+3.3V" H 3370 3030 50  0000 C CNN
 F 2 "" H 3420 2890 50  0001 C CNN
 F 3 "" H 3420 2890 50  0001 C CNN
 	1    3420 2890

@@ -1237,7 +1237,7 @@ Connection ~ 7710 2130
 Wire Wire Line
 	7710 2130 7710 2230
 Text Notes 540  690  0    100  ~ 20
-16. Temperature Sensors
+15. Temperature Sensors
 NoConn ~ 3590 2030
 NoConn ~ 3580 3870
 NoConn ~ 3580 5720

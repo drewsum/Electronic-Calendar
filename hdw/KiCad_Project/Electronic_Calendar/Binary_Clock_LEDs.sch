@@ -1246,5 +1246,5 @@ Wire Wire Line
 Connection ~ 6550 4150
 Connection ~ 6550 4350
 Text Notes 540  690  0    100  ~ 20
-13. Binary Clock LEDs
+12. Binary Clock LEDs
 $EndSCHEMATC
