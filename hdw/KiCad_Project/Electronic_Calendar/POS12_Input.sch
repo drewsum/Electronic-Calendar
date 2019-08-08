@@ -931,33 +931,6 @@ Wire Wire Line
 Connection ~ 8990 2270
 Wire Wire Line
 	8990 2270 8520 2270
-$Comp
-L Custom_Library:TP TP?
-U 1 1 5C3D9362
-P 1610 3170
-AR Path="/5C1D5CD8/5C3D9362" Ref="TP?"  Part="1" 
-AR Path="/5C1D5C9E/5C3D9362" Ref="TP?"  Part="1" 
-AR Path="/5CB6F1ED/5C3D9362" Ref="TP?"  Part="1" 
-AR Path="/5CD35FB7/5C3D9362" Ref="TP202"  Part="1" 
-F 0 "TP202" H 1610 3320 50  0000 C CNN
-F 1 "TP" H 1610 3320 50  0001 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_1x01_Pitch2.54mm" H 1610 3170 60  0001 C CNN
-F 3 "" H 1610 3170 60  0000 C CNN
-F 4 "S1111EC-01-ND" H 1610 3170 50  0001 C CNN "Digi-Key PN"
-	1    1610 3170
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0203
-U 1 1 5C3D9369
-P 1610 3170
-F 0 "#PWR0203" H 1610 2920 50  0001 C CNN
-F 1 "GND" H 1610 3020 50  0000 C CNN
-F 2 "" H 1610 3170 50  0001 C CNN
-F 3 "" H 1610 3170 50  0001 C CNN
-	1    1610 3170
-	1    0    0    -1  
-$EndComp
 Text Notes 540  690  0    100  ~ 20
 02. +12V Input
 $Comp

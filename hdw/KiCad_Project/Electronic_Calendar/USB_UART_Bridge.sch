@@ -616,18 +616,6 @@ Wire Wire Line
 Wire Wire Line
 	4640 2220 5180 2220
 Connection ~ 5180 2220
-$Comp
-L Custom_Library:TP TP1502
-U 1 1 5C3553C3
-P 9880 4440
-F 0 "TP1502" H 9880 4590 50  0000 C CNN
-F 1 "TP" H 9880 4590 50  0001 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_1x01_Pitch2.54mm" H 9880 4440 60  0001 C CNN
-F 3 "" H 9880 4440 60  0000 C CNN
-F 4 "S1111EC-01-ND" H 9880 4440 50  0001 C CNN "Digi-Key PN"
-	1    9880 4440
-	1    0    0    -1  
-$EndComp
 Text Notes 540  690  0    100  ~ 20
 14. USB UART Bridge
 $Comp
@@ -650,17 +638,6 @@ F 1 "GND" H 9980 3680 50  0000 C CNN
 F 2 "" H 9980 3830 50  0001 C CNN
 F 3 "" H 9980 3830 50  0001 C CNN
 	1    9980 3830
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR01529
-U 1 1 5D1A524C
-P 9880 4440
-F 0 "#PWR01529" H 9880 4190 50  0001 C CNN
-F 1 "GND" H 9880 4290 50  0000 C CNN
-F 2 "" H 9880 4440 50  0001 C CNN
-F 3 "" H 9880 4440 50  0001 C CNN
-	1    9880 4440
 	1    0    0    -1  
 $EndComp
 $Comp
