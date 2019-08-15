@@ -174,105 +174,71 @@ Text GLabel 3220 2480 0    50   Output ~ 0
 TEMP_I2C_SCL
 Text GLabel 7220 5580 2    50   Input ~ 0
 POS12_PGOOD
-Text GLabel 3220 5280 0    50   Input ~ 0
+Text GLabel 2230 4930 0    50   Input ~ 0
 POS3P3_PGOOD
 Text GLabel 7220 5480 2    50   Input ~ 0
 Cap_Touch_Power
-Text GLabel 7220 4180 2    50   Output ~ 0
+Text GLabel 8010 3900 2    50   Output ~ 0
 Heartbeat_LED
 Text GLabel 7220 2680 2    50   Output ~ 0
 Reset_LED
-Text GLabel 7220 4280 2    50   Output ~ 0
+Text GLabel 8240 4390 2    50   Output ~ 0
 USB_Error_LED
-Text GLabel 7220 1480 2    40   Output ~ 0
-~JAN_LED
-Text GLabel 7220 1580 2    40   Output ~ 0
-~FEB_LED
-Text GLabel 7220 1680 2    40   Output ~ 0
-~MAR_LED
-Text GLabel 7220 1780 2    40   Output ~ 0
-~APR_LED
-Text GLabel 7220 1880 2    40   Output ~ 0
-~MAY_LED
-Text GLabel 7220 1980 2    40   Output ~ 0
-~JUN_LED
-Text GLabel 7220 2080 2    40   Output ~ 0
-~JUL_LED
-Text GLabel 7220 2180 2    40   Output ~ 0
-~AUG_LED
-Text GLabel 7220 2280 2    40   Output ~ 0
-~SEP_LED
-Text GLabel 7220 2380 2    40   Output ~ 0
-~OCT_LED
-Text GLabel 7220 2480 2    40   Output ~ 0
-~NOV_LED
-Text GLabel 7220 2580 2    40   Output ~ 0
-~DEC_LED
-Text GLabel 3220 1980 0    50   Input ~ 0
+Text GLabel 1840 1670 0    50   Input ~ 0
 POS3P3_ADC
-Text GLabel 3220 1680 0    50   Input ~ 0
+Text GLabel 8920 2420 2    50   Input ~ 0
 POS12_ISNS_ADC
 Text GLabel 3220 1580 0    50   Input ~ 0
 POS3P3_ISNS_ADC
 Text GLabel 3220 1480 0    50   Input ~ 0
 POS12_ADC
-Text GLabel 3220 1780 0    50   Input ~ 0
+Text GLabel 1430 1830 2    50   Input ~ 0
 POS5_USB_ADC
-Text GLabel 7220 3580 2    40   Output ~ 0
-~SAT_LED
-Text GLabel 7220 3480 2    40   Output ~ 0
+Text GLabel 3220 1780 0    40   Output ~ 0
 ~FRI_LED
-Text GLabel 7220 3380 2    40   Output ~ 0
+Text GLabel 3220 1680 0    40   Output ~ 0
 ~THR_LED
-Text GLabel 7220 3280 2    40   Output ~ 0
+Text GLabel 7220 4780 2    40   Output ~ 0
 ~WED_LED
-Text GLabel 7220 3180 2    40   Output ~ 0
+Text GLabel 7220 4380 2    40   Output ~ 0
 ~TUE_LED
-Text GLabel 7220 3080 2    40   Output ~ 0
+Text GLabel 7220 4480 2    40   Output ~ 0
 ~MON_LED
-Text GLabel 7220 2980 2    40   Output ~ 0
+Text GLabel 3220 5280 0    40   Output ~ 0
 ~SUN_LED
-Text GLabel 3220 3030 0    40   Output ~ 0
-~Hours0_LED
-Text GLabel 3220 3130 0    40   Output ~ 0
-~Hours1_LED
 Text GLabel 3220 3230 0    40   Output ~ 0
-~Hours2_LED
-Text GLabel 3220 3330 0    40   Output ~ 0
+~Hours1_LED
+Text GLabel 3220 3130 0    40   Output ~ 0
 ~Hours3_LED
-Text GLabel 3220 3430 0    40   Output ~ 0
-~Hours4_LED
-Text GLabel 3220 3530 0    40   Output ~ 0
+Text GLabel 3220 3030 0    40   Output ~ 0
 ~Hours5_LED
-Text GLabel 3220 3630 0    40   Output ~ 0
-~Hours6_LED
-Text GLabel 3220 4330 0    40   Output ~ 0
+Text GLabel 7220 3380 2    40   Output ~ 0
 ~Minutes6_LED
-Text GLabel 3220 4230 0    40   Output ~ 0
+Text GLabel 7220 3480 2    40   Output ~ 0
 ~Minutes5_LED
-Text GLabel 3220 4130 0    40   Output ~ 0
+Text GLabel 7220 3280 2    40   Output ~ 0
 ~Minutes4_LED
-Text GLabel 3220 4030 0    40   Output ~ 0
+Text GLabel 3220 1980 0    40   Output ~ 0
 ~Minutes3_LED
-Text GLabel 3220 3930 0    40   Output ~ 0
+Text GLabel 7220 3180 2    40   Output ~ 0
 ~Minutes2_LED
-Text GLabel 3220 3830 0    40   Output ~ 0
+Text GLabel 7220 6180 2    40   Output ~ 0
 ~Minutes1_LED
-Text GLabel 3220 3730 0    40   Output ~ 0
+Text GLabel 7220 5980 2    40   Output ~ 0
 ~Minutes0_LED
-Text GLabel 3220 4580 0    40   Output ~ 0
+Text GLabel 7220 4280 2    40   Output ~ 0
 ~Seconds0_LED
-Text GLabel 3220 4680 0    40   Output ~ 0
+Text GLabel 7220 3080 2    40   Output ~ 0
 ~Seconds1_LED
-Text GLabel 3220 4780 0    40   Output ~ 0
+Text GLabel 3220 2080 0    40   Output ~ 0
 ~Seconds2_LED
-Text GLabel 3220 4880 0    40   Output ~ 0
+Text GLabel 7220 6080 2    40   Output ~ 0
 ~Seconds3_LED
-Text GLabel 3220 4980 0    40   Output ~ 0
+Text GLabel 3220 2180 0    40   Output ~ 0
 ~Seconds4_LED
-Text GLabel 3220 5080 0    40   Output ~ 0
+Text GLabel 7220 5880 2    40   Output ~ 0
 ~Seconds5_LED
-Text GLabel 3220 5180 0    40   Output ~ 0
+Text GLabel 7220 2980 2    40   Output ~ 0
 ~Seconds6_LED
 Text GLabel 7220 5380 2    50   Output ~ 0
 USB_UART_TX
@@ -280,9 +246,9 @@ Text GLabel 7220 5280 2    50   Input ~ 0
 USB_UART_RX
 Text GLabel 7220 5780 2    50   Output ~ 0
 Date_B0
-Text GLabel 7220 5880 2    50   Output ~ 0
+Text GLabel 8030 6000 2    50   Output ~ 0
 Date_B1
-Text GLabel 7220 5980 2    50   Output ~ 0
+Text GLabel 8210 5830 2    50   Output ~ 0
 Date_B2
 Text GLabel 7220 3680 2    50   Output ~ 0
 Year_B0
@@ -290,11 +256,11 @@ Text GLabel 7220 3780 2    50   Output ~ 0
 Year_B1
 Text GLabel 7220 3880 2    50   Output ~ 0
 Year_B2
-Text GLabel 7220 4380 2    50   Output ~ 0
+Text GLabel 8340 2920 2    50   Output ~ 0
 Other_Error_LED
 Text GLabel 7220 4580 2    50   Output ~ 0
 Exception_LED
-Text GLabel 7220 4480 2    50   Output ~ 0
+Text GLabel 8600 3200 2    50   Output ~ 0
 Analog_Error_LED
 Text GLabel 3220 2380 0    50   Output ~ 0
 Date_Decode_Enable
@@ -302,27 +268,60 @@ Text GLabel 3220 2830 0    50   BiDi ~ 0
 ICSPDAT
 Text GLabel 3220 2930 0    50   Input ~ 0
 ICSPCLK
-Text GLabel 7220 6080 2    40   Output ~ 0
+Text GLabel 8040 6150 2    40   Output ~ 0
 ~Date_Decode_1
-Text GLabel 7220 6180 2    40   Output ~ 0
+Text GLabel 8310 6570 2    40   Output ~ 0
 ~Date_Decode_2
-Text GLabel 3220 2080 0    40   Output ~ 0
+Text GLabel 1910 2030 0    40   Output ~ 0
 ~Date_Decode_3
-Text GLabel 3220 2180 0    40   Output ~ 0
+Text GLabel 1910 2130 0    40   Output ~ 0
 ~Date_Decode_4
 Text Notes 540  690  0    100  ~ 20
 07. Microcontroller
 Text GLabel 7220 5680 2    50   Input ~ 0
 POS12_PGOOD
-NoConn ~ 3220 1880
 Text GLabel 3220 2280 0    50   Input ~ 0
 VBAT_ADC
 Text GLabel 7220 4980 2    40   Input ~ 0
 ~DIODE_FAULT
 Text GLabel 7220 4880 2    50   Output ~ 0
 VBAT_ADC_EN
-Text GLabel 7220 4780 2    50   Output ~ 0
+Text GLabel 8890 3530 2    50   Output ~ 0
 STATUS_LED_ENABLE
 Text GLabel 7220 4680 2    40   Output ~ 0
 ~VBAT_ISOLATE
+Text GLabel 7220 1880 2    40   Output ~ 0
+~OCT_LED
+Text GLabel 7220 2280 2    40   Output ~ 0
+~SEP_LED
+Text GLabel 7220 2180 2    40   Output ~ 0
+~AUG_LED
+Text GLabel 7220 2080 2    40   Output ~ 0
+~JUL_LED
+Text GLabel 7220 2480 2    40   Output ~ 0
+~JUN_LED
+Text GLabel 7220 2380 2    40   Output ~ 0
+~MAY_LED
+Text GLabel 7220 1780 2    40   Output ~ 0
+~APR_LED
+Text GLabel 7220 1680 2    40   Output ~ 0
+~MAR_LED
+Text GLabel 7220 1580 2    40   Output ~ 0
+~FEB_LED
+Text GLabel 7220 1480 2    40   Output ~ 0
+~JAN_LED
+Text GLabel 7220 1980 2    40   Output ~ 0
+~NOV_LED
+Text GLabel 7220 4180 2    40   Output ~ 0
+~DEC_LED
+Text GLabel 3220 1880 0    40   Output ~ 0
+~SAT_LED
+Text GLabel 3220 4580 0    40   Output ~ 0
+~Hours0_LED
+Text GLabel 3220 4680 0    40   Output ~ 0
+~Hours2_LED
+Text GLabel 3220 4780 0    40   Output ~ 0
+~Hours4_LED
+Text GLabel 3220 4880 0    40   Output ~ 0
+~Hours6_LED
 $EndSCHEMATC
