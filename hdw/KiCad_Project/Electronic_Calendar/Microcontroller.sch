@@ -180,9 +180,9 @@ Text GLabel 7220 5480 2    50   Input ~ 0
 Cap_Touch_Power
 Text GLabel 8010 3900 2    50   Output ~ 0
 Heartbeat_LED
-Text GLabel 7220 2680 2    50   Output ~ 0
+Text GLabel 8180 2540 2    50   Output ~ 0
 Reset_LED
-Text GLabel 8240 4390 2    50   Output ~ 0
+Text GLabel 7220 5280 2    50   Output ~ 0
 USB_Error_LED
 Text GLabel 1840 1670 0    50   Input ~ 0
 POS3P3_ADC
@@ -190,7 +190,7 @@ Text GLabel 8920 2420 2    50   Input ~ 0
 POS12_ISNS_ADC
 Text GLabel 3220 1580 0    50   Input ~ 0
 POS3P3_ISNS_ADC
-Text GLabel 3220 1480 0    50   Input ~ 0
+Text GLabel 2880 1300 0    50   Input ~ 0
 POS12_ADC
 Text GLabel 1430 1830 2    50   Input ~ 0
 POS5_USB_ADC
@@ -240,23 +240,23 @@ Text GLabel 7220 5880 2    40   Output ~ 0
 ~Seconds5_LED
 Text GLabel 7220 2980 2    40   Output ~ 0
 ~Seconds6_LED
-Text GLabel 7220 5380 2    50   Output ~ 0
+Text GLabel 7220 2580 2    50   Output ~ 0
 USB_UART_TX
-Text GLabel 7220 5280 2    50   Input ~ 0
+Text GLabel 7220 2680 2    50   Input ~ 0
 USB_UART_RX
-Text GLabel 7220 5780 2    50   Output ~ 0
+Text GLabel 3220 1480 0    50   Output ~ 0
 Date_B0
-Text GLabel 8030 6000 2    50   Output ~ 0
+Text GLabel 7220 5780 2    50   Output ~ 0
 Date_B1
-Text GLabel 8210 5830 2    50   Output ~ 0
-Date_B2
 Text GLabel 7220 3680 2    50   Output ~ 0
+Date_B2
+Text GLabel 8160 3670 2    50   Output ~ 0
 Year_B0
 Text GLabel 7220 3780 2    50   Output ~ 0
 Year_B1
 Text GLabel 7220 3880 2    50   Output ~ 0
 Year_B2
-Text GLabel 8340 2920 2    50   Output ~ 0
+Text GLabel 7220 5380 2    50   Output ~ 0
 Other_Error_LED
 Text GLabel 7220 4580 2    50   Output ~ 0
 Exception_LED
@@ -274,7 +274,7 @@ Text GLabel 8310 6570 2    40   Output ~ 0
 ~Date_Decode_2
 Text GLabel 1910 2030 0    40   Output ~ 0
 ~Date_Decode_3
-Text GLabel 1910 2130 0    40   Output ~ 0
+Text GLabel 7220 3580 2    40   Output ~ 0
 ~Date_Decode_4
 Text Notes 540  690  0    100  ~ 20
 07. Microcontroller
