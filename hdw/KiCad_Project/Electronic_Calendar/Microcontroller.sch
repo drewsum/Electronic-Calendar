@@ -148,7 +148,7 @@ F 3 "" H 4570 1150 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	4570 1150 4570 1230
-Text GLabel 3220 6180 0    40   Input ~ 8
+Text GLabel 3220 6180 0    40   Input ~ 0
 ~MCLR
 NoConn ~ 3220 5780
 NoConn ~ 3220 5880
@@ -250,7 +250,7 @@ Text GLabel 7220 5780 2    50   Output ~ 0
 Date_B1
 Text GLabel 7220 3680 2    50   Output ~ 0
 Date_B2
-Text GLabel 8160 3670 2    50   Output ~ 0
+Text GLabel 3220 3330 0    50   Output ~ 0
 Year_B0
 Text GLabel 7220 3780 2    50   Output ~ 0
 Year_B1
@@ -268,20 +268,16 @@ Text GLabel 3220 2830 0    50   BiDi ~ 0
 ICSPDAT
 Text GLabel 3220 2930 0    50   Input ~ 0
 ICSPCLK
-Text GLabel 8040 6150 2    40   Output ~ 0
+Text GLabel 3220 4030 0    40   Output ~ 0
 ~Date_Decode_1
-Text GLabel 8310 6570 2    40   Output ~ 0
+Text GLabel 3220 4130 0    40   Output ~ 0
 ~Date_Decode_2
-Text GLabel 1910 2030 0    40   Output ~ 0
+Text GLabel 3220 4230 0    40   Output ~ 0
 ~Date_Decode_3
-Text GLabel 7220 3580 2    40   Output ~ 0
-~Date_Decode_4
 Text Notes 540  690  0    100  ~ 20
 07. Microcontroller
 Text GLabel 7220 5680 2    50   Input ~ 0
 POS12_PGOOD
-Text GLabel 3220 2280 0    50   Input ~ 0
-VBAT_ADC
 Text GLabel 7220 4980 2    40   Input ~ 0
 ~DIODE_FAULT
 Text GLabel 7220 4880 2    50   Output ~ 0
@@ -324,4 +320,10 @@ Text GLabel 3220 4780 0    40   Output ~ 0
 ~Hours4_LED
 Text GLabel 3220 4880 0    40   Output ~ 0
 ~Hours6_LED
+Text GLabel 2040 4350 0    50   Input ~ 0
+POS5_USB_PGOOD
+Text GLabel 3220 4330 0    50   Input ~ 0
+VBAT_ADC
+Text GLabel 7220 3580 2    40   Output ~ 0
+~Date_Decode_4
 $EndSCHEMATC
