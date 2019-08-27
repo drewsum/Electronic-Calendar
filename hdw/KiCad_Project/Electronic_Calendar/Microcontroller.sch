@@ -174,25 +174,25 @@ Text GLabel 3220 2480 0    50   Output ~ 0
 TEMP_I2C_SCL
 Text GLabel 7220 5580 2    50   Input ~ 0
 POS12_PGOOD
-Text GLabel 2230 4930 0    50   Input ~ 0
+Text GLabel 3220 5080 0    50   Input ~ 0
 POS3P3_PGOOD
 Text GLabel 7220 5480 2    50   Input ~ 0
 Cap_Touch_Power
-Text GLabel 8010 3900 2    50   Output ~ 0
+Text GLabel 3220 4980 0    50   Output ~ 0
 Heartbeat_LED
-Text GLabel 8180 2540 2    50   Output ~ 0
+Text GLabel 3220 2280 0    50   Output ~ 0
 Reset_LED
 Text GLabel 7220 5280 2    50   Output ~ 0
 USB_Error_LED
-Text GLabel 1840 1670 0    50   Input ~ 0
+Text GLabel 3220 3630 0    50   Input ~ 0
 POS3P3_ADC
-Text GLabel 8920 2420 2    50   Input ~ 0
+Text GLabel 3220 3730 0    50   Input ~ 0
 POS12_ISNS_ADC
 Text GLabel 3220 1580 0    50   Input ~ 0
 POS3P3_ISNS_ADC
-Text GLabel 2880 1300 0    50   Input ~ 0
+Text GLabel 3220 3530 0    50   Input ~ 0
 POS12_ADC
-Text GLabel 1430 1830 2    50   Input ~ 0
+Text GLabel 3220 3430 0    50   Input ~ 0
 POS5_USB_ADC
 Text GLabel 3220 1780 0    40   Output ~ 0
 ~FRI_LED
@@ -260,7 +260,7 @@ Text GLabel 7220 5380 2    50   Output ~ 0
 Other_Error_LED
 Text GLabel 7220 4580 2    50   Output ~ 0
 Exception_LED
-Text GLabel 8600 3200 2    50   Output ~ 0
+Text GLabel 3220 3830 0    50   Output ~ 0
 Analog_Error_LED
 Text GLabel 3220 2380 0    50   Output ~ 0
 Date_Decode_Enable
@@ -282,7 +282,7 @@ Text GLabel 7220 4980 2    40   Input ~ 0
 ~DIODE_FAULT
 Text GLabel 7220 4880 2    50   Output ~ 0
 VBAT_ADC_EN
-Text GLabel 8890 3530 2    50   Output ~ 0
+Text GLabel 3220 3930 0    50   Output ~ 0
 STATUS_LED_ENABLE
 Text GLabel 7220 4680 2    40   Output ~ 0
 ~VBAT_ISOLATE
@@ -320,7 +320,7 @@ Text GLabel 3220 4780 0    40   Output ~ 0
 ~Hours4_LED
 Text GLabel 3220 4880 0    40   Output ~ 0
 ~Hours6_LED
-Text GLabel 2040 4350 0    50   Input ~ 0
+Text GLabel 3220 5180 0    50   Input ~ 0
 POS5_USB_PGOOD
 Text GLabel 3220 4330 0    50   Input ~ 0
 VBAT_ADC
