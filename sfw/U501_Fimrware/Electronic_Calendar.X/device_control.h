@@ -23,7 +23,7 @@
 #include "32mz_interrupt_control.h"
 
 // Hardcoded Clock Setting Integers, in Hertz
-#define SYSCLK_INT          252000000
+#define SYSCLK_INT          200000000
 
 // Unlock system function
 // This function unlocks the device so that device parameters can be changed

@@ -117,18 +117,18 @@ inline void softwareDelay(uint32_t inputDelay) {
 }
 
 // This function initializes the oscillator and PLL
-// This sets up a SYSCLK of 252 MHz
+// This sets up a SYSCLK of 200 MHz
 // REFCLK1: Disabled
 // REFCLK2: Disabled
 // REFCLK3: Disabled
 // REFCLK4: Disabled
-// PBCLK1: 84 MHz
-// PBCLK2: 84 MHz
-// PBCLK3: 15.75 MHz
-// PBCLK4: 84 MHz
-// PBCLK5: 84 MHz
-// PBCLK7: 252 MHz
-// PBCLK8: 84 MHz
+// PBCLK1: 
+// PBCLK2: 
+// PBCLK3: 
+// PBCLK4: 
+// PBCLK5: 
+// PBCLK7: 
+// PBCLK8: 
 void clockInitialize(void) {
  
     // unlock the device
@@ -138,14 +138,14 @@ void clockInitialize(void) {
     OSCCONbits.CLKLOCK = 0;
     
     // Initialize peripheral bus clocks
-    PBCLK1Initialize();
-    PBCLK2Initialize();
-    PBCLK3Initialize();
-    PBCLK4Initialize();
-    PBCLK5Initialize();
-    PBCLK7Initialize();
-    PBCLK8Initialize();
-    
+//    PBCLK1Initialize();
+//    PBCLK2Initialize();
+//    PBCLK3Initialize();
+//    PBCLK4Initialize();
+//    PBCLK5Initialize();
+//    PBCLK7Initialize();
+//    PBCLK8Initialize();
+
     // Initialize reference clocks
     REFCLK1Initialize();
     REFCLK2Initialize();
@@ -188,8 +188,8 @@ void PLLInitialize(void) {
     // Set PLL input divider to 1
     SPLLCONbits.PLLIDIV = 0b000;
     
-    // Set PLL multiplier to 63
-    SPLLCONbits.PLLMULT = 0b111110; // (62 in binary, 0b0000000 => PLL X 1)
+    // Set PLL multiplier to 50
+    SPLLCONbits.PLLMULT = 0b110001; // (49 in binary, 0b0000000 => PLL X 1)
     
     // Set PLL output divider to 2
     SPLLCONbits.PLLODIV = 0b001;

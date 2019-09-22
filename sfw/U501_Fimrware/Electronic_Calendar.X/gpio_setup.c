@@ -17,9 +17,6 @@ void gpioInitialize (void){
     portEGPIOInitialize();
     portFGPIOInitialize();
     portGGPIOInitialize();
-    portHGPIOInitialize();
-    portJGPIOInitialize();
-    portKGPIOInitialize();
     
     // Lock PPS
     PPSLock();

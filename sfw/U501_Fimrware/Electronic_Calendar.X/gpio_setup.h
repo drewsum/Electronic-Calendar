@@ -35,7 +35,7 @@
 #define ANALOG_DISABLE      0
 
 
-// initializes GPIO ports on microcontroller
+// initializes all GPIO ports on microcontroller
 void gpioInitialize (void);
 
 // initializes port A GPIO pins
@@ -58,16 +58,6 @@ void portFGPIOInitialize (void);
 
 // initializes port G GPIO pins
 void portGGPIOInitialize (void);
-
-// initializes port H GPIO pins
-void portHGPIOInitialize (void);
-
-// initializes port J GPIO pins
-void portJGPIOInitialize (void);
-
-// initializes port K GPIO pins
-void portKGPIOInitialize (void);
-
 
 #endif /* _GPIO_SETUP_H */
 
