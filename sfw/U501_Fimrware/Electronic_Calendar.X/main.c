@@ -19,5 +19,12 @@
 
 
 void main(void) {
+    
+    // Set up system clocks
+    clockInitialize();
+    
+    // Set up GPIO ports
+    gpioInitialize();
+    
     return;
 }
