@@ -997,9 +997,6 @@ Wire Wire Line
 	5170 5060 4920 5060
 Wire Wire Line
 	4920 5060 4920 5140
-Wire Wire Line
-	4840 5060 4920 5060
-Connection ~ 4920 5060
 $Comp
 L Device:LED D?
 U 1 1 5CC2555B
@@ -1018,8 +1015,6 @@ F 4 "160-1447-1-ND" H 6040 4790 50  0001 C CNN "Digi-Key PN"
 	1    6040 4790
 	0    -1   -1   0   
 $EndComp
-Text GLabel 4840 5060 0    50   Input ~ 0
-Exception_LED
 Text GLabel 6840 5060 0    50   Input ~ 0
 Other_Error_LED
 Text Notes 540  690  0    100  ~ 20
@@ -1090,4 +1085,9 @@ F 3 "" H 4040 4340 50  0001 C CNN
 	1    4040 4340
 	1    0    0    -1  
 $EndComp
+Text GLabel 4840 5060 0    50   Input ~ 0
+Exception_LED
+Connection ~ 4920 5060
+Wire Wire Line
+	4840 5060 4920 5060
 $EndSCHEMATC
