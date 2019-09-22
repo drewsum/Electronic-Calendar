@@ -162,8 +162,8 @@ section                    address  length [bytes]      (dec)  Description
 Dynamic Data-Memory Reservation
 section                    address  length [bytes]      (dec)  Description
 -------                 ----------  -------------------------  -----------
-heap                    0x800001c8           0x10          16  Reserved for heap 
-stack                   0x800001f0        0x7fe08      523784  Reserved for stack 
+heap                    0x800001c8          0x400        1024  Reserved for heap 
+stack                   0x800005e0        0x7fa18      522776  Reserved for stack 
 
         --------------------------------------------------------------------------
 
@@ -388,6 +388,7 @@ LOAD build/default/production/terminal_control.o
 LOAD build/default/production/cause_of_reset.o
 LOAD build/default/production/error_handler.o
                 0x00000001                __MPLAB_BUILD = 0x1
+                0x00000400                _min_heap_size = 0x400
 LOAD c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MZ2048EFG100\default_isr_vectors.o
 LOAD c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\pic32_software_reset.o
                 0x00000400                PROVIDE (_min_stack_size, 0x400)
@@ -2306,8 +2307,8 @@ LOAD data_init
 .reginfo        0x00000000       0x18
  .reginfo       0x00000000       0x18 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MZ2048EFG100/crt0_mips32r2.o
 
-.stack          0x800001f0      0x400
- .stack         0x800001f0      0x400 stack
+.stack          0x800005e0      0x400
+ .stack         0x800005e0      0x400 stack
 
 .__vector_offset_BF810540_data
                 0xbf810540      0x178

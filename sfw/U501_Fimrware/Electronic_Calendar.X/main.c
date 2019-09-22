@@ -12,6 +12,7 @@
 #include "configuration.h"
 #include "32mz_interrupt_control.h"
 #include "cause_of_reset.h"
+#include "pin_macros.h"
 
 
 void main(void) {
