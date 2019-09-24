@@ -3,9 +3,12 @@
 #include <stdio.h>
 #include <string.h>
 
+// These are macros needed for defining ISRs, included in XC32
+#include <sys/attribs.h>
+
 #include "error_handler.h"
 #include "32mz_interrupt_control.h"
-// #include "pin_macros.h"
+#include "pin_macros.h"
 #include "terminal_control.h"
 
 // This function initializes the error handler structure to detect fault conditions

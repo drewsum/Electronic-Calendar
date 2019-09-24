@@ -200,9 +200,9 @@ Discarded input sections
  .reginfo       0x00000000       0x18 build/default/production/prefetch.o
  .reginfo       0x00000000       0x18 build/default/production/terminal_control.o
  .reginfo       0x00000000       0x18 build/default/production/cause_of_reset.o
- .reginfo       0x00000000       0x18 build/default/production/error_handler.o
  .reginfo       0x00000000       0x18 build/default/production/device_control.o
  .reginfo       0x00000000       0x18 build/default/production/gpio_setup.o
+ .reginfo       0x00000000       0x18 build/default/production/error_handler.o
  .reginfo       0x00000000       0x18 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MZ2048EFG100\default_isr_vectors.o
  .discard       0x00000000        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MZ2048EFG100\default_isr_vectors.o
  .reginfo       0x00000000       0x18 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\pic32_software_reset.o
@@ -415,9 +415,9 @@ LOAD build/default/production/32mz_interrupt_control.o
 LOAD build/default/production/prefetch.o
 LOAD build/default/production/terminal_control.o
 LOAD build/default/production/cause_of_reset.o
-LOAD build/default/production/error_handler.o
 LOAD build/default/production/device_control.o
 LOAD build/default/production/gpio_setup.o
+LOAD build/default/production/error_handler.o
                 0x00000001                __MPLAB_BUILD = 0x1
                 0x00000400                _min_heap_size = 0x400
 LOAD c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MZ2048EFG100\default_isr_vectors.o
@@ -1899,9 +1899,9 @@ END GROUP
  .mdebug.abi32  0x00000000        0x0 build/default/production/prefetch.o
  .mdebug.abi32  0x00000000        0x0 build/default/production/terminal_control.o
  .mdebug.abi32  0x00000000        0x0 build/default/production/cause_of_reset.o
- .mdebug.abi32  0x00000000        0x0 build/default/production/error_handler.o
  .mdebug.abi32  0x00000000        0x0 build/default/production/device_control.o
  .mdebug.abi32  0x00000000        0x0 build/default/production/gpio_setup.o
+ .mdebug.abi32  0x00000000        0x0 build/default/production/error_handler.o
  .mdebug.abi32  0x00000000        0x0 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-reset.o)
  .mdebug.abi32  0x00000000        0x0 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-bootstrap.o)
  .mdebug.abi32  0x00000000        0x0 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(defaultinterrupt.o)
@@ -1971,9 +1971,9 @@ END GROUP
  .comment       0x00000000       0x3d build/default/production/prefetch.o
  .comment       0x00000000       0x3d build/default/production/terminal_control.o
  .comment       0x00000000       0x3d build/default/production/cause_of_reset.o
- .comment       0x00000000       0x3d build/default/production/error_handler.o
  .comment       0x00000000       0x3d build/default/production/device_control.o
  .comment       0x00000000       0x3d build/default/production/gpio_setup.o
+ .comment       0x00000000       0x3d build/default/production/error_handler.o
  .comment       0x0000003c       0x19 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(strlen.o)
                                  0x1a (size before relaxing)
  .comment       0x00000000       0x3d c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-reset.o)
@@ -2037,11 +2037,11 @@ END GROUP
  .debug_aranges
                 0x00000080       0x20 build/default/production/cause_of_reset.o
  .debug_aranges
-                0x000000a0       0x20 build/default/production/error_handler.o
+                0x000000a0       0x20 build/default/production/device_control.o
  .debug_aranges
-                0x000000c0       0x20 build/default/production/device_control.o
+                0x000000c0       0x20 build/default/production/gpio_setup.o
  .debug_aranges
-                0x000000e0       0x20 build/default/production/gpio_setup.o
+                0x000000e0       0x20 build/default/production/error_handler.o
  .debug_aranges
                 0x00000100       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-reset.o)
  .debug_aranges
@@ -2065,7 +2065,7 @@ END GROUP
  *.elf(.debug_pubnames)
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0xffd0
+.debug_info     0x00000000     0xffd1
  *.elf(.debug_info .gnu.linkonce.wi.*)
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x1a5 build/default/production/main.o
@@ -2073,18 +2073,18 @@ END GROUP
  .debug_info    0x00007689     0x16ba build/default/production/prefetch.o
  .debug_info    0x00008d43      0x402 build/default/production/terminal_control.o
  .debug_info    0x00009145      0x728 build/default/production/cause_of_reset.o
- .debug_info    0x0000986d     0x1991 build/default/production/error_handler.o
- .debug_info    0x0000b1fe     0x1369 build/default/production/device_control.o
- .debug_info    0x0000c567     0x25cb build/default/production/gpio_setup.o
- .debug_info    0x0000eb32       0xcb c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-reset.o)
- .debug_info    0x0000ebfd       0xd3 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-bootstrap.o)
- .debug_info    0x0000ecd0       0xe5 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(defaultinterrupt.o)
- .debug_info    0x0000edb5       0xbd c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libmfd.a(s_modf.o)
- .debug_info    0x0000ee72      0x768 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/fpu64\libgcc.a(_udivdi3.o)
- .debug_info    0x0000f5da      0x7a5 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/fpu64\libgcc.a(_umoddi3.o)
- .debug_info    0x0000fd7f       0xc5 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(_mon_getc.o)
- .debug_info    0x0000fe44       0xc7 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(_mon_write.o)
- .debug_info    0x0000ff0b       0xc5 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(_mon_putc.o)
+ .debug_info    0x0000986d     0x1369 build/default/production/device_control.o
+ .debug_info    0x0000abd6     0x25cb build/default/production/gpio_setup.o
+ .debug_info    0x0000d1a1     0x1992 build/default/production/error_handler.o
+ .debug_info    0x0000eb33       0xcb c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-reset.o)
+ .debug_info    0x0000ebfe       0xd3 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-bootstrap.o)
+ .debug_info    0x0000ecd1       0xe5 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(defaultinterrupt.o)
+ .debug_info    0x0000edb6       0xbd c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libmfd.a(s_modf.o)
+ .debug_info    0x0000ee73      0x768 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/fpu64\libgcc.a(_udivdi3.o)
+ .debug_info    0x0000f5db      0x7a5 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/fpu64\libgcc.a(_umoddi3.o)
+ .debug_info    0x0000fd80       0xc5 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(_mon_getc.o)
+ .debug_info    0x0000fe45       0xc7 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(_mon_write.o)
+ .debug_info    0x0000ff0c       0xc5 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(_mon_putc.o)
 
 .debug_abbrev   0x00000000      0xcf4
  *.elf(.debug_abbrev)
@@ -2094,9 +2094,9 @@ END GROUP
  .debug_abbrev  0x0000020d       0xd7 build/default/production/prefetch.o
  .debug_abbrev  0x000002e4       0xa4 build/default/production/terminal_control.o
  .debug_abbrev  0x00000388      0x114 build/default/production/cause_of_reset.o
- .debug_abbrev  0x0000049c      0x17e build/default/production/error_handler.o
- .debug_abbrev  0x0000061a      0x271 build/default/production/device_control.o
- .debug_abbrev  0x0000088b       0xd2 build/default/production/gpio_setup.o
+ .debug_abbrev  0x0000049c      0x271 build/default/production/device_control.o
+ .debug_abbrev  0x0000070d       0xd2 build/default/production/gpio_setup.o
+ .debug_abbrev  0x000007df      0x17e build/default/production/error_handler.o
  .debug_abbrev  0x0000095d       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-reset.o)
  .debug_abbrev  0x00000985       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-bootstrap.o)
  .debug_abbrev  0x000009ad       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(defaultinterrupt.o)
@@ -2115,9 +2115,9 @@ END GROUP
  .debug_line    0x0000123f      0x202 build/default/production/prefetch.o
  .debug_line    0x00001441      0x21b build/default/production/terminal_control.o
  .debug_line    0x0000165c      0x1cb build/default/production/cause_of_reset.o
- .debug_line    0x00001827      0x293 build/default/production/error_handler.o
- .debug_line    0x00001aba      0x399 build/default/production/device_control.o
- .debug_line    0x00001e53      0x306 build/default/production/gpio_setup.o
+ .debug_line    0x00001827      0x399 build/default/production/device_control.o
+ .debug_line    0x00001bc0      0x306 build/default/production/gpio_setup.o
+ .debug_line    0x00001ec6      0x293 build/default/production/error_handler.o
  .debug_line    0x00002159       0x91 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-reset.o)
  .debug_line    0x000021ea       0x95 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-bootstrap.o)
  .debug_line    0x0000227f       0xa3 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(defaultinterrupt.o)
@@ -2137,9 +2137,9 @@ END GROUP
  .debug_frame   0x00000288       0xc0 build/default/production/prefetch.o
  .debug_frame   0x00000348      0x110 build/default/production/terminal_control.o
  .debug_frame   0x00000458       0x4c build/default/production/cause_of_reset.o
- .debug_frame   0x000004a4      0x174 build/default/production/error_handler.o
- .debug_frame   0x00000618      0x39c build/default/production/device_control.o
- .debug_frame   0x000009b4      0x110 build/default/production/gpio_setup.o
+ .debug_frame   0x000004a4      0x39c build/default/production/device_control.o
+ .debug_frame   0x00000840      0x110 build/default/production/gpio_setup.o
+ .debug_frame   0x00000950      0x174 build/default/production/error_handler.o
  .debug_frame   0x00000ac4       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-reset.o)
  .debug_frame   0x00000ae4       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-bootstrap.o)
  .debug_frame   0x00000b04       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(defaultinterrupt.o)
@@ -2158,9 +2158,9 @@ END GROUP
  .debug_str     0x0000001c        0x0 build/default/production/prefetch.o
  .debug_str     0x0000001c        0x0 build/default/production/terminal_control.o
  .debug_str     0x0000001c        0x0 build/default/production/cause_of_reset.o
- .debug_str     0x0000001c        0x0 build/default/production/error_handler.o
  .debug_str     0x0000001c       0x38 build/default/production/device_control.o
  .debug_str     0x00000054        0x0 build/default/production/gpio_setup.o
+ .debug_str     0x00000054        0x0 build/default/production/error_handler.o
  .debug_str     0x00000054        0x0 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-reset.o)
  .debug_str     0x00000054        0x0 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-bootstrap.o)
  .debug_str     0x00000054        0x0 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(defaultinterrupt.o)
@@ -2232,11 +2232,11 @@ END GROUP
  .gnu.attributes
                 0x00000040       0x10 build/default/production/cause_of_reset.o
  .gnu.attributes
-                0x00000050       0x10 build/default/production/error_handler.o
+                0x00000050       0x10 build/default/production/device_control.o
  .gnu.attributes
-                0x00000060       0x10 build/default/production/device_control.o
+                0x00000060       0x10 build/default/production/gpio_setup.o
  .gnu.attributes
-                0x00000070       0x10 build/default/production/gpio_setup.o
+                0x00000070       0x10 build/default/production/error_handler.o
  .gnu.attributes
                 0x00000080       0x10 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(default-on-reset.o)
  .gnu.attributes
@@ -2634,19 +2634,19 @@ LOAD data_init
  .data          0x00000000        0x0 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MZ2048EFG100\default_isr_vectors.o
 
 .bss%z67        0x00000000        0x0
- .bss           0x00000000        0x0 build/default/production/gpio_setup.o
-
-.data%z68       0x00000000        0x0
- .data          0x00000000        0x0 build/default/production/gpio_setup.o
-
-.data%z69       0x00000000        0x0
- .data          0x00000000        0x0 build/default/production/device_control.o
-
-.bss%z70        0x00000000        0x0
  .bss           0x00000000        0x0 build/default/production/error_handler.o
 
-.data%z71       0x00000000        0x0
+.data%z68       0x00000000        0x0
  .data          0x00000000        0x0 build/default/production/error_handler.o
+
+.bss%z69        0x00000000        0x0
+ .bss           0x00000000        0x0 build/default/production/gpio_setup.o
+
+.data%z70       0x00000000        0x0
+ .data          0x00000000        0x0 build/default/production/gpio_setup.o
+
+.data%z71       0x00000000        0x0
+ .data          0x00000000        0x0 build/default/production/device_control.o
 
 .bss%z72        0x00000000        0x0
  .bss           0x00000000        0x0 build/default/production/cause_of_reset.o
