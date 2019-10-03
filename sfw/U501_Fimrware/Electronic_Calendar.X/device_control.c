@@ -122,13 +122,13 @@ inline void softwareDelay(uint32_t inputDelay) {
 // REFCLK2: Disabled
 // REFCLK3: Disabled
 // REFCLK4: Disabled
-// PBCLK1: 
-// PBCLK2: 
-// PBCLK3: 
-// PBCLK4: 
-// PBCLK5: 
-// PBCLK7: 
-// PBCLK8: 
+// PBCLK1: 66.6 MHz
+// PBCLK2: 66.6 MHz
+// PBCLK3: 12.5 MHz
+// PBCLK4: 66.6 MHz
+// PBCLK5: 66.6 MHz
+// PBCLK7: 200 MHz
+// PBCLK8: 66.6M Hz
 void clockInitialize(void) {
  
     // unlock the device
@@ -138,13 +138,13 @@ void clockInitialize(void) {
     OSCCONbits.CLKLOCK = 0;
     
     // Initialize peripheral bus clocks
-//    PBCLK1Initialize();
-//    PBCLK2Initialize();
-//    PBCLK3Initialize();
-//    PBCLK4Initialize();
-//    PBCLK5Initialize();
-//    PBCLK7Initialize();
-//    PBCLK8Initialize();
+    PBCLK1Initialize();
+    PBCLK2Initialize();
+    PBCLK3Initialize();
+    PBCLK4Initialize();
+    PBCLK5Initialize();
+    PBCLK7Initialize();
+    PBCLK8Initialize();
 
     // Initialize reference clocks
     REFCLK1Initialize();

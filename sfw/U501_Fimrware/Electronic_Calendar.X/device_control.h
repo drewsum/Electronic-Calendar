@@ -25,6 +25,10 @@
 // Hardcoded Clock Setting Integers, in Hertz
 #define SYSCLK_INT          200000000
 
+// logic level macros
+#define HIGH        1
+#define LOW         0
+
 // Unlock system function
 // This function unlocks the device so that device parameters can be changed
 // and the microcontroller can be reset

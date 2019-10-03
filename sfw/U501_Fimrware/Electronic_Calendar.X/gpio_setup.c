@@ -70,7 +70,7 @@ void portAGPIOInitialize (void) {
     
     // Setup RA9
     TRISAbits.TRISA9    = TRIS_OUTPUT;
-    LATAbits.LATA9      = LAT_LOW;
+    LATAbits.LATA9      = LAT_HIGH;
     ODCAbits.ODCA9      = ODC_DISABLE;
     ANSELAbits.ANSA9    = ANALOG_DISABLE;
     

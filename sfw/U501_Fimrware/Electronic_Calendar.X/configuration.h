@@ -35,7 +35,7 @@
 #pragma config FPLLIDIV = DIV_4         // System PLL Input Divider (1x Divider)
 #pragma config FPLLRNG = RANGE_5_10_MHZ // System PLL Input Range (5-10 MHz Input)
 #pragma config FPLLICLK = PLL_FRC       // System PLL Input Clock Selection (FRC is input to the System PLL)
-#pragma config FPLLMULT = MUL_63        // System PLL Multiplier (PLL Multiply by 63)
+#pragma config FPLLMULT = MUL_50        // System PLL Multiplier (PLL Multiply by 50)
 #pragma config FPLLODIV = DIV_2         // System PLL Output Clock Divider (2x Divider)
 #pragma config UPLLFSEL = FREQ_24MHZ    // USB PLL Input Frequency Selection (USB PLL input is 24 MHz)
 
@@ -104,7 +104,7 @@
 #pragma config_alt FPLLIDIV = DIV_4     // System PLL Input Divider (1x Divider)
 #pragma config_alt FPLLRNG = RANGE_5_10_MHZ// System PLL Input Range (5-10 MHz Input)
 #pragma config_alt FPLLICLK = PLL_FRC   // System PLL Input Clock Selection (FRC is input to the System PLL)
-#pragma config_alt FPLLMULT = MUL_63    // System PLL Multiplier (PLL Multiply by 63)
+#pragma config_alt FPLLMULT = MUL_50    // System PLL Multiplier (PLL Multiply by 50)
 #pragma config_alt FPLLODIV = DIV_2     // System PLL Output Clock Divider (2x Divider)
 #pragma config_alt UPLLFSEL = FREQ_24MHZ// USB PLL Input Frequency Selection (USB PLL input is 24 MHz)
 
@@ -161,7 +161,7 @@
 #pragma config_auba FPLLIDIV = DIV_4    // System PLL Input Divider (1x Divider)
 #pragma config_auba FPLLRNG = RANGE_5_10_MHZ// System PLL Input Range (5-10 MHz Input)
 #pragma config_auba FPLLICLK = PLL_FRC  // System PLL Input Clock Selection (FRC is input to the System PLL)
-#pragma config_auba FPLLMULT = MUL_63   // System PLL Multiplier (PLL Multiply by 63)
+#pragma config_auba FPLLMULT = MUL_50   // System PLL Multiplier (PLL Multiply by 50)
 #pragma config_auba FPLLODIV = DIV_2    // System PLL Output Clock Divider (2x Divider)
 #pragma config_auba UPLLFSEL = FREQ_24MHZ// USB PLL Input Frequency Selection (USB PLL input is 24 MHz)
 
@@ -218,7 +218,7 @@
 #pragma config_uba FPLLIDIV = DIV_4     // System PLL Input Divider (1x Divider)
 #pragma config_uba FPLLRNG = RANGE_5_10_MHZ// System PLL Input Range (5-10 MHz Input)
 #pragma config_uba FPLLICLK = PLL_FRC   // System PLL Input Clock Selection (FRC is input to the System PLL)
-#pragma config_uba FPLLMULT = MUL_63    // System PLL Multiplier (PLL Multiply by 63)
+#pragma config_uba FPLLMULT = MUL_50    // System PLL Multiplier (PLL Multiply by 50)
 #pragma config_uba FPLLODIV = DIV_2     // System PLL Output Clock Divider (2x Divider)
 #pragma config_uba UPLLFSEL = FREQ_24MHZ// USB PLL Input Frequency Selection (USB PLL input is 24 MHz)
 

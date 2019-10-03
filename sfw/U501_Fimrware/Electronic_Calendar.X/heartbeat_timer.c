@@ -28,9 +28,9 @@ void heartbeatTimerInitialize(void) {
     // Clear timer 1
     TMR1 = 0x0000;
     
-    // Set timer 1 period match to 61523
+    // Set timer 1 period match to 48828
     // This will give an interrupt rate of 1 Hz
-    PR1 = 61523;
+    PR1 = 48828;
     
     // Clear Timer1 Interrupt Flag
     clearInterruptFlag(Timer1);
@@ -72,7 +72,7 @@ void __ISR(_TIMER_1_VECTOR, ipl6SRS) hearbeatTimerISR(void) {
     HEARTBEAT_LED_PIN = !(HEARTBEAT_LED_PIN);
     
     // Update error LEDs based on error handler status
-    updateErrorLEDs();
+    // updateErrorLEDs();
     
     // Increment on time counter
     device_on_time_counter++;
