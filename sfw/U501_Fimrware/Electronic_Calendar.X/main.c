@@ -20,6 +20,8 @@
 #include "prefetch.h"
 #include "watchdog_timer.h"
 #include "heartbeat_timer.h"
+#include "usb_uart.h"
+#include "terminal_control.h"
 
 void main(void) {
     
@@ -42,58 +44,28 @@ void main(void) {
     // Initialize GPIO pins to startup settings
     gpioInitialize();
     
-    // Initialize UART USB debugging
-//    usbUartInitialize();
-//    
-//    // Clear the terminal
-//    terminalClearScreen();
-//    terminalSetCursorHome();
-//    terminalTextAttributesReset();
-
+    // Setup USB UART debugging
+    usbUartInitialize();
     
-    // Print debug message s
-//    printf("Logic Board Initializing...\n\r");
-//    
-//    if (    reset_cause == Undefined ||
-//            reset_cause == Primary_Config_Registers_Error ||
-//            reset_cause == Primary_Secondary_Config_Registers_Error ||
-//            reset_cause == Config_Mismatch ||
-//            reset_cause == DMT_Reset ||
-//            reset_cause == WDT_Reset ||
-//            reset_cause == Software_Reset ||
-//            reset_cause == External_Reset ||
-//            reset_cause == BOR_Reset) {
-//    
-//        terminalTextAttributes(RED, BLACK, NORMAL);
-//        
-//    }
-//    
-//    else {
-//     
-//        terminalTextAttributes(GREEN, BLACK, NORMAL);
-//        
-//    }
+    // Clear the terminal
+    terminalClearScreen();
+    terminalSetCursorHome();
     
-    // printf("Cause of most recent device reset: %s\n\r", getResetCauseString(reset_cause));
-    
-//    terminalTextAttributesReset();
-//    terminalTextAttributes(GREEN, BLACK, NORMAL);
-//    printf("Clocks Initialized\n\r");
-//    printf("Interrupt Controller Initialized, Global Interrupts Enabled\n\r");
-//    printf("GPIO Pins Initialized\n\r");
-//    printf("USB UART Initialized\n\r");
+    terminalTextAttributesReset();
+    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("Clocks Initialized\n\r");
+    printf("Interrupt Controller Initialized, Global Interrupts Enabled\n\r");
+    printf("GPIO Pins Initialized\n\r");
+    printf("USB UART Initialized\n\r");
     
     // Setup error handling
     errorHandlerInitialize();
-    // printf("Error Handler Initialized\n\r");
+    printf("Error Handler Initialized\n\r");
     
-    // Setup prefetch module
-    // prefetchInitialize();
-    // printf("Prefetch Module Initialized\n\r");
     
 //    // Setup heartbeat timer
     heartbeatTimerInitialize();
-//    printf("Heartbeat Timer Initialized\n\r");
+    printf("Heartbeat Timer Initialized\n\r");
 //    
 //    // Disable unused peripherals for power savings
 //    PMDInitialize();
@@ -101,17 +73,24 @@ void main(void) {
             
     // Setup the watchdog timer
     watchdogTimerInitialize();
-    // printf("Watchdog Timer Initialized\n\r");
+    printf("Watchdog Timer Initialized\n\r");
     
     // Startup the deadman timer
     deadmanTimerInitialize();
-    // printf("Deadman Timer Initialized\n\r");
+    printf("Deadman Timer Initialized\n\r");
     
     // Enable status LED supply rail
     STATUS_LED_ENABLE_PIN = HIGH;
+    printf("Status LEDs enabled\r\n");
     
     // Disable RESET LED
     RESET_LED_PIN = LOW;
+    printf("Reset LED disabled\r\n");
+    
+    terminalTextAttributesReset();
+    terminalTextAttributes(YELLOW, BLACK, NORMAL);
+    printf("\n\rType 'Help' for list of supported commands, press enter twice after reset\n\r\n\r");
+    terminalTextAttributesReset();
     
     // Main loop
     while (true) {

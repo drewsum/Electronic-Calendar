@@ -9,4 +9,6 @@ device_control.h  \
 prefetch.h  \
 watchdog_timer.h  \
 error_handler.h  \
- heartbeat_timer.h 
+ heartbeat_timer.h  \
+usb_uart.h  \
+terminal_control.h 

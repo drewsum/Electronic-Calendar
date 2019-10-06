@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c 32mz_interrupt_control.c prefetch.c terminal_control.c cause_of_reset.c device_control.c gpio_setup.c error_handler.c watchdog_timer.c heartbeat_timer.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c 32mz_interrupt_control.c prefetch.c terminal_control.c cause_of_reset.c device_control.c gpio_setup.c error_handler.c watchdog_timer.c heartbeat_timer.c usb_uart.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/32mz_interrupt_control.o ${OBJECTDIR}/prefetch.o ${OBJECTDIR}/terminal_control.o ${OBJECTDIR}/cause_of_reset.o ${OBJECTDIR}/device_control.o ${OBJECTDIR}/gpio_setup.o ${OBJECTDIR}/error_handler.o ${OBJECTDIR}/watchdog_timer.o ${OBJECTDIR}/heartbeat_timer.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/32mz_interrupt_control.o.d ${OBJECTDIR}/prefetch.o.d ${OBJECTDIR}/terminal_control.o.d ${OBJECTDIR}/cause_of_reset.o.d ${OBJECTDIR}/device_control.o.d ${OBJECTDIR}/gpio_setup.o.d ${OBJECTDIR}/error_handler.o.d ${OBJECTDIR}/watchdog_timer.o.d ${OBJECTDIR}/heartbeat_timer.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/32mz_interrupt_control.o ${OBJECTDIR}/prefetch.o ${OBJECTDIR}/terminal_control.o ${OBJECTDIR}/cause_of_reset.o ${OBJECTDIR}/device_control.o ${OBJECTDIR}/gpio_setup.o ${OBJECTDIR}/error_handler.o ${OBJECTDIR}/watchdog_timer.o ${OBJECTDIR}/heartbeat_timer.o ${OBJECTDIR}/usb_uart.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/32mz_interrupt_control.o.d ${OBJECTDIR}/prefetch.o.d ${OBJECTDIR}/terminal_control.o.d ${OBJECTDIR}/cause_of_reset.o.d ${OBJECTDIR}/device_control.o.d ${OBJECTDIR}/gpio_setup.o.d ${OBJECTDIR}/error_handler.o.d ${OBJECTDIR}/watchdog_timer.o.d ${OBJECTDIR}/heartbeat_timer.o.d ${OBJECTDIR}/usb_uart.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/32mz_interrupt_control.o ${OBJECTDIR}/prefetch.o ${OBJECTDIR}/terminal_control.o ${OBJECTDIR}/cause_of_reset.o ${OBJECTDIR}/device_control.o ${OBJECTDIR}/gpio_setup.o ${OBJECTDIR}/error_handler.o ${OBJECTDIR}/watchdog_timer.o ${OBJECTDIR}/heartbeat_timer.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/32mz_interrupt_control.o ${OBJECTDIR}/prefetch.o ${OBJECTDIR}/terminal_control.o ${OBJECTDIR}/cause_of_reset.o ${OBJECTDIR}/device_control.o ${OBJECTDIR}/gpio_setup.o ${OBJECTDIR}/error_handler.o ${OBJECTDIR}/watchdog_timer.o ${OBJECTDIR}/heartbeat_timer.o ${OBJECTDIR}/usb_uart.o
 
 # Source Files
-SOURCEFILES=main.c 32mz_interrupt_control.c prefetch.c terminal_control.c cause_of_reset.c device_control.c gpio_setup.c error_handler.c watchdog_timer.c heartbeat_timer.c
+SOURCEFILES=main.c 32mz_interrupt_control.c prefetch.c terminal_control.c cause_of_reset.c device_control.c gpio_setup.c error_handler.c watchdog_timer.c heartbeat_timer.c usb_uart.c
 
 
 CFLAGS=
@@ -166,6 +166,12 @@ ${OBJECTDIR}/heartbeat_timer.o: heartbeat_timer.c  nbproject/Makefile-${CND_CONF
 	@${RM} ${OBJECTDIR}/heartbeat_timer.o 
 	@${FIXDEPS} "${OBJECTDIR}/heartbeat_timer.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/heartbeat_timer.o.d" -o ${OBJECTDIR}/heartbeat_timer.o heartbeat_timer.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
+${OBJECTDIR}/usb_uart.o: usb_uart.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/usb_uart.o.d 
+	@${RM} ${OBJECTDIR}/usb_uart.o 
+	@${FIXDEPS} "${OBJECTDIR}/usb_uart.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/usb_uart.o.d" -o ${OBJECTDIR}/usb_uart.o usb_uart.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	
 else
 ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -226,6 +232,12 @@ ${OBJECTDIR}/heartbeat_timer.o: heartbeat_timer.c  nbproject/Makefile-${CND_CONF
 	@${RM} ${OBJECTDIR}/heartbeat_timer.o.d 
 	@${RM} ${OBJECTDIR}/heartbeat_timer.o 
 	@${FIXDEPS} "${OBJECTDIR}/heartbeat_timer.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/heartbeat_timer.o.d" -o ${OBJECTDIR}/heartbeat_timer.o heartbeat_timer.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/usb_uart.o: usb_uart.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/usb_uart.o.d 
+	@${RM} ${OBJECTDIR}/usb_uart.o 
+	@${FIXDEPS} "${OBJECTDIR}/usb_uart.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/usb_uart.o.d" -o ${OBJECTDIR}/usb_uart.o usb_uart.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 endif
 
