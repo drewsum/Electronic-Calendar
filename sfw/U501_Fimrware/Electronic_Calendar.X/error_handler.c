@@ -162,90 +162,10 @@ void printErrorHandlerStatus(void) {
     else terminalTextAttributes(GREEN, BLACK, NORMAL);
     printf("   Configuration error %s\n\r", error_handler.configuration_error_flag ? "has occurred" : "has not occurred");
     
-    // EBI Error
-    if (error_handler.EBI_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   EBI SRAM error %s\n\r", error_handler.EBI_error_flag ? "has occurred" : "has not occurred");
-    
-    // SPI Error
-    if (error_handler.SPI_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   SPI Flash error %s\n\r", error_handler.SPI_error_flag ? "has occurred" : "has not occurred");
-    
-    // SPI Receive Overflow Error
-    if (error_handler.SPI_receive_overflow_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   SPI Flash Receive Overflow error %s\n\r", error_handler.SPI_receive_overflow_error_flag ? "has occurred" : "has not occurred");
-    
-    // SPI Transfer Underrun Error
-    if (error_handler.SPI_transfer_underrun_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   SPI Flash Transfer Underrun error %s\n\r", error_handler.SPI_transfer_underrun_error_flag ? "has occurred" : "has not occurred");
-    
-    // WIFI Error
-    if (error_handler.WIFI_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   WIFI Module error %s\n\r", error_handler.WIFI_error_flag ? "has occurred" : "has not occurred");
-    
     // USB Error
     if (error_handler.USB_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
     else terminalTextAttributes(GREEN, BLACK, NORMAL);
     printf("   USB UART error %s\n\r", error_handler.USB_error_flag ? "has occurred" : "has not occurred");
-    
-    // Other Error
-    if (error_handler.other_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   Other errors %s\n\r", error_handler.other_error_flag ? "have occurred" : "have not occurred");
-    
-    // POS5P Thermal Warning Error
-    if (error_handler.POS5P_thermal_warning_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   POS5P thermal warning %s\n\r", error_handler.POS5P_thermal_warning_error_flag ? "has occurred" : "has not occurred");
-    
-    // POS3P3 Regulation Error
-    if (error_handler.POS3P3_regulation_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   POS3P3 regulation error %s\n\r", error_handler.POS3P3_regulation_error_flag ? "has occurred" : "has not occurred");
-    
-    // POS5 Regulation Error
-    if (error_handler.POS5_regulation_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   POS5 regulation error %s\n\r", error_handler.POS5_regulation_error_flag ? "has occurred" : "has not occurred");
-    
-    // POS12 Regulation Error
-    if (error_handler.POS12_regulation_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   POS12 regulation error %s\n\r", error_handler.POS12_regulation_error_flag ? "has occurred" : "has not occurred");
-    
-    // POS5P Regulation Error
-    if (error_handler.POS5P_regulation_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   POS5P regulation error %s\n\r", error_handler.POS5P_regulation_error_flag ? "has occurred" : "has not occurred");
-    
-    // POS5P5 Regulation Error
-    if (error_handler.POS5P5_regulation_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   POS5P5 regulation error %s\n\r", error_handler.POS5P5_regulation_error_flag ? "has occurred" : "has not occurred");
-    
-    // DMT Error
-    if (error_handler.DMT_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   Deadman Timer error %s\n\r", error_handler.DMT_error_flag ? "has occurred" : "has not occurred");
-    
-    // System Bus Protection Error
-    if (error_handler.system_bus_protection_violation_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   System bus protection violation error %s\n\r", error_handler.system_bus_protection_violation_flag ? "has occurred" : "has not occurred");
-    
-    // Prefetch Module SEC Error
-    if (error_handler.prefetch_module_SEC_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   Prefetch Module SEC Event %s\n\r", error_handler.prefetch_module_SEC_flag ? "has occurred" : "has not occurred");
-    
-    // ADC Config Error
-    if (error_handler.ADC_configuration_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   ADC configuration error %s\n\r", error_handler.ADC_configuration_error_flag ? "has occurred" : "has not occurred");
     
     
     terminalTextAttributesReset();    
@@ -256,66 +176,37 @@ void printErrorHandlerStatus(void) {
 void clearErrorHandler(void) {
  
     error_handler.DMT_error_flag = 0;
-    error_handler.EBI_error_flag = 0;
-    error_handler.POS12_regulation_error_flag = 0;
-    error_handler.POS3P3_regulation_error_flag = 0;
-    error_handler.POS5P5_regulation_error_flag = 0;
-    error_handler.POS5P_regulation_error_flag = 0;
-    error_handler.POS5P_thermal_warning_error_flag = 0;
-    error_handler.POS5_regulation_error_flag = 0;
-    error_handler.SPI_error_flag = 0;
-    error_handler.SPI_receive_overflow_error_flag = 0;
-    error_handler.SPI_transfer_underrun_error_flag = 0;
     error_handler.USB_error_flag = 0;
-    error_handler.WIFI_error_flag = 0;
+    error_handler.USB_tx_dma_error_flag = 0;
     error_handler.configuration_error_flag = 0;
-    error_handler.other_error_flag = 0;
+
     error_handler.system_bus_protection_violation_flag = 0;
     error_handler.prefetch_module_SEC_flag = 0;
-    error_handler.ADC_configuration_error_flag = 0;
+    // error_handler.ADC_configuration_error_flag = 0;
     
 }
 
 // This function updates the error LEDs based on the error handler state
-//void updateErrorLEDs(void) {
-// 
-//    // Configuration Error
+void updateErrorLEDs(void) {
+ 
+    // Configuration Error
 //    if (    error_handler.configuration_error_flag ||
 //            error_handler.DMT_error_flag ||
-//            error_handler.POS12_regulation_error_flag ||
-//            error_handler.POS3P3_regulation_error_flag ||
-//            error_handler.POS5P5_regulation_error_flag ||
-//            error_handler.POS5P_regulation_error_flag ||
-//            error_handler.POS5P_thermal_warning_error_flag ||
-//            error_handler.POS5_regulation_error_flag ||
-//            error_handler.other_error_flag ||
 //            error_handler.system_bus_protection_violation_flag ||
 //            error_handler.prefetch_module_SEC_flag ||
-//            error_handler.ADC_configuration_error_flag) {
+//            error_handler.other_error_flag) {
 //        
 //        OTHER_ERROR_LED_PIN = 1;
 //        
 //    }
 //    
 //    else OTHER_ERROR_LED_PIN = 0;
-//
-//    // EBI Error
-//    if (error_handler.EBI_error_flag) EBI_ERROR_LED_PIN = 1;
-//    else EBI_ERROR_LED_PIN = 0;
-//    
-//    // SPI Error
-//    if (error_handler.SPI_error_flag || error_handler.SPI_receive_overflow_error_flag || error_handler.SPI_transfer_underrun_error_flag) SPI_ERROR_LED_PIN = 1;
-//    else SPI_ERROR_LED_PIN = 0;
-//    
-//    // WIFI Error
-//    if (error_handler.WIFI_error_flag) WIFI_ERROR_LED_PIN = 1;
-//    else WIFI_ERROR_LED_PIN = 0;
-//    
-//    // USB Error
-//    if (error_handler.USB_error_flag) USB_ERROR_LED_PIN = 1;
-//    else USB_ERROR_LED_PIN = 0;    
-//    
-//}
+
+    // USB Error
+    if (error_handler.USB_error_flag || error_handler.USB_tx_dma_error_flag) USB_ERROR_LED_PIN = 1;
+    else USB_ERROR_LED_PIN = 0;    
+    
+}
 
 // This function prints short strings during a CPU exception
 void exceptionPrint(char *input_string) {

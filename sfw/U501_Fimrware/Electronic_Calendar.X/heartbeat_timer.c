@@ -72,7 +72,7 @@ void __ISR(_TIMER_1_VECTOR, ipl6SRS) hearbeatTimerISR(void) {
     HEARTBEAT_LED_PIN = !(HEARTBEAT_LED_PIN);
     
     // Update error LEDs based on error handler status
-    // updateErrorLEDs();
+    updateErrorLEDs();
     
     // Increment on time counter
     device_on_time_counter++;

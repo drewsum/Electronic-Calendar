@@ -8,6 +8,9 @@
 // These are macros needed for defining ISRs, included in XC32
 #include <sys/attribs.h>
 
+// These macros are needed for switching between physical and virtual memory locations
+#include <sys/kmem.h>
+
 #include "32mz_interrupt_control.h"
 #include "pin_macros.h"
 #include "device_control.h"
@@ -18,30 +21,77 @@
 #include "error_handler.h"
 #include "cause_of_reset.h"
 #include "prefetch.h"
-
-volatile uint32_t usb_uart_TxHead = 0;
-volatile uint32_t usb_uart_TxTail = 0;
-volatile uint8_t usb_uart_TxBuffer[USB_UART_TX_BUFFER_SIZE];
-volatile uint32_t usb_uart_TxBufferRemaining;
-
-volatile uint32_t usb_uart_RxHead = 0;
-volatile uint32_t usb_uart_RxTail = 0;
-volatile uint8_t usb_uart_RxBuffer[USB_UART_RX_BUFFER_SIZE];
-volatile uint32_t usb_uart_RxCount;
-
-volatile uint8_t usb_uart_RxStringReady = 0;
+#include "error_handler.h"
 
 // Printable Variables from other header files
 extern uint32_t device_on_time_counter;
 extern reset_cause_t reset_cause;
 
+// This function is used to setup DMA0 for UART transmit
+void usbUartTrasmitDmaInitialize(void) {
+ 
+    // Set up DMA0 for USB UART Transmit
+    // From reference manual example 31-2
+    // Disable DMA0 interrupt
+    disableInterrupt(DMA_Channel_0);
+    clearInterruptFlag(DMA_Channel_0);
+    
+    // Enable DMA controller
+    DMACONbits.ON = 0;
+    // Disable DMA CRC
+    DCRCCONbits.CRCEN = 0;
+    // Turn on channel 0
+    DCH0CONbits.CHEN = 0;
+    // Set channel 0 priority to 3 (highest)
+    DCH0CONbits.CHPRI = 3;
+    // Disable DMA chaining
+    DCH0CONbits.CHCHN = 0;
+    
+    // Start interrupt request is UART 3 TX done
+    DCH0ECONbits.CHSIRQ = UART3_Transfer_Done;
+    // configure DMA0 to start on an IRQ matching CHSIRQ
+    DCH0ECONbits.SIRQEN = 1;
+    // configure DMA0 to abort on pattern match where data matched DCH0DAT
+    DCH0ECONbits.PATEN = 1;
+    // pattern is 1 byte long
+    DCH0CONbits.CHPATLEN = 0;
+    // Pattern value is a null ('\0'), end of string
+    DCH0DAT = '\0';
+    
+    // Set DMA0 source location
+    //DCH0SSA = KVA_TO_PA((void*)&usb_uart_tx_buffer[0]);
+    DCH0SSA = KVA_TO_PA((void*)"Hello World\r\n");
+    // Set DMA0 destination location
+    DCH0DSA = KVA_TO_PA((void*)&U3TXREG);
+    // Set source size to size of transmit buffer
+    DCH0SSIZ = USB_UART_TX_BUFFER_SIZE;
+    // Set destination size to 1, since U3TXREG is one byte long
+    DCH0DSIZ = 1;
+    // 1 byte transferred per event (cell size = 1)
+    DCH0CSIZ = 1;
+    
+    // clear existing events, disable all interrupts
+    DCH0INTCLR = 0x00000000;
+    // enable Block Complete and error interrupts
+    DCH0INTbits.CHBCIF = 0;
+    DCH0INTbits.CHBCIE = 1;
+    DCH0INTbits.CHERIF = 0;
+    DCH0INTbits.CHERIE = 1;
+    
+    // Set up DMA0 interrupts
+    setInterruptPriority(DMA_Channel_0, 5);
+    setInterruptSubpriority(DMA_Channel_0, 3);
+    clearInterruptFlag(DMA_Channel_0);
+    enableInterrupt(DMA_Channel_0);
+    
+    // Turn on DMA channel 0
+    DCH0CONbits.CHEN = 1;
+    DMACONbits.ON = 1;
+}
+
 // This function initializes UART 6 for USB debugging
 void usbUartInitialize(void) {
  
-    __XC_UART = 3;
-    
-    usb_in_use_flag = 1;
-    
     // Disable UART 3 interrupts
     disableInterrupt(UART3_Receive_Done);
     disableInterrupt(UART3_Transfer_Done);
@@ -109,71 +159,23 @@ void usbUartInitialize(void) {
     // From section 21.3 of PIC32MZ reference manual
     // Input CLK is PBCLK2 (84 MHz)
     // With PBCLK2 = 84 MHz, BRGH = 1, baud rate error is 0.16%
-    U3BRG = 35;
-    
-    // initializing the driver state
-    usb_uart_TxHead = 0;
-    usb_uart_TxTail = 0;
-    usb_uart_TxBufferRemaining = sizeof(usb_uart_TxBuffer);
-    usb_uart_RxHead = 0;
-    usb_uart_RxTail = 0;
-    usb_uart_RxCount = 0;
-        
+    U3BRG = 35;        
     
     // Set interrupt priorities
-    setInterruptPriority(UART3_Receive_Done, 2);
-    setInterruptPriority(UART3_Transfer_Done, 6);
     setInterruptPriority(UART3_Fault, 1);
     
     // Set interrupt subpriorities
-    setInterruptSubpriority(UART3_Receive_Done, 2);
-    setInterruptSubpriority(UART3_Transfer_Done, 2);
     setInterruptSubpriority(UART3_Fault, 1);
     
     // Clear all UART 3 Interrupts
-    clearInterruptFlag(UART3_Receive_Done);
-    clearInterruptFlag(UART3_Transfer_Done);
     clearInterruptFlag(UART3_Fault);
+    clearInterruptFlag(UART3_Transfer_Done);
     
     // Enable UART 3
     U3MODEbits.ON = 1;
     
-    // Trick UART into thinking user has pressed enter twice
-//    U3MODEbits.LPBACK = 1;
-//    U3TXREG = '\n';
-//    U3TXREG = '\r';
-//    U3TXREG = '\n';
-//    U3TXREG = '\r';
-//    U3MODEbits.LPBACK = 0;
-    
     // Enable receive and error interrupts
-    // Transfer interrupt is set in write function
-    enableInterrupt(UART3_Receive_Done);
     enableInterrupt(UART3_Fault);
-    
-}
-
-// This is the USB UART receive interrupt service routine
-void __ISR(_UART3_RX_VECTOR, ipl2SRS) usbUartReceiveISR(void) {
-    
-    usb_in_use_flag = 1;
-    
-    // Do receive tasks
-    usbUartReceiveHandler();
-    
-    // Clear receive interrupt flag
-    clearInterruptFlag(UART3_Receive_Done);
-    
-}
-
-// This is the USB UART transfer interrupt service routine
-void __ISR(_UART3_TX_VECTOR, ipl6SRS) usbUartTransferISR(void) {
-    
-    // Do transfer tasks
-    usbUartTransmitHandler();
-    
-    // Clear interrupt flag
-    clearInterruptFlag(UART3_Transfer_Done);
     
 }
 
@@ -181,387 +183,66 @@ void __ISR(_UART3_TX_VECTOR, ipl6SRS) usbUartTransferISR(void) {
 void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) usbUartFaultISR(void) {
     
     // TO-DO: Fault tasks
-    error_handler.USB_error_flag = 1;   
+    error_handler.USB_error_flag = 1;
     
     // Clear fault interrupt flag
     clearInterruptFlag(UART3_Fault);
     
 }
 
-// This function pulls a byte from the RX ring buffer
-uint8_t usbUartReadByte(void) {
+// These are the USB UART DMA Interrupt Service Routines
+void __ISR(_DMA0_VECTOR, IPL5SRS) usbUartTxDmaISR(void) {
  
-    uint8_t readValue  = 0;
-    
-    // This state should never be entered
-    while(0 == usb_uart_RxCount)
-    {
-        error_handler.USB_error_flag = 1;
-        return 0;
-    }
-
-    readValue = usb_uart_RxBuffer[usb_uart_RxTail++];
-    if(sizeof(usb_uart_RxBuffer) <= usb_uart_RxTail)
-    {
-        usb_uart_RxTail = 0;
-    }
-    
-    
-    disableInterrupt(UART3_Receive_Done);
-    usb_uart_RxCount--;
-    enableInterrupt(UART3_Receive_Done);
-    return readValue;
-    
-}
-
-
-// This function adds a byte to the TX ring buffer
-void usbUartPutchar(uint8_t txData) {
- 
-    // wait for ring buffer to open up
-    while(0 == usb_uart_TxBufferRemaining);
-
-    if(0 == getInterruptEnable(UART3_Transfer_Done))
-    {
-        U3TXREG = txData;
-   
-    }
-    else
-    {
+    // Determine source of DMA 0 interrupt
+    // Channel block transfer complete interrupt flag (or pattern match)
+    if (DCH0INTbits.CHBCIF) {
         
-        disableInterrupt(UART3_Transfer_Done);
-        usb_uart_TxBuffer[usb_uart_TxHead++] = txData;
-        
-        if(sizeof(usb_uart_TxBuffer) <= usb_uart_TxHead)
-        {
-            usb_uart_TxHead = 0;
-        }
-        
-        usb_uart_TxBufferRemaining--;
-
-    }
-
-     enableInterrupt(UART3_Transfer_Done);
-   
-    
-}
-
-// This serves as the TX interrupt handler and is called by the TX ISR
-void usbUartTransmitHandler(void) {
- 
-    if(sizeof(usb_uart_TxBuffer) > usb_uart_TxBufferRemaining)
-    {
-        U3TXREG = usb_uart_TxBuffer[usb_uart_TxTail++];
-        if(sizeof(usb_uart_TxBuffer) <= usb_uart_TxTail)
-        {
-            usb_uart_TxTail = 0;
-        }
-        usb_uart_TxBufferRemaining++;
-    }
-    
-    else
-    {
-        disableInterrupt(UART3_Transfer_Done);
-        
-    }
-    
-    
-}
-
-
-// This serves as the RX handler and is called by the RX ISR
-void usbUartReceiveHandler(void) {
+        // clear tx buffer
+        uint32_t index;
+        for (index = 0; index <= usb_uart_tx_buffer_head; index++) {
+         
+            usb_uart_tx_buffer[index] = '\0';
             
-    if(1 == U3STAbits.OERR)
-    {
-        U3MODEbits.ON = 0;
-        error_handler.USB_error_flag = 1;
-        U3STAbits.OERR = 0;
-        U3MODEbits.ON = 1;
-    }
-    
-    while(U3STAbits.URXDA) {
-    
-        usb_uart_RxBuffer[usb_uart_RxHead++] = U3RXREG;
-        
-        if(sizeof(usb_uart_RxBuffer) <= usb_uart_RxHead)
-        {
-            usb_uart_RxHead = 0;
-        }
-        usb_uart_RxCount++;
-        
-    }    
-    
-    // This chunk tells main() or whatever is pulling from the ring buffer that
-    // data is ready to be read, since the terminal sent a newline or 
-    // carriage return
-    if((usb_uart_RxBuffer[usb_uart_RxHead - 1] == (int) '\n') || 
-       (usb_uart_RxBuffer[usb_uart_RxHead - 1] == (int) '\r')) {
-
-        usb_uart_RxStringReady = 1;
-                
-    }
-    
-    else {
-        
-        usb_uart_RxStringReady = 0;
-        
-    }
-   
-    // If we've received a backspace
-    if((usb_uart_RxBuffer[usb_uart_RxHead - 1] == (int) '\b')) {
-     
-        usb_uart_RxBuffer[usb_uart_RxHead - 1] = '\0';
-        usb_uart_RxHead--;
- 
-        // Erase the "backspaced" character on terminal
-        printf("\033[K");
-        
-        if(usb_uart_RxHead != usb_uart_RxTail) {
-        
-            usb_uart_RxBuffer[usb_uart_RxHead - 1] = '\0';
-            usb_uart_RxHead--;
-
         }
         
+        usb_uart_tx_buffer_head = 0;
+        
     }
+    
+    // channel error
+    else if (DCH0INTbits.CHERIF) {
+        
+        error_handler.USB_tx_dma_error_flag = 1;
+        
+    }
+    
+    // Clear DMA controller interrupt flags
+    DCH0INTCLR=0x000000ff;
+    
+    // Clear interrupt flag
+    clearInterruptFlag(DMA_Channel_0);
     
 }
 
 // This function redirects stdout to USB_UART output, allowing printf functionality
 void _mon_putc(char c) {
     
-    usbUartPutchar(c);
+    usb_uart_tx_buffer[usb_uart_tx_buffer_head] = c;
+    usb_uart_tx_buffer_head++;
     
-}
-
-
-// This function pulls data out of the RX ring buffer
-void usbUartRingBufferPull(void) {
-
-    int charNumber = usb_uart_RxCount;
-            
-    // Clear line buffer
-    uint32_t index;
-    for (index = 0; index < sizeof(usb_uart_line); index++) {
-
-        usb_uart_line[index] = '\0';
-
-    }
-
-    // Fill line from ring buffer
-    for(index = 0; index < charNumber; index++){
-
-        usb_uart_line[index] = usbUartReadByte();
-
-    }
-
-    // Reset ring buffer
-    usb_uart_RxTail = usb_uart_RxHead;
-
-    // Try to kill off ending returns/newlines
-    while((usb_uart_line[strlen(usb_uart_line) - 1] == (int) '\n') ||
-          (usb_uart_line[strlen(usb_uart_line) - 1] == (int) '\r')) {
-     
-        // NULL
-        usb_uart_line[strlen(usb_uart_line) - 1] = '\0';
-        
-    }
-    
-
-    // Clear ready flag
-    usb_uart_RxStringReady = 0;
-
-    // Check to see if line matches a command
-    usbUartRingBufferLUT(usb_uart_line);
-
-    
-}
-
-
-// This function parses the data pulled from the RX ring buffer
-// This is the function that actually makes stuff happen based on commands
-// Enter the command you'd like to set up within the if statements as
-// an argument to the "strstr" functions
-/*
- 
-    if (strcmp(line_in, "<INSERT COMMAND HERE>") == 0) {
-
-        <ACTIONS OF COMMAND>;
-    }
- 
- * 
- *  * */
-void usbUartRingBufferLUT(char * line_in) {
- 
-    // THIS IS WHERE WE DO THE ACTUAL PARSING OF RECEIVED STRING AND
-    // ACT ON IT
-    
-    if (strcmp(line_in, "Reset") == 0) {
-
-         deviceReset();
-        
-    }
-    
-    else if (strcmp(line_in, "Clear") == 0) {
-     
-        terminalClearScreen();
-        terminalSetCursorHome();
-        
-    }
-    
-    else if (strcmp(line_in, "*IDN?") == 0) {
-     
-        terminalTextAttributesReset();
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
-        printf("E44 Electronic Display Logic Board\n\r");
-        terminalTextAttributesReset();
-        
-    }
-    
-    else if (strcmp(line_in, "Device On Time?") == 0) {
-     
-        terminalTextAttributesReset();
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
-        printf("On time since last device reset: %s\n\r", 
-                getStringSecondsAsTime(device_on_time_counter));
-        terminalTextAttributesReset();
-        
-    }
-    
-//    else if (strcmp(line_in, "PMD Status?") == 0) {
-//     
-//        usb_uart_TxHead = 0;
-//        usb_uart_TxTail = 0;
+    // Force a DMA0 transfer to begin
+//    if (DCH0CONbits.CHBUSY == 0) {
 //        
-//        printPMDStatus();
+//        DCH0CONbits.CHEN = 1;
+//        DCH0ECONbits.CFORCE = 1;
 //        
 //    }
     
-     else if (strcmp(line_in, "MCU IDs?") == 0) {
-     
-        terminalTextAttributesReset();
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
-        
-        // Print serial number
-        printf("    PIC32MZ Serial Number retrieved from Flash: %s\n\r",
-                getStringSerialNumber());
-        
-        // Print device ID
-        printf("    Device ID retrieved from Flash: %s (0x%X)\n\r", 
-            getDeviceIDString(getDeviceID()), 
-            getDeviceID());
-
-        // Print revision ID
-        printf("    Revision ID retrieved from Flash: %s (0x%X)\n\r", 
-            getRevisionIDString(getRevisionID()), 
-            getRevisionID());
-
-        terminalTextAttributesReset();
-        
-    }
-    
-    else if (strcmp(line_in, "MCU Status?") == 0) {
-     
-        printWatchdogStatus();
-        
-        printDeadmanStatus();
-        
-        printPrefetchStatus();
-        
-        
-    }
-    
-    else if (strcmp(line_in, "Interrupt Status?") == 0) {
-     
-        usb_uart_TxHead = 0;
-        usb_uart_TxTail = 0;
-            
-        // Print function from interrupt control module
-        printInterruptStatus();
-        
-    }
-    
-//    else if (strcmp(line_in, "Cause of Reset?") == 0) {
-//     
-//        terminalTextAttributesReset();
-//        
-//        if (    reset_cause == Undefined ||
-//                reset_cause == Primary_Config_Registers_Error ||
-//                reset_cause == Primary_Secondary_Config_Registers_Error ||
-//                reset_cause == Config_Mismatch ||
-//                reset_cause == DMT_Reset ||
-//                reset_cause == WDT_Reset ||
-//                reset_cause == Software_Reset ||
-//                reset_cause == External_Reset ||
-//                reset_cause == BOR_Reset) {
-//
-//            terminalTextAttributes(RED, BLACK, NORMAL);
-//
-//        }
-//
-//        else {
-//
-//            terminalTextAttributes(GREEN, BLACK, NORMAL);
-//
-//        }
-//        
-//        printf("Cause of the most recent device reset: %s\n\r",
-//                getResetCauseString(reset_cause));
-//        terminalTextAttributesReset();
-//        
-//    }
-    
-    else if (strcmp(line_in, "Clock Status?") == 0) {
-     
-        printClockStatus(SYSCLK_INT);
-        
-    }
-        
-    
-    else if (strcmp(line_in, "Error Status?") == 0) {
-     
-        // Print error handler status
-        printErrorHandlerStatus();
-        
-        // Print help message
-        terminalTextAttributes(YELLOW, BLACK, NORMAL);
-        printf("\n\rCall 'Clear Errors' command to clear any errors that have been set\n\r");
-        terminalTextAttributesReset();
-        
-        
-    }
-    
-    else if (strcmp(line_in, "Clear Errors") == 0) {
-     
-        // Zero out all error handler flags
-        clearErrorHandler();
-        
-        // Update error LEDs based on error handler status
-        // updateErrorLEDs();
-        
-        terminalTextAttributesReset();
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
-        printf("Error Handler flags cleared\n\r");
-        terminalTextAttributesReset();
-        
-    }
-        
-    
-    else if (strcmp(line_in, "Help") == 0) {
-    
-        usbUartPrintHelpMessage();
-        
-    }
-    
 }
+
 
 // Print help message, used in a command above
 void usbUartPrintHelpMessage(void) {
- 
-    usb_uart_TxHead = 0;
-    usb_uart_TxTail = 0;   
-
     
     terminalTextAttributesReset();
     terminalTextAttributes(YELLOW, BLACK, NORMAL);

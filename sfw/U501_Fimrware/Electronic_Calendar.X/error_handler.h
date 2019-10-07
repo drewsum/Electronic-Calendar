@@ -30,23 +30,14 @@
 struct {
     
     unsigned configuration_error_flag                   : 1;    // error in device setup
-    unsigned EBI_error_flag                             : 1;    // error with extended bus interface (external SRAM)
-    unsigned SPI_error_flag                             : 1;    // Error with external flash SPI
-    unsigned SPI_receive_overflow_error_flag            : 1;    // A SPI receive overflow error occurred
-    unsigned SPI_transfer_underrun_error_flag           : 1;    // A SPI transfer underrun error occurred
-    unsigned WIFI_error_flag                            : 1;    // Error with WIFI module
+    
     unsigned USB_error_flag                             : 1;    // Error with USB debugging interface
-    unsigned other_error_flag                           : 1;    // Other error event
-    unsigned POS5P_thermal_warning_error_flag           : 1;    // Power board thermal warning event flag
-    unsigned POS3P3_regulation_error_flag               : 1;    // +3.3V power supply regulation error
-    unsigned POS5_regulation_error_flag                 : 1;    // +5V power supply regulation error
-    unsigned POS12_regulation_error_flag                : 1;    // +12V input regulation error
-    unsigned POS5P_regulation_error_flag                : 1;    // External power board regulation error
-    unsigned POS5P5_regulation_error_flag               : 1;    // +5.5V power supply regulation error
+    unsigned USB_tx_dma_error_flag                      : 1;    // Error with usb uart tx dma
     unsigned DMT_error_flag                             : 1;    // Deadman timer error
     unsigned system_bus_protection_violation_flag       : 1;    // System bus protection event occurred
     unsigned prefetch_module_SEC_flag                   : 1;    // Prefetch module recorded an SEC event
-    unsigned ADC_configuration_error_flag               : 1;    // ADC could not be configured properly
+    unsigned other_error_flag                           : 1;    // undiagnosable error
+    //unsigned ADC_configuration_error_flag               : 1;    // ADC could not be configured properly
     
 } error_handler;
 
