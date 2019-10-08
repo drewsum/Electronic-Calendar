@@ -1,6 +1,8 @@
 
 #include <xc.h>
 
+#include <stdio.h>
+
 #include "heartbeat_timer.h"
 #include "error_handler.h"
 
@@ -91,5 +93,4 @@ void __ISR(_TIMER_1_VECTOR, ipl6SRS) hearbeatTimerISR(void) {
     // Clear interrupt flag
     clearInterruptFlag(Timer1);
     
-
 }

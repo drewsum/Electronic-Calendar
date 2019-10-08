@@ -31,7 +31,7 @@
 #define USB_UART_FLOW_CONTROL_STR       "None"
 
 // This is the outgoing TX USB UART buffer
-volatile char usb_uart_tx_buffer[USB_UART_TX_BUFFER_SIZE];
+char __attribute__((coherent)) usb_uart_tx_buffer[USB_UART_TX_BUFFER_SIZE];
 
 // This variable keeps track of how many bytes are used up in usb_uart_tx_buffer[]
 uint32_t usb_uart_tx_buffer_head = 0;

@@ -9,6 +9,7 @@
 #include <xc.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "configuration.h"
 #include "32mz_interrupt_control.h"
@@ -44,34 +45,43 @@ void main(void) {
     // Initialize GPIO pins to startup settings
     gpioInitialize();
     
+    // Enable status LED supply rail
+    STATUS_LED_ENABLE_PIN = HIGH;
+    
     // Setup USB UART debugging
     usbUartInitialize();
     
     // Setup DMA0 for USB UART Transmit
     usbUartTrasmitDmaInitialize();
     
-    printf("Hello, World!\r\n");
-    
+    // printf("Hello, World!\r\n");
+    // printf("Hello, again!!!\r\n");
+    // DCH0CONbits.CHEN = 1;
     
     // Clear the terminal
-    // terminalClearScreen();
-    // terminalSetCursorHome();
+    terminalClearScreen();
+    terminalSetCursorHome();
     
-    // terminalTextAttributesReset();
-    // terminalTextAttributes(GREEN, BLACK, NORMAL);
-    // printf("Clocks Initialized\n\r");
-    // printf("Interrupt Controller Initialized, Global Interrupts Enabled\n\r");
-    // printf("GPIO Pins Initialized\n\r");
-    // printf("USB UART Initialized\n\r");
+    terminalTextAttributesReset();
+    terminalTextAttributes(GREEN, BLACK, REVERSE);
+    printf("Electronic Calendar\r\n");
+    printf("Created by Drew Maatman, 2019\r\n");
+    terminalTextAttributesReset();
+    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("Clocks Initialized\n\r");
+    printf("Interrupt Controller Initialized, Global Interrupts Enabled\n\r");
+    printf("GPIO Pins Initialized\n\r");
+    printf("Status LEDs enabled\r\n");
+    printf("USB UART Initialized, DMA output buffer method used\n\r");
     
     // Setup error handling
     errorHandlerInitialize();
-    // printf("Error Handler Initialized\n\r");
+    printf("Error Handler Initialized\n\r");
     
     
 //    // Setup heartbeat timer
     heartbeatTimerInitialize();
-    // printf("Heartbeat Timer Initialized\n\r");
+    printf("Heartbeat Timer Initialized\n\r");
 //    
 //    // Disable unused peripherals for power savings
 //    PMDInitialize();
@@ -79,24 +89,20 @@ void main(void) {
             
     // Setup the watchdog timer
     watchdogTimerInitialize();
-    // printf("Watchdog Timer Initialized\n\r");
+    printf("Watchdog Timer Initialized\n\r");
     
     // Startup the deadman timer
     deadmanTimerInitialize();
-    // printf("Deadman Timer Initialized\n\r");
-    
-    // Enable status LED supply rail
-    STATUS_LED_ENABLE_PIN = HIGH;
-    // printf("Status LEDs enabled\r\n");
+    printf("Deadman Timer Initialized\n\r");
     
     // Disable RESET LED
     RESET_LED_PIN = LOW;
-    // printf("Reset LED disabled\r\n");
+    printf("Reset LED disabled\r\n");
     
-    // terminalTextAttributesReset();
-    // terminalTextAttributes(YELLOW, BLACK, NORMAL);
-    // printf("\n\rType 'Help' for list of supported commands, press enter twice after reset\n\r\n\r");
-    // terminalTextAttributesReset();
+    terminalTextAttributesReset();
+    terminalTextAttributes(YELLOW, BLACK, NORMAL);
+    printf("\n\rType 'Help' for list of supported commands\n\r\n\r");
+    terminalTextAttributesReset();
     
     // Main loop
     while (true) {

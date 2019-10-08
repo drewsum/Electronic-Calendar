@@ -59,8 +59,8 @@ void usbUartTrasmitDmaInitialize(void) {
     DCH0DAT = '\0';
     
     // Set DMA0 source location
-    //DCH0SSA = KVA_TO_PA((void*)&usb_uart_tx_buffer[0]);
-    DCH0SSA = KVA_TO_PA((void*)"Hello World\r\n");
+    DCH0SSA = KVA_TO_PA((void *) &usb_uart_tx_buffer);
+    // DCH0SSA = KVA_TO_PA((void *) "Hello World\r\n");
     // Set DMA0 destination location
     DCH0DSA = KVA_TO_PA((void*)&U3TXREG);
     // Set source size to size of transmit buffer
@@ -84,8 +84,7 @@ void usbUartTrasmitDmaInitialize(void) {
     clearInterruptFlag(DMA_Channel_0);
     enableInterrupt(DMA_Channel_0);
     
-    // Turn on DMA channel 0
-    DCH0CONbits.CHEN = 1;
+    // Turn on DMA
     DMACONbits.ON = 1;
 }
 
@@ -135,7 +134,7 @@ void usbUartInitialize(void) {
     U3STAbits.ADM_EN = 0;
     
     // Interrupt on every transmitted character
-    U3STAbits.UTXISEL = 0b00;
+    U3STAbits.UTXISEL = 0b01;
     
     // Idle transmit state is low
     U3STAbits.UTXINV = 1;
@@ -225,21 +224,26 @@ void __ISR(_DMA0_VECTOR, IPL5SRS) usbUartTxDmaISR(void) {
 }
 
 // This function redirects stdout to USB_UART output, allowing printf functionality
-void _mon_putc(char c) {
+void _mon_putc (char c) {
     
     usb_uart_tx_buffer[usb_uart_tx_buffer_head] = c;
     usb_uart_tx_buffer_head++;
     
     // Force a DMA0 transfer to begin
 //    if (DCH0CONbits.CHBUSY == 0) {
-//        
+//    // if (usb_uart_tx_buffer_head >= 1) {
+//    
 //        DCH0CONbits.CHEN = 1;
-//        DCH0ECONbits.CFORCE = 1;
+//        // DCH0ECONbits.CFORCE = 1;
 //        
 //    }
     
+    if (U3STAbits.UTXBF == 0 || usb_uart_tx_buffer_head == 1) {
+        
+        DCH0CONbits.CHEN = 1;
+        DCH0ECONbits.CFORCE = 1;
+    }
 }
-
 
 // Print help message, used in a command above
 void usbUartPrintHelpMessage(void) {
