@@ -19,8 +19,10 @@
 // These are macros needed for defining ISRs, included in XC32
 #include <sys/attribs.h>
 
+#include "usb_uart_rx_lookup_table.h"
+
 // Sizes of TX and RX ring buffers
-#define USB_UART_TX_BUFFER_SIZE 2048
+#define USB_UART_TX_BUFFER_SIZE 16384
 #define USB_UART_RX_BUFFER_SIZE 2048
 
 // Hardcoded COM Port Descriptor Strings
@@ -33,13 +35,19 @@
 // This is the outgoing TX USB UART buffer
 char __attribute__((coherent)) usb_uart_tx_buffer[USB_UART_TX_BUFFER_SIZE];
 
+// This is the incoming RX USB UART buffer
+char __attribute__((coherent)) usb_uart_rx_buffer[USB_UART_RX_BUFFER_SIZE];
+
 // This variable keeps track of how many bytes are used up in usb_uart_tx_buffer[]
 uint32_t usb_uart_tx_buffer_head = 0;
 
 // This function is used to setup DMA0 for UART transmit
 void usbUartTrasmitDmaInitialize(void);
 
-// This function initializes UART 6 for USB debugging
+// This function is used to setup DMA1 for UART Receive
+void usbUartReceiveDmaInitialize(void);
+
+// This function initializes UART 3 for USB debugging
 void usbUartInitialize(void);
 
 // These are the USB UART Interrupt Service Routines
@@ -47,17 +55,7 @@ void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) usbUartFaultISR(void);
 
 // These are the USB UART DMA Interrupt Service Routines
 void __ISR(_DMA0_VECTOR, IPL5SRS) usbUartTxDmaISR(void);
-
-// Misc functions
-void usbUartPrintHelpMessage(void);
-
-// This function returns a string of a large number of seconds in a human readable format
-char * getStringSecondsAsTime(uint32_t input_seconds);
-
-// This function compares the "needle" string parameter to see if it is the 
-// beginning of the "haystack" string variable
-// Returns 0 for success, 1 for failure
-uint8_t strstart(const char * haystack, const char * needle);
+void __ISR(_DMA1_VECTOR, IPL6SRS) usbUartRxDmaISR(void);
 
 #endif /* _USB_UART_H */
 

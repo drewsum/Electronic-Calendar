@@ -203,7 +203,13 @@ void updateErrorLEDs(void) {
 //    else OTHER_ERROR_LED_PIN = 0;
 
     // USB Error
-    if (error_handler.USB_error_flag || error_handler.USB_tx_dma_error_flag) USB_ERROR_LED_PIN = 1;
+    if (    error_handler.USB_error_flag || 
+            error_handler.USB_tx_dma_error_flag ||
+            error_handler.USB_rx_dma_error_flag) {
+        
+        USB_ERROR_LED_PIN = 1;
+    
+    }
     else USB_ERROR_LED_PIN = 0;    
     
 }

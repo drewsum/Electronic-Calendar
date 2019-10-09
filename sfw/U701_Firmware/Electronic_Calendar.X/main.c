@@ -51,13 +51,6 @@ void main(void) {
     // Setup USB UART debugging
     usbUartInitialize();
     
-    // Setup DMA0 for USB UART Transmit
-    usbUartTrasmitDmaInitialize();
-    
-    // printf("Hello, World!\r\n");
-    // printf("Hello, again!!!\r\n");
-    // DCH0CONbits.CHEN = 1;
-    
     // Clear the terminal
     terminalClearScreen();
     terminalSetCursorHome();

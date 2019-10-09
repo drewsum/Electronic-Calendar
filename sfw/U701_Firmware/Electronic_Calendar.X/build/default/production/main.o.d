@@ -11,4 +11,5 @@ watchdog_timer.h  \
 error_handler.h  \
  heartbeat_timer.h  \
 usb_uart.h  \
-terminal_control.h 
+usb_uart_rx_lookup_table.h  \
+ terminal_control.h 

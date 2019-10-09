@@ -33,6 +33,7 @@ struct {
     
     unsigned USB_error_flag                             : 1;    // Error with USB debugging interface
     unsigned USB_tx_dma_error_flag                      : 1;    // Error with usb uart tx dma
+    unsigned USB_rx_dma_error_flag                      : 1;    // Error with usb uart rx dma
     unsigned DMT_error_flag                             : 1;    // Deadman timer error
     unsigned system_bus_protection_violation_flag       : 1;    // System bus protection event occurred
     unsigned prefetch_module_SEC_flag                   : 1;    // Prefetch module recorded an SEC event

@@ -7,6 +7,7 @@ power_saving.h  \
 watchdog_timer.h  \
  error_handler.h  \
 usb_uart.h  \
+usb_uart_rx_lookup_table.h  \
 terminal_control.h  \
-cause_of_reset.h  \
- prefetch.h 
+ cause_of_reset.h  \
+prefetch.h 
