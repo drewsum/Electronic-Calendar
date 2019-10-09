@@ -8,6 +8,7 @@
 #include "terminal_control.h"
 #include "device_control.h"
 #include "heartbeat_timer.h"
+#include "cause_of_reset.h"
 
 // This function is what interprets strings sent over USB Virtual COM Port
 void usb_uart_rx_lookup_table(char * input_string) {
@@ -126,6 +127,36 @@ void usb_uart_rx_lookup_table(char * input_string) {
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
         printf("Error Handler flags cleared\n\r");
+        terminalTextAttributesReset();
+        
+    }
+    
+     else if (strcmp(input_string, "Cause of Reset?") == 0) {
+     
+        terminalTextAttributesReset();
+        
+        if (    reset_cause == Undefined ||
+                reset_cause == Primary_Config_Registers_Error ||
+                reset_cause == Primary_Secondary_Config_Registers_Error ||
+                reset_cause == Config_Mismatch ||
+                reset_cause == DMT_Reset ||
+                reset_cause == WDT_Reset ||
+                reset_cause == Software_Reset ||
+                reset_cause == External_Reset ||
+                reset_cause == BOR_Reset) {
+
+            terminalTextAttributes(RED, BLACK, NORMAL);
+
+        }
+
+        else {
+
+            terminalTextAttributes(GREEN, BLACK, NORMAL);
+
+        }
+        
+        printf("Cause of the most recent device reset: %s\n\r",
+                getResetCauseString(reset_cause));
         terminalTextAttributesReset();
         
     }

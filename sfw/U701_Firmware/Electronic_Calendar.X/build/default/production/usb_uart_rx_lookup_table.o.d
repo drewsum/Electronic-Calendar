@@ -5,4 +5,5 @@ terminal_control.h  \
  device_control.h  \
 32mz_interrupt_control.h  \
 heartbeat_timer.h  \
-pin_macros.h 
+pin_macros.h  \
+ cause_of_reset.h 

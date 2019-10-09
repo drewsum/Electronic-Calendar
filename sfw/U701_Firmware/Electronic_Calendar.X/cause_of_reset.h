@@ -34,6 +34,9 @@ typedef enum {
 
 } reset_cause_t;
 
+// Cause of Device Reset global variable
+reset_cause_t reset_cause;
+
 // This function determines the cause of the most recent device reset and
 // assigns it to the reset_cause enumeration
 reset_cause_t getResetCause(void);
