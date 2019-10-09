@@ -145,7 +145,10 @@ void usbUartReceiveDmaInitialize(void) {
     clearInterruptFlag(DMA_Channel_1);
     enableInterrupt(DMA_Channel_1);
     
+    // Enable channel for receiving data
     DCH1CONbits.CHEN = 1;
+    // Set up to auto-enable on pattern match
+    DCH1CONbits.CHAEN = 1;
     
     // Turn on DMA
     DMACONbits.ON = 1;
@@ -300,12 +303,13 @@ void __ISR(_DMA1_VECTOR, IPL6SRS) usbUartRxDmaISR(void) {
     // Channel block transfer complete interrupt flag (or pattern match)
     if (DCH1INTbits.CHBCIF) {
         
+        // Determine length of received string
+        uint32_t length = strlen(usb_uart_rx_buffer);
         
         // parse received string
-        usb_uart_rx_lookup_table(usb_uart_rx_buffer);
+        if (strlen(usb_uart_rx_buffer) > 2) usb_uart_rx_lookup_table(usb_uart_rx_buffer);
         
         // clear rx buffer
-        uint32_t length = strlen(usb_uart_rx_buffer);
         uint32_t index;
         for (index = 0; index < length; index++) {
             usb_uart_rx_buffer[index] = '\0';
@@ -325,9 +329,6 @@ void __ISR(_DMA1_VECTOR, IPL6SRS) usbUartRxDmaISR(void) {
     
     // Clear interrupt flag
     clearInterruptFlag(DMA_Channel_1);
-    
-    // Re-enable DMA channel since it's disabled on pattern match
-    DCH1CONbits.CHEN = 1;
     
 }
 

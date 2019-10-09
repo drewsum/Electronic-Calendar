@@ -12,35 +12,31 @@
 // This function is what interprets strings sent over USB Virtual COM Port
 void usb_uart_rx_lookup_table(char * input_string) {
  
-    if (strcmp(input_string, "POWER TEAM\r\n") == 0) {
-     
-        terminalTextAttributesReset();
-        terminalTextAttributes(BLACK, RED, NORMAL);
-        printf("Todd Keene is back, with the ultimate strength team\r\n");
-        terminalTextAttributesReset();
-        
-    }
+    // Remove trailing newlines and carriage returns
+    strtok(input_string, "\n");
+    strtok(input_string, "\r");
     
-    else if (strcmp(input_string, "Help\r\n") == 0) {
+    // Determine if received string has a match
+    if (strcmp(input_string, "Help") == 0) {
      
         usbUartPrintHelpMessage();
         
     }
     
-    else if (strcmp(input_string, "Reset\r\n") == 0) {
+    else if (strcmp(input_string, "Reset") == 0) {
 
          deviceReset();
         
     }
     
-    else if (strcmp(input_string, "Clear\r\n") == 0) {
+    else if (strcmp(input_string, "Clear") == 0) {
      
         terminalClearScreen();
         terminalSetCursorHome();
         
     }
     
-    else if (strcmp(input_string, "*IDN?\r\n") == 0) {
+    else if (strcmp(input_string, "*IDN?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -49,7 +45,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcmp(input_string, "MCU IDs?\r\n") == 0) {
+    else if (strcmp(input_string, "MCU IDs?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -72,7 +68,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcmp(input_string, "MCU Status?\r\n") == 0) {
+    else if (strcmp(input_string, "MCU Status?") == 0) {
      
         printWatchdogStatus();
         
@@ -83,25 +79,53 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcmp(input_string, "Interrupt Status?\r\n") == 0) {
+    else if (strcmp(input_string, "Interrupt Status?") == 0) {
      
         // Print function from interrupt control module
         printInterruptStatus();
         
     }
     
-    else if (strcmp(input_string, "Clock Status?\r\n") == 0) {
+    else if (strcmp(input_string, "Clock Status?") == 0) {
      
         printClockStatus(SYSCLK_INT);
         
     }
     
-    else if (strcmp(input_string, "Device On Time?\r\n") == 0) {
+    else if (strcmp(input_string, "Device On Time?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
         printf("On time since last device reset: %s\n\r", 
                 getStringSecondsAsTime(device_on_time_counter));
+        terminalTextAttributesReset();
+        
+    }
+    
+    else if (strcmp(input_string, "Error Status?") == 0) {
+     
+        // Print error handler status
+        printErrorHandlerStatus();
+        
+        // Print help message
+        terminalTextAttributes(YELLOW, BLACK, NORMAL);
+        printf("\n\rCall 'Clear Errors' command to clear any errors that have been set\n\r");
+        terminalTextAttributesReset();
+        
+        
+    }
+    
+    else if (strcmp(input_string, "Clear Errors") == 0) {
+     
+        // Zero out all error handler flags
+        clearErrorHandler();
+        
+        // Update error LEDs based on error handler status
+        updateErrorLEDs();
+        
+        terminalTextAttributesReset();
+        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        printf("Error Handler flags cleared\n\r");
         terminalTextAttributesReset();
         
     }
@@ -124,8 +148,8 @@ void usbUartPrintHelpMessage(void) {
     //printf("    PMD Status?: Prints the state of Peripheral Module Disable settings\n\r");
     printf("    Interrupt Status? Prints information on interrupt settings\n\r");
     printf("    Clock Status?: Prints system clock settings\n\r");
-    //printf("    Error Status?: Prints the state of system error flags\n\r");
-    //printf("    Clear Errors: Clears all error handler flags\n\r");
+    printf("    Error Status?: Prints the state of system error flags\n\r");
+    printf("    Clear Errors: Clears all error handler flags\n\r");
     printf("    Help: This Command\n\r");
     
     printf("Help messages and neutral responses appear in yellow\n\r");

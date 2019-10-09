@@ -30,7 +30,6 @@
 struct {
     
     unsigned configuration_error_flag                   : 1;    // error in device setup
-    
     unsigned USB_error_flag                             : 1;    // Error with USB debugging interface
     unsigned USB_tx_dma_error_flag                      : 1;    // Error with usb uart tx dma
     unsigned USB_rx_dma_error_flag                      : 1;    // Error with usb uart rx dma

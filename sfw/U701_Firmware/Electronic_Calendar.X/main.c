@@ -64,8 +64,8 @@ void main(void) {
     printf("Clocks Initialized\n\r");
     printf("Interrupt Controller Initialized, Global Interrupts Enabled\n\r");
     printf("GPIO Pins Initialized\n\r");
-    printf("Status LEDs enabled\r\n");
-    printf("USB UART Initialized, DMA output buffer method used\n\r");
+    printf("Status LEDs Enabled\r\n");
+    printf("USB UART Initialized, DMA buffer method used\n\r");
     
     // Setup error handling
     errorHandlerInitialize();
@@ -75,6 +75,10 @@ void main(void) {
 //    // Setup heartbeat timer
     heartbeatTimerInitialize();
     printf("Heartbeat Timer Initialized\n\r");
+    
+    // Setup prefetch module
+    prefetchInitialize();
+    printf("CPU Instruction Prefetch Module Enabled\r\n");
 //    
 //    // Disable unused peripherals for power savings
 //    PMDInitialize();
@@ -90,7 +94,7 @@ void main(void) {
     
     // Disable RESET LED
     RESET_LED_PIN = LOW;
-    printf("Reset LED disabled\r\n");
+    printf("Reset LED Disabled\r\n");
     
     terminalTextAttributesReset();
     terminalTextAttributes(YELLOW, BLACK, NORMAL);

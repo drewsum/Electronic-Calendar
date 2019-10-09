@@ -49,10 +49,9 @@ void printPrefetchStatus(void) {
  
     
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, UNDERSCORE);
+    terminalTextAttributes(GREEN, BLACK, NORMAL);
     printf("Prefetch Module Status:\n\r");
     
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
     printf("    Prefetch Module enable Status: ");
     
     switch (PRECONbits.PREFEN) {

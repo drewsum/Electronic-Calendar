@@ -36,20 +36,15 @@ void __ISR(_SYSTEM_BUS_PROTECTION_VECTOR, ipl1SRS) systemBusProtectionISR(void) 
 void __attribute__((nomips16)) _general_exception_handler(void) {
     
     // Signal to user something really bad happened
-//    EBI_ERROR_LED_PIN = 1;
-//    SPI_ERROR_LED_PIN = 1;
-//    WIFI_ERROR_LED_PIN = 1;
-//    USB_ERROR_LED_PIN = 1;
-//    OTHER_ERROR_LED_PIN = 1;
-//    nACTIVE_LED_PIN = 1;
-//    
+    EXCEPTION_LED_PIN = HIGH;
+    
     // Disable global interrupts
     setGlobalInterruptsState(0);
     
     // Clear watchdog and deadman to give user time to see error state
-//    kickTheDog();
-//    holdThumbTighter();
-//    
+    kickTheDog();
+    holdThumbTighter();
+    
     exceptionPrint(" \033[0;31;40mCPU General Exception! EXCCODE: ");
     
     uint8_t exception_code = (_CP0_GET_CAUSE() >> 2) & 0b11111;
@@ -57,14 +52,9 @@ void __attribute__((nomips16)) _general_exception_handler(void) {
     U3TXREG = exception_code_number;
     exceptionPrint("\n\r");
     
-    
-    
     // Give up
     // Wait for watchdog to save us
     while(1);
-    
-    // Half-baked exception recovery
-    // _CP0_SET_EPC(_CP0_GET_EPC()+4); // increment Error Program Counter (EPC) to next word (skip over offending instruction)
     
 }
 
@@ -72,77 +62,53 @@ void __attribute__((nomips16)) _general_exception_handler(void) {
 void __attribute__((nomips16)) _simple_tlb_refill_exception_handler(void) {
 
     // Signal to user something really bad happened
-//    EBI_ERROR_LED_PIN = 1;
-//    SPI_ERROR_LED_PIN = 1;
-//    WIFI_ERROR_LED_PIN = 1;
-//    USB_ERROR_LED_PIN = 1;
-//    OTHER_ERROR_LED_PIN = 1;
-//    nACTIVE_LED_PIN = 1;
-//    
-//    // Clear watchdog to give user time to see error state
-//    kickTheDog();
-//    holdThumbTighter();
-//    
+    EXCEPTION_LED_PIN = HIGH;
+    
+    // Clear watchdog to give user time to see error state
+    kickTheDog();
+    holdThumbTighter();
+    
     exceptionPrint("\033[0;31;40mCPU TLB Refill Exception!\n\r");
     
     // Give up
     // Wait for watchdog to save us
     while(1);
     
-    // Half-baked exception recovery
-    // _CP0_SET_EPC(_CP0_GET_EPC()+4); // increment Error Program Counter (EPC) to next word (skip over offending instruction)
-    
 }
 
 // This function is called when a cache error occurs
 void __attribute__((nomips16)) _cache_err_exception_handler(void) {
 
-    // Signal to user something really bad happened
-//    EBI_ERROR_LED_PIN = 1;
-//    SPI_ERROR_LED_PIN = 1;
-//    WIFI_ERROR_LED_PIN = 1;
-//    USB_ERROR_LED_PIN = 1;
-//    OTHER_ERROR_LED_PIN = 1;
-//    nACTIVE_LED_PIN = 1;
-//    
-//    // Clear watchdog to give user time to see error state
-//    kickTheDog();
-//    holdThumbTighter();
-//    
+// Signal to user something really bad happened
+    EXCEPTION_LED_PIN = HIGH;
+    
+    // Clear watchdog to give user time to see error state
+    kickTheDog();
+    holdThumbTighter();
+    
     exceptionPrint("\033[0;31;40mCPU Cache Exception!\n\r");
     
     // Give up
     // Wait for watchdog to save us
     while(1);
-    
-    // Half-baked exception recovery
-    // _CP0_SET_EPC(_CP0_GET_EPC()+4); // increment Error Program Counter (EPC) to next word (skip over offending instruction)
-    
+
 }
 
 // This function is called when a bootstrap exception occurs
 void __attribute__((nomips16)) _bootstrap_exception_handler(void) {
 
-    // Signal to user something really bad happened
-//    EBI_ERROR_LED_PIN = 1;
-//    SPI_ERROR_LED_PIN = 1;
-//    WIFI_ERROR_LED_PIN = 1;
-//    USB_ERROR_LED_PIN = 1;
-//    OTHER_ERROR_LED_PIN = 1;
-//    nACTIVE_LED_PIN = 1;
-//    
-//    // Clear watchdog to give user time to see error state
-//    kickTheDog();
-//    holdThumbTighter();
-//    
+// Signal to user something really bad happened
+    EXCEPTION_LED_PIN = HIGH;
+    
+    // Clear watchdog to give user time to see error state
+    kickTheDog();
+    holdThumbTighter();
+    
     exceptionPrint("\033[0;31;40mCPU Bootstrap Exception!\n\r");
     
     // Give up
     // Wait for watchdog to save us
     while(1);
-    
-    // Half-baked exception recovery
-    // _CP0_SET_EPC(_CP0_GET_EPC()+4); // increment Error Program Counter (EPC) to next word (skip over offending instruction)
     
 }
 
@@ -162,11 +128,40 @@ void printErrorHandlerStatus(void) {
     else terminalTextAttributes(GREEN, BLACK, NORMAL);
     printf("   Configuration error %s\n\r", error_handler.configuration_error_flag ? "has occurred" : "has not occurred");
     
-    // USB Error
+    // General USB Error
     if (error_handler.USB_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
     else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   USB UART error %s\n\r", error_handler.USB_error_flag ? "has occurred" : "has not occurred");
+    printf("   General USB error %s\n\r", error_handler.USB_error_flag ? "has occurred" : "has not occurred");
     
+    // USB TX DMA Error
+    if (error_handler.USB_tx_dma_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
+    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("   USB TX DMA error %s\n\r", error_handler.USB_tx_dma_error_flag ? "has occurred" : "has not occurred");
+    
+    // USB RX DMA Error
+    if (error_handler.USB_rx_dma_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
+    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("   USB RX DMA error %s\n\r", error_handler.USB_rx_dma_error_flag ? "has occurred" : "has not occurred");
+    
+    // Deadman Timer Error
+    if (error_handler.DMT_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
+    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("   Deadman Timer error %s\n\r", error_handler.DMT_error_flag ? "has occurred" : "has not occurred");
+    
+    // System Bus Protection Violation Error
+    if (error_handler.system_bus_protection_violation_flag) terminalTextAttributes(RED, BLACK, NORMAL);
+    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("   System Bus Protection Violation %s\n\r", error_handler.system_bus_protection_violation_flag ? "has occurred" : "has not occurred");
+    
+    // Prefetch Module SEC Event
+    if (error_handler.prefetch_module_SEC_flag) terminalTextAttributes(RED, BLACK, NORMAL);
+    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("   Prefetch SEC Event %s\n\r", error_handler.prefetch_module_SEC_flag ? "has occurred" : "has not occurred");
+    
+    // Other Error
+    if (error_handler.other_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
+    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("   Other Error %s\n\r", error_handler.other_error_flag ? "has occurred" : "has not occurred");
     
     terminalTextAttributesReset();    
     
@@ -175,14 +170,14 @@ void printErrorHandlerStatus(void) {
 // This function clears the error handler flags
 void clearErrorHandler(void) {
  
-    error_handler.DMT_error_flag = 0;
-    error_handler.USB_error_flag = 0;
-    error_handler.USB_tx_dma_error_flag = 0;
-    error_handler.configuration_error_flag = 0;
-
-    error_handler.system_bus_protection_violation_flag = 0;
-    error_handler.prefetch_module_SEC_flag = 0;
-    // error_handler.ADC_configuration_error_flag = 0;
+    error_handler.configuration_error_flag                   = 0;
+    error_handler.USB_error_flag                             = 0;
+    error_handler.USB_tx_dma_error_flag                      = 0;
+    error_handler.USB_rx_dma_error_flag                      = 0;
+    error_handler.DMT_error_flag                             = 0;
+    error_handler.system_bus_protection_violation_flag       = 0;
+    error_handler.prefetch_module_SEC_flag                   = 0;
+    error_handler.other_error_flag                           = 0;
     
 }
 
@@ -190,17 +185,17 @@ void clearErrorHandler(void) {
 void updateErrorLEDs(void) {
  
     // Configuration Error
-//    if (    error_handler.configuration_error_flag ||
-//            error_handler.DMT_error_flag ||
-//            error_handler.system_bus_protection_violation_flag ||
-//            error_handler.prefetch_module_SEC_flag ||
-//            error_handler.other_error_flag) {
-//        
-//        OTHER_ERROR_LED_PIN = 1;
-//        
-//    }
-//    
-//    else OTHER_ERROR_LED_PIN = 0;
+    if (    error_handler.configuration_error_flag ||
+            error_handler.DMT_error_flag ||
+            error_handler.system_bus_protection_violation_flag ||
+            error_handler.prefetch_module_SEC_flag ||
+            error_handler.other_error_flag) {
+        
+        OTHER_ERROR_LED_PIN = 1;
+        
+    }
+    
+    else OTHER_ERROR_LED_PIN = 0;
 
     // USB Error
     if (    error_handler.USB_error_flag || 

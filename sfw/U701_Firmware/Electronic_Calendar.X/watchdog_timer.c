@@ -97,10 +97,9 @@ void verifyThumbTightEnough(void) {
 void printWatchdogStatus(void) {
 
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, UNDERSCORE);
+    terminalTextAttributes(GREEN, BLACK, NORMAL);
     printf("Watchdog Timer Status:\n\r");
 
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
     printf("    Postscalar: ");
     
     switch (DEVCFG1bits.WDTPS) {
@@ -241,10 +240,8 @@ void printWatchdogStatus(void) {
 void printDeadmanStatus(void) {
 
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, UNDERSCORE);
-    printf("Deadman Timer Status:\n\r");
-
     terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("Deadman Timer Status:\n\r");
     
     printf("   Instruction Fetch Count Limit: ");
     

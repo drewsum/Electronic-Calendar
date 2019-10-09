@@ -20,6 +20,9 @@
 
 #include <xc.h>
 
+#define HIGH    1
+#define LOW     0
+
 // These pin macros allow for easier manipulation of GPIO with matching
 // signal names from the hardware schematic
 
