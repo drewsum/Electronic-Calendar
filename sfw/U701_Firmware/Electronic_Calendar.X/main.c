@@ -23,6 +23,7 @@
 #include "heartbeat_timer.h"
 #include "usb_uart.h"
 #include "terminal_control.h"
+#include "power_saving.h"
 
 void main(void) {
     
@@ -104,10 +105,10 @@ void main(void) {
     // Setup prefetch module
     prefetchInitialize();
     printf("    CPU Instruction Prefetch Module Enabled\r\n");
-//    
-//    // Disable unused peripherals for power savings
-//    PMDInitialize();
-//    // printf("Unused Peripheral Modules Disabled\n\r");
+    
+    // Disable unused peripherals for power savings
+    PMDInitialize();
+    printf("    Unused Peripheral Modules Disabled\n\r");
             
     // Setup the watchdog timer
     watchdogTimerInitialize();
@@ -123,7 +124,7 @@ void main(void) {
     
     terminalTextAttributesReset();
     terminalTextAttributes(YELLOW, BLACK, NORMAL);
-    printf("\n\rType 'Help' for list of supported commands\n\r\n\r");
+    printf("\n\rType 'Help' for list of supported commands, first command is ignored\n\r\n\r");
     terminalTextAttributesReset();
     
     // Main loop

@@ -161,6 +161,12 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
+    else if (strcmp(input_string, "PMD Status?") == 0) {
+     
+        printPMDStatus();
+        
+    }
+    
 }
 
 // Print help message, prints out list of all commands
@@ -171,12 +177,12 @@ void usbUartPrintHelpMessage(void) {
     printf("Supported Commands:\n\r");
     printf("    Reset: Software Reset\n\r");
     printf("    Clear: Clears the terminal\n\r");
-    // printf("    Cause of Reset?: Prints the cause of the most recent device reset\n\r");
+    printf("    Cause of Reset?: Prints the cause of the most recent device reset\n\r");
     printf("    *IDN?: Prints identification string\n\r");
     printf("    MCU IDs?: Print microcontroller serial number, device ID, and silicon revision ID\r\n");
     printf("    MCU Status?: Prints the status of the watchdog timer, deadman timer and predictive prefetch module\n\r");
     printf("    Device On Time?: Returns the device on time since last reset\n\r");
-    //printf("    PMD Status?: Prints the state of Peripheral Module Disable settings\n\r");
+    printf("    PMD Status?: Prints the state of Peripheral Module Disable settings\n\r");
     printf("    Interrupt Status? Prints information on interrupt settings\n\r");
     printf("    Clock Status?: Prints system clock settings\n\r");
     printf("    Error Status?: Prints the state of system error flags\n\r");
