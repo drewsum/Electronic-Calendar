@@ -63,7 +63,7 @@ void PBCLK8Initialize(void);
 // Unlock system function
 // This function unlocks the device so that device parameters can be changed
 // and the microcontroller can be reset
-void deviceUnlock(void) {
+inline void deviceUnlock(void) {
     
      // force a lock
     SYSKEY = 0x00000000;
@@ -78,7 +78,7 @@ void deviceUnlock(void) {
 // Lock system function
 // This function re-locks the system so that important device parameters may 
 // not be changed
-void deviceLock(void) {
+inline void deviceLock(void) {
     
      // write an invalid key to force lock
     SYSKEY = 0x00000000;

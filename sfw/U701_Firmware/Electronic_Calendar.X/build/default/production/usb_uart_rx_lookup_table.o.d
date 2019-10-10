@@ -6,4 +6,5 @@ terminal_control.h  \
 32mz_interrupt_control.h  \
 heartbeat_timer.h  \
 pin_macros.h  \
- cause_of_reset.h 
+ cause_of_reset.h  \
+rtcc.h 

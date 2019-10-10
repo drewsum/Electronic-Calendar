@@ -13,4 +13,5 @@ error_handler.h  \
 usb_uart.h  \
 usb_uart_rx_lookup_table.h  \
  terminal_control.h  \
-power_saving.h 
+power_saving.h  \
+rtcc.h 

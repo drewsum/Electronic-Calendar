@@ -24,6 +24,7 @@
 #include "usb_uart.h"
 #include "terminal_control.h"
 #include "power_saving.h"
+#include "rtcc.h"
 
 void main(void) {
     
@@ -118,13 +119,17 @@ void main(void) {
     deadmanTimerInitialize();
     printf("    Deadman Timer Initialized\n\r");
     
+    // Setup the real time clock-calendar
+    rtccInitialize();
+    printf("    Real Time Clock-Calendar Initialized\r\n");
+    
     // Disable RESET LED
     RESET_LED_PIN = LOW;
     printf("    Reset LED Disabled\r\n");
     
     terminalTextAttributesReset();
     terminalTextAttributes(YELLOW, BLACK, NORMAL);
-    printf("\n\rType 'Help' for list of supported commands, first command is ignored\n\r\n\r");
+    printf("\n\rType 'Help' for list of supported commands\n\r\n\r");
     terminalTextAttributesReset();
     
     // Main loop
