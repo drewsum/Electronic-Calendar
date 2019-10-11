@@ -44,7 +44,7 @@ uint8_t strstart(const char * haystack, const char * needle);
 // Runs a normal string compare if it's not the first string
 // returns 0 if strings match
 // returns 1 if they don't
-uint8_t strcmomp(const char * haystack, const char * needle);
+uint8_t strcomp(const char * haystack, const char * needle);
 
 #endif /* _USB_UART_RX_LOOKUP_TABLE_H */
 

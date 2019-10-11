@@ -25,6 +25,8 @@
 #include "terminal_control.h"
 #include "power_saving.h"
 #include "rtcc.h"
+#include "binary_clock.h"
+#include "calendar_leds.h"
 
 void main(void) {
     
@@ -135,7 +137,21 @@ void main(void) {
     // Main loop
     while (true) {
      
-        Nop();
+        // set LEDs if changes are pending
+        if (led_update_request_flag) {
+         
+            // update values displayed on binary clock LEDs
+            updateBinaryClockLEDs(rtcc_shadow.hours, rtcc_shadow.minutes, rtcc_shadow.seconds);
+
+            // update value displayed on month LEDs
+            updateMonthLEDs(rtcc_shadow.month);
+
+            // update value displayed on weekday LEDs
+            updateWeekdayLEDs(rtcc_shadow.weekday);
+
+            led_update_request_flag = 0;
+            
+        }
         
     }
 }

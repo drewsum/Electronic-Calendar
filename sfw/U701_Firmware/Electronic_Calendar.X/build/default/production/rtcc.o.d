@@ -3,4 +3,5 @@ rtcc.c  \
 rtcc.h  \
 32mz_interrupt_control.h  \
  pin_macros.h  \
-device_control.h 
+device_control.h  \
+binary_clock.h 

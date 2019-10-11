@@ -117,7 +117,7 @@ void printErrorHandlerStatus(void) {
  
     terminalTextAttributesReset();    
     
-    terminalTextAttributes(GREEN, BLACK, UNDERSCORE);
+    terminalTextAttributes(GREEN, BLACK, NORMAL);
     
     // Print heading
     printf("Error Handler Status:\n\r");

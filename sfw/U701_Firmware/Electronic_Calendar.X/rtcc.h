@@ -27,6 +27,9 @@
 
 #include "pin_macros.h"
 
+// this flag is set when we want to update the time/date LEDs
+uint8_t led_update_request_flag = 0;
+
 // This is a typedef for the day of the week
 typedef enum {
     
@@ -40,8 +43,27 @@ typedef enum {
     
 } weekday_t;
 
+// This typedef simply maps month number to month name
+typedef enum {
+    
+    January = 1,
+    February = 2,
+    March = 3,
+    April = 4,
+    May = 5,
+    June = 6,
+    July = 7,
+    August = 8,
+    September = 9,
+    October = 10,
+    November = 11,
+    December = 12
+    
+} month_t;
+
 // This structure is a shadow register copy of the data within the RTCC, but is 
 // conglomerated into binary instead of BCD
+// also, copy BCD for time for use with binary clock
 // year includes the leading 2000
 struct rtcc_shadow_t {
     

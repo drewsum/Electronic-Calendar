@@ -14,4 +14,6 @@ usb_uart.h  \
 usb_uart_rx_lookup_table.h  \
  terminal_control.h  \
 power_saving.h  \
-rtcc.h 
+rtcc.h  \
+binary_clock.h  \
+calendar_leds.h 

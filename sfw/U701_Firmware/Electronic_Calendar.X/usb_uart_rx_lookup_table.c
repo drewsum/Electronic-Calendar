@@ -19,26 +19,27 @@ void usb_uart_rx_lookup_table(char * input_string) {
     strtok(input_string, "\r");
     
     // Determine if received string has a match
-    if (strcmomp(input_string, "Help") == 0) {
+    if (strcomp(input_string, "Help") == 0) {
      
         usbUartPrintHelpMessage();
         
     }
     
-    else if (strcmomp(input_string, "Reset") == 0) {
+    
+    else if (strcomp(input_string, "Reset") == 0) {
 
          deviceReset();
         
     }
     
-    else if (strcmomp(input_string, "Clear") == 0) {
+    else if (strcomp(input_string, "Clear") == 0) {
      
         terminalClearScreen();
         terminalSetCursorHome();
         
     }
     
-    else if (strcmomp(input_string, "*IDN?") == 0) {
+    else if (strcomp(input_string, "*IDN?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -47,7 +48,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcmomp(input_string, "MCU IDs?") == 0) {
+    else if (strcomp(input_string, "MCU IDs?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -70,7 +71,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcmomp(input_string, "MCU Status?") == 0) {
+    else if (strcomp(input_string, "MCU Status?") == 0) {
      
         printWatchdogStatus();
         
@@ -81,20 +82,20 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcmomp(input_string, "Interrupt Status?") == 0) {
+    else if (strcomp(input_string, "Interrupt Status?") == 0) {
      
         // Print function from interrupt control module
         printInterruptStatus();
         
     }
     
-    else if (strcmomp(input_string, "Clock Status?") == 0) {
+    else if (strcomp(input_string, "Clock Status?") == 0) {
      
         printClockStatus(SYSCLK_INT);
         
     }
     
-    else if (strcmomp(input_string, "Device On Time?") == 0) {
+    else if (strcomp(input_string, "Device On Time?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -104,7 +105,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcmomp(input_string, "Error Status?") == 0) {
+    else if (strcomp(input_string, "Error Status?") == 0) {
      
         // Print error handler status
         printErrorHandlerStatus();
@@ -117,7 +118,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcmomp(input_string, "Clear Errors") == 0) {
+    else if (strcomp(input_string, "Clear Errors") == 0) {
      
         // Zero out all error handler flags
         clearErrorHandler();
@@ -132,7 +133,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-     else if (strcmomp(input_string, "Cause of Reset?") == 0) {
+     else if (strcomp(input_string, "Cause of Reset?") == 0) {
      
         terminalTextAttributesReset();
         
@@ -162,13 +163,13 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcmomp(input_string, "PMD Status?") == 0) {
+    else if (strcomp(input_string, "PMD Status?") == 0) {
      
         printPMDStatus();
         
     }
     
-    else if (strcmomp(input_string, "Time and Date?") == 0) {
+    else if (strcomp(input_string, "Time and Date?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -192,7 +193,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
             // print out what we just did
             terminalTextAttributesReset();
             terminalTextAttributes(GREEN, BLACK, NORMAL);
-            printf("Set RTCC date as %u/%u/%u\r\n", read_month, read_day, read_year);
+            printf("Set RTCC date as %02u/%02u/%04u\r\n", rtcc_shadow.month, rtcc_shadow.day, rtcc_shadow.year);
             terminalTextAttributesReset();
         
         }
@@ -202,7 +203,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
          
             terminalTextAttributesReset();
             terminalTextAttributes(RED, BLACK, NORMAL);
-            printf("Enter a valid date after 01/01/2000. User entered %u/%u/%u\r\n", read_month, read_day, read_year);
+            printf("Enter a valid date after 01/01/2000. User entered %02u/%02u/%04u\r\n", read_month, read_day, read_year);
             terminalTextAttributesReset();
             
         }
@@ -220,7 +221,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         // print out what we just did
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
-        printf("Set RTCC time as %u:%u:%u\r\n", read_hour, read_minute, read_second);
+        printf("Set RTCC time as %02u:%02u:%02u\r\n", rtcc_shadow.hours, rtcc_shadow.minutes, rtcc_shadow.seconds);
         terminalTextAttributesReset();
 
     }
@@ -246,7 +247,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
             terminalTextAttributesReset();
             terminalTextAttributes(GREEN, BLACK, NORMAL);
             rtccWriteWeekday(read_weekday_enum);
-            printf("Set RTCC weekday as %s\r\n", getDayOfWeek(read_weekday_enum));
+            printf("Set RTCC weekday as %s\r\n", getDayOfWeek(rtcc_shadow.weekday));
             terminalTextAttributesReset();
 
         }
@@ -456,7 +457,7 @@ uint8_t strstart(const char * haystack, const char * needle) {
 // Runs a normal string compare if it's not the first string
 // returns 0 if strings match
 // returns 1 if they don't
-uint8_t strcmomp(const char * haystack, const char * needle) {
+uint8_t strcomp(const char * haystack, const char * needle) {
     if (num_strings_received == 0) {
 
         // First check to see if needle is longer than haystack, if it is 

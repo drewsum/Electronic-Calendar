@@ -5,6 +5,7 @@
 
 #include "device_control.h"
 #include "32mz_interrupt_control.h"
+#include "binary_clock.h"
 
 // This function unlocks the RTCC for writing
 void rtccUnlock(void) {
@@ -142,6 +143,15 @@ void rtccClear(void) {
     RTCTIME = 0x00000000;
     RTCDATE = 0x00000000;
     
+    // Copy values from RTCC into ram shadow register
+    rtcc_shadow.weekday     = RTCDATEbits.WDAY01;
+    rtcc_shadow.day         = (RTCDATEbits.DAY10 * 10) + RTCDATEbits.DAY01;
+    rtcc_shadow.month       = (RTCDATEbits.MONTH10 * 10) + RTCDATEbits.MONTH01;
+    rtcc_shadow.year        = (RTCDATEbits.YEAR10 * 10) + RTCDATEbits.YEAR01 + 2000;
+    rtcc_shadow.hours       = (RTCTIMEbits.HR10 * 10) + RTCTIMEbits.HR01;
+    rtcc_shadow.minutes     = (RTCTIMEbits.MIN10 * 10) + RTCTIMEbits.MIN01;
+    rtcc_shadow.seconds     = (RTCTIMEbits.SEC10 * 10) + RTCTIMEbits.SEC01;
+    
     // Turn on RTCC
     RTCCONbits.ON = 1;
     
@@ -178,6 +188,15 @@ void rtccWriteDate(uint8_t month, uint8_t day, uint16_t year) {
     RTCDATEbits.YEAR10 = (year / 10) % 10;
     RTCDATEbits.YEAR01 = year % 10;
     
+    // Copy values from RTCC into ram shadow register
+    rtcc_shadow.weekday     = RTCDATEbits.WDAY01;
+    rtcc_shadow.day         = (RTCDATEbits.DAY10 * 10) + RTCDATEbits.DAY01;
+    rtcc_shadow.month       = (RTCDATEbits.MONTH10 * 10) + RTCDATEbits.MONTH01;
+    rtcc_shadow.year        = (RTCDATEbits.YEAR10 * 10) + RTCDATEbits.YEAR01 + 2000;
+    rtcc_shadow.hours       = (RTCTIMEbits.HR10 * 10) + RTCTIMEbits.HR01;
+    rtcc_shadow.minutes     = (RTCTIMEbits.MIN10 * 10) + RTCTIMEbits.MIN01;
+    rtcc_shadow.seconds     = (RTCTIMEbits.SEC10 * 10) + RTCTIMEbits.SEC01;
+    
     // Turn on RTCC
     RTCCONbits.ON = 1;
     
@@ -201,17 +220,26 @@ void rtccWriteTime(uint8_t hour, uint8_t minute, uint8_t second) {
     // wait for RTCC to turn off
     while (RTCCONbits.RTCCLKON);
     
-    // Set month
+    // Set hour
     RTCTIMEbits.HR10 = (hour / 10) % 10;
     RTCTIMEbits.HR01 = hour % 10;
     
-    // Set day
+    // Set minute
     RTCTIMEbits.MIN10 = (minute / 10) % 10;
     RTCTIMEbits.MIN01 = minute % 10;
     
-    // Set year
+    // Set second
     RTCTIMEbits.SEC10 = (second / 10) % 10;
     RTCTIMEbits.SEC01 = second % 10;
+    
+    // Copy values from RTCC into ram shadow register
+    rtcc_shadow.weekday     = RTCDATEbits.WDAY01;
+    rtcc_shadow.day         = (RTCDATEbits.DAY10 * 10) + RTCDATEbits.DAY01;
+    rtcc_shadow.month       = (RTCDATEbits.MONTH10 * 10) + RTCDATEbits.MONTH01;
+    rtcc_shadow.year        = (RTCDATEbits.YEAR10 * 10) + RTCDATEbits.YEAR01 + 2000;
+    rtcc_shadow.hours       = (RTCTIMEbits.HR10 * 10) + RTCTIMEbits.HR01;
+    rtcc_shadow.minutes     = (RTCTIMEbits.MIN10 * 10) + RTCTIMEbits.MIN01;
+    rtcc_shadow.seconds     = (RTCTIMEbits.SEC10 * 10) + RTCTIMEbits.SEC01;
     
     // Turn on RTCC
     RTCCONbits.ON = 1;
@@ -238,6 +266,15 @@ void rtccWriteWeekday(weekday_t weekday) {
     
     // Set weekday
     RTCDATEbits.WDAY01 = weekday;
+    
+    // Copy values from RTCC into ram shadow register
+    rtcc_shadow.weekday     = RTCDATEbits.WDAY01;
+    rtcc_shadow.day         = (RTCDATEbits.DAY10 * 10) + RTCDATEbits.DAY01;
+    rtcc_shadow.month       = (RTCDATEbits.MONTH10 * 10) + RTCDATEbits.MONTH01;
+    rtcc_shadow.year        = (RTCDATEbits.YEAR10 * 10) + RTCDATEbits.YEAR01 + 2000;
+    rtcc_shadow.hours       = (RTCTIMEbits.HR10 * 10) + RTCTIMEbits.HR01;
+    rtcc_shadow.minutes     = (RTCTIMEbits.MIN10 * 10) + RTCTIMEbits.MIN01;
+    rtcc_shadow.seconds     = (RTCTIMEbits.SEC10 * 10) + RTCTIMEbits.SEC01;
     
     // Turn on RTCC
     RTCCONbits.ON = 1;
@@ -297,12 +334,12 @@ char * getDayOfWeek(uint8_t day_of_week_enum) {
 // This function prints the current time and date to stdout
 void printTimeAndDate(void) {
     
-    printf("Time: %u:%u:%u    ",
+    printf("Time: %02u:%02u:%02u    ",
             rtcc_shadow.hours,
             rtcc_shadow.minutes,
             rtcc_shadow.seconds);
     
-    printf("Date: %s, %u/%u/%u\r\n",
+    printf("Date: %s, %02u/%02u/%04u\r\n",
             getDayOfWeek(rtcc_shadow.weekday),
             rtcc_shadow.month,
             rtcc_shadow.day,
@@ -318,13 +355,16 @@ void __ISR(_RTCC_VECTOR, ipl2SRS) rtccISR(void) {
     while (RTCCONbits.RTCSYNC == 1);
     
     // Copy values from RTCC into ram shadow register
-    rtcc_shadow.weekday = RTCDATEbits.WDAY01;
-    rtcc_shadow.day     = (RTCDATEbits.DAY10 * 10) + RTCDATEbits.DAY01;
-    rtcc_shadow.month   = (RTCDATEbits.MONTH10 * 10) + RTCDATEbits.MONTH01;
-    rtcc_shadow.year    = (RTCDATEbits.YEAR10 * 10) + RTCDATEbits.YEAR01 + 2000;
-    rtcc_shadow.hours   = (RTCTIMEbits.HR10 * 10) + RTCTIMEbits.HR01;
-    rtcc_shadow.minutes = (RTCTIMEbits.MIN10 * 10) + RTCTIMEbits.MIN01;
-    rtcc_shadow.seconds = (RTCTIMEbits.SEC10 * 10) + RTCTIMEbits.SEC01;
+    rtcc_shadow.weekday     = RTCDATEbits.WDAY01;
+    rtcc_shadow.day         = (RTCDATEbits.DAY10 * 10) + RTCDATEbits.DAY01;
+    rtcc_shadow.month       = (RTCDATEbits.MONTH10 * 10) + RTCDATEbits.MONTH01;
+    rtcc_shadow.year        = (RTCDATEbits.YEAR10 * 10) + RTCDATEbits.YEAR01 + 2000;
+    rtcc_shadow.hours       = (RTCTIMEbits.HR10 * 10) + RTCTIMEbits.HR01;
+    rtcc_shadow.minutes     = (RTCTIMEbits.MIN10 * 10) + RTCTIMEbits.MIN01;
+    rtcc_shadow.seconds     = (RTCTIMEbits.SEC10 * 10) + RTCTIMEbits.SEC01;
+    
+    // request an LED update
+    led_update_request_flag = 1;
     
     // Clear IRQ flag
     clearInterruptFlag(Real_Time_Clock);
