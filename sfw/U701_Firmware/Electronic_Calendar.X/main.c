@@ -129,6 +129,10 @@ void main(void) {
     RESET_LED_PIN = LOW;
     printf("    Reset LED Disabled\r\n");
     
+    // Enable date decoding
+    DATE_DECODE_ENABLE_PIN = HIGH;
+    printf("    Date Decoding Enabled\r\n");
+    
     terminalTextAttributesReset();
     terminalTextAttributes(YELLOW, BLACK, NORMAL);
     printf("\n\rType 'Help' for list of supported commands\n\r\n\r");
@@ -149,7 +153,28 @@ void main(void) {
             // update value displayed on weekday LEDs
             updateWeekdayLEDs(rtcc_shadow.weekday);
 
+            // update value displayed on year LEDs
+            updateYearLEDs(rtcc_shadow.year);
+            
             led_update_request_flag = 0;
+            
+        }
+        
+        // check to see if we have a new usb uart string to parse
+        if (usb_uart_rx_parse_request && strlen(usb_uart_rx_buffer) > 2) {
+         
+            // Determine length of received string
+            uint32_t length = strlen(usb_uart_rx_buffer);
+            
+            // parse received string
+            usb_uart_rx_lookup_table(usb_uart_rx_buffer);
+            usb_uart_rx_parse_request = 0;
+            
+            // clear rx buffer
+            uint32_t index;
+            for (index = 0; index < length; index++) {
+                usb_uart_rx_buffer[index] = '\0';
+            }
             
         }
         

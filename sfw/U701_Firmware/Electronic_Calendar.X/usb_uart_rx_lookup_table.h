@@ -24,6 +24,9 @@
 // this keeps track of the number of strings received
 uint32_t num_strings_received = 0;
 
+// this is a flag to request that received strings be parsed
+uint8_t usb_uart_rx_parse_request = 0;
+
 // This function is what interprets strings sent over USB Virtual COM Port
 void usb_uart_rx_lookup_table(char * input_string);
 

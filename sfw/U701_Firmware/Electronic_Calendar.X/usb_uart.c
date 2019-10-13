@@ -303,17 +303,7 @@ void __ISR(_DMA1_VECTOR, IPL6SRS) usbUartRxDmaISR(void) {
     // Channel block transfer complete interrupt flag (or pattern match)
     if (DCH1INTbits.CHBCIF) {
         
-        // Determine length of received string
-        uint32_t length = strlen(usb_uart_rx_buffer);
-        
-        // parse received string
-        if (strlen(usb_uart_rx_buffer) > 2) usb_uart_rx_lookup_table(usb_uart_rx_buffer);
-        
-        // clear rx buffer
-        uint32_t index;
-        for (index = 0; index < length; index++) {
-            usb_uart_rx_buffer[index] = '\0';
-        }
+        usb_uart_rx_parse_request = 1;
         
     }
     

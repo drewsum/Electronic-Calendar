@@ -295,3 +295,66 @@ void updateWeekdayLEDs(weekday_t input_weekday) {
     }
     
 }
+
+// this function updates the year LEDs to indicate the year passed
+void updateYearLEDs(uint16_t input_year) {
+ 
+    switch (input_year) {
+     
+        case 2019:
+            YEAR_B0_PIN = LOW;
+            YEAR_B1_PIN = LOW;
+            YEAR_B2_PIN = LOW;
+            break;
+            
+        case 2020:
+            YEAR_B0_PIN = HIGH;
+            YEAR_B1_PIN = LOW;
+            YEAR_B2_PIN = LOW;
+            break;
+        
+        case 2021:
+            YEAR_B0_PIN = LOW;
+            YEAR_B1_PIN = HIGH;
+            YEAR_B2_PIN = LOW;
+            break;
+            
+        case 2022:
+            YEAR_B0_PIN = HIGH;
+            YEAR_B1_PIN = HIGH;
+            YEAR_B2_PIN = LOW;
+            break;
+            
+        case 2023:
+            YEAR_B0_PIN = LOW;
+            YEAR_B1_PIN = LOW;
+            YEAR_B2_PIN = HIGH;
+            break;
+            
+        case 2024:
+            YEAR_B0_PIN = HIGH;
+            YEAR_B1_PIN = LOW;
+            YEAR_B2_PIN = HIGH;
+            break;
+            
+        case 2025:
+            YEAR_B0_PIN = LOW;
+            YEAR_B1_PIN = HIGH;
+            YEAR_B2_PIN = HIGH;
+            break;
+            
+        case 2026:
+            YEAR_B0_PIN = HIGH;
+            YEAR_B1_PIN = HIGH;
+            YEAR_B2_PIN = HIGH;
+            break;
+    
+        default:
+            YEAR_B0_PIN = LOW;
+            YEAR_B1_PIN = LOW;
+            YEAR_B2_PIN = LOW;
+            break;
+            
+    }
+    
+}
