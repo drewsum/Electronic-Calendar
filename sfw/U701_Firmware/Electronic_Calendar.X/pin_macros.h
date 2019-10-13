@@ -31,9 +31,9 @@
 #define nTHUR_LED_PIN               LATAbits.LATA2
 #define nFRI_LED_PIN                LATAbits.LATA3
 #define nSAT_LED_PIN                LATAbits.LATA4
-#define nMINUTES3_LED_PIN               LATAbits.LATA5
-#define nSECONDS2_LED_PIN               LATAbits.LATA6
-#define nSECONDS4_LED_PIN               LATAbits.LATA7
+#define nMINUTES3_LED_PIN           LATAbits.LATA5
+#define nSECONDS2_LED_PIN           LATAbits.LATA6
+#define nSECONDS4_LED_PIN           LATAbits.LATA7
 #define RESET_LED_PIN               LATAbits.LATA9
 #define DATE_DECODE_ENABLE_PIN      LATAbits.LATA10
 

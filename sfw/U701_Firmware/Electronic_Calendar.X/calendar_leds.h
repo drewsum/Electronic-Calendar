@@ -31,6 +31,9 @@ void updateWeekdayLEDs(weekday_t input_weekday);
 // this function updates the year LEDs to indicate the year passed
 void updateYearLEDs(uint16_t input_years);
 
+// this function updates the day LEDs to indicate date passed
+void updateDateLEDs(uint8_t input_day);
+
 
 #endif /* _CALENDAR_LEDS_H */
 

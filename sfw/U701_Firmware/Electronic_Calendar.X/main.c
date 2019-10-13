@@ -156,6 +156,9 @@ void main(void) {
             // update value displayed on year LEDs
             updateYearLEDs(rtcc_shadow.year);
             
+            // update value displayed on day LEDs
+            updateDateLEDs(rtcc_shadow.day);
+            
             led_update_request_flag = 0;
             
         }

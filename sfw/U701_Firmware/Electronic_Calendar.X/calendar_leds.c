@@ -358,3 +358,333 @@ void updateYearLEDs(uint16_t input_year) {
     }
     
 }
+
+// this function updates the day LEDs to indicate date passed
+void updateDateLEDs(uint8_t input_day) {
+
+    // determine settings based on input_day
+    switch (input_day) {
+     
+        case 1:
+            nDATE_DECODE_1_PIN  = LOW;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 2:
+            nDATE_DECODE_1_PIN  = LOW;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = LOW;
+            break;    
+            
+        case 3:
+            nDATE_DECODE_1_PIN  = LOW;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 4:
+            nDATE_DECODE_1_PIN  = LOW;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 5:
+            nDATE_DECODE_1_PIN  = LOW;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 6:
+            nDATE_DECODE_1_PIN  = LOW;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 7:
+            nDATE_DECODE_1_PIN  = LOW;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 8:
+            nDATE_DECODE_1_PIN  = LOW;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 9:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = LOW;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 10:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = LOW;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 11:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = LOW;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 12:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = LOW;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 13:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = LOW;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 14:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = LOW;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 15:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = LOW;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 16:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = LOW;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 17:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = LOW;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 18:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = LOW;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 19:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = LOW;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 20:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = LOW;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 21:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = LOW;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 22:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = LOW;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 23:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = LOW;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 24:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = LOW;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 25:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = LOW;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 26:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = LOW;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 27:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = LOW;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 28:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = LOW;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+        case 29:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = LOW;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 30:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = LOW;
+            DATE_B0_PIN         = HIGH;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        case 31:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = LOW;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = HIGH;
+            DATE_B2_PIN         = HIGH;
+            break;
+            
+        default:
+            nDATE_DECODE_1_PIN  = HIGH;
+            nDATE_DECODE_2_PIN  = HIGH;
+            nDATE_DECODE_3_PIN  = HIGH;
+            nDATE_DECODE_4_PIN  = HIGH;
+            DATE_B0_PIN         = LOW;
+            DATE_B1_PIN         = LOW;
+            DATE_B2_PIN         = LOW;
+            break;
+            
+    }
+    
+}
