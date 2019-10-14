@@ -125,6 +125,10 @@ void main(void) {
     rtccInitialize();
     printf("    Real Time Clock-Calendar Initialized\r\n");
     
+    // setup the ADC modules
+    ADCInitialize();
+    printf("    Analog to Digital Converters Initialized\r\n");
+    
     // Disable RESET LED
     RESET_LED_PIN = LOW;
     printf("    Reset LED Disabled\r\n");

@@ -10,6 +10,8 @@
 #include "heartbeat_timer.h"
 #include "cause_of_reset.h"
 #include "rtcc.h"
+#include "adc.h"
+#include "error_handler.h"
 
 // This function is what interprets strings sent over USB Virtual COM Port
 void usb_uart_rx_lookup_table(char * input_string) {
@@ -262,6 +264,38 @@ void usb_uart_rx_lookup_table(char * input_string) {
         }
             
     }
+    
+    else if (strcmp(input_string, "ADC Status?") == 0) {
+     
+        printADCStatus();
+        
+    }
+    
+    else if (strcmp(input_string, "Telemetry?") == 0) {
+     
+        if (error_handler.ADC_configuration_error_flag) {
+         
+            terminalTextAttributesReset();
+            terminalTextAttributes(RED, BLACK, NORMAL);
+            printf("ADC Configuration Error\n\r");
+            terminalTextAttributesReset();
+            
+        }
+        
+        else {
+
+            terminalTextAttributesReset();
+            terminalTextAttributes(CYAN, BLACK, NORMAL);
+            printf("Most recent ADC conversion results:\n\r");
+            printf("    +12V Input Voltage Measurement: %+0.3f V\n\r", adc_results.POS12_adc);
+            printf("    +3.3V Power Supply Measurement: %+0.3f V\n\r", adc_results.POS3P3_adc);
+            printf("    Internal VREF ADC Conversion Result: %+0.3f V\n\r", adc_results.vref_adc);
+            printf("    Internal Die Temperature ADC Conversion Result: %+0.3f C\n\r", adc_results.die_temp_adc);
+            terminalTextAttributesReset();
+
+        }
+            
+    }
 
     
     // increment the number of strings we've received
@@ -285,6 +319,8 @@ void usbUartPrintHelpMessage(void) {
     printf("    PMD Status?: Prints the state of Peripheral Module Disable settings\n\r");
     printf("    Interrupt Status? Prints information on interrupt settings\n\r");
     printf("    Clock Status?: Prints system clock settings\n\r");
+    printf("    ADC Status?: Prints configuration settings for the ADCs\r\n");
+    printf("    Telemetry?: Prints all current board level measurements\r\n");
     printf("    Error Status?: Prints the state of system error flags\n\r");
     printf("    Clear Errors: Clears all error handler flags\n\r");
     printf("    Time and Date?: Prints the current system time and date\r\n");

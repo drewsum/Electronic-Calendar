@@ -37,7 +37,7 @@ struct {
     unsigned system_bus_protection_violation_flag       : 1;    // System bus protection event occurred
     unsigned prefetch_module_SEC_flag                   : 1;    // Prefetch module recorded an SEC event
     unsigned other_error_flag                           : 1;    // undiagnosable error
-    //unsigned ADC_configuration_error_flag               : 1;    // ADC could not be configured properly
+    unsigned ADC_configuration_error_flag               : 1;    // ADC could not be configured properly
     
 } error_handler;
 

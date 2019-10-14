@@ -163,6 +163,11 @@ void printErrorHandlerStatus(void) {
     else terminalTextAttributes(GREEN, BLACK, NORMAL);
     printf("   Other Error %s\n\r", error_handler.other_error_flag ? "has occurred" : "has not occurred");
     
+    // ADC Config Error
+    if (error_handler.ADC_configuration_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
+    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("   ADC Configuration Error %s\n\r", error_handler.ADC_configuration_error_flag ? "has occurred" : "has not occurred");
+    
     terminalTextAttributesReset();    
     
 }
@@ -178,6 +183,7 @@ void clearErrorHandler(void) {
     error_handler.system_bus_protection_violation_flag       = 0;
     error_handler.prefetch_module_SEC_flag                   = 0;
     error_handler.other_error_flag                           = 0;
+    error_handler.ADC_configuration_error_flag               = 0;
     
 }
 
@@ -191,21 +197,24 @@ void updateErrorLEDs(void) {
             error_handler.prefetch_module_SEC_flag ||
             error_handler.other_error_flag) {
         
-        OTHER_ERROR_LED_PIN = 1;
+        OTHER_ERROR_LED_PIN = HIGH;
         
     }
     
-    else OTHER_ERROR_LED_PIN = 0;
+    else OTHER_ERROR_LED_PIN = LOW;
 
     // USB Error
     if (    error_handler.USB_error_flag || 
             error_handler.USB_tx_dma_error_flag ||
             error_handler.USB_rx_dma_error_flag) {
         
-        USB_ERROR_LED_PIN = 1;
+        USB_ERROR_LED_PIN = HIGH;
     
     }
-    else USB_ERROR_LED_PIN = 0;    
+    else USB_ERROR_LED_PIN = LOW;    
+    
+    if (error_handler.ADC_configuration_error_flag) ANALOG_ERROR_LED_PIN = HIGH;
+    else ANALOG_ERROR_LED_PIN = LOW;
     
 }
 

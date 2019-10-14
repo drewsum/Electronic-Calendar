@@ -7,4 +7,6 @@ terminal_control.h  \
 heartbeat_timer.h  \
 pin_macros.h  \
  cause_of_reset.h  \
-rtcc.h 
+rtcc.h  \
+adc.h  \
+error_handler.h 
