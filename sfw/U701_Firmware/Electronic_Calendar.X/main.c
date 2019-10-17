@@ -101,7 +101,7 @@ void main(void) {
     printf("    Error Handler Initialized\n\r");
     
     
-//    // Setup heartbeat timer
+    // Setup heartbeat timer
     heartbeatTimerInitialize();
     printf("    Heartbeat Timer Initialized\n\r");
     
@@ -141,6 +141,8 @@ void main(void) {
     terminalTextAttributes(YELLOW, BLACK, NORMAL);
     printf("\n\rType 'Help' for list of supported commands\n\r\n\r");
     terminalTextAttributesReset();
+    
+    U3STA = 0x7510;
     
     // Main loop
     while (true) {

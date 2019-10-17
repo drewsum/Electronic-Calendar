@@ -14,34 +14,32 @@
 #include "error_handler.h"
 
 // This function is what interprets strings sent over USB Virtual COM Port
-void usb_uart_rx_lookup_table(char * input_string) {
- 
+void usb_uart_rx_lookup_table(char * cmd_string) {
     // Remove trailing newlines and carriage returns
-    strtok(input_string, "\n");
-    strtok(input_string, "\r");
+    strtok(cmd_string, "\n");
+    strtok(cmd_string, "\r");
     
     // Determine if received string has a match
-    if (strcomp(input_string, "Help") == 0) {
+    if (strcomp(cmd_string, "Help") == 0) {
      
         usbUartPrintHelpMessage();
         
     }
     
-    
-    else if (strcomp(input_string, "Reset") == 0) {
+    else if (strcomp(cmd_string, "Reset") == 0) {
 
          deviceReset();
         
     }
     
-    else if (strcomp(input_string, "Clear") == 0) {
+    else if (strcomp(cmd_string, "Clear") == 0) {
      
         terminalClearScreen();
         terminalSetCursorHome();
         
     }
     
-    else if (strcomp(input_string, "*IDN?") == 0) {
+    else if (strcomp(cmd_string, "*IDN?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -50,7 +48,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcomp(input_string, "MCU IDs?") == 0) {
+    else if (strcomp(cmd_string, "MCU IDs?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -73,7 +71,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcomp(input_string, "MCU Status?") == 0) {
+    else if (strcomp(cmd_string, "MCU Status?") == 0) {
      
         printWatchdogStatus();
         
@@ -84,20 +82,20 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcomp(input_string, "Interrupt Status?") == 0) {
+    else if (strcomp(cmd_string, "Interrupt Status?") == 0) {
      
         // Print function from interrupt control module
         printInterruptStatus();
         
     }
     
-    else if (strcomp(input_string, "Clock Status?") == 0) {
+    else if (strcomp(cmd_string, "Clock Status?") == 0) {
      
         printClockStatus(SYSCLK_INT);
         
     }
     
-    else if (strcomp(input_string, "Device On Time?") == 0) {
+    else if (strcomp(cmd_string, "Device On Time?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -107,7 +105,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcomp(input_string, "Error Status?") == 0) {
+    else if (strcomp(cmd_string, "Error Status?") == 0) {
      
         // Print error handler status
         printErrorHandlerStatus();
@@ -120,7 +118,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcomp(input_string, "Clear Errors") == 0) {
+    else if (strcomp(cmd_string, "Clear Errors") == 0) {
      
         // Zero out all error handler flags
         clearErrorHandler();
@@ -135,7 +133,7 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-     else if (strcomp(input_string, "Cause of Reset?") == 0) {
+     else if (strcomp(cmd_string, "Cause of Reset?") == 0) {
      
         terminalTextAttributesReset();
         
@@ -165,13 +163,13 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strcomp(input_string, "PMD Status?") == 0) {
+    else if (strcomp(cmd_string, "PMD Status?") == 0) {
      
         printPMDStatus();
         
     }
     
-    else if (strcomp(input_string, "Time and Date?") == 0) {
+    else if (strcomp(cmd_string, "Time and Date?") == 0) {
      
         terminalTextAttributesReset();
         terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -181,11 +179,11 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strstart(input_string, "Set Date: ") == 0) {
+    else if (strcomp(cmd_string, "Set Date: ") == 0) {
      
         // Snipe out received string
         uint32_t read_month, read_day, read_year;
-        sscanf(input_string, "Set Date: %u/%u/%u", &read_month, &read_day, &read_year);
+        sscanf(cmd_string, "Set Date: %u/%u/%u", &read_month, &read_day, &read_year);
         
         // Write received data into RTCC
         if (read_year >= 2000) {
@@ -212,11 +210,11 @@ void usb_uart_rx_lookup_table(char * input_string) {
         
     }
     
-    else if (strstart(input_string, "Set Time: ") == 0) {
+    else if (strcomp(cmd_string, "Set Time: ") == 0) {
      
         // Snipe out received string
         uint32_t read_hour, read_minute, read_second;
-        sscanf(input_string, "Set Time: %u:%u:%u", &read_hour, &read_minute, &read_second);
+        sscanf(cmd_string, "Set Time: %u:%u:%u", &read_hour, &read_minute, &read_second);
                     
         rtccWriteTime((uint8_t) read_hour, (uint8_t) read_minute, (uint16_t) read_second);
 
@@ -228,11 +226,11 @@ void usb_uart_rx_lookup_table(char * input_string) {
 
     }
     
-    else if (strstart(input_string, "Set Weekday: ") == 0) {
+    else if (strcomp(cmd_string, "Set Weekday: ") == 0) {
      
         char read_weekday[16];
         uint8_t read_weekday_enum;
-        sscanf(input_string, "Set Weekday: %s", &read_weekday);
+        sscanf(cmd_string, "Set Weekday: %s", &read_weekday);
         
         if (strcmp(read_weekday, "Sunday") == 0) read_weekday_enum = 0;
         else if (strcmp(read_weekday, "Monday") == 0) read_weekday_enum = 1;
@@ -265,13 +263,13 @@ void usb_uart_rx_lookup_table(char * input_string) {
             
     }
     
-    else if (strcmp(input_string, "ADC Status?") == 0) {
+    else if (strcomp(cmd_string, "ADC Status?") == 0) {
      
         printADCStatus();
         
     }
     
-    else if (strcmp(input_string, "Telemetry?") == 0) {
+    else if (strcomp(cmd_string, "Telemetry?") == 0) {
      
         if (error_handler.ADC_configuration_error_flag) {
          
@@ -464,48 +462,18 @@ char * getStringSecondsAsTime(uint32_t input_seconds) {
 // This function compares the "needle" string parameter to see if it is the 
 // beginning of the "haystack" string variable
 // Returns 0 for success, 1 for failure
-uint8_t strstart(const char * haystack, const char * needle) {
- 
-    // First check to see if needle is longer than haystack, if it is 
-    // we already know this is not a match
-    if (strlen(needle) >= strlen(haystack)) return 1;
-    
-    // Next loop through each element in needle to see if it matches the 
-    // same character in haystack at the same position
-    // If the characters do not match, return 1
-    // After the loop, return 0 for exit success
-    uint8_t char_index;
-    for(char_index = 0; char_index < strlen(needle); char_index++) {
-        
-        // Return a 1 if there is not a match
-        if (needle[char_index] != haystack[char_index]) return 1;
-        
-    }
-    
-    // return a 0 for exit success
-    return 0;
-    
-}
-
-// This function is a custom string compare
-// Compares all characters in two strings after the first character (0th index)
-// if the input string is the first received over USB UART
-// Runs a normal string compare if it's not the first string
-// returns 0 if strings match
-// returns 1 if they don't
 uint8_t strcomp(const char * haystack, const char * needle) {
+ 
     if (num_strings_received == 0) {
-
+        
         // First check to see if needle is longer than haystack, if it is 
         // we already know this is not a match
         if (strlen(needle) > strlen(haystack)) return 1;
-        if (strlen(needle) < strlen(haystack)) return 1;
 
         // Next loop through each element in needle to see if it matches the 
         // same character in haystack at the same position
         // If the characters do not match, return 1
         // After the loop, return 0 for exit success
-        // skip the first character, start looping at index 1
         uint8_t char_index;
         for(char_index = 1; char_index < strlen(needle); char_index++) {
 
@@ -516,10 +484,30 @@ uint8_t strcomp(const char * haystack, const char * needle) {
 
         // return a 0 for exit success
         return 0;
-
+    
     }
     
-    // return a string compare after we've received more than one string
-    else return strcmp(needle, haystack);
+    else {
+     
+        // First check to see if needle is longer than haystack, if it is 
+        // we already know this is not a match
+        if (strlen(needle) > strlen(haystack)) return 1;
+
+        // Next loop through each element in needle to see if it matches the 
+        // same character in haystack at the same position
+        // If the characters do not match, return 1
+        // After the loop, return 0 for exit success
+        uint8_t char_index;
+        for(char_index = 1; char_index < strlen(needle); char_index++) {
+
+            // Return a 1 if there is not a match
+            if (needle[char_index] != haystack[char_index]) return 1;
+
+        }
+
+        // return a 0 for exit success
+        return 0;
+        
+    }
         
 }

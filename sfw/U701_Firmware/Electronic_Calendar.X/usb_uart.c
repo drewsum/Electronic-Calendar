@@ -118,7 +118,7 @@ void usbUartReceiveDmaInitialize(void) {
     // pattern is 1 byte long
     DCH1CONbits.CHPATLEN = 0;
     // Pattern value is a carriage return ('\r'), end of string
-    DCH1DAT = '\n';
+    DCH1DAT = '\r';
     
     // Set DMA1 source location
     DCH1SSA = KVA_TO_PA((void *) &U3RXREG);
@@ -185,7 +185,7 @@ void usbUartInitialize(void) {
     // Disable auto-baud
     U3MODEbits.ABAUD = 0;
     
-    // RX idle state is logic low
+    // RX idle state is logic high
     U3MODEbits.RXINV = 0;
     
     // High speed baud rate setting
@@ -206,14 +206,8 @@ void usbUartInitialize(void) {
     // Idle transmit state is low
     U3STAbits.UTXINV = 1;
     
-    // Enable receiver
-    U3STAbits.URXEN = 1;
-    
     // Disable break
     U3STAbits.UTXBRK = 0;
-    
-    // Enable transmitter
-    U3STAbits.UTXEN = 1;
     
     // Interrupt on every character received
     U3STAbits.URXISEL = 0b00;
@@ -225,7 +219,7 @@ void usbUartInitialize(void) {
     // From section 21.3 of PIC32MZ reference manual
     // Input CLK is PBCLK2 (84 MHz)
     // With PBCLK2 = 84 MHz, BRGH = 1, baud rate error is 0.16%
-    U3BRG = 35;        
+    U3BRG = 35;
     
     // Set interrupt priorities
     setInterruptPriority(UART3_Fault, 1);
@@ -237,8 +231,19 @@ void usbUartInitialize(void) {
     clearInterruptFlag(UART3_Fault);
     clearInterruptFlag(UART3_Transfer_Done);
     
+    // clear receive errors
+    U3STAbits.FERR = 0;
+    U3STAbits.PERR = 0;
+    U3STAbits.OERR = 0;
+    
     // Enable UART 3
     U3MODEbits.ON = 1;
+    
+    // Enable transmitter
+    U3STAbits.UTXEN = 1;
+    
+    // Enable receiver
+    U3STAbits.URXEN = 1;
     
     // Enable receive and error interrupts
     enableInterrupt(UART3_Fault);
@@ -256,6 +261,10 @@ void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) usbUartFaultISR(void) {
     
     // TO-DO: Fault tasks
     error_handler.USB_error_flag = 1;
+    
+    U3STAbits.PERR = 0;
+    U3STAbits.FERR = 0;
+    U3STAbits.OERR = 0;
     
     // Clear fault interrupt flag
     clearInterruptFlag(UART3_Fault);
@@ -298,7 +307,7 @@ void __ISR(_DMA0_VECTOR, IPL5SRS) usbUartTxDmaISR(void) {
 
 // These are the USB UART DMA Interrupt Service Routines
 void __ISR(_DMA1_VECTOR, IPL6SRS) usbUartRxDmaISR(void) {
-
+    
     // Determine source of DMA 1 interrupt
     // Channel block transfer complete interrupt flag (or pattern match)
     if (DCH1INTbits.CHBCIF) {
