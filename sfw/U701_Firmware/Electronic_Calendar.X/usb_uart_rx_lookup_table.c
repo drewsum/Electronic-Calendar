@@ -495,46 +495,41 @@ uint8_t strcomp(const char * haystack, const char * needle) {
  
     if (num_strings_received == 0) {
         
-        // First check to see if needle is longer than haystack, if it is 
-        // we already know this is not a match
-        if (strlen(needle) > strlen(haystack)) return 1;
+        // move to next pair of characters
+        needle++;
+        haystack++;
+        while(*needle)
+        {
+            // if characters differ or end of second string is reached
+            if (*needle != *haystack)
+                return 1;
 
-        // Next loop through each element in needle to see if it matches the 
-        // same character in haystack at the same position
-        // If the characters do not match, return 1
-        // After the loop, return 0 for exit success
-        uint8_t char_index;
-        for(char_index = 1; char_index < strlen(needle); char_index++) {
-
-            // Return a 1 if there is not a match
-            if (needle[char_index] != haystack[char_index]) return 1;
-
+            // move to next pair of characters
+            needle++;
+            haystack++;
         }
 
-        // return a 0 for exit success
+        // return the ASCII difference after converting char* to unsigned char*
+        // return *(const unsigned char*)needle - *(const unsigned char*)haystack;
         return 0;
-    
+        
     }
     
     else {
-     
-        // First check to see if needle is longer than haystack, if it is 
-        // we already know this is not a match
-        if (strlen(needle) > strlen(haystack)) return 1;
+      
+        while(*needle)
+        {
+            // if characters differ or end of second string is reached
+            if (*needle != *haystack)
+                return 1;
 
-        // Next loop through each element in needle to see if it matches the 
-        // same character in haystack at the same position
-        // If the characters do not match, return 1
-        // After the loop, return 0 for exit success
-        uint8_t char_index;
-        for(char_index = 1; char_index < strlen(needle); char_index++) {
-
-            // Return a 1 if there is not a match
-            if (needle[char_index] != haystack[char_index]) return 1;
-
+            // move to next pair of characters
+            needle++;
+            haystack++;
         }
 
-        // return a 0 for exit success
+        // return the ASCII difference after converting char* to unsigned char*
+        // return *(const unsigned char*)needle - *(const unsigned char*)haystack;
         return 0;
         
     }
