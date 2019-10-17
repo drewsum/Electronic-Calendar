@@ -13,72 +13,104 @@
 #include "adc.h"
 #include "error_handler.h"
 
+// this is a typedef for a function call based on usb uart command
+typedef void (*usb_uart_command_function_t)(void);
+
+// this structure is the model for each usb uart command
+typedef struct usb_uart_command_s {
+  
+    char * command_name;
+    char * command_help_message;
+    usb_uart_command_function_t func;
+    
+} usb_uart_command_t;
+
+// The following is a list of call supported usb_uart serial commands in
+// struct usb_uart_command_s struct format
+
+// ************************************************************************************************************
+// help message usb_uart command
+usb_uart_command_t help_command = {         "Help",
+                                            "Prints help message for all supported serial commands",
+                                            usbUartPrintHelpMessage};
+
+
+
+// ************************************************************************************************************
+// this usb_uart command resets the microcontroller
+usb_uart_command_t reset_command = {        "Reset",
+                                            "Executes an MCU Software Reset",
+                                            deviceReset};
+
+// ************************************************************************************************************
+// This usb_uart command clears the serial terminal
+void clearCommandFunction(void) {
+    terminalClearScreen();
+    terminalSetCursorHome();
+} usb_uart_command_t clear_command = {      "Clear",
+                                            "Clears the serial terminal",
+                                            clearCommandFunction};
+
+// ************************************************************************************************************
+// This usb_uart command returns the device identification string
+void idnCommandFunction(void) {
+    terminalTextAttributesReset();
+    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("Electronic Calendar\r\n");
+    terminalTextAttributesReset();    
+} usb_uart_command_t idn_command = {        "*IDN?",
+                                            "Prints identification string",
+                                            idnCommandFunction};
+
+// ************************************************************************************************************
+// This usb_uart command prints MCU silicon revision, device id, and serial number
+void mcuIdCommandFunction(void) {
+    
+    terminalTextAttributesReset();
+    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    
+    // Print serial number
+    printf("    PIC32MZ Serial Number retrieved from Flash: %s\n\r",
+                getStringSerialNumber());
+        
+    // Print device ID
+    printf("    Device ID retrieved from Flash: %s (0x%X)\n\r", 
+        getDeviceIDString(getDeviceID()), 
+        getDeviceID());
+
+        // Print revision ID
+    printf("    Revision ID retrieved from Flash: %s (0x%X)\n\r", 
+        getRevisionIDString(getRevisionID()), 
+        getRevisionID());
+
+    terminalTextAttributesReset();
+    
+} usb_uart_command_t mcu_id_command = {     "MCU IDs?",
+                                            "Prints microcontroller serial number, device ID, and silicon revision ID",
+                                            mcuIdCommandFunction};
+
+// ************************************************************************************************************
+// This usb_uart command prints MCU status (WDT, DMT and Prefetch information)
+void mcuStatusCommandFunction(void) {
+
+    printWatchdogStatus();
+        
+    printDeadmanStatus();
+        
+    printPrefetchStatus();
+
+} usb_uart_command_t mcu_status_command = {     "MCU Status?",
+                                            "Prints the status of the watchdog timer, deadman timer and predictive prefetch module",
+                                            mcuStatusCommandFunction};
+
 // This function is what interprets strings sent over USB Virtual COM Port
 void usb_uart_rx_lookup_table(char * cmd_string) {
     // Remove trailing newlines and carriage returns
     strtok(cmd_string, "\n");
     strtok(cmd_string, "\r");
     
-    // Determine if received string has a match
-    if (strcomp(cmd_string, "Help") == 0) {
-     
-        usbUartPrintHelpMessage();
-        
-    }
-    
-    else if (strcomp(cmd_string, "Reset") == 0) {
-
-         deviceReset();
-        
-    }
-    
-    else if (strcomp(cmd_string, "Clear") == 0) {
-     
-        terminalClearScreen();
-        terminalSetCursorHome();
-        
-    }
-    
-    else if (strcomp(cmd_string, "*IDN?") == 0) {
-     
-        terminalTextAttributesReset();
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
-        printf("Electronic Calendar\r\n");
-        terminalTextAttributesReset();
-        
-    }
-    
-    else if (strcomp(cmd_string, "MCU IDs?") == 0) {
-     
-        terminalTextAttributesReset();
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
-        
-        // Print serial number
-        printf("    PIC32MZ Serial Number retrieved from Flash: %s\n\r",
-                getStringSerialNumber());
-        
-        // Print device ID
-        printf("    Device ID retrieved from Flash: %s (0x%X)\n\r", 
-            getDeviceIDString(getDeviceID()), 
-            getDeviceID());
-
-        // Print revision ID
-        printf("    Revision ID retrieved from Flash: %s (0x%X)\n\r", 
-            getRevisionIDString(getRevisionID()), 
-            getRevisionID());
-
-        terminalTextAttributesReset();
-        
-    }
-    
-    else if (strcomp(cmd_string, "MCU Status?") == 0) {
-     
-        printWatchdogStatus();
-        
-        printDeadmanStatus();
-        
-        printPrefetchStatus();
-        
+    if (strcomp(cmd_string, (char *) help_command.command_name) == 0) {
+        help_command.func();
         
     }
     
@@ -307,12 +339,9 @@ void usbUartPrintHelpMessage(void) {
     terminalTextAttributesReset();
     terminalTextAttributes(YELLOW, BLACK, NORMAL);
     printf("Supported Commands:\n\r");
-    printf("    Reset: Software Reset\n\r");
-    printf("    Clear: Clears the terminal\n\r");
-    printf("    Cause of Reset?: Prints the cause of the most recent device reset\n\r");
-    printf("    *IDN?: Prints identification string\n\r");
-    printf("    MCU IDs?: Print microcontroller serial number, device ID, and silicon revision ID\r\n");
-    printf("    MCU Status?: Prints the status of the watchdog timer, deadman timer and predictive prefetch module\n\r");
+    
+
+    
     printf("    Device On Time?: Returns the device on time since last reset\n\r");
     printf("    PMD Status?: Prints the state of Peripheral Module Disable settings\n\r");
     printf("    Interrupt Status? Prints information on interrupt settings\n\r");
