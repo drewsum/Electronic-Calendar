@@ -15,13 +15,13 @@
 #include "32mz_interrupt_control.h"
 #include "cause_of_reset.h"
 #include "pin_macros.h"
-#include "32mz_interrupt_control.h"
 #include "device_control.h"
 #include "gpio_setup.h"
 #include "prefetch.h"
 #include "watchdog_timer.h"
 #include "heartbeat_timer.h"
 #include "usb_uart.h"
+#include "usb_uart_rx_lookup_table.h"
 #include "terminal_control.h"
 #include "power_saving.h"
 #include "rtcc.h"
@@ -54,6 +54,7 @@ void main(void) {
     
     // Setup USB UART debugging
     usbUartInitialize();
+    usbUartHashTableInitialize();
     
     // Clear the terminal
     terminalClearScreen();
@@ -176,7 +177,7 @@ void main(void) {
             uint32_t length = strlen(usb_uart_rx_buffer);
             
             // parse received string
-            usb_uart_rx_lookup_table(usb_uart_rx_buffer);
+            usbUartRxLUTInterface(usb_uart_rx_buffer);
             usb_uart_rx_parse_request = 0;
             
             // clear rx buffer

@@ -352,3 +352,431 @@ void _mon_putc (char c) {
         DCH0ECONbits.CFORCE = 1;
     }
 }
+
+// this function adds a usb_uart command to the usb_uart_commands hash table
+void usbUartHashTableAdd(char * input_cmd_name, char * input_cmd_help_message, usb_uart_command_function_t input_cmd_func) {
+
+    // Add help command to hash string
+    usb_uart_command_t *cmd = malloc(sizeof(usb_uart_command_t));
+    strcpy(cmd->command_name, input_cmd_name);
+    strcpy(cmd->command_help_message, input_cmd_help_message);
+    cmd->func = input_cmd_func;
+    HASH_ADD_STR(usb_uart_commands, command_name, cmd);
+    
+}
+
+
+// This function is what interprets strings sent over USB Virtual COM Port
+void usbUartRxLUTInterface(char * cmd_string) {
+    // Remove trailing newlines and carriage returns
+    strtok(cmd_string, "\n");
+    strtok(cmd_string, "\r");
+    
+    // iterate over usb_uart_commands hash table to find a matching command to cmd_string
+    usb_uart_command_t *current_command, *temp;
+    HASH_ITER(hh, usb_uart_commands, current_command, temp) {
+        
+        // if the current entry that we've found in the hash table matches cmd_string,
+        // call the function pointed to by the current entry in the hash table
+        if (strcomp(cmd_string, current_command->command_name) == 0) {
+         
+            current_command->func(cmd_string);
+            break;
+            
+        }
+    }
+    
+//    if (strcomp(cmd_string, (char *) &help_command) == 0) {
+//        // help_command.func();
+//        void (*func)(void) = &help_command;
+//        func = (void*)(((void*)func) + 16 + 128);
+//        //func = &help_command + sizeof(usb_uart_command_t.command_name) + sizeof(usb_uart_command_t.command_name);
+//        (*func)();
+//        
+//    }
+    
+//    if (strcomp(cmd_string, "Interrupt Status?") == 0) {
+//     
+//        // Print function from interrupt control module
+//        printInterruptStatus();
+//        
+//    }
+//    
+//    else if (strcomp(cmd_string, "Clock Status?") == 0) {
+//     
+//        printClockStatus(SYSCLK_INT);
+//        
+//    }
+//    
+//    else if (strcomp(cmd_string, "Device On Time?") == 0) {
+//     
+//        terminalTextAttributesReset();
+//        terminalTextAttributes(GREEN, BLACK, NORMAL);
+//        printf("On time since last device reset: %s\n\r", 
+//                getStringSecondsAsTime(device_on_time_counter));
+//        terminalTextAttributesReset();
+//        
+//    }
+//    
+//    else if (strcomp(cmd_string, "Error Status?") == 0) {
+//     
+//        // Print error handler status
+//        printErrorHandlerStatus();
+//        
+//        // Print help message
+//        terminalTextAttributes(YELLOW, BLACK, NORMAL);
+//        printf("\n\rCall 'Clear Errors' command to clear any errors that have been set\n\r");
+//        terminalTextAttributesReset();
+//        
+//        
+//    }
+//    
+//    else if (strcomp(cmd_string, "Clear Errors") == 0) {
+//     
+//        // Zero out all error handler flags
+//        clearErrorHandler();
+//        
+//        // Update error LEDs based on error handler status
+//        updateErrorLEDs();
+//        
+//        terminalTextAttributesReset();
+//        terminalTextAttributes(GREEN, BLACK, NORMAL);
+//        printf("Error Handler flags cleared\n\r");
+//        terminalTextAttributesReset();
+//        
+//    }
+//    
+//     else if (strcomp(cmd_string, "Cause of Reset?") == 0) {
+//     
+//        terminalTextAttributesReset();
+//        
+//        if (    reset_cause == Undefined ||
+//                reset_cause == Primary_Config_Registers_Error ||
+//                reset_cause == Primary_Secondary_Config_Registers_Error ||
+//                reset_cause == Config_Mismatch ||
+//                reset_cause == DMT_Reset ||
+//                reset_cause == WDT_Reset ||
+//                reset_cause == Software_Reset ||
+//                reset_cause == External_Reset ||
+//                reset_cause == BOR_Reset) {
+//
+//            terminalTextAttributes(RED, BLACK, NORMAL);
+//
+//        }
+//
+//        else {
+//
+//            terminalTextAttributes(GREEN, BLACK, NORMAL);
+//
+//        }
+//        
+//        printf("Cause of the most recent device reset: %s\n\r",
+//                getResetCauseString(reset_cause));
+//        terminalTextAttributesReset();
+//        
+//    }
+//    
+//    else if (strcomp(cmd_string, "PMD Status?") == 0) {
+//     
+//        printPMDStatus();
+//        
+//    }
+//    
+//    else if (strcomp(cmd_string, "Time and Date?") == 0) {
+//     
+//        terminalTextAttributesReset();
+//        terminalTextAttributes(GREEN, BLACK, NORMAL);
+//        printf("Current system time and date:\r\n   ");
+//        printTimeAndDate();
+//        terminalTextAttributesReset();
+//        
+//    }
+//    
+//    else if (strcomp(cmd_string, "Set Date: ") == 0) {
+//     
+//        // Snipe out received string
+//        uint32_t read_month, read_day, read_year;
+//        sscanf(cmd_string, "Set Date: %u/%u/%u", &read_month, &read_day, &read_year);
+//        
+//        // Write received data into RTCC
+//        if (read_year >= 2000) {
+//            
+//            rtccWriteDate((uint8_t) read_month, (uint8_t) read_day, (uint16_t) read_year);
+//
+//            // print out what we just did
+//            terminalTextAttributesReset();
+//            terminalTextAttributes(GREEN, BLACK, NORMAL);
+//            printf("Set RTCC date as %02u/%02u/%04u\r\n", rtcc_shadow.month, rtcc_shadow.day, rtcc_shadow.year);
+//            terminalTextAttributesReset();
+//        
+//        }
+//        
+//        // return error if year < 2000
+//        else {
+//         
+//            terminalTextAttributesReset();
+//            terminalTextAttributes(RED, BLACK, NORMAL);
+//            printf("Enter a valid date after 01/01/2000. User entered %02u/%02u/%04u\r\n", read_month, read_day, read_year);
+//            terminalTextAttributesReset();
+//            
+//        }
+//        
+//    }
+//    
+//    else if (strcomp(cmd_string, "Set Time: ") == 0) {
+//     
+//        // Snipe out received string
+//        uint32_t read_hour, read_minute, read_second;
+//        sscanf(cmd_string, "Set Time: %u:%u:%u", &read_hour, &read_minute, &read_second);
+//                    
+//        rtccWriteTime((uint8_t) read_hour, (uint8_t) read_minute, (uint16_t) read_second);
+//
+//        // print out what we just did
+//        terminalTextAttributesReset();
+//        terminalTextAttributes(GREEN, BLACK, NORMAL);
+//        printf("Set RTCC time as %02u:%02u:%02u\r\n", rtcc_shadow.hours, rtcc_shadow.minutes, rtcc_shadow.seconds);
+//        terminalTextAttributesReset();
+//
+//    }
+//    
+//    else if (strcomp(cmd_string, "Set Weekday: ") == 0) {
+//     
+//        char read_weekday[16];
+//        uint8_t read_weekday_enum;
+//        sscanf(cmd_string, "Set Weekday: %s", &read_weekday);
+//        
+//        if (strcmp(read_weekday, "Sunday") == 0) read_weekday_enum = 0;
+//        else if (strcmp(read_weekday, "Monday") == 0) read_weekday_enum = 1;
+//        else if (strcmp(read_weekday, "Tuesday") == 0) read_weekday_enum = 2;
+//        else if (strcmp(read_weekday, "Wednesday") == 0) read_weekday_enum = 3;
+//        else if (strcmp(read_weekday, "Thursday") == 0) read_weekday_enum = 4;
+//        else if (strcmp(read_weekday, "Friday") == 0) read_weekday_enum = 5;
+//        else if (strcmp(read_weekday, "Saturday") == 0) read_weekday_enum = 6;
+//        else read_weekday_enum = 255;
+//
+//        if (read_weekday_enum != 255) {
+//
+//            // print out what we just did
+//            terminalTextAttributesReset();
+//            terminalTextAttributes(GREEN, BLACK, NORMAL);
+//            rtccWriteWeekday(read_weekday_enum);
+//            printf("Set RTCC weekday as %s\r\n", getDayOfWeek(rtcc_shadow.weekday));
+//            terminalTextAttributesReset();
+//
+//        }
+//        
+//        else {
+//        
+//            terminalTextAttributesReset();
+//            terminalTextAttributes(RED, BLACK, NORMAL);
+//            printf("Please enter a valid day of the weekday. Input is case sensitive\r\n");
+//            terminalTextAttributesReset();
+//            
+//        }
+//            
+//    }
+//    
+//    else if (strcomp(cmd_string, "ADC Status?") == 0) {
+//     
+//        printADCStatus();
+//        
+//    }
+//    
+//    else if (strcomp(cmd_string, "Telemetry?") == 0) {
+//     
+//        if (error_handler.ADC_configuration_error_flag) {
+//         
+//            terminalTextAttributesReset();
+//            terminalTextAttributes(RED, BLACK, NORMAL);
+//            printf("ADC Configuration Error\n\r");
+//            terminalTextAttributesReset();
+//            
+//        }
+//        
+//        else {
+//
+//            terminalTextAttributesReset();
+//            terminalTextAttributes(CYAN, BLACK, NORMAL);
+//            printf("Most recent ADC conversion results:\n\r");
+//            printf("    +12V Input Voltage Measurement: %+0.3f V\n\r", adc_results.POS12_adc);
+//            printf("    +3.3V Power Supply Measurement: %+0.3f V\n\r", adc_results.POS3P3_adc);
+//            printf("    Internal VREF ADC Conversion Result: %+0.3f V\n\r", adc_results.vref_adc);
+//            printf("    Internal Die Temperature ADC Conversion Result: %+0.3f C\n\r", adc_results.die_temp_adc);
+//            terminalTextAttributesReset();
+//
+//        }
+//            
+//    }
+//
+//    
+    // increment the number of strings we've received
+    num_strings_received++;
+    
+}
+
+// This function returns a string of a large number of seconds in a human readable format
+char * getStringSecondsAsTime(uint32_t input_seconds) {
+ 
+    uint32_t years, days, hours, minutes, seconds, remainder;
+    static char return_string[80];
+    
+    // clear return string
+    int i;
+    for (i = 0; i < strlen(return_string); i++) {
+     
+        return_string[i] = '\0';
+        
+    }
+    
+    char buff[20];
+    
+    years = input_seconds / (60 * 60 * 24 * 365);
+    input_seconds -= years * (60 * 60 * 24 * 365);
+    days = input_seconds / (60 * 60 * 24);
+    input_seconds -= days * (60 * 60 * 24);
+    hours = input_seconds / (60 * 60);
+    input_seconds -= hours * (60 * 60);
+    minutes = input_seconds / 60;
+    input_seconds -= minutes * 60;
+    seconds = input_seconds;
+    
+    if (years > 0) {
+        
+        if (years == 1) {
+         
+            sprintf(buff, "%d year, ", years);
+            
+        }
+        
+        else {
+         
+            sprintf(buff, "%d years, ", years);
+            
+        }
+        
+        strcat(return_string, buff);
+        
+    }
+    
+    if (days > 0) {
+     
+        if (days == 1) {
+         
+            sprintf(buff, "%d day, ", days);
+            
+        }
+        
+        else {
+         
+            sprintf(buff, "%d days, ", days);
+            
+        }
+        
+        strcat(return_string, buff);
+    }
+    
+    if (hours > 0) {
+     
+        if (hours == 1) {
+         
+            sprintf(buff, "%d hour, ", hours);
+            
+        }
+        
+        else {
+         
+            sprintf(buff, "%d hours, ", hours);
+            
+        }
+        
+        strcat(return_string, buff);
+        
+    }
+    
+    if (minutes > 0) {
+     
+        if (minutes == 1) {
+         
+            sprintf(buff, "%d minute, ", minutes);
+            
+        }
+        
+        else {
+         
+            sprintf(buff, "%d minutes, ", minutes);
+            
+        }
+        
+        strcat(return_string, buff);
+        
+    }
+    
+    if (seconds > 0) {
+     
+        if (seconds == 1) {
+         
+            sprintf(buff, "%d second", seconds);
+            
+        }
+        
+        else {
+         
+            sprintf(buff, "%d seconds", seconds);
+            
+        }
+        
+        strcat(return_string, buff);
+        
+    }
+    
+    return return_string;
+    
+}
+
+// This function compares the "needle" string parameter to see if it is the 
+// beginning of the "haystack" string variable
+// Returns 0 for success, 1 for failure
+uint8_t strcomp(const char * haystack, const char * needle) {
+ 
+    if (num_strings_received == 0) {
+        
+        // move to next pair of characters
+        needle++;
+        haystack++;
+        while(*needle)
+        {
+            // if characters differ or end of second string is reached
+            if (*needle != *haystack)
+                return 1;
+
+            // move to next pair of characters
+            needle++;
+            haystack++;
+        }
+
+        // return the ASCII difference after converting char* to unsigned char*
+        // return *(const unsigned char*)needle - *(const unsigned char*)haystack;
+        return 0;
+        
+    }
+    
+    else {
+      
+        while(*needle)
+        {
+            // if characters differ or end of second string is reached
+            if (*needle != *haystack)
+                return 1;
+
+            // move to next pair of characters
+            needle++;
+            haystack++;
+        }
+
+        // return the ASCII difference after converting char* to unsigned char*
+        // return *(const unsigned char*)needle - *(const unsigned char*)haystack;
+        return 0;
+        
+    }
+        
+}

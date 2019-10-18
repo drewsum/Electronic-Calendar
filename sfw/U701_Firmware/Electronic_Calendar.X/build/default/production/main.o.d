@@ -12,6 +12,7 @@ error_handler.h  \
  heartbeat_timer.h  \
 usb_uart.h  \
 usb_uart_rx_lookup_table.h  \
+uthash.h  \
  terminal_control.h  \
 power_saving.h  \
 rtcc.h  \
