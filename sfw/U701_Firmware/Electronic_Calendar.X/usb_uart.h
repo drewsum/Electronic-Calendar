@@ -64,9 +64,6 @@ typedef struct usb_uart_command_s {
 // DON'T TOUCH THIS!!!
 usb_uart_command_t *usb_uart_commands = NULL;
 
-// this keeps track of the number of strings received
-uint32_t num_strings_received = 0;
-
 // this is a flag to request that received strings be parsed
 uint8_t usb_uart_rx_parse_request = 0;
 

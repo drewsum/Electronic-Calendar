@@ -176,9 +176,6 @@ void usbUartInitialize(void) {
     // (No flow control used)
     U3MODEbits.UEN = 0b00;
     
-    // Enable wake from sleep
-    U3MODEbits.WAKE = 1;
-    
     // Disable loopback
     U3MODEbits.LPBACK = 0;
     
@@ -263,7 +260,7 @@ void usbUartInitialize(void) {
 void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) usbUartFaultISR(void) {
     
     // TO-DO: Fault tasks
-    if (num_strings_received > 3) error_handler.USB_error_flag = 1;
+    error_handler.USB_error_flag = 1;
     
     U3STAbits.PERR = 0;
     U3STAbits.FERR = 0;
@@ -340,15 +337,6 @@ void _mon_putc (char c) {
     usb_uart_tx_buffer[usb_uart_tx_buffer_head] = c;
     usb_uart_tx_buffer_head++;
     
-    // Force a DMA0 transfer to begin
-//    if (DCH0CONbits.CHBUSY == 0) {
-//    // if (usb_uart_tx_buffer_head >= 1) {
-//    
-//        DCH0CONbits.CHEN = 1;
-//        // DCH0ECONbits.CFORCE = 1;
-//        
-//    }
-    
     if (U3STAbits.UTXBF == 0 || usb_uart_tx_buffer_head == 1) {
         
         DCH0CONbits.CHEN = 1;
@@ -388,9 +376,6 @@ void usbUartRxLUTInterface(char * cmd_string) {
             
         }
     }
-    
-    // increment the number of strings we've received
-    num_strings_received++;
     
 }
 
@@ -517,46 +502,20 @@ char * getStringSecondsAsTime(uint32_t input_seconds) {
 // beginning of the "haystack" string variable
 // Returns 0 for success, 1 for failure
 uint8_t strcomp(const char * haystack, const char * needle) {
- 
-    if (num_strings_received == 0) {
-        
+      
+    while(*needle)
+    {
+        // if characters differ or end of second string is reached
+        if (*needle != *haystack)
+            return 1;
+
         // move to next pair of characters
         needle++;
         haystack++;
-        while(*needle)
-        {
-            // if characters differ or end of second string is reached
-            if (*needle != *haystack)
-                return 1;
-
-            // move to next pair of characters
-            needle++;
-            haystack++;
-        }
-
-        // return the ASCII difference after converting char* to unsigned char*
-        // return *(const unsigned char*)needle - *(const unsigned char*)haystack;
-        return 0;
-        
     }
-    
-    else {
-      
-        while(*needle)
-        {
-            // if characters differ or end of second string is reached
-            if (*needle != *haystack)
-                return 1;
 
-            // move to next pair of characters
-            needle++;
-            haystack++;
-        }
-
-        // return the ASCII difference after converting char* to unsigned char*
-        // return *(const unsigned char*)needle - *(const unsigned char*)haystack;
-        return 0;
-        
-    }
+    // return the ASCII difference after converting char* to unsigned char*
+    // return *(const unsigned char*)needle - *(const unsigned char*)haystack;
+    return 0;
         
 }
