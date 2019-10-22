@@ -52,7 +52,7 @@ typedef void (*usb_uart_command_function_t)(char *);
 // the function func is the function called when this command is received
 typedef struct usb_uart_command_s {
   
-    char command_name[16];
+    char command_name[32];
     char command_help_message[128];
     usb_uart_command_function_t func;
     UT_hash_handle hh;

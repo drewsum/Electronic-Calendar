@@ -54,7 +54,6 @@ void main(void) {
     
     // Setup USB UART debugging
     usbUartInitialize();
-    usbUartHashTableInitialize();
     
     // Clear the terminal
     terminalClearScreen();
