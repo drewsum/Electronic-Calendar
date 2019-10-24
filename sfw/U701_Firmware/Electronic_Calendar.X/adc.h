@@ -15,12 +15,12 @@
 
 /* Used ADC channels include:
  * 
- * AN38 - POS3P3_ADC
- * AN39 - POS12_ADC
- * AN40 - POS5P5_ADC
- * AN41 - POS5_ADC
- * AN42 - POS5P_ADC
- * 
+ * AN10 - VBAT_ADC
+ * AN29 - POS3P3_ISNS_ADC
+ * AN46 - POS5_USB_ADC
+ * AN47 - POS12_ADC
+ * AN48 - POS3P3_ADC
+ * AN49 - POS12_ISNS_ADC
  * 
  * */
 
@@ -33,7 +33,15 @@
 #include <sys/attribs.h>
 
 // ADC constants macros
+#define CAL_GAIN                    (1.0 / 1.3530303030303)
 #define ADC_VOLTS_PER_LSB           0.000805861
+
+// These constants depend compensate for input voltage dividers
+#define POS3P3_CHANNEL_GAIN         2.0
+#define POS12_CHANNEL_GAIN          9.3333333333333333333333
+#define POS5_USB_CHANNEL_GAIN       2.0
+#define POS12_ISNS_CHANNEL_GAIN     1.002004008
+#define POS3P3_ISNS_CHANNEL_GAIN    2.50501002004
 
 // This structure holds ADC measurement results
 struct adc_results_t {
@@ -42,6 +50,9 @@ struct adc_results_t {
     double POS12_adc;
     double vref_adc;
     double die_temp_adc;
+    double POS5_USB_adc;
+    double POS3P3_isns_adc;
+    double POS12_isns_adc;
     
 } adc_results;
 

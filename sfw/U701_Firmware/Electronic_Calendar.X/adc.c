@@ -38,6 +38,10 @@ void ADCInitialize(void) {
     ADCCON3bits.TRGSUSP = 1;
     
     /* initialize ADC calibration setting */
+    ADC1CFG = DEVADC1;
+    ADC2CFG = DEVADC2;
+    ADC3CFG = DEVADC3;
+    ADC4CFG = DEVADC4;
     ADC7CFG = DEVADC7;
     
     /* Configure ADCCON1 */
@@ -61,47 +65,75 @@ void ADCInitialize(void) {
     ADCCON3bits.CONCLKDIV = 1; // Control clock frequency is half of input clock
     ADCCON3bits.VREFSEL = 0; // Select AVDD and AVSS as reference source
     
-    /* Select ADC sample time and conversion clock */
+    /* Select ADC7 sample time and conversion clock */
     ADCCON2bits.ADCDIV = 1;
     ADCCON2bits.SAMC = 5;
-    ADCCON1bits.SELRES = 3;
+    ADCCON1bits.SELRES = 3;     // 12 bit result
     
     /* Select ADC input mode */
-//    ADCIMCON3bits.SIGN38 = 0; // unsigned data format
-//    ADCIMCON3bits.DIFF38 = 0; // Single ended mode
-//    ADCIMCON3bits.SIGN39 = 0; // unsigned data format
-//    ADCIMCON3bits.DIFF39 = 0; // Single ended mode
-//    ADCIMCON3bits.SIGN40 = 0; // unsigned data format
-//    ADCIMCON3bits.DIFF40 = 0; // Single ended mode
-//    ADCIMCON3bits.SIGN41 = 0; // unsigned data format
-//    ADCIMCON3bits.DIFF41 = 0; // Single ended mode
-//    ADCIMCON3bits.SIGN42 = 0; // unsigned data format
-//    ADCIMCON3bits.DIFF42 = 0; // Single ended mode
+    ADCIMCON1bits.DIFF10 = 0; // Single ended mode
+    ADCIMCON1bits.SIGN10 = 0; //unsigned data format
+    ADCIMCON2bits.DIFF29 = 0; // Single ended mode
+    ADCIMCON2bits.SIGN29 = 0; //unsigned data format
+    ADCIMCON1bits.DIFF1 = 0; // Single ended mode
+    ADCIMCON1bits.SIGN1 = 0; //unsigned data format
+    ADCIMCON1bits.DIFF2 = 0; // Single ended mode
+    ADCIMCON1bits.SIGN2 = 0; //unsigned data format
+    ADCIMCON1bits.DIFF3 = 0; // Single ended mode
+    ADCIMCON1bits.SIGN3 = 0; //unsigned data format
+    ADCIMCON1bits.DIFF4 = 0; // Single ended mode
+    ADCIMCON1bits.SIGN4 = 0; //unsigned data format
+    ADCIMCON3bits.DIFF43 = 0; // Single ended mode
+    ADCIMCON3bits.SIGN43 = 0; // unsigned data format
+    ADCIMCON3bits.DIFF44 = 0; // Single ended mode
+    ADCIMCON3bits.SIGN44 = 0; // unsigned data format
+    
+    // Configure high speed ADC input channels
+    ADCTRGMODEbits.SH1ALT = 0b01; // ADC1 converts channel AN46
+    ADCTRGMODEbits.SH2ALT = 0b01; // ADC2 converts channel AN47
+    ADCTRGMODEbits.SH3ALT = 0b01; // ADC3 converts channel AN48
+    ADCTRGMODEbits.SH4ALT = 0b01; // ADC1 converts channel AN49
     
     /* Configure ADCGIRQENx */
     ADCGIRQEN1 = 0;
     ADCGIRQEN2 = 0;
-    // ADCCON2bits.BGVRIEN = 1;        // Enable analog circuits ready interrupt
-    // ADCANCONbits.WKIEN7 = 1;        // Enable ADC7 warm up interrupt
-//    ADCGIRQEN2bits.AGIEN38 = 1;     // Enable Data 38 ready interrupt
-//    ADCGIRQEN2bits.AGIEN39 = 1;     // Enable Data 39 ready interrupt
-//    ADCGIRQEN2bits.AGIEN40 = 1;     // Enable Data 40 ready interrupt
-//    ADCGIRQEN2bits.AGIEN41 = 1;     // Enable Data 41 ready interrupt
-//    ADCGIRQEN2bits.AGIEN42 = 1;     // Enable Data 42 ready interrupt
-    // ADCGIRQEN2bits.AGIEN43 = 1;     // Enable Data 43 ready interrupt
-    // ADCGIRQEN2bits.AGIEN44 = 1;     // Enable Data 44 ready interrupt
     ADCCON2bits.EOSIEN = 1;         // Enable interrupt on end of scan
     
     /* Configure ADCCSSx */
     ADCCSS1 = 0;
     ADCCSS2 = 0;
-//    ADCCSS2bits.CSS38 = 1;          // Enable Channel 38 for common scan
-//    ADCCSS2bits.CSS39 = 1;          // Enable Channel 39 for common scan
-//    ADCCSS2bits.CSS40 = 1;          // Enable Channel 40 for common scan
-//    ADCCSS2bits.CSS41 = 1;          // Enable Channel 41 for common scan
-//    ADCCSS2bits.CSS42 = 1;          // Enable Channel 42 for common scan
+    ADCCSS1bits.CSS1 = 1;           // Enable channel 46 for common scan
+    ADCCSS1bits.CSS2 = 1;           // Enable channel 47 for common scan
+    ADCCSS1bits.CSS3 = 1;           // Enable channel 48 for common scan
+    ADCCSS1bits.CSS4 = 1;           // Enable channel 49 for common scan
+    ADCCSS1bits.CSS10 = 1;          // Enable channel 10 for common scan
+    ADCCSS1bits.CSS29 = 1;          // Enable channel 29 for common scan
     ADCCSS2bits.CSS43 = 1;          // Enable Channel 43 for common scan
     ADCCSS2bits.CSS44 = 1;          // Enable Channel 44 for common scan
+    
+    // Configure ADC1 timing
+    ADC1TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
+    ADC1TIMEbits.SELRES = 0b11;     // 12 bit result
+    ADC1TIMEbits.ADCDIV = 1;        // input clock divider is / 1
+    ADC1TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
+    
+    // Configure ADC2 timing
+    ADC2TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
+    ADC2TIMEbits.SELRES = 0b11;     // 12 bit result
+    ADC2TIMEbits.ADCDIV = 1;        // input clock divider is / 1
+    ADC2TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
+    
+    // Configure ADC3 timing
+    ADC3TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
+    ADC3TIMEbits.SELRES = 0b11;     // 12 bit result
+    ADC3TIMEbits.ADCDIV = 1;        // input clock divider is / 1
+    ADC3TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
+    
+    // Configure ADC4 timing
+    ADC4TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
+    ADC4TIMEbits.SELRES = 0b11;     // 12 bit result
+    ADC4TIMEbits.ADCDIV = 1;        // input clock divider is / 1
+    ADC4TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
     
     /* Configure ADCCMPCONx */
     ADCCMPCON1 = 0; // No digital comparators are used. Setting the ADCCMPCONx
@@ -121,6 +153,14 @@ void ADCInitialize(void) {
     /* Set up the trigger sources */
     ADCCON1bits.STRGLVL = 0;            // Edge trigger mode
     ADCCON1bits.STRGSRC = 0b00110;      // Trigger source is Timer3
+    ADCTRGSNSbits.LVL1 = 0;             // trigger on edge
+    ADCTRGSNSbits.LVL2 = 0;             // trigger on edge
+    ADCTRGSNSbits.LVL3 = 0;             // trigger on edge
+    ADCTRGSNSbits.LVL4 = 0;             // trigger on edge
+    ADCTRG1bits.TRGSRC1 = 0b00011;      // ADC1 triggers on scan trigger
+    ADCTRG1bits.TRGSRC2 = 0b00011;      // ADC2 triggers on scan trigger
+    ADCTRG1bits.TRGSRC3 = 0b00011;      // ADC3 triggers on scan trigger
+    ADCTRG2bits.TRGSRC4 = 0b00011;      // ADC4 triggers on scan trigger
     
     /* Early interrupt */
     ADCEIEN1 = 0; // No early interrupts used
@@ -135,15 +175,28 @@ void ADCInitialize(void) {
     if (ADCCON2bits.REFFLT) error_handler.ADC_configuration_error_flag = 1;     // Record error if reference fails
     
     /* Enable clock to analog circuit */
+    ADCANCONbits.ANEN1 = 1; // Enable the clock to analog bias
+    ADCANCONbits.ANEN2 = 1; // Enable the clock to analog bias
+    ADCANCONbits.ANEN3 = 1; // Enable the clock to analog bias
+    ADCANCONbits.ANEN4 = 1; // Enable the clock to analog bias
     ADCANCONbits.ANEN7 = 1; // Enable the clock to analog bias
     
+    while (ADCANCONbits.WKRDY1);    // wait for ADC1 AN to be ready
+    while (ADCANCONbits.WKRDY2);    // wait for ADC2 AN to be ready
+    while (ADCANCONbits.WKRDY3);    // wait for ADC3 AN to be ready
+    while (ADCANCONbits.WKRDY4);    // wait for ADC4 AN to be ready
+    while (ADCANCONbits.WKRDY7);    // wait for ADC7 AN to be ready
+    
+    
     /* Enable the ADC module */
+    ADCCON3bits.DIGEN1 = 1; // Enable ADC7 digital circuits
+    ADCCON3bits.DIGEN2 = 1; // Enable ADC7 digital circuits
+    ADCCON3bits.DIGEN3 = 1; // Enable ADC7 digital circuits
+    ADCCON3bits.DIGEN4 = 1; // Enable ADC7 digital circuits
     ADCCON3bits.DIGEN7 = 1; // Enable ADC7 digital circuits
     
     // Unblock triggers
     ADCCON3bits.TRGSUSP = 0;
-    
-    ADCANCONbits.WKIEN7 = 0;    // Disable ADC7 warm up interrupt
     
     // Setup ADC Trigger Timer
     ADCTriggerTimerInitialize();
@@ -165,8 +218,8 @@ void ADCTriggerTimerInitialize(void) {
     // Disable gated time accumulation
     T3CONbits.TGATE = 0;
     
-    // Set timer 3 prescalar to 4
-    T3CONbits.TCKPS = 0b010;
+    // Set timer 3 prescalar to 5
+    T3CONbits.TCKPS = 0b011;
     
     // Set timer clock input as PBCLK3
     T3CONbits.TCS = 0;
@@ -175,7 +228,6 @@ void ADCTriggerTimerInitialize(void) {
     TMR3 = 0x0000;
     
     // Set timer 3 period match to 16000
-    // This should get us a Timer3 period of 1600uS, or a Timer3 frequency of 625Hz
     PR3 = 16000;
     
     // Start timer 3
@@ -192,9 +244,14 @@ void __ISR(_ADC_EOS_VECTOR, IPL1SRS) ADCEndOfScanISR(void) {
 
         // Convert each ADC channel to voltage from LSBs
         adc_results.vref_adc    = (double) ADCDATA43 * ADC_VOLTS_PER_LSB;
-        adc_cal_gain = adc_results.vref_adc / 1.2;
+        adc_cal_gain = (1.2 / adc_results.vref_adc) * CAL_GAIN;
         adc_results.die_temp_adc = (double) ((ADCDATA44 * ADC_VOLTS_PER_LSB * adc_cal_gain) - 0.7) / 0.005;
-
+        adc_results.POS3P3_adc = (double) (ADCDATA3 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS3P3_CHANNEL_GAIN);
+        adc_results.POS12_adc = (double) (ADCDATA2 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS12_CHANNEL_GAIN);
+        adc_results.POS5_USB_adc = (double) (ADCDATA1 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS5_USB_CHANNEL_GAIN);
+        adc_results.POS12_isns_adc = (double) (ADCDATA4 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS12_ISNS_CHANNEL_GAIN);
+        adc_results.POS3P3_isns_adc = (double) (ADCDATA29 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS3P3_ISNS_CHANNEL_GAIN);
+        
     }
 
     // Clear IRQ

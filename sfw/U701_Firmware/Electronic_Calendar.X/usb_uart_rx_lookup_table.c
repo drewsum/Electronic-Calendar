@@ -297,7 +297,10 @@ usb_uart_command_function_t telemetryCommand(char * input_str) {
             terminalTextAttributes(CYAN, BLACK, NORMAL);
             printf("Most recent ADC conversion results:\n\r");
             printf("    +12V Input Voltage Measurement: %+0.3f V\n\r", adc_results.POS12_adc);
-            printf("    +3.3V Power Supply Measurement: %+0.3f V\n\r", adc_results.POS3P3_adc);
+            printf("    +12V Input Current Measurement: %+0.3f A\n\r", adc_results.POS12_isns_adc);
+            printf("    +3.3V Power Supply Voltage Measurement: %+0.3f V\n\r", adc_results.POS3P3_adc);
+            printf("    +3.3V Power Supply Current Measurement: %+0.3f A\n\r", adc_results.POS3P3_isns_adc);
+            printf("    +5V USB Power Supply Voltage Measurement: %+0.3f V\n\r", adc_results.POS5_USB_adc);
             printf("    Internal VREF ADC Conversion Result: %+0.3f V\n\r", adc_results.vref_adc);
             printf("    Internal Die Temperature ADC Conversion Result: %+0.3f C\n\r", adc_results.die_temp_adc);
             terminalTextAttributesReset();
