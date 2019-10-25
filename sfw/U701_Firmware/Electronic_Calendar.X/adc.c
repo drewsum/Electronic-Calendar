@@ -38,11 +38,16 @@ void ADCInitialize(void) {
     ADCCON3bits.TRGSUSP = 1;
     
     /* initialize ADC calibration setting */
+    ADC0CFG = DEVADC0;
     ADC1CFG = DEVADC1;
     ADC2CFG = DEVADC2;
     ADC3CFG = DEVADC3;
     ADC4CFG = DEVADC4;
     ADC7CFG = DEVADC7;
+    
+    // disable analog input charge pump
+    ADCCON1bits.AICPMPEN = 0;
+    CFGCONbits.IOANCPEN = 0;
     
     /* Configure ADCCON1 */
     ADCCON1 = 0;
@@ -66,8 +71,8 @@ void ADCInitialize(void) {
     ADCCON3bits.VREFSEL = 0; // Select AVDD and AVSS as reference source
     
     /* Select ADC7 sample time and conversion clock */
-    ADCCON2bits.ADCDIV = 1;
-    ADCCON2bits.SAMC = 5;
+    ADCCON2bits.ADCDIV = 100;
+    ADCCON2bits.SAMC = 10;
     ADCCON1bits.SELRES = 3;     // 12 bit result
     
     /* Select ADC input mode */
@@ -114,26 +119,26 @@ void ADCInitialize(void) {
     // Configure ADC1 timing
     ADC1TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC1TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC1TIMEbits.ADCDIV = 1;        // input clock divider is / 1
-    ADC1TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
+    ADC1TIMEbits.ADCDIV = 10;        // input clock divider is / 10
+    ADC1TIMEbits.SAMC = 10;          // conversion takes 10 clk cycles
     
     // Configure ADC2 timing
     ADC2TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC2TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC2TIMEbits.ADCDIV = 1;        // input clock divider is / 1
-    ADC2TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
+    ADC2TIMEbits.ADCDIV = 10;        // input clock divider is / 10
+    ADC2TIMEbits.SAMC = 10;          // conversion takes 10 clk cycles
     
     // Configure ADC3 timing
     ADC3TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC3TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC3TIMEbits.ADCDIV = 1;        // input clock divider is / 1
-    ADC3TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
+    ADC3TIMEbits.ADCDIV = 10;        // input clock divider is / 10
+    ADC3TIMEbits.SAMC = 10;          // conversion takes 10 clk cycles
     
     // Configure ADC4 timing
     ADC4TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC4TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC4TIMEbits.ADCDIV = 1;        // input clock divider is / 1
-    ADC4TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
+    ADC4TIMEbits.ADCDIV = 10;        // input clock divider is / 10
+    ADC4TIMEbits.SAMC = 10;          // conversion takes 10 clk cycles
     
     /* Configure ADCCMPCONx */
     ADCCMPCON1 = 0; // No digital comparators are used. Setting the ADCCMPCONx
@@ -244,8 +249,8 @@ void __ISR(_ADC_EOS_VECTOR, IPL1SRS) ADCEndOfScanISR(void) {
 
         // Convert each ADC channel to voltage from LSBs
         adc_results.vref_adc    = (double) ADCDATA43 * ADC_VOLTS_PER_LSB;
-        adc_cal_gain = (1.2 / adc_results.vref_adc) * CAL_GAIN;
-        adc_results.die_temp_adc = (double) ((ADCDATA44 * ADC_VOLTS_PER_LSB * adc_cal_gain) - 0.7) / 0.005;
+        adc_cal_gain = (1.2 / adc_results.vref_adc);        // compensate for errors in the ADC, we know VREF is 1.2V
+        adc_results.die_temp_adc = (double) ((ADCDATA44 * ADC_VOLTS_PER_LSB * adc_cal_gain) - 0.7) / 0.005 + ADC_TEMP_SENS_OFFSET;
         adc_results.POS3P3_adc = (double) (ADCDATA3 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS3P3_CHANNEL_GAIN);
         adc_results.POS12_adc = (double) (ADCDATA2 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS12_CHANNEL_GAIN);
         adc_results.POS5_USB_adc = (double) (ADCDATA1 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS5_USB_CHANNEL_GAIN);

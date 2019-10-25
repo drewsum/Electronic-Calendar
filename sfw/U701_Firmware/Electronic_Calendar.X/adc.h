@@ -33,15 +33,15 @@
 #include <sys/attribs.h>
 
 // ADC constants macros
-#define CAL_GAIN                    (1.0 / 1.3530303030303)
 #define ADC_VOLTS_PER_LSB           0.000805861
 
-// These constants depend compensate for input voltage dividers
+// These constants compensate for input voltage dividers/value scaling
 #define POS3P3_CHANNEL_GAIN         2.0
 #define POS12_CHANNEL_GAIN          9.3333333333333333333333
 #define POS5_USB_CHANNEL_GAIN       2.0
 #define POS12_ISNS_CHANNEL_GAIN     1.002004008
 #define POS3P3_ISNS_CHANNEL_GAIN    2.50501002004
+#define ADC_TEMP_SENS_OFFSET        -100.0
 
 // This structure holds ADC measurement results
 struct adc_results_t {
