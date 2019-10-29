@@ -32,29 +32,10 @@
 // These are macros needed for defining ISRs, included in XC32
 #include <sys/attribs.h>
 
+#include "telemetry.h"
+
 // ADC constants macros
 #define ADC_VOLTS_PER_LSB           0.000805861
-
-// These constants compensate for input voltage dividers/value scaling
-#define POS3P3_CHANNEL_GAIN         2.0
-#define POS12_CHANNEL_GAIN          9.3333333333333333333333
-#define POS5_USB_CHANNEL_GAIN       2.0
-#define POS12_ISNS_CHANNEL_GAIN     1.002004008
-#define POS3P3_ISNS_CHANNEL_GAIN    2.50501002004
-#define ADC_TEMP_SENS_OFFSET        -100.0
-
-// This structure holds ADC measurement results
-struct adc_results_t {
-    
-    double POS3P3_adc;
-    double POS12_adc;
-    double vref_adc;
-    double die_temp_adc;
-    double POS5_USB_adc;
-    double POS3P3_isns_adc;
-    double POS12_isns_adc;
-    
-} adc_results;
 
 // This is an ADC result scaling factor calculated using the internal reference voltage
 double adc_cal_gain;

@@ -27,6 +27,8 @@
 #include "rtcc.h"
 #include "binary_clock.h"
 #include "calendar_leds.h"
+#include "adc.h"
+#include "telemetry.h"
 
 void main(void) {
     
@@ -127,7 +129,8 @@ void main(void) {
     
     // setup the ADC modules
     ADCInitialize();
-    printf("    Analog to Digital Converters Initialized\r\n");
+    telemetryInitialize();
+    printf("    Analog to Digital Converters, Telemetry Initialized\r\n");
     
     // Disable RESET LED
     RESET_LED_PIN = LOW;
@@ -184,6 +187,9 @@ void main(void) {
             }
             
         }
+        
+        // update minimum and maximum measured telemetry
+        if (telemetry_extremes_update_flag) telemetryUpdateExtremes();
         
     }
 }

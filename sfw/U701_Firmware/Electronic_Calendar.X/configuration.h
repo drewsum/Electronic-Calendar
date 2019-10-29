@@ -50,10 +50,10 @@
 #pragma config WDTPS = PS2048           // Watchdog Timer Postscaler (1:2048)
 #pragma config WDTSPGM = STOP           // Watchdog Timer Stop During Flash Programming (WDT stops during Flash programming)
 #pragma config WINDIS = NORMAL          // Watchdog Timer Window Mode (Watchdog Timer is in non-Window mode)
-#pragma config FWDTEN = ON              // Watchdog Timer Enable (WDT Enabled)
+#pragma config FWDTEN = OFF              // Watchdog Timer Enable (WDT Disabled)
 #pragma config FWDTWINSZ = WINSZ_75     // Watchdog Timer Window Size (Window size is 75%)
 #pragma config DMTCNT = DMT31           // Deadman Timer Count Selection (2^31 (2147483648))
-#pragma config FDMTEN = ON              // Deadman Timer Enable (Deadman Timer is enabled)
+#pragma config FDMTEN = OFF              // Deadman Timer Enable (Deadman Timer is disabled)
 
 // DEVCFG0
 #pragma config DEBUG = OFF              // Background Debugger Enable (Debugger is disabled)
@@ -119,10 +119,10 @@
 #pragma config_alt WDTPS = PS2048       // Watchdog Timer Postscaler (1:2048)
 #pragma config_alt WDTSPGM = STOP       // Watchdog Timer Stop During Flash Programming (WDT stops during Flash programming)
 #pragma config_alt WINDIS = NORMAL      // Watchdog Timer Window Mode (Watchdog Timer is in non-Window mode)
-#pragma config_alt FWDTEN = ON          // Watchdog Timer Enable (WDT Enabled)
+#pragma config_alt FWDTEN = OFF          // Watchdog Timer Enable (WDT Disabled)
 #pragma config_alt FWDTWINSZ = WINSZ_75 // Watchdog Timer Window Size (Window size is 75%)
 #pragma config_alt DMTCNT = DMT31       // Deadman Timer Count Selection (2^31 (2147483648))
-#pragma config_alt FDMTEN = ON          // Deadman Timer Enable (Deadman Timer is enabled)
+#pragma config_alt FDMTEN = OFF          // Deadman Timer Enable (Deadman Timer is disabled)
 
 // ADEVCFG0
 #pragma config_alt DEBUG = OFF          // Background Debugger Enable (Debugger is disabled)
@@ -176,10 +176,10 @@
 #pragma config_auba WDTPS = PS2048      // Watchdog Timer Postscaler (1:2048)
 #pragma config_auba WDTSPGM = STOP      // Watchdog Timer Stop During Flash Programming (WDT stops during Flash programming)
 #pragma config_auba WINDIS = NORMAL     // Watchdog Timer Window Mode (Watchdog Timer is in non-Window mode)
-#pragma config_auba FWDTEN = ON         // Watchdog Timer Enable (WDT Enabled)
+#pragma config_auba FWDTEN = OFF         // Watchdog Timer Enable (WDT Disabled)
 #pragma config_auba FWDTWINSZ = WINSZ_75// Watchdog Timer Window Size (Window size is 75%)
 #pragma config_auba DMTCNT = DMT31      // Deadman Timer Count Selection (2^31 (2147483648))
-#pragma config_auba FDMTEN = ON         // Deadman Timer Enable (Deadman Timer is enabled)
+#pragma config_auba FDMTEN = OFF         // Deadman Timer Enable (Deadman Timer is disabled)
 
 // AUBADEVCFG0
 #pragma config_auba DEBUG = OFF         // Background Debugger Enable (Debugger is disabled)
@@ -233,10 +233,10 @@
 #pragma config_uba WDTPS = PS2048       // Watchdog Timer Postscaler (1:2048)
 #pragma config_uba WDTSPGM = STOP       // Watchdog Timer Stop During Flash Programming (WDT stops during Flash programming)
 #pragma config_uba WINDIS = NORMAL      // Watchdog Timer Window Mode (Watchdog Timer is in non-Window mode)
-#pragma config_uba FWDTEN = ON          // Watchdog Timer Enable (WDT Enabled)
+#pragma config_uba FWDTEN = OFF          // Watchdog Timer Enable (WDT Disabled)
 #pragma config_uba FWDTWINSZ = WINSZ_75 // Watchdog Timer Window Size (Window size is 75%)
 #pragma config_uba DMTCNT = DMT31       // Deadman Timer Count Selection (2^31 (2147483648))
-#pragma config_uba FDMTEN = ON          // Deadman Timer Enable (Deadman Timer is enabled)
+#pragma config_uba FDMTEN = OFF          // Deadman Timer Enable (Deadman Timer is disabled)
 
 // UBADEVCFG0
 #pragma config_uba DEBUG = OFF          // Background Debugger Enable (Debugger is disabled)

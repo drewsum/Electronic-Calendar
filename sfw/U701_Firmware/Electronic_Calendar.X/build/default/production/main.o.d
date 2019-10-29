@@ -17,4 +17,6 @@ uthash.h  \
 power_saving.h  \
 rtcc.h  \
 binary_clock.h  \
-calendar_leds.h 
+calendar_leds.h  \
+ adc.h  \
+telemetry.h 

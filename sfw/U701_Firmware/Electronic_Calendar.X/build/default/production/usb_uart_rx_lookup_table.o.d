@@ -11,4 +11,5 @@ pin_macros.h  \
 cause_of_reset.h  \
 rtcc.h  \
 adc.h  \
+telemetry.h  \
  error_handler.h 
