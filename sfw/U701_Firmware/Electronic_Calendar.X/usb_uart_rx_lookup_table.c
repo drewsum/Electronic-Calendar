@@ -21,15 +21,18 @@ usb_uart_command_function_t helpCommandFunction(char * input_str) {
     terminalTextAttributes(YELLOW, BLACK, BOLD);
     printf("Supported Commands:\n\r");
     
+    terminalTextAttributes(YELLOW, BLACK, NORMAL);
+    
     // iterate over usb_uart_commands hash table and print the name of all commands and their help messages
     usb_uart_command_t  *current_command, *temp;
     HASH_ITER(hh, usb_uart_commands, current_command, temp) {
-        
+            
         printf("    %s: %s\r\n", current_command->command_name, current_command->command_help_message);
         
     }
     
-    printf("Help messages and neutral responses appear in yellow\n\r");
+    terminalTextAttributes(YELLOW, BLACK, NORMAL);
+    printf("\r\nHelp messages and neutral responses appear in yellow\n\r");
     terminalTextAttributes(GREEN, BLACK, NORMAL);
     printf("System parameters and affirmative responses appear in green\n\r");
     terminalTextAttributes(CYAN, BLACK, NORMAL);
@@ -450,7 +453,7 @@ void usbUartHashTableInitialize(void) {
             "\b\b<weekday>: Sets the system weekday",
             setWeekdayCommand);
     usbUartAddCommand("Set Unix Time: ",
-            "\b\b<decimal unix time>, <hour offset from UTC to local time>: sets the RTCC to the supplied UNIX time with hour offset from GMT",
+            "\b\b<decimal unix time>, <hour offset from UTC to local time>: sets the RTCC to the supplied UNIX time with hour offset from UTC",
             setUnixTimeCommand);
     usbUartAddCommand("ADC Status?",
             "Prints status information for the Analog to Digital Converter",
