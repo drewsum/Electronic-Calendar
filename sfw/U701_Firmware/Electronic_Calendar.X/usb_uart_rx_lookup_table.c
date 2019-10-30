@@ -18,7 +18,7 @@
 usb_uart_command_function_t helpCommandFunction(char * input_str) {
 
     terminalTextAttributesReset();
-    terminalTextAttributes(YELLOW, BLACK, NORMAL);
+    terminalTextAttributes(YELLOW, BLACK, BOLD);
     printf("Supported Commands:\n\r");
     
     // iterate over usb_uart_commands hash table and print the name of all commands and their help messages
@@ -183,8 +183,9 @@ usb_uart_command_function_t pmdStatusCommand(char * input_str) {
 usb_uart_command_function_t timeAndDateCommand(char * input_str) {
  
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN, BLACK, BOLD);
     printf("Current system time and date:\r\n   ");
+    terminalTextAttributes(GREEN, BLACK, NORMAL);
     printTimeAndDate();
     terminalTextAttributesReset();
     
@@ -296,11 +297,13 @@ usb_uart_command_function_t telemetryCommand(char * input_str) {
             terminalTextAttributesReset();
             terminalTextAttributes(CYAN, BLACK, BOLD);
             printf("Most recent system telemetry:\n\r");
+            terminalTextAttributes(CYAN, BLACK, NORMAL);
             printf("    +12V Input Voltage Measurement: %+0.3f V\n\r", telemetry.current.params.pos12_voltage);
             printf("    +12V Input Current Measurement: %+0.3f A\n\r", telemetry.current.params.pos12_current);
             printf("    +3.3V Power Supply Voltage Measurement: %+0.3f V\n\r", telemetry.current.params.pos3p3_voltage);
             printf("    +3.3V Power Supply Current Measurement: %+0.3f A\n\r", telemetry.current.params.pos3p3_current);
             printf("    +5V USB Power Supply Voltage Measurement: %+0.3f V\n\r", telemetry.current.params.pos5_usb_voltage);
+            printf("    Backup Battery Voltage Measurement: %+0.3f V\n\r", telemetry.current.params.vbat_voltage);
             printf("    Internal VREF ADC Conversion Result: %+0.3f V\n\r", telemetry.current.params.mcu_vref_voltage);
             printf("    Internal Die Temperature ADC Conversion Result: %+0.3f C\n\r", telemetry.current.params.mcu_die_temp);
             terminalTextAttributesReset();
@@ -325,11 +328,13 @@ usb_uart_command_function_t minTelemetryCommand(char * input_str) {
             terminalTextAttributesReset();
             terminalTextAttributes(CYAN, BLACK, BOLD);
             printf("Minimum system telemetry recorded:\n\r");
+            terminalTextAttributes(CYAN, BLACK, NORMAL);
             printf("    +12V Input Voltage Measurement: %+0.3f V\n\r", telemetry.min.params.pos12_voltage);
             printf("    +12V Input Current Measurement: %+0.3f A\n\r", telemetry.min.params.pos12_current);
             printf("    +3.3V Power Supply Voltage Measurement: %+0.3f V\n\r", telemetry.min.params.pos3p3_voltage);
             printf("    +3.3V Power Supply Current Measurement: %+0.3f A\n\r", telemetry.min.params.pos3p3_current);
             printf("    +5V USB Power Supply Voltage Measurement: %+0.3f V\n\r", telemetry.min.params.pos5_usb_voltage);
+            printf("    Backup Battery Voltage Measurement: %+0.3f V\n\r", telemetry.min.params.vbat_voltage);
             printf("    Internal VREF ADC Conversion Result: %+0.3f V\n\r", telemetry.min.params.mcu_vref_voltage);
             printf("    Internal Die Temperature ADC Conversion Result: %+0.3f C\n\r", telemetry.min.params.mcu_die_temp);
             terminalTextAttributesReset();
@@ -354,11 +359,13 @@ usb_uart_command_function_t maxTelemetryCommand(char * input_str) {
             terminalTextAttributesReset();
             terminalTextAttributes(CYAN, BLACK, BOLD);
             printf("Maximum system telemetry recorded:\n\r");
+            terminalTextAttributes(CYAN, BLACK, NORMAL);
             printf("    +12V Input Voltage Measurement: %+0.3f V\n\r", telemetry.max.params.pos12_voltage);
             printf("    +12V Input Current Measurement: %+0.3f A\n\r", telemetry.max.params.pos12_current);
             printf("    +3.3V Power Supply Voltage Measurement: %+0.3f V\n\r", telemetry.max.params.pos3p3_voltage);
             printf("    +3.3V Power Supply Current Measurement: %+0.3f A\n\r", telemetry.max.params.pos3p3_current);
             printf("    +5V USB Power Supply Voltage Measurement: %+0.3f V\n\r", telemetry.max.params.pos5_usb_voltage);
+            printf("    Backup Battery Voltage Measurement: %+0.3f V\n\r", telemetry.max.params.vbat_voltage);
             printf("    Internal VREF ADC Conversion Result: %+0.3f V\n\r", telemetry.max.params.mcu_vref_voltage);
             printf("    Internal Die Temperature ADC Conversion Result: %+0.3f C\n\r", telemetry.max.params.mcu_die_temp);
             terminalTextAttributesReset();

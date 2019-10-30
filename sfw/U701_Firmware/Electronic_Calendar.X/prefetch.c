@@ -49,7 +49,7 @@ void printPrefetchStatus(void) {
  
     
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN, BLACK, BOLD);
     printf("Prefetch Module Status:\n\r");
     
     printf("    Prefetch Module enable Status: ");

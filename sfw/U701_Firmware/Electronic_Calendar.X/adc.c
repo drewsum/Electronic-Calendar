@@ -102,7 +102,35 @@ void ADCInitialize(void) {
     /* Configure ADCGIRQENx */
     ADCGIRQEN1 = 0;
     ADCGIRQEN2 = 0;
+    ADCGIRQEN1bits.AGIEN1 = 1;      // enable data ready 1 IRQ
+    ADCGIRQEN1bits.AGIEN2 = 1;      // enable data ready 2 IRQ
+    ADCGIRQEN1bits.AGIEN3 = 1;      // enable data ready 3 IRQ
+    ADCGIRQEN1bits.AGIEN4 = 1;      // enable data ready 4 IRQ
+    ADCGIRQEN1bits.AGIEN10 = 1;     // enable data ready 10 IRQ
+    ADCGIRQEN1bits.AGIEN29 = 1;     // enable data ready 29 IRQ
+    ADCGIRQEN2bits.AGIEN43 = 1;     // enable data ready 43 IRQ
+    ADCGIRQEN2bits.AGIEN44 = 1;     // enable data ready 44 IRQ
     ADCCON2bits.EOSIEN = 1;         // Enable interrupt on end of scan
+    
+    // set IRQ priorities
+    setInterruptPriority(ADC_Data_1, 1);
+    setInterruptPriority(ADC_Data_2, 1);
+    setInterruptPriority(ADC_Data_3, 1);
+    setInterruptPriority(ADC_Data_4, 1);
+    setInterruptPriority(ADC_Data_10, 1);
+    setInterruptPriority(ADC_Data_29, 1);
+    setInterruptPriority(ADC_Data_43, 1);
+    setInterruptPriority(ADC_Data_44, 1);
+    
+    // set IRQ subpriorities
+    setInterruptSubpriority(ADC_Data_1, 1);
+    setInterruptSubpriority(ADC_Data_2, 1);
+    setInterruptSubpriority(ADC_Data_3, 1);
+    setInterruptSubpriority(ADC_Data_4, 1);
+    setInterruptSubpriority(ADC_Data_10, 1);
+    setInterruptSubpriority(ADC_Data_29, 1);
+    setInterruptSubpriority(ADC_Data_43, 1);
+    setInterruptSubpriority(ADC_Data_44, 1);
     
     /* Configure ADCCSSx */
     ADCCSS1 = 0;
@@ -206,6 +234,16 @@ void ADCInitialize(void) {
     // Setup ADC Trigger Timer
     ADCTriggerTimerInitialize();
     
+    // enable data ready interrupts
+    enableInterrupt(ADC_Data_1);
+    enableInterrupt(ADC_Data_2);
+    enableInterrupt(ADC_Data_3);
+    enableInterrupt(ADC_Data_4);
+    enableInterrupt(ADC_Data_10);
+    enableInterrupt(ADC_Data_29);
+    enableInterrupt(ADC_Data_43);
+    enableInterrupt(ADC_Data_44);
+    
     // Enable ADC end of scan interrupt
     enableInterrupt(ADC_End_Of_Scan_Ready);
     
@@ -240,25 +278,141 @@ void ADCTriggerTimerInitialize(void) {
     
 }
 
+// these ISRs are triggered when data for their respective ADC channel is ready
+void __ISR(_ADC_DATA10_VECTOR, IPL1SRS) ADCData10ISR(void) {
+ 
+    // check to see if data is actually ready
+    if (ADCDSTAT1bits.ARDY10) {
+     
+        // copy ADC conversion result into telemetry
+        telemetry.current.params.vbat_voltage = (double) (ADCDATA10 * ADC_VOLTS_PER_LSB * adc_cal_gain * VBAT_CHANNEL_GAIN);;
+        VBAT_ADC_ENABLE_PIN = 0;
+        
+    }
+    
+    // clear IRQ
+    clearInterruptFlag(ADC_Data_10);
+    
+}
+
+void __ISR(_ADC_DATA29_VECTOR, IPL1SRS) ADCData29ISR(void) {
+
+    // check to see if data is actually ready
+    if (ADCDSTAT1bits.ARDY29) {
+     
+        // copy ADC conversion result into telemetry
+        telemetry.current.params.pos3p3_current = (double) (ADCDATA29 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS3P3_ISNS_CHANNEL_GAIN);
+        
+    }
+    
+    // clear IRQ
+    clearInterruptFlag(ADC_Data_29);
+    
+}
+
+
+void __ISR(_ADC_DATA43_VECTOR, IPL1SRS) ADCData43ISR(void) {
+
+    // check to see if data is actually ready
+    if (ADCDSTAT2bits.ARDY43) {
+     
+        // copy ADC conversion result into telemetry
+        telemetry.current.params.mcu_vref_voltage = (double) ADCDATA43 * ADC_VOLTS_PER_LSB;
+        // compensate for errors in the ADC, we know VREF is supposed to be 1.2V
+        adc_cal_gain = (1.2 / telemetry.current.params.mcu_vref_voltage);
+        
+    }
+    
+    // clear IRQ
+    clearInterruptFlag(ADC_Data_43);
+    
+}
+
+void __ISR(_ADC_DATA44_VECTOR, IPL1SRS) ADCData44ISR(void) {
+    
+    // check to see if data is actually ready
+    if (ADCDSTAT2bits.ARDY44) {
+     
+        // copy ADC conversion result into telemetry
+        telemetry.current.params.mcu_die_temp = (double) ((ADCDATA44 * ADC_VOLTS_PER_LSB * adc_cal_gain) - 0.7) / 0.005 + ADC_TEMP_SENS_OFFSET;
+        
+    }
+    
+    // clear IRQ
+    clearInterruptFlag(ADC_Data_44);
+    
+}
+
+void __ISR(_ADC_DATA1_VECTOR, IPL1SRS) ADCData46ISR(void) {
+    
+    // check to see if data is actually ready
+    if (ADCDSTAT1bits.ARDY1) {
+     
+        // copy ADC conversion result into telemetry
+        telemetry.current.params.pos5_usb_voltage = (double) (ADCDATA1 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS5_USB_CHANNEL_GAIN);
+        
+    }
+    
+    // clear IRQ
+    clearInterruptFlag(ADC_Data_1);
+    
+}
+
+void __ISR(_ADC_DATA2_VECTOR, IPL1SRS) ADCData47ISR(void) {
+    
+    // check to see if data is actually ready
+    if (ADCDSTAT1bits.ARDY2) {
+     
+        // copy ADC conversion result into telemetry
+        telemetry.current.params.pos12_voltage = (double) (ADCDATA2 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS12_CHANNEL_GAIN);
+        
+    }
+    
+    // clear IRQ
+    clearInterruptFlag(ADC_Data_2);
+    
+}
+
+void __ISR(_ADC_DATA3_VECTOR, IPL1SRS) ADCData48ISR(void) {
+    
+    // check to see if data is actually ready
+    if (ADCDSTAT1bits.ARDY3) {
+     
+        // copy ADC conversion result into telemetry
+        telemetry.current.params.pos3p3_voltage = (double) (ADCDATA3 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS3P3_CHANNEL_GAIN);
+        
+    }
+    
+    // clear IRQ
+    clearInterruptFlag(ADC_Data_3);
+
+    // enable VBAT ADC voltage divider
+    VBAT_ADC_ENABLE_PIN = 1;
+
+}
+
+void __ISR(_ADC_DATA4_VECTOR, IPL1SRS) ADCData49ISR(void) {
+    
+    // check to see if data is actually ready
+    if (ADCDSTAT1bits.ARDY4) {
+     
+        // copy ADC conversion result into telemetry
+        telemetry.current.params.pos12_current = (double) (ADCDATA4 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS12_ISNS_CHANNEL_GAIN);
+        
+    }
+    
+    // clear IRQ
+    clearInterruptFlag(ADC_Data_4);
+    
+}
+
+
 // This is the ADC end of scan interrupt service routine
 void __ISR(_ADC_EOS_VECTOR, IPL1SRS) ADCEndOfScanISR(void) {
     
 
     // Make sure end of scan is complete
     if (ADCCON2bits.EOSRDY) {
-
-        
-        // Convert each ADC channel to voltage from LSBs
-        telemetry.current.params.mcu_vref_voltage   = (double) ADCDATA43 * ADC_VOLTS_PER_LSB;
-        // compensate for errors in the ADC, we know VREF is supposed to be 1.2V
-        adc_cal_gain                                = (1.2 / telemetry.current.params.mcu_vref_voltage);
-        telemetry.current.params.mcu_die_temp       = (double) ((ADCDATA44 * ADC_VOLTS_PER_LSB * adc_cal_gain) - 0.7) / 0.005 + ADC_TEMP_SENS_OFFSET;
-        telemetry.current.params.pos3p3_voltage     = (double) (ADCDATA3 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS3P3_CHANNEL_GAIN);
-        telemetry.current.params.pos12_voltage      = (double) (ADCDATA2 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS12_CHANNEL_GAIN);
-        telemetry.current.params.pos5_usb_voltage   = (double) (ADCDATA1 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS5_USB_CHANNEL_GAIN);
-        telemetry.current.params.pos12_current      = (double) (ADCDATA4 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS12_ISNS_CHANNEL_GAIN);
-        telemetry.current.params.pos3p3_current     = (double) (ADCDATA29 * ADC_VOLTS_PER_LSB * adc_cal_gain * POS3P3_ISNS_CHANNEL_GAIN);
-        telemetry.current.params.vbat_voltage       = (double) (ADCDATA10 * ADC_VOLTS_PER_LSB * adc_cal_gain * VBAT_CHANNEL_GAIN);
         
         // track min and max values on next loop through main();
         telemetry_extremes_update_flag = 1;
@@ -274,7 +428,7 @@ void __ISR(_ADC_EOS_VECTOR, IPL1SRS) ADCEndOfScanISR(void) {
 void printADCStatus(void) {
 
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, UNDERSCORE);
+    terminalTextAttributes(GREEN, BLACK, BOLD);
     printf("Analog to Digital Converter Status:\n\r");
     
     // Print if ADC is on

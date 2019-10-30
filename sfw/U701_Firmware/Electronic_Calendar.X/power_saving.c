@@ -124,7 +124,7 @@ void printPMDStatus(void) {
 
     terminalTextAttributesReset();    
     
-    terminalTextAttributes(GREEN, BLACK, UNDERSCORE);
+    terminalTextAttributes(GREEN, BLACK, BOLD);
     printf("Peripheral Module Disable Status:\n\r");
     
     // ADC

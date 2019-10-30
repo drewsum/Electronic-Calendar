@@ -42,7 +42,8 @@ void telemetryUpdateExtremes(void) {
     // loop over all min telemetry params and set to current param value if needing update
     for (index = 0; index < TEL_NUM_PARAMS; index++) {
      
-        if (telemetry.current.param_array[index] < telemetry.min.param_array[index]) {
+        if ((telemetry.current.param_array[index] < telemetry.min.param_array[index]) && 
+        telemetry.current.param_array[index] != 0.0) {
             
             telemetry.min.param_array[index] = telemetry.current.param_array[index];
             

@@ -38,13 +38,23 @@
 #define ADC_VOLTS_PER_LSB           0.000805861
 
 // This is an ADC result scaling factor calculated using the internal reference voltage
-double adc_cal_gain;
+double adc_cal_gain = 1.0;
 
 // This function initializes the ADC modules
 void ADCInitialize(void);
 
 // This function initializes Timer3 as the ADC trigger timer
 void ADCTriggerTimerInitialize(void);
+
+// these ISRs are triggered when data for their respective ADC channel is ready
+void __ISR(_ADC_DATA10_VECTOR, IPL1SRS) ADCData10ISR(void);
+void __ISR(_ADC_DATA29_VECTOR, IPL1SRS) ADCData29ISR(void);
+void __ISR(_ADC_DATA43_VECTOR, IPL1SRS) ADCData43ISR(void);
+void __ISR(_ADC_DATA44_VECTOR, IPL1SRS) ADCData44ISR(void);
+void __ISR(_ADC_DATA1_VECTOR, IPL1SRS) ADCData46ISR(void);
+void __ISR(_ADC_DATA2_VECTOR, IPL1SRS) ADCData47ISR(void);
+void __ISR(_ADC_DATA3_VECTOR, IPL1SRS) ADCData48ISR(void);
+void __ISR(_ADC_DATA4_VECTOR, IPL1SRS) ADCData49ISR(void);
 
 // This is the ADC end of scan interrupt service routine
 void __ISR(_ADC_EOS_VECTOR, IPL1SRS) ADCEndOfScanISR(void);

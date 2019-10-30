@@ -747,7 +747,7 @@ char * getRevisionIDString(uint8_t revision_ID) {
 void printClockStatus(uint32_t input_sysclk) {
 
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, UNDERSCORE);
+    terminalTextAttributes(GREEN, BLACK, BOLD);
     
     // Print table heading
     printf("System Clock Settings:\n\r");

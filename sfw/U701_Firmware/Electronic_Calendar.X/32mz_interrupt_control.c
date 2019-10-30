@@ -7013,7 +7013,7 @@ char * getInterruptNameStringPadded(interrupt_source_t input_interrupt) {
 void printInterruptStatus(void) {
     
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, UNDERSCORE);
+    terminalTextAttributes(GREEN, BLACK, BOLD);
     printf("Interrupt Controller Status:\n\r");
 
     terminalTextAttributesReset();

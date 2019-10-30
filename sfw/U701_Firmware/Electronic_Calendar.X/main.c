@@ -62,7 +62,7 @@ void main(void) {
     terminalSetCursorHome();
     
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, REVERSE);
+    terminalTextAttributes(GREEN, BLACK, BOLD);
     printf("Electronic Calendar\r\n");
     printf("Created by Drew Maatman, 2019\r\n");
     terminalTextAttributesReset();
