@@ -374,6 +374,29 @@ usb_uart_command_function_t maxTelemetryCommand(char * input_str) {
     
 }
 
+usb_uart_command_function_t setUnixTimeCommand(char * input_str) {
+ 
+    // Snipe out received string
+    uint32_t read_unix_time, read_offset;
+    sscanf(input_str, "Set Unix Time: %lu, %d", &read_unix_time, &read_offset);
+
+    // remove timezone from unix time (this converts from UTC to local time)
+    read_offset *= 3600;                // convert from hours to seconds
+    read_unix_time += read_offset;      // add or remove these seconds to read unix time
+    
+    // write unix time into RTCC
+    rtccWriteUnixTime(read_unix_time);
+
+    // print out what we just did
+    terminalTextAttributesReset();
+    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    printf("Set RTCC time as %02u:%02u:%02u\r\n", rtcc_shadow.hours, rtcc_shadow.minutes, rtcc_shadow.seconds);
+    printf("Set RTCC date as %02u/%02u/%04u\r\n", rtcc_shadow.month, rtcc_shadow.day, rtcc_shadow.year);
+    printf("Set RTCC weekday as %s\r\n", getDayOfWeek(rtcc_shadow.weekday));
+    terminalTextAttributesReset();
+    
+}
+
 // This function must be called to set up the usb_uart_commands hash table
 // Entries into this hash table are "usb_uart serial commands"
 void usbUartHashTableInitialize(void) {
@@ -426,6 +449,9 @@ void usbUartHashTableInitialize(void) {
     usbUartAddCommand("Set Weekday: ",
             "\b\b<weekday>: Sets the system weekday",
             setWeekdayCommand);
+    usbUartAddCommand("Set Unix Time: ",
+            "\b\b<decimal unix time>, <hour offset from UTC to local time>: sets the RTCC to the supplied UNIX time with hour offset from GMT",
+            setUnixTimeCommand);
     usbUartAddCommand("ADC Status?",
             "Prints status information for the Analog to Digital Converter",
             adcStatusCommand);
@@ -438,6 +464,7 @@ void usbUartHashTableInitialize(void) {
     usbUartAddCommand("Min Telemetry?",
             "Prints minimum recorded board level parameter measurements",
             minTelemetryCommand);
+    
     
     
 

@@ -98,6 +98,9 @@ void rtccWriteTime(uint8_t hour, uint8_t minute, uint8_t second);
 // This function writes weekday to the RTCC
 void rtccWriteWeekday(weekday_t weekday);
 
+// this function writes the passed unix time into the RTCC
+void rtccWriteUnixTime(uint32_t input_unix_time);
+
 // This function returns a string of the day of the week, given the RTCC value encoding this
 char * getDayOfWeek(uint8_t day_of_week_enum);
 

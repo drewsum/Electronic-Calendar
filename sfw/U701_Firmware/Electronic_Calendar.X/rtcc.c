@@ -1,6 +1,8 @@
 
 #include <stdio.h>
 
+#include <time.h>
+
 #include "rtcc.h"
 
 #include "device_control.h"
@@ -288,7 +290,22 @@ void rtccWriteWeekday(weekday_t weekday) {
     
 }
 
-
+// this function writes the passed unix time into the RTCC
+void rtccWriteUnixTime(uint32_t input_unix_time) {
+    
+    // this structure holds the conversion from unix time
+    struct tm *converted_time_s;
+    time_t unix_time = (time_t) input_unix_time;
+    
+    // convert from unix into structure
+    converted_time_s = gmtime(&unix_time);
+    
+    // write back conversion into RTCC
+    rtccWriteDate(converted_time_s->tm_mon + 1, converted_time_s->tm_mday, converted_time_s->tm_year + 1900);
+    rtccWriteTime(converted_time_s->tm_hour, converted_time_s->tm_min, converted_time_s->tm_sec);
+    rtccWriteWeekday(converted_time_s->tm_wday);
+    
+}
 
 // This function returns a string of the day of the week, given the RTCC value encoding this
 char * getDayOfWeek(uint8_t day_of_week_enum) {
