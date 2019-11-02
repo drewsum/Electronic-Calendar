@@ -22,7 +22,7 @@
 // These are macros needed for defining ISRs, included in XC32
 #include <sys/attribs.h>
 
-#define ERROR_HANDLER_NUM_FLAGS  18
+#define ERROR_HANDLER_NUM_FLAGS  17
 
 // Error handler structure
 // Follow the convention in XC32 user's guide section 8.6.2
@@ -38,19 +38,18 @@ union error_handler_u {
         unsigned USB_framing_error                      : 8;    // usb uart framing error
         unsigned USB_parity_error                       : 8;    // usb uart parity error
         unsigned USB_overrun_error                      : 8;    // RX overrun error
-        unsigned USB_tx_dma_overrun                     : 8;
-        unsigned USB_tx_dma_address_error               : 8;    
         unsigned USB_tx_dma_error                       : 8;    // Error with usb uart tx dma
-        unsigned USB_rx_dma_overrun                     : 8;
-        unsigned USB_rx_dma_address_error               : 8;
         unsigned USB_rx_dma_error                       : 8;    // Error with usb uart rx dma
         unsigned DMT_error                              : 8;    // Deadman timer error
         unsigned system_bus_protection_violation        : 8;    // System bus protection event occurred
         unsigned prefetch_module_SEC                    : 8;    // Prefetch module recorded an SEC event
         unsigned ADC_configuration_error                : 8;    // ADC could not be configured properly
-        unsigned ADC_bandgap_vref_voltage_fault         : 8;
         unsigned ADC_reference_fault                    : 8;
         unsigned clock_failure                          : 8;
+        unsigned CPU_general_exception                  : 8;
+        unsigned CPU_TLB_refill_exception               : 8;
+        unsigned CPU_cache_exception                    : 8;
+        unsigned CPU_bootstrap_exception                : 8;
 
     }  __attribute__((persistent)) flags;
 
@@ -66,19 +65,18 @@ const char * const error_handler_flag_names[] = {
     "USB Framing",
     "USB Parity",
     "USB Overrun",
-    "USB TX DMA Overrun",
-    "USB TX DMA Address",
     "USB TX DMA",
-    "USB RX DMA Overrun",
-    "USB RX DMA Address",
     "USB RX DMA",
     "Deadman Timer",
     "System Bus Protection Violation",
     "Prefetch Module SEC",
     "ADC Configuration",
-    "ADC Bandgap VREF Voltage",
     "ADC Reference",
-    "Clock Failure"
+    "Clock Failure",
+    "CPU General Exception",
+    "CPU TLB Refill Exception",
+    "CPU Cache Exception",
+    "CPU Bootstrap Exception"
 
 };
 

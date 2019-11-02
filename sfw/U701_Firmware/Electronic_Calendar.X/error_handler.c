@@ -45,6 +45,9 @@ void __attribute__((nomips16)) _general_exception_handler(void) {
     kickTheDog();
     holdThumbTighter();
     
+    // log error
+    error_handler.flags.CPU_general_exception = 1;
+    
     exceptionPrint(" \033[0;31;40mCPU General Exception! EXCCODE: ");
     
     uint8_t exception_code = (_CP0_GET_CAUSE() >> 2) & 0b11111;
@@ -68,6 +71,9 @@ void __attribute__((nomips16)) _simple_tlb_refill_exception_handler(void) {
     kickTheDog();
     holdThumbTighter();
     
+    // log error
+    error_handler.flags.CPU_TLB_refill_exception = 1;
+    
     exceptionPrint("\033[0;31;40mCPU TLB Refill Exception!\n\r");
     
     // Give up
@@ -86,6 +92,9 @@ void __attribute__((nomips16)) _cache_err_exception_handler(void) {
     kickTheDog();
     holdThumbTighter();
     
+    // log error
+    error_handler.flags.CPU_cache_exception = 1;
+    
     exceptionPrint("\033[0;31;40mCPU Cache Exception!\n\r");
     
     // Give up
@@ -103,6 +112,9 @@ void __attribute__((nomips16)) _bootstrap_exception_handler(void) {
     // Clear watchdog to give user time to see error state
     kickTheDog();
     holdThumbTighter();
+    
+    // log error
+    error_handler.flags.CPU_bootstrap_exception = 1;
     
     exceptionPrint("\033[0;31;40mCPU Bootstrap Exception!\n\r");
     
@@ -170,11 +182,7 @@ void updateErrorLEDs(void) {
             error_handler.flags.USB_rx_dma_error ||
             error_handler.flags.USB_framing_error ||
             error_handler.flags.USB_overrun_error ||
-            error_handler.flags.USB_parity_error ||
-            error_handler.flags.USB_rx_dma_address_error ||
-            error_handler.flags.USB_rx_dma_overrun ||
-            error_handler.flags.USB_tx_dma_address_error ||
-            error_handler.flags.USB_tx_dma_overrun) {
+            error_handler.flags.USB_parity_error) {
         
         USB_ERROR_LED_PIN = HIGH;
     
@@ -182,7 +190,6 @@ void updateErrorLEDs(void) {
     else USB_ERROR_LED_PIN = LOW;    
     
     if (    error_handler.flags.ADC_configuration_error ||
-            error_handler.flags.ADC_bandgap_vref_voltage_fault ||
             error_handler.flags.ADC_reference_fault) {
     
         ANALOG_ERROR_LED_PIN = HIGH;

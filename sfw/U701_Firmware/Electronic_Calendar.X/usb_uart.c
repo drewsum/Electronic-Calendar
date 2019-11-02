@@ -259,11 +259,10 @@ void usbUartInitialize(void) {
 // This is the UAB UART fault interrupt service routine
 void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) usbUartFaultISR(void) {
     
-    // TO-DO: Fault tasks
     error_handler.flags.USB_general_error = 1;
-    error_handler.flags.USB_framing_error = U3STAbits.FERR;
-    error_handler.flags.USB_overrun_error = U3STAbits.OERR;
-    error_handler.flags.USB_parity_error = U3STAbits.PERR;
+    if (U3STAbits.FERR) error_handler.flags.USB_framing_error = 1;
+    if (U3STAbits.OERR) error_handler.flags.USB_overrun_error = 1;
+    if (U3STAbits.PERR) error_handler.flags.USB_parity_error = 1;
     
     U3STAbits.PERR = 0;
     U3STAbits.FERR = 0;

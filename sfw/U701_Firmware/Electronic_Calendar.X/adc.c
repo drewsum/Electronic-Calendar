@@ -34,6 +34,12 @@ void ADCInitialize(void) {
     setInterruptSubpriority(ADC_End_Of_Scan_Ready, 1);
     clearInterruptFlag(ADC_End_Of_Scan_Ready);
     
+    // setup ADC fault interrupt
+    disableInterrupt(ADC_Fault);
+    setInterruptPriority(ADC_Fault, 1);
+    setInterruptSubpriority(ADC_Fault, 1);
+    clearInterruptFlag(ADC_Fault);
+    
     // Block ADC triggers for startup
     ADCCON3bits.TRGSUSP = 1;
     
@@ -55,11 +61,6 @@ void ADCInitialize(void) {
     if (ADCCON1bits.TRBERR) error_handler.flags.ADC_configuration_error = 1;     // Verify turbo mode disabled
     ADCCON1bits.SIDL = 1;   // Stop ADC in idle mode
 
-    /* Configure ADCCON2 */
-    ADCCON2 = 0;
-    ADCCON2bits.SAMC = 0b0000001000;       // Set ADC7 sample time
-    ADCCON2bits.ADCDIV = 0b0000001;         // Set clock divider
-
     /* Initialize warm up time register */
     ADCANCON = 0;
     ADCANCONbits.WKUPCLKCNT = 0b1111; // Set for longest wakeup time to be safe
@@ -70,9 +71,11 @@ void ADCInitialize(void) {
     ADCCON3bits.CONCLKDIV = 1; // Control clock frequency is half of input clock
     ADCCON3bits.VREFSEL = 0; // Select AVDD and AVSS as reference source
     
+    /* Configure ADCCON2 */
+    ADCCON2 = 0;
     /* Select ADC7 sample time and conversion clock */
     ADCCON2bits.ADCDIV = 100;
-    ADCCON2bits.SAMC = 10;
+    ADCCON2bits.SAMC = 8;
     ADCCON1bits.SELRES = 3;     // 12 bit result
     
     /* Select ADC input mode */
@@ -147,26 +150,26 @@ void ADCInitialize(void) {
     // Configure ADC1 timing
     ADC1TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC1TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC1TIMEbits.ADCDIV = 10;        // input clock divider is / 10
-    ADC1TIMEbits.SAMC = 10;          // conversion takes 10 clk cycles
+    ADC1TIMEbits.ADCDIV = 2;        // input clock divider is / 2 
+    ADC1TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
     
     // Configure ADC2 timing
     ADC2TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC2TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC2TIMEbits.ADCDIV = 10;        // input clock divider is / 10
-    ADC2TIMEbits.SAMC = 10;          // conversion takes 10 clk cycles
+    ADC2TIMEbits.ADCDIV = 5;        // input clock divider is / 5
+    ADC2TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
     
     // Configure ADC3 timing
     ADC3TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC3TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC3TIMEbits.ADCDIV = 10;        // input clock divider is / 10
-    ADC3TIMEbits.SAMC = 10;          // conversion takes 10 clk cycles
+    ADC3TIMEbits.ADCDIV = 5;        // input clock divider is / 5
+    ADC3TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
     
     // Configure ADC4 timing
     ADC4TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC4TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC4TIMEbits.ADCDIV = 10;        // input clock divider is / 10
-    ADC4TIMEbits.SAMC = 10;          // conversion takes 10 clk cycles
+    ADC4TIMEbits.ADCDIV = 5;        // input clock divider is / 5
+    ADC4TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
     
     /* Configure ADCCMPCONx */
     ADCCMPCON1 = 0; // No digital comparators are used. Setting the ADCCMPCONx
@@ -246,6 +249,10 @@ void ADCInitialize(void) {
     
     // Enable ADC end of scan interrupt
     enableInterrupt(ADC_End_Of_Scan_Ready);
+    
+    // enable ADC fault interrupt
+    ADCCON2bits.REFFLTIEN = 1;
+    enableInterrupt(ADC_Fault);
     
 }
 
@@ -421,6 +428,16 @@ void __ISR(_ADC_EOS_VECTOR, IPL1SRS) ADCEndOfScanISR(void) {
 
     // Clear IRQ
     clearInterruptFlag(ADC_End_Of_Scan_Ready);
+    
+}
+
+// this is the ADC fault interrupt service routine
+void __ISR(_ADC_FAULT_VECTOR, IPL1SRS) ADCFaultISR(void) {
+ 
+    // record error
+    if (ADCCON2bits.REFFLT) error_handler.flags.ADC_reference_fault = 1;
+    
+    clearInterruptFlag(ADC_Fault);
     
 }
 
