@@ -260,7 +260,7 @@ void usbUartInitialize(void) {
 void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) usbUartFaultISR(void) {
     
     // TO-DO: Fault tasks
-    error_handler.USB_error_flag = 1;
+    error_handler.flags.USB_general_error = 1;
     
     U3STAbits.PERR = 0;
     U3STAbits.FERR = 0;
@@ -293,7 +293,7 @@ void __ISR(_DMA0_VECTOR, IPL5SRS) usbUartTxDmaISR(void) {
     // channel error
     else if (DCH0INTbits.CHERIF) {
         
-        error_handler.USB_tx_dma_error_flag = 1;
+        error_handler.flags.USB_tx_dma_error = 1;
         
     }
     
@@ -319,7 +319,7 @@ void __ISR(_DMA1_VECTOR, IPL6SRS) usbUartRxDmaISR(void) {
     // channel error
     else if (DCH1INTbits.CHERIF) {
         
-        error_handler.USB_rx_dma_error_flag = 1;
+        error_handler.flags.USB_rx_dma_error = 1;
         
     }
     

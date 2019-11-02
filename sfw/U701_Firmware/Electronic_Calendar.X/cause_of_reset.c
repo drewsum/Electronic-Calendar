@@ -79,20 +79,20 @@ reset_cause_t getResetCause(void) {
     else {
      
         reset_cause = Undefined;
-        error_handler.other_error_flag = 1;
+        error_handler.flags.other_error = 1;
         
     }
     
     if (RCONbits.BCFGERR) {
     
-        error_handler.configuration_error_flag = 1;
+        error_handler.flags.configuration_error = 1;
         RCONbits.BCFGERR = 0;
         
     }
     
     if (RCONbits.BCFGFAIL) {
      
-        error_handler.configuration_error_flag = 1;
+        error_handler.flags.configuration_error = 1;
         RCONbits.BCFGFAIL = 0;
         
     }

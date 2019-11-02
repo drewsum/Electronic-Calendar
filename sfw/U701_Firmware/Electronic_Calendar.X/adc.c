@@ -52,7 +52,7 @@ void ADCInitialize(void) {
     /* Configure ADCCON1 */
     ADCCON1 = 0;
     ADCCON1bits.TRBEN = 0;     // Disable Turbo Mode
-    if (ADCCON1bits.TRBERR) error_handler.ADC_configuration_error_flag = 1;     // Verify turbo mode disabled
+    if (ADCCON1bits.TRBERR) error_handler.flags.ADC_configuration_error = 1;     // Verify turbo mode disabled
     ADCCON1bits.SIDL = 1;   // Stop ADC in idle mode
 
     /* Configure ADCCON2 */
@@ -205,7 +205,7 @@ void ADCInitialize(void) {
     /* Wait for voltage reference to be stable */
     while(!ADCCON2bits.BGVRRDY); // Wait until the reference voltage is ready
     
-    if (ADCCON2bits.REFFLT) error_handler.ADC_configuration_error_flag = 1;     // Record error if reference fails
+    if (ADCCON2bits.REFFLT) error_handler.flags.ADC_configuration_error = 1;     // Record error if reference fails
     
     /* Enable clock to analog circuit */
     ADCANCONbits.ANEN1 = 1; // Enable the clock to analog bias

@@ -22,24 +22,49 @@
 // These are macros needed for defining ISRs, included in XC32
 #include <sys/attribs.h>
 
-// Error handler structure - can hold up to 32 flags (I think, we'll see if we run over)
+#define ERROR_HANDLER_NUM_FLAGS  9
+
+// Error handler structure
 // Follow the convention in XC32 user's guide section 8.6.2
 // Each flag indicates if the described error has occurred
 // This is used for controlling status LEDs and USB debugging
 // Access a flag like any C structure
-struct {
+union error_handler_u {
     
-    unsigned configuration_error_flag                   : 1;    // error in device setup
-    unsigned USB_error_flag                             : 1;    // Error with USB debugging interface
-    unsigned USB_tx_dma_error_flag                      : 1;    // Error with usb uart tx dma
-    unsigned USB_rx_dma_error_flag                      : 1;    // Error with usb uart rx dma
-    unsigned DMT_error_flag                             : 1;    // Deadman timer error
-    unsigned system_bus_protection_violation_flag       : 1;    // System bus protection event occurred
-    unsigned prefetch_module_SEC_flag                   : 1;    // Prefetch module recorded an SEC event
-    unsigned other_error_flag                           : 1;    // undiagnosable error
-    unsigned ADC_configuration_error_flag               : 1;    // ADC could not be configured properly
+    struct {
+
+        unsigned configuration_error                   : 8;    // error in device setup
+        unsigned USB_general_error                     : 8;    // Error with USB debugging interface
+        unsigned USB_tx_dma_error                      : 8;    // Error with usb uart tx dma
+        unsigned USB_rx_dma_error                      : 8;    // Error with usb uart rx dma
+        unsigned DMT_error                             : 8;    // Deadman timer error
+        unsigned system_bus_protection_violation       : 8;    // System bus protection event occurred
+        unsigned prefetch_module_SEC                   : 8;    // Prefetch module recorded an SEC event
+        unsigned other_error                           : 8;    // undiagnosable error
+        unsigned ADC_configuration_error               : 8;    // ADC could not be configured properly
+
+    } flags;
+
+    uint8_t flag_array[ERROR_HANDLER_NUM_FLAGS];
+    
+    uint32_t errors_have_occurred;
     
 } error_handler;
+    
+// this array holds the names of error handler flags
+const char * const error_handler_flag_names[] = {
+ 
+    "Configuration",
+    "USB General",
+    "USB Transmit DMA",
+    "USB Receive DMA",
+    "Deadman Timer",
+    "System Bus Protection",
+    "Prefetch Module SEC",
+    "Other",
+    "ADC Configuration"
+    
+};
 
 // This function initializes the error handler structure to detect fault conditions
 void errorHandlerInitialize(void);

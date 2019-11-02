@@ -27,7 +27,7 @@ void errorHandlerInitialize(void) {
 void __ISR(_SYSTEM_BUS_PROTECTION_VECTOR, ipl1SRS) systemBusProtectionISR(void) {
  
     // Record a system bus protection violation occurred
-    error_handler.system_bus_protection_violation_flag = 1;
+    error_handler.flags.system_bus_protection_violation = 1;
     clearInterruptFlag(System_Bus_Protection_Violation);
     
 }
@@ -115,58 +115,21 @@ void __attribute__((nomips16)) _bootstrap_exception_handler(void) {
 // This function prints the status of the error handler flags
 void printErrorHandlerStatus(void) {
  
-    terminalTextAttributesReset();    
-    
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN, BLACK, BOLD);
     
     // Print heading
     printf("Error Handler Status:\n\r");
-    
-    // Print status of each error handler element
-    // Configuration Error
-    if (error_handler.configuration_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   Configuration error %s\n\r", error_handler.configuration_error_flag ? "has occurred" : "has not occurred");
-    
-    // General USB Error
-    if (error_handler.USB_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   General USB error %s\n\r", error_handler.USB_error_flag ? "has occurred" : "has not occurred");
-    
-    // USB TX DMA Error
-    if (error_handler.USB_tx_dma_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   USB TX DMA error %s\n\r", error_handler.USB_tx_dma_error_flag ? "has occurred" : "has not occurred");
-    
-    // USB RX DMA Error
-    if (error_handler.USB_rx_dma_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   USB RX DMA error %s\n\r", error_handler.USB_rx_dma_error_flag ? "has occurred" : "has not occurred");
-    
-    // Deadman Timer Error
-    if (error_handler.DMT_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   Deadman Timer error %s\n\r", error_handler.DMT_error_flag ? "has occurred" : "has not occurred");
-    
-    // System Bus Protection Violation Error
-    if (error_handler.system_bus_protection_violation_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   System Bus Protection Violation %s\n\r", error_handler.system_bus_protection_violation_flag ? "has occurred" : "has not occurred");
-    
-    // Prefetch Module SEC Event
-    if (error_handler.prefetch_module_SEC_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   Prefetch SEC Event %s\n\r", error_handler.prefetch_module_SEC_flag ? "has occurred" : "has not occurred");
-    
-    // Other Error
-    if (error_handler.other_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   Other Error %s\n\r", error_handler.other_error_flag ? "has occurred" : "has not occurred");
-    
-    // ADC Config Error
-    if (error_handler.ADC_configuration_error_flag) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   ADC Configuration Error %s\n\r", error_handler.ADC_configuration_error_flag ? "has occurred" : "has not occurred");
+  
+    // loop through all error handler flags and print if they are set or not
+    uint32_t index;
+    for (index = 0; index < ERROR_HANDLER_NUM_FLAGS; index++) {
+
+        if (error_handler.flag_array[index]) terminalTextAttributes(RED, BLACK, NORMAL);
+        else terminalTextAttributes(GREEN, BLACK, NORMAL);
+        printf("    %s Error %s\n\r", 
+                error_handler_flag_names[index],
+                error_handler.flag_array[index] ? "has occurred" : "has not occurred");
+    }
     
     terminalTextAttributesReset();    
     
@@ -175,15 +138,13 @@ void printErrorHandlerStatus(void) {
 // This function clears the error handler flags
 void clearErrorHandler(void) {
  
-    error_handler.configuration_error_flag                   = 0;
-    error_handler.USB_error_flag                             = 0;
-    error_handler.USB_tx_dma_error_flag                      = 0;
-    error_handler.USB_rx_dma_error_flag                      = 0;
-    error_handler.DMT_error_flag                             = 0;
-    error_handler.system_bus_protection_violation_flag       = 0;
-    error_handler.prefetch_module_SEC_flag                   = 0;
-    error_handler.other_error_flag                           = 0;
-    error_handler.ADC_configuration_error_flag               = 0;
+    // loop through all error handler flags and clear
+    uint32_t index;
+    for (index = 0; index < ERROR_HANDLER_NUM_FLAGS; index++) {
+     
+        error_handler.flag_array[index] = 0;
+        
+    }
     
 }
 
@@ -191,11 +152,11 @@ void clearErrorHandler(void) {
 void updateErrorLEDs(void) {
  
     // Configuration Error
-    if (    error_handler.configuration_error_flag ||
-            error_handler.DMT_error_flag ||
-            error_handler.system_bus_protection_violation_flag ||
-            error_handler.prefetch_module_SEC_flag ||
-            error_handler.other_error_flag) {
+    if (    error_handler.flags.configuration_error ||
+            error_handler.flags.DMT_error ||
+            error_handler.flags.system_bus_protection_violation ||
+            error_handler.flags.prefetch_module_SEC ||
+            error_handler.flags.other_error) {
         
         OTHER_ERROR_LED_PIN = HIGH;
         
@@ -204,16 +165,16 @@ void updateErrorLEDs(void) {
     else OTHER_ERROR_LED_PIN = LOW;
 
     // USB Error
-    if (    error_handler.USB_error_flag || 
-            error_handler.USB_tx_dma_error_flag ||
-            error_handler.USB_rx_dma_error_flag) {
+    if (    error_handler.flags.USB_general_error || 
+            error_handler.flags.USB_tx_dma_error ||
+            error_handler.flags.USB_rx_dma_error) {
         
         USB_ERROR_LED_PIN = HIGH;
     
     }
     else USB_ERROR_LED_PIN = LOW;    
     
-    if (error_handler.ADC_configuration_error_flag) ANALOG_ERROR_LED_PIN = HIGH;
+    if (error_handler.flags.ADC_configuration_error) ANALOG_ERROR_LED_PIN = HIGH;
     else ANALOG_ERROR_LED_PIN = LOW;
     
 }

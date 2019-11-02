@@ -145,6 +145,8 @@ void main(void) {
     printf("\n\rType 'Help' for list of supported commands\n\r\n\r");
     terminalTextAttributesReset();
     
+    error_handler.flags.other_error = 1;
+    
     // Main loop
     while (true) {
      

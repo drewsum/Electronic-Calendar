@@ -61,7 +61,7 @@ usb_uart_command_function_t clearCommand(char * input_str) {
 usb_uart_command_function_t idnCommand(char * input_str) {
     terminalTextAttributesReset();
     terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("Electronic Calendar\r\n");
+    printf("Electronic Calendar by Drew Maatman, 2019\r\n");
     terminalTextAttributesReset();    
 }
 
@@ -286,7 +286,7 @@ usb_uart_command_function_t adcStatusCommand(char * input_str) {
 
 usb_uart_command_function_t telemetryCommand(char * input_str) {
  
-    if (error_handler.ADC_configuration_error_flag) {
+    if (error_handler.flags.ADC_configuration_error) {
          
             terminalTextAttributesReset();
             terminalTextAttributes(RED, BLACK, NORMAL);
@@ -317,7 +317,7 @@ usb_uart_command_function_t telemetryCommand(char * input_str) {
 
 usb_uart_command_function_t minTelemetryCommand(char * input_str) {
  
-    if (error_handler.ADC_configuration_error_flag) {
+    if (error_handler.flags.ADC_configuration_error) {
          
             terminalTextAttributesReset();
             terminalTextAttributes(RED, BLACK, NORMAL);
@@ -348,7 +348,7 @@ usb_uart_command_function_t minTelemetryCommand(char * input_str) {
 
 usb_uart_command_function_t maxTelemetryCommand(char * input_str) {
  
-    if (error_handler.ADC_configuration_error_flag) {
+    if (error_handler.flags.ADC_configuration_error) {
          
             terminalTextAttributesReset();
             terminalTextAttributes(RED, BLACK, NORMAL);
@@ -410,7 +410,7 @@ void usbUartHashTableInitialize(void) {
     usbUartAddCommand("Reset", 
             "Executes an MCU software reset", 
             resetCommand);
-    usbUartAddCommand("Clear", 
+    usbUartAddCommand("Clear Screen", 
             "Clears the serial port terminal", 
             clearCommand);
     usbUartAddCommand("*IDN?", 

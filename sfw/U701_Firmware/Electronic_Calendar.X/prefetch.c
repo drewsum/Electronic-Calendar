@@ -37,7 +37,7 @@ void __ISR(_PREFETCH_VECTOR, ipl4SRS) prefetchSECEventISR(void) {
     PRESTATbits.PFMSECCNT = PRECONbits.PFMSECEN;
     
     // Set error handler flag high
-    error_handler.prefetch_module_SEC_flag = 1;
+    error_handler.flags.prefetch_module_SEC = 1;
     
     // Clear interrupt flag
     clearInterruptFlag(Prefetch_Module_SEC_Event);
