@@ -261,6 +261,9 @@ void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) usbUartFaultISR(void) {
     
     // TO-DO: Fault tasks
     error_handler.flags.USB_general_error = 1;
+    error_handler.flags.USB_framing_error = U3STAbits.FERR;
+    error_handler.flags.USB_overrun_error = U3STAbits.OERR;
+    error_handler.flags.USB_parity_error = U3STAbits.PERR;
     
     U3STAbits.PERR = 0;
     U3STAbits.FERR = 0;

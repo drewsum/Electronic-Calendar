@@ -88,6 +88,9 @@ void main(void) {
         
     }
     
+    // only clear persistent error flags if we've seen a POR... keep old values after other resets
+    if (reset_cause == POR_Reset) clearErrorHandler();
+    
     printf("\r\nCause of most recent device reset: %s\r\n\r\n", getResetCauseString(reset_cause));
     terminalTextAttributesReset();
     terminalTextAttributes(GREEN, BLACK, NORMAL);
@@ -145,11 +148,13 @@ void main(void) {
     printf("\n\rType 'Help' for list of supported commands\n\r\n\r");
     terminalTextAttributesReset();
     
-    error_handler.flags.other_error = 1;
+    clockFailCheck();
     
     // Main loop
     while (true) {
      
+        clockFailCheck();
+        
         // set LEDs if changes are pending
         if (led_update_request_flag) {
          

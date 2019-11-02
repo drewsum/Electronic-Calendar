@@ -76,13 +76,6 @@ reset_cause_t getResetCause(void) {
         
     }
     
-    else {
-     
-        reset_cause = Undefined;
-        error_handler.flags.other_error = 1;
-        
-    }
-    
     if (RCONbits.BCFGERR) {
     
         error_handler.flags.configuration_error = 1;

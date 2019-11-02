@@ -156,7 +156,7 @@ void updateErrorLEDs(void) {
             error_handler.flags.DMT_error ||
             error_handler.flags.system_bus_protection_violation ||
             error_handler.flags.prefetch_module_SEC ||
-            error_handler.flags.other_error) {
+            error_handler.flags.clock_failure) {
         
         OTHER_ERROR_LED_PIN = HIGH;
         
@@ -167,14 +167,27 @@ void updateErrorLEDs(void) {
     // USB Error
     if (    error_handler.flags.USB_general_error || 
             error_handler.flags.USB_tx_dma_error ||
-            error_handler.flags.USB_rx_dma_error) {
+            error_handler.flags.USB_rx_dma_error ||
+            error_handler.flags.USB_framing_error ||
+            error_handler.flags.USB_overrun_error ||
+            error_handler.flags.USB_parity_error ||
+            error_handler.flags.USB_rx_dma_address_error ||
+            error_handler.flags.USB_rx_dma_overrun ||
+            error_handler.flags.USB_tx_dma_address_error ||
+            error_handler.flags.USB_tx_dma_overrun) {
         
         USB_ERROR_LED_PIN = HIGH;
     
     }
     else USB_ERROR_LED_PIN = LOW;    
     
-    if (error_handler.flags.ADC_configuration_error) ANALOG_ERROR_LED_PIN = HIGH;
+    if (    error_handler.flags.ADC_configuration_error ||
+            error_handler.flags.ADC_bandgap_vref_voltage_fault ||
+            error_handler.flags.ADC_reference_fault) {
+    
+        ANALOG_ERROR_LED_PIN = HIGH;
+    
+    }
     else ANALOG_ERROR_LED_PIN = LOW;
     
 }
@@ -199,3 +212,10 @@ void exceptionPrint(char *input_string) {
     }
     
 }
+// this function checks for clock failures and records them into the error handler
+void clockFailCheck(void) {
+
+    if (OSCCONbits.CF) error_handler.flags.clock_failure = 1;
+    
+}
+
