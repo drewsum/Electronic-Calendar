@@ -36,7 +36,7 @@
 // This flag keeps track of if we need to update min and max values
 uint32_t telemetry_extremes_update_flag;
 
-#define TEL_NUM_PARAMS              8
+#define TEL_NUM_PARAMS              12
 
 // This structure defines the parameters for telemetry
 // unless otherwise noted, voltage measurements are in volts, and
@@ -54,6 +54,10 @@ typedef union telemetry_paramaters_u {
         double vbat_voltage;                // measured battery voltage of backup battery
         double mcu_vref_voltage;            // internal voltage reference for MCU
         double mcu_die_temp;                // die temp of MCU
+        double input_temperature;           // temperature of input protection circuit
+        double pos3p3_temperature;          // temperature of +3.3V power supply
+        double ambient_temperature;         // temperature of board
+        double backup_temperature;          // temperature of backup diode
 
     } params;
     

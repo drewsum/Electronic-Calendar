@@ -22,7 +22,7 @@
 // These are macros needed for defining ISRs, included in XC32
 #include <sys/attribs.h>
 
-#define ERROR_HANDLER_NUM_FLAGS  17
+#define ERROR_HANDLER_NUM_FLAGS  22
 
 // Error handler structure
 // Follow the convention in XC32 user's guide section 8.6.2
@@ -50,7 +50,12 @@ union error_handler_u {
         unsigned CPU_TLB_refill_exception               : 8;
         unsigned CPU_cache_exception                    : 8;
         unsigned CPU_bootstrap_exception                : 8;
-
+        unsigned temp_I2C_bus_collision                 : 8;
+        unsigned input_temp_sens_I2C_fault              : 8;
+        unsigned pos3p3_temp_sens_I2C_fault             : 8;
+        unsigned amb_temp_sens_I2C_fault                : 8;
+        unsigned bckp_temp_sens_I2C_fault               : 8;
+        
     }  __attribute__((persistent)) flags;
 
     uint8_t flag_array[ERROR_HANDLER_NUM_FLAGS] __attribute__((persistent)) ;
@@ -76,7 +81,13 @@ const char * const error_handler_flag_names[] = {
     "CPU General Exception",
     "CPU TLB Refill Exception",
     "CPU Cache Exception",
-    "CPU Bootstrap Exception"
+    "CPU Bootstrap Exception",
+    "Temp I2C Bus Collision",
+    "Input Temperature Sensor I2C",
+    "+3.3V Power Supply Temperature Sensor I2C",
+    "Ambient Temperature Sensor I2C",
+    "Backup Diode Temperature Sensor I2C"
+        
 
 };
 

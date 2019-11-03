@@ -19,4 +19,6 @@ rtcc.h  \
 binary_clock.h  \
 calendar_leds.h  \
  adc.h  \
-telemetry.h 
+telemetry.h  \
+temp_i2c.h  \
+mcp9804_temp_sensor.h 

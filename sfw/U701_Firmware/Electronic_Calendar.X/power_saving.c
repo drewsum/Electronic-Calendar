@@ -76,8 +76,8 @@ void PMDInitialize(void) {
     PMD5bits.SPI5MD = 1;
     PMD5bits.SPI6MD = 1;
     
-    // Disable all I2C Modules
-    PMD5bits.I2C1MD = 1;
+    // Disable all I2C Modules, except I2C 1
+    PMD5bits.I2C1MD = 0;
     PMD5bits.I2C2MD = 1;
     PMD5bits.I2C3MD = 1;
     PMD5bits.I2C4MD = 1;

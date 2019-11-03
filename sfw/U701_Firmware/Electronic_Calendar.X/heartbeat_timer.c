@@ -5,6 +5,7 @@
 
 #include "heartbeat_timer.h"
 #include "error_handler.h"
+#include "mcp9804_temp_sensor.h"
 
 // This function initializes the heartbeat timer
 void heartbeatTimerInitialize(void) {
@@ -89,6 +90,9 @@ void __ISR(_TIMER_1_VECTOR, ipl6SRS) hearbeatTimerISR(void) {
     
     // Check to see if DMT actually cleared
     verifyThumbTightEnough();
+    
+    // request new temp sensor data
+    MCP9804_start_flag = 1;
     
     // Clear interrupt flag
     clearInterruptFlag(Timer1);

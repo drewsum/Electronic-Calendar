@@ -29,6 +29,8 @@
 #include "calendar_leds.h"
 #include "adc.h"
 #include "telemetry.h"
+#include "temp_i2c.h"
+#include "mcp9804_temp_sensor.h"
 
 void main(void) {
     
@@ -123,8 +125,8 @@ void main(void) {
     printf("    Watchdog Timer Initialized\n\r");
     
     // Startup the deadman timer
-    deadmanTimerInitialize();
-    printf("    Deadman Timer Initialized\n\r");
+    //deadmanTimerInitialize();
+    //printf("    Deadman Timer Initialized\n\r");
     
     // Setup the real time clock-calendar
     rtccInitialize();
@@ -134,6 +136,12 @@ void main(void) {
     ADCInitialize();
     telemetryInitialize();
     printf("    Analog to Digital Converters, Telemetry Initialized\r\n");
+    
+    // setup temperature sensor I2C bus
+    TEMP_I2C_Initialize();
+    printf("    Temperature Sensor I2C Bus Initialized\r\n");
+    MCP9804TempSensorInitialize();
+    printf("    Digital Temperature Sensors Initialized\r\n");
     
     // Disable RESET LED
     RESET_LED_PIN = LOW;
@@ -194,6 +202,10 @@ void main(void) {
             }
             
         }
+        
+        // if we need to grab new temp sensor data, do it
+        // THIS FUNCTION BLOCKS
+        if (MCP9804_start_flag) MCP9804AcquisitionHandler();
         
         // update minimum and maximum measured telemetry
         if (telemetry_extremes_update_flag) telemetryUpdateExtremes();

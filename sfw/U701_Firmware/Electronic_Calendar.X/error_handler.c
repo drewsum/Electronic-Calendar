@@ -168,7 +168,12 @@ void updateErrorLEDs(void) {
             error_handler.flags.DMT_error ||
             error_handler.flags.system_bus_protection_violation ||
             error_handler.flags.prefetch_module_SEC ||
-            error_handler.flags.clock_failure) {
+            error_handler.flags.clock_failure ||
+            error_handler.flags.temp_I2C_bus_collision ||
+            error_handler.flags.input_temp_sens_I2C_fault ||
+            error_handler.flags.pos3p3_temp_sens_I2C_fault ||
+            error_handler.flags.amb_temp_sens_I2C_fault ||
+            error_handler.flags.bckp_temp_sens_I2C_fault) {
         
         OTHER_ERROR_LED_PIN = HIGH;
         
