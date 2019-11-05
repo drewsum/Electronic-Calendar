@@ -23,6 +23,7 @@ reset_cause_t getResetCause(void) {
      
         reset_cause = BOR_Reset;
         RCONbits.BOR = 0;
+        error_handler.flags.vdd_brownout = 1;
         
     }
     
@@ -52,6 +53,7 @@ reset_cause_t getResetCause(void) {
      
         reset_cause = DMT_Reset;
         RCONbits.DMTO = 0;
+        error_handler.flags.DMT_timeout = 1;
         
     }
     
@@ -59,6 +61,7 @@ reset_cause_t getResetCause(void) {
      
         reset_cause = WDT_Reset;
         RCONbits.WDTO = 0;
+        error_handler.flags.WDT_timeout = 1;
         
     }
     

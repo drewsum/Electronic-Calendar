@@ -14,6 +14,7 @@
 #include "rtcc.h"
 #include "adc.h"
 #include "error_handler.h"
+#include "misc_IO_functions.h"
 
 usb_uart_command_function_t helpCommandFunction(char * input_str) {
 
@@ -412,6 +413,39 @@ usb_uart_command_function_t setUnixTimeCommand(char * input_str) {
     
 }
 
+usb_uart_command_function_t pgoodStatusCommand(char * input_str) {
+ 
+    printPGOODStatus();
+    
+}
+
+usb_uart_command_function_t vbatIsolateCommand(char * input_str) {
+ 
+    // Snipe out received string
+    uint32_t read_isolation;
+    sscanf(input_str, "Set Battery Isolation: %u", &read_isolation);
+    
+    if (read_isolation > 1) {
+     
+        terminalTextAttributes(RED, BLACK, BOLD);
+        printf("Please enter a valid VBAT isolation state: 1 for true (isolated) / 0 for false (connected)\r\n");
+        
+    }
+    
+    else {
+     
+        nVBAT_ISOLATE_PIN = (read_isolation & 0b1);
+        pgood_status.VBAT_ISOLATE = !(nVBAT_ISOLATE_PIN);
+        if (pgood_status.VBAT_ISOLATE) terminalTextAttributes(GREEN, BLACK, NORMAL);
+        else terminalTextAttributes(RED, BLACK, NORMAL);
+        printf("    Backup Battery is %s Ideal Diode\n\r", pgood_status.VBAT_ISOLATE ? "connected to" : "isolated from");
+        
+    }
+    
+    terminalTextAttributesReset();
+    
+}
+
 // This function must be called to set up the usb_uart_commands hash table
 // Entries into this hash table are "usb_uart serial commands"
 void usbUartHashTableInitialize(void) {
@@ -452,6 +486,24 @@ void usbUartHashTableInitialize(void) {
     usbUartAddCommand("PMD Status?",
             "Prints status of peripheral module disable settings",
             pmdStatusCommand);
+    usbUartAddCommand("PGOOD Status?",
+            "Prints current state of power good signals for all voltage rails",
+            pgoodStatusCommand);
+    usbUartAddCommand("Set Battery Isolation: ",
+            "\b\b<isolation_state>: Connects or disconnects the MCU backup battery. 1 for isolated, 0 for connected.",
+            vbatIsolateCommand);
+    usbUartAddCommand("ADC Status?",
+            "Prints status information for the Analog to Digital Converter",
+            adcStatusCommand);
+    usbUartAddCommand("Telemetry?",
+            "Prints board level parameter measurements",
+            telemetryCommand);
+    usbUartAddCommand("Max Telemetry?",
+            "Prints maximum recorded board level parameter measurements",
+            maxTelemetryCommand);
+    usbUartAddCommand("Min Telemetry?",
+            "Prints minimum recorded board level parameter measurements",
+            minTelemetryCommand);
     usbUartAddCommand("Time and Date?",
             "Prints the current system time and date",
             timeAndDateCommand);
@@ -467,20 +519,5 @@ void usbUartHashTableInitialize(void) {
     usbUartAddCommand("Set Unix Time: ",
             "\b\b<decimal unix time>, <hour offset from UTC to local time>: sets the RTCC to the supplied UNIX time with hour offset from UTC",
             setUnixTimeCommand);
-    usbUartAddCommand("ADC Status?",
-            "Prints status information for the Analog to Digital Converter",
-            adcStatusCommand);
-    usbUartAddCommand("Telemetry?",
-            "Prints board level parameter measurements",
-            telemetryCommand);
-    usbUartAddCommand("Max Telemetry?",
-            "Prints maximum recorded board level parameter measurements",
-            maxTelemetryCommand);
-    usbUartAddCommand("Min Telemetry?",
-            "Prints minimum recorded board level parameter measurements",
-            minTelemetryCommand);
     
-    
-    
-
 }

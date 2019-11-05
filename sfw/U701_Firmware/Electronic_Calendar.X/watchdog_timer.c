@@ -245,13 +245,13 @@ void printDeadmanStatus(void) {
     printf("Deadman Timer Status:\n\r");
     
     terminalTextAttributes(GREEN, BLACK, NORMAL);
-    printf("   Instruction Fetch Count Limit: ");
+    printf("    Instruction Fetch Count Limit: ");
     
     uint32_t deadmanCountLimit = (DEVCFG1bits.DMTCNT + 1) * 256;
     
     printf("%d instructions\n\r", deadmanCountLimit);
     
-    printf("   Count Window Interval: ");
+    printf("    Count Window Interval: ");
     
     switch (DEVCFG1bits.DMTINTV) {
      
@@ -292,7 +292,7 @@ void printDeadmanStatus(void) {
     // Print if DMT is enabled
     if (DMTCONbits.ON) terminalTextAttributes(GREEN, BLACK, NORMAL);
     else terminalTextAttributes(RED, BLACK, NORMAL);
-    printf("   DMT Enabled: %c\n\r",
+    printf("    DMT Enabled: %c\n\r",
             DMTCONbits.ON ? 'T' : 'F');
     
     

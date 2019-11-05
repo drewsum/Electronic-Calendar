@@ -96,7 +96,7 @@ typedef enum
 /* defined for TEMP_I2C */
 
 #ifndef TEMP_I2C_CONFIG_TR_QUEUE_LENGTH
-        #define TEMP_I2C_CONFIG_TR_QUEUE_LENGTH 1
+        #define TEMP_I2C_CONFIG_TR_QUEUE_LENGTH 10
 #endif
 
 

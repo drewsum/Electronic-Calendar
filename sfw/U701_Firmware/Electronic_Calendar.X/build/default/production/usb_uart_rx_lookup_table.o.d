@@ -12,4 +12,5 @@ cause_of_reset.h  \
 rtcc.h  \
 adc.h  \
 telemetry.h  \
- error_handler.h 
+ error_handler.h  \
+misc_IO_functions.h 

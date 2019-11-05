@@ -22,7 +22,7 @@
 // These are macros needed for defining ISRs, included in XC32
 #include <sys/attribs.h>
 
-#define ERROR_HANDLER_NUM_FLAGS  22
+#define ERROR_HANDLER_NUM_FLAGS  24
 
 // Error handler structure
 // Follow the convention in XC32 user's guide section 8.6.2
@@ -55,6 +55,9 @@ union error_handler_u {
         unsigned pos3p3_temp_sens_I2C_fault             : 8;
         unsigned amb_temp_sens_I2C_fault                : 8;
         unsigned bckp_temp_sens_I2C_fault               : 8;
+        unsigned WDT_timeout                            : 8;
+        unsigned DMT_timeout                            : 8;
+        unsigned vdd_brownout                           : 8;
         
     }  __attribute__((persistent)) flags;
 
@@ -86,9 +89,11 @@ const char * const error_handler_flag_names[] = {
     "Input Temperature Sensor I2C",
     "+3.3V Power Supply Temperature Sensor I2C",
     "Ambient Temperature Sensor I2C",
-    "Backup Diode Temperature Sensor I2C"
-        
-
+    "Backup Diode Temperature Sensor I2C",
+    "Watchdog Timer Timeout",
+    "Deadman Timer Timeout",
+    "MCU VDD Brownout"
+    
 };
 
 // This function initializes the error handler structure to detect fault conditions

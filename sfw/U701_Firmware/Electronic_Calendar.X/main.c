@@ -31,6 +31,7 @@
 #include "telemetry.h"
 #include "temp_i2c.h"
 #include "mcp9804_temp_sensor.h"
+#include "misc_IO_functions.h"
 
 void main(void) {
     
@@ -122,6 +123,7 @@ void main(void) {
             
     // Setup the watchdog timer
     watchdogTimerInitialize();
+    kickTheDog();
     printf("    Watchdog Timer Initialized\n\r");
     
     // Startup the deadman timer
@@ -141,8 +143,24 @@ void main(void) {
     TEMP_I2C_Initialize();
     printf("    Temperature Sensor I2C Bus Initialized\r\n");
     MCP9804TempSensorInitialize();
-    printf("    Digital Temperature Sensors Initialized\r\n");
+    if (    error_handler.flags.amb_temp_sens_I2C_fault ||
+            error_handler.flags.bckp_temp_sens_I2C_fault ||
+            error_handler.flags.input_temp_sens_I2C_fault ||
+            error_handler.flags.pos3p3_temp_sens_I2C_fault ||
+            error_handler.flags.temp_I2C_bus_collision) {
+        
+        terminalTextAttributes(RED, BLACK, NORMAL);
+        printf("    Temperature Sensor I2C Bus Initialization  Failed\r\n");
+        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        
+    }
     
+    else {
+        
+        printf("    Digital Temperature Sensors Initialized\r\n");
+    
+    }
+        
     // Disable RESET LED
     RESET_LED_PIN = LOW;
     printf("    Reset LED Disabled\r\n");
@@ -161,7 +179,11 @@ void main(void) {
     // Main loop
     while (true) {
      
+        // check to see if a clock fail has occurred and latch it
         clockFailCheck();
+        
+        // check to see if a PGOOD fault has occurred and latch it
+        powerGoodCheck();
         
         // set LEDs if changes are pending
         if (led_update_request_flag) {
@@ -204,11 +226,13 @@ void main(void) {
         }
         
         // if we need to grab new temp sensor data, do it
-        // THIS FUNCTION BLOCKS
         if (MCP9804_start_flag) MCP9804AcquisitionHandler();
         
         // update minimum and maximum measured telemetry
         if (telemetry_extremes_update_flag) telemetryUpdateExtremes();
+     
+        // clear WDT if heartbeat didn't get to it
+        kickTheDog();
         
     }
 }

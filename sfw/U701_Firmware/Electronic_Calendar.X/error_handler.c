@@ -173,7 +173,9 @@ void updateErrorLEDs(void) {
             error_handler.flags.input_temp_sens_I2C_fault ||
             error_handler.flags.pos3p3_temp_sens_I2C_fault ||
             error_handler.flags.amb_temp_sens_I2C_fault ||
-            error_handler.flags.bckp_temp_sens_I2C_fault) {
+            error_handler.flags.bckp_temp_sens_I2C_fault ||
+            error_handler.flags.WDT_timeout ||
+            error_handler.flags.DMT_timeout) {
         
         OTHER_ERROR_LED_PIN = HIGH;
         
