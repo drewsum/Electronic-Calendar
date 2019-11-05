@@ -70,15 +70,19 @@ void stopDeadmanTimer(void) {
 // This function clears the deadman timer
 void holdThumbTighter(void) {
  
-    // First write 0x40 into STEP1 bits within DMTPRECLR register
-    DMTPRECLRbits.STEP1 = 0x40;
+    if (DMTCNT * 128 < DMTPSINTV * 127) {
     
-    // Second, write 0x08 into STEP2 of DMTCLR register
-    DMTCLRbits.STEP2 = 0x08;
-    
-    // Verify DMT was cleared properly
-    verifyThumbTightEnough();
-    
+        // First write 0x40 into STEP1 bits within DMTPRECLR register
+        DMTPRECLRbits.STEP1 = 0x40;
+
+        // Second, write 0x08 into STEP2 of DMTCLR register
+        DMTCLRbits.STEP2 = 0x08;
+
+        // Verify DMT was cleared properly
+        verifyThumbTightEnough();
+
+}
+        
 }
 
 // This function verifies the DMT has been cleared properly
@@ -250,6 +254,10 @@ void printDeadmanStatus(void) {
     uint32_t deadmanCountLimit = (DEVCFG1bits.DMTCNT + 1) * 256;
     
     printf("%d instructions\n\r", deadmanCountLimit);
+    
+    printf("    DMT current reading: 0x%08X\r\n", DMTCNT);
+    
+    printf("    DMT interval (instructions) = 0x%08X\r\n", DMTPSINTV);
     
     printf("    Count Window Interval: ");
     
