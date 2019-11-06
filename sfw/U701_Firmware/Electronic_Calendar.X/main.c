@@ -230,9 +230,9 @@ void main(void) {
         
         // update minimum and maximum measured telemetry
         if (telemetry_extremes_update_flag) telemetryUpdateExtremes();
-     
-        // clear WDT if heartbeat didn't get to it
-        kickTheDog();
+        
+        // update error LEDs if needed
+        if (update_error_leds_flag) updateErrorLEDs();
         
     }
 }

@@ -204,6 +204,8 @@ void updateErrorLEDs(void) {
     }
     else ANALOG_ERROR_LED_PIN = LOW;
     
+    update_error_leds_flag = 0;
+    
 }
 
 // This function prints short strings during a CPU exception

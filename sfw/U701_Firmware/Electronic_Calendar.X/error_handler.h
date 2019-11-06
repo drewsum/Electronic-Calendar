@@ -22,6 +22,9 @@
 // These are macros needed for defining ISRs, included in XC32
 #include <sys/attribs.h>
 
+// set this flag high to update the error LEDs the next loop through main()
+uint8_t update_error_leds_flag;
+
 #define ERROR_HANDLER_NUM_FLAGS  24
 
 // Error handler structure

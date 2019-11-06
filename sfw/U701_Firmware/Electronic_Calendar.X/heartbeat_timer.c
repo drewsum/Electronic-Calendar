@@ -39,7 +39,7 @@ void heartbeatTimerInitialize(void) {
     clearInterruptFlag(Timer1);
     
     // Set Timer 1 interrupt priority
-    setInterruptPriority(Timer1, 6);
+    setInterruptPriority(Timer1, 7);
     
     // Clear on time counter
     device_on_time_counter = 0;
@@ -69,7 +69,7 @@ void heartbeatTimerStop(void) {
 }
 
 // Heartbeat timer interrupt service routine
-void __ISR(_TIMER_1_VECTOR, ipl6AUTO) hearbeatTimerISR(void) {
+void __ISR(_TIMER_1_VECTOR, ipl7SRS) hearbeatTimerISR(void) {
 
     // Clear the watchdog timer
     kickTheDog();
@@ -84,7 +84,7 @@ void __ISR(_TIMER_1_VECTOR, ipl6AUTO) hearbeatTimerISR(void) {
     HEARTBEAT_LED_PIN = !(HEARTBEAT_LED_PIN);
     
     // Update error LEDs based on error handler status
-    updateErrorLEDs();
+    update_error_leds_flag = 1;
     
     // Increment on time counter
     device_on_time_counter++;
