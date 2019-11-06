@@ -72,7 +72,7 @@ void MCP9804AcquisitionHandler(void) {
     uint8_t data_reg_pointer[1];
     data_reg_pointer[0] = MCP9804_TA_REG;
     TEMP_I2C_MasterWrite(data_reg_pointer, 1, INPUT_TEMP_SENS_ADDR, &I2C_STATUS);
-    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    //while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
     if (    I2C_STATUS == TEMP_I2C_MESSAGE_FAIL ||
             I2C_STATUS == TEMP_I2C_STUCK_START ||
             I2C_STATUS == TEMP_I2C_MESSAGE_ADDRESS_NO_ACK ||
@@ -82,7 +82,7 @@ void MCP9804AcquisitionHandler(void) {
     }
     // Read two bytes from temp reg
     TEMP_I2C_MasterRead(MCP9804_temp_results.input_temp_raw, 2, INPUT_TEMP_SENS_ADDR, &I2C_STATUS);
-    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    //while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
     if (    I2C_STATUS == TEMP_I2C_MESSAGE_FAIL ||
             I2C_STATUS == TEMP_I2C_STUCK_START ||
             I2C_STATUS == TEMP_I2C_MESSAGE_ADDRESS_NO_ACK ||
@@ -95,7 +95,7 @@ void MCP9804AcquisitionHandler(void) {
     // Write temp reg addr to read back temp sensor data
     data_reg_pointer[0] = MCP9804_TA_REG;
     TEMP_I2C_MasterWrite(data_reg_pointer, 1, POS3P3_TEMP_SENS_ADDR, &I2C_STATUS);
-    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    //while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
     if (    I2C_STATUS == TEMP_I2C_MESSAGE_FAIL ||
             I2C_STATUS == TEMP_I2C_STUCK_START ||
             I2C_STATUS == TEMP_I2C_MESSAGE_ADDRESS_NO_ACK ||
@@ -105,7 +105,7 @@ void MCP9804AcquisitionHandler(void) {
     }
     // Read two bytes from temp reg
     TEMP_I2C_MasterRead(MCP9804_temp_results.pos3p3_temp_raw, 2, POS3P3_TEMP_SENS_ADDR, &I2C_STATUS);
-    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    //while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
     if (    I2C_STATUS == TEMP_I2C_MESSAGE_FAIL ||
             I2C_STATUS == TEMP_I2C_STUCK_START ||
             I2C_STATUS == TEMP_I2C_MESSAGE_ADDRESS_NO_ACK ||
@@ -118,7 +118,7 @@ void MCP9804AcquisitionHandler(void) {
     // Write temp reg addr to read back temp sensor data
     data_reg_pointer[0] = MCP9804_TA_REG;
     TEMP_I2C_MasterWrite(data_reg_pointer, 1, AMB_TEMP_SENS_ADDR, &I2C_STATUS);
-    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    //while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
     if (    I2C_STATUS == TEMP_I2C_MESSAGE_FAIL ||
             I2C_STATUS == TEMP_I2C_STUCK_START ||
             I2C_STATUS == TEMP_I2C_MESSAGE_ADDRESS_NO_ACK ||
@@ -128,7 +128,7 @@ void MCP9804AcquisitionHandler(void) {
     }
     // Read two bytes from temp reg
     TEMP_I2C_MasterRead(MCP9804_temp_results.amb_temp_raw, 2, AMB_TEMP_SENS_ADDR, &I2C_STATUS);
-    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    //while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
     if (    I2C_STATUS == TEMP_I2C_MESSAGE_FAIL ||
             I2C_STATUS == TEMP_I2C_STUCK_START ||
             I2C_STATUS == TEMP_I2C_MESSAGE_ADDRESS_NO_ACK ||
@@ -141,7 +141,7 @@ void MCP9804AcquisitionHandler(void) {
     // Write temp reg addr to read back temp sensor data
     data_reg_pointer[0] = MCP9804_TA_REG;
     TEMP_I2C_MasterWrite(data_reg_pointer, 1, BCKP_TEMP_SENS_ADDR, &I2C_STATUS);
-    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    //while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
     if (    I2C_STATUS == TEMP_I2C_MESSAGE_FAIL ||
             I2C_STATUS == TEMP_I2C_STUCK_START ||
             I2C_STATUS == TEMP_I2C_MESSAGE_ADDRESS_NO_ACK ||
@@ -151,7 +151,7 @@ void MCP9804AcquisitionHandler(void) {
     }
     // Read two bytes from temp reg
     TEMP_I2C_MasterRead(MCP9804_temp_results.bckp_temp_raw, 2, BCKP_TEMP_SENS_ADDR, &I2C_STATUS);
-    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    //while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
     if (    I2C_STATUS == TEMP_I2C_MESSAGE_FAIL ||
             I2C_STATUS == TEMP_I2C_STUCK_START ||
             I2C_STATUS == TEMP_I2C_MESSAGE_ADDRESS_NO_ACK ||

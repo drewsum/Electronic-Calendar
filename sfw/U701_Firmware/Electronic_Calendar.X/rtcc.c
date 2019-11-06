@@ -124,9 +124,6 @@ void rtccInitialize(void) {
     // Lock RTCC
     rtccLock();
     
-    // Clear the real time clock value
-    rtccClear();
-    
 }
 
 // This function clears all values in the RTCC

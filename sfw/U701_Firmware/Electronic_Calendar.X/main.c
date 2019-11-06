@@ -132,6 +132,7 @@ void main(void) {
     
     // Setup the real time clock-calendar
     rtccInitialize();
+    if (reset_cause == POR_Reset) rtccClear();
     printf("    Real Time Clock-Calendar Initialized\r\n");
     
     // setup the ADC modules
@@ -208,8 +209,9 @@ void main(void) {
         }
         
         // check to see if we have a new usb uart string to parse
-        if (usb_uart_rx_parse_request && strlen(usb_uart_rx_buffer) > 2) {
-         
+        // if (usb_uart_rx_parse_request && strlen(usb_uart_rx_buffer) > 2) {
+        if (usb_uart_rx_parse_request) {
+        
             // Determine length of received string
             uint32_t length = strlen(usb_uart_rx_buffer);
             
