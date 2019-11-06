@@ -49,61 +49,61 @@ void printPrefetchStatus(void) {
  
     
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, BOLD);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, BOLD_FONT);
     printf("Prefetch Module Status:\n\r");
     
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Prefetch Module enable Status: ");
     
     switch (PRECONbits.PREFEN) {
      
         case 0b00:
-            terminalTextAttributes(RED, BLACK, NORMAL);
+            terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
             printf("Predictive prefetch disabled\n\r");
             break;
             
         case 0b01:
-            terminalTextAttributes(GREEN, BLACK, NORMAL);
+            terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
             printf("Enable predictive prefetch for CPU instructions only\n\r");
             break;
             
         case 0b10:
-            terminalTextAttributes(GREEN, BLACK, NORMAL);
+            terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
             printf("Enable predictive prefetch for CPU instructions and CPU data\n\r");
             break;
             
         case 0b11:
-            terminalTextAttributes(GREEN, BLACK, NORMAL);
+            terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
             printf("Enable predictive prefetch for any address\n\r");
             break;
             
     }
     
     // Print if interrupt is enabled
-    if (PRECONbits.PFMSECEN) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (PRECONbits.PFMSECEN) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Prefetch SEC Interrupt %s\n\r",
             PRECONbits.PFMSECEN ? "Enabled" : "Disabled");
     
     
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    PFM access times set to %d wait states\n\r", PRECONbits.PFMWS);
     
     // Print if interrupt is enabled
-    if (PRECONbits.PFMSECEN) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (PRECONbits.PFMSECEN) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Prefetch SEC Interrupt %s\n\r",
             PRECONbits.PFMSECEN ? "Enabled" : "Disabled");
     
     // Print if DED error occured
-    if (PRESTATbits.PFMDED) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    if (PRESTATbits.PFMDED) terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Prefetch Double-bit Error %s\n\r",
             PRESTATbits.PFMDED ? "Detected" : "Not Detected");
     
     // Print if SEC error occured
-    if (PRESTATbits.PFMSEC) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    if (PRESTATbits.PFMSEC) terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Prefetch Single-bit Error %s\n\r",
             PRESTATbits.PFMSEC ? "Corrected" : "Not Detected");
     

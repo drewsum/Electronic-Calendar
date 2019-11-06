@@ -4,8 +4,6 @@
 #include <string.h>
 
 #include "terminal_control.h"
-// #include "usb_uart.h"
-
 
 // This function clears the terminal
 void terminalClearScreen(void) {
@@ -43,9 +41,9 @@ void terminalReturnCursor(void) {
 
 */
 
-void terminalTextAttributes(text_color_t foreground_color,
-        text_color_t background_color,
-        text_attribute_t input_attribute) {
+void terminalTextAttributes(char * foreground_color,
+        char * background_color,
+        char * input_attribute) {
     
     char print_string[16];
     
@@ -58,100 +56,16 @@ void terminalTextAttributes(text_color_t foreground_color,
     }
     
     strncpy(print_string, "\033[", sizeof(print_string));
+   
+    strcat(print_string, input_attribute);
     
-    switch (input_attribute) {
-     
-        case NORMAL:
-            strcat(print_string,"0");
-            break;
-        case BOLD:
-            strcat(print_string,"1");
-            break;
-        case UNDERSCORE:
-            strcat(print_string,"4");
-            break;
-        case BLINK:
-            strcat(print_string,"5");
-            break;
-        case REVERSE:
-            strcat(print_string,"7");
-            break;
-        case CONCEALED:
-            strcat(print_string,"8");
-            break;
-
-        default:
-            strcat(print_string,"0");
-            break;
-    }
+    strcat(print_string,";3");
+   
+    strcat(print_string, foreground_color);
     
-    strcat(print_string,";");
+    strcat(print_string,";4");
     
-    switch (foreground_color) {
-     
-        case BLACK:
-            strcat(print_string,"30");
-            break;
-        case RED:
-            strcat(print_string,"31");
-            break;
-        case GREEN:
-            strcat(print_string,"32");
-            break;
-        case YELLOW:
-            strcat(print_string,"33");
-            break;
-        case BLUE:
-            strcat(print_string,"34");
-            break;
-        case MAGENTA:
-            strcat(print_string,"35");
-            break;
-        case CYAN:
-            strcat(print_string,"36");
-            break;
-        case WHITE:
-            strcat(print_string,"37");
-            break;
-            
-        default:
-            strcat(print_string,"37");
-            break;
-    }
-    
-    strcat(print_string,";");
-    
-    switch (background_color) {
-     
-        case BLACK:
-            strcat(print_string,"40");
-            break;
-        case RED:
-            strcat(print_string,"41");
-            break;
-        case GREEN:
-            strcat(print_string,"42");
-            break;
-        case YELLOW:
-            strcat(print_string,"43");
-            break;
-        case BLUE:
-            strcat(print_string,"44");
-            break;
-        case MAGENTA:
-            strcat(print_string,"45");
-            break;
-        case CYAN:
-            strcat(print_string,"46");
-            break;
-        case WHITE:
-            strcat(print_string,"47");
-            break;
-            
-        default:
-            strcat(print_string,"40");
-            break;
-    }
+    strcat(print_string, background_color);
     
     strcat(print_string,"m");
     
@@ -188,85 +102,85 @@ void terminalPrintTestMessage(void) {
 
     // Print some black text
     terminalTextAttributesReset();
-    terminalTextAttributes(BLACK, WHITE, NORMAL);
+    terminalTextAttributes(BLACK_COLOR, WHITE_COLOR, NORMAL_FONT);
     printf("This text is black\n\r");
 
     terminalTextAttributesReset();
-    terminalTextAttributes(RED, BLACK, NORMAL);
+    terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("This text is red\n\r");
 
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("This text is green\n\r");
 
     terminalTextAttributesReset();
-    terminalTextAttributes(YELLOW, BLACK, NORMAL);
+    terminalTextAttributes(YELLOW_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("This text is yellow\n\r");
 
     terminalTextAttributesReset();
-    terminalTextAttributes(BLUE, WHITE, NORMAL);
+    terminalTextAttributes(BLUE_COLOR, WHITE_COLOR, NORMAL_FONT);
     printf("This text is blue\n\r");
 
     terminalTextAttributesReset();
-    terminalTextAttributes(MAGENTA, BLACK, NORMAL);
+    terminalTextAttributes(MAGENTA_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("This text is magenta\n\r");
 
     terminalTextAttributesReset();
-    terminalTextAttributes(CYAN, BLACK, NORMAL);
+    terminalTextAttributes(CYAN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("This text is cyan\n\r");
     
     terminalTextAttributesReset();
-    terminalTextAttributes(WHITE, BLACK, NORMAL);
+    terminalTextAttributes(WHITE_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("This text has a black background\n\r");
     
     terminalTextAttributesReset();
-    terminalTextAttributes(BLACK, RED, NORMAL);
+    terminalTextAttributes(BLACK_COLOR, RED_COLOR, NORMAL_FONT);
     printf("This text has a red background\n\r");
 
     terminalTextAttributesReset();
-    terminalTextAttributes(BLACK, GREEN, NORMAL);
+    terminalTextAttributes(BLACK_COLOR, GREEN_COLOR, NORMAL_FONT);
     printf("This text has a green background\n\r");
     
     terminalTextAttributesReset();
-    terminalTextAttributes(BLACK, YELLOW, NORMAL);
+    terminalTextAttributes(BLACK_COLOR, YELLOW_COLOR, NORMAL_FONT);
     printf("This text has a yellow background\n\r");
     
     terminalTextAttributesReset();
-    terminalTextAttributes(WHITE, BLUE, NORMAL);
+    terminalTextAttributes(WHITE_COLOR, BLUE_COLOR, NORMAL_FONT);
     printf("This text has a blue background\n\r");
     
     terminalTextAttributesReset();
-    terminalTextAttributes(BLACK, MAGENTA, NORMAL);
+    terminalTextAttributes(BLACK_COLOR, MAGENTA_COLOR, NORMAL_FONT);
     printf("This text has a magenta background\n\r");
     
     terminalTextAttributesReset();
-    terminalTextAttributes(BLACK, CYAN, NORMAL);
+    terminalTextAttributes(BLACK_COLOR, CYAN_COLOR, NORMAL_FONT);
     printf("This text has a cyan background\n\r");
     
     terminalTextAttributesReset();
-    terminalTextAttributes(BLACK, WHITE, NORMAL);
+    terminalTextAttributes(BLACK_COLOR, WHITE_COLOR, NORMAL_FONT);
     printf("This text has a white background\n\r");
     
     terminalTextAttributesReset();
-    terminalTextAttributes(WHITE, BLACK, BOLD);
+    terminalTextAttributes(WHITE_COLOR, BLACK_COLOR, BOLD_FONT);
     printf("This text is bold\n\r");
 
     terminalTextAttributesReset();
-    terminalTextAttributes(WHITE, BLACK, UNDERSCORE);
+    terminalTextAttributes(WHITE_COLOR, BLACK_COLOR, UNDERSCORE_FONT);
     printf("This text is underscored\n\r");
 
     terminalTextAttributesReset();
-    terminalTextAttributes(WHITE, BLACK, BLINK);
+    terminalTextAttributes(WHITE_COLOR, BLACK_COLOR, BLINK_FONT);
     printf("This text is blinking\n\r");
 
     terminalTextAttributesReset();
-    terminalTextAttributes(WHITE, BLACK, REVERSE);
+    terminalTextAttributes(WHITE_COLOR, BLACK_COLOR, REVERSE_FONT);
     printf("This text is reversed\n\r");
 
     terminalTextAttributesReset();
     printf("This text is normal\n\r\n\r");
     
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Finished test message, type 'Help' for list of commands\n\r\n\r");
     terminalTextAttributesReset();
 

@@ -445,16 +445,16 @@ void __ISR(_ADC_FAULT_VECTOR, IPL1SRS) ADCFaultISR(void) {
 void printADCStatus(void) {
 
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, BOLD);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, BOLD_FONT);
     printf("Analog to Digital Converter Status:\n\r");
     
     // Print if ADC is on
-    if (ADCCON1bits.ON) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCCON1bits.ON) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC %s\n\r", ADCCON1bits.ON ? "Enabled" : "Disabled");
     
     // Print ADC resolution
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC7 Resolution: ");
     switch (ADCCON1bits.SELRES) {
      
@@ -477,12 +477,12 @@ void printADCStatus(void) {
     }
     
     // Print if fractional of integer mode
-    if (ADCCON1bits.FRACT) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCCON1bits.FRACT) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Fraction Format: %s\n\r", ADCCON1bits.FRACT ? "Fractional" : "Integer");
     
     // Print trigger source
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC Scan Trigger Source: ");
     switch (ADCCON1bits.STRGSRC) {
      
@@ -541,35 +541,35 @@ void printADCStatus(void) {
     }
     
     // print trigger level/edge
-    if (ADCCON1bits.STRGLVL) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCCON1bits.STRGLVL) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Scan Trigger Sensitivity: %s\n\r", ADCCON1bits.STRGLVL ? "Level" : "Edge");
     
     // print trigger suspension status
-    if (ADCCON3bits.TRGSUSP) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    if (ADCCON3bits.TRGSUSP) terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Scan Trigger Suspension: %s\n\r", ADCCON3bits.TRGSUSP ? "suspended" : "not suspended");
     
     // Print status of bandgap reference
-    if (ADCCON2bits.BGVRRDY) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCCON2bits.BGVRRDY) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Bandgap Reference Status: %s\n\r", ADCCON2bits.BGVRRDY ? "Ready" : "Not Ready");
     
     // Print bandgap fault status
-    if (ADCCON2bits.REFFLT) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    if (ADCCON2bits.REFFLT) terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Bandgap Reference is %s\n\r", ADCCON2bits.REFFLT ? "faulty" : "working properly");
     
     // Print SAMC7
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC7 Sample Time (TSAM7) = %d * TAD7\n\r", ADCCON2bits.SAMC + 2);
     
     // print ADC7 clock divider
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC7 Clock (TAD7) = %d * TQ\n\r", ADCCON2bits.ADCDIV * 2);
     
     // print ADC clock source
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC Clock Source (TCLK): ");
     switch (ADCCON3bits.ADCSEL) {
      
@@ -592,31 +592,31 @@ void printADCStatus(void) {
     }
     
     // Print control clock divider
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC Control Clock (TQ) = %d * TCLK\n\r", ADCCON3bits.CONCLKDIV * 2);
     
     // print digital enables
-    if (ADCCON3bits.DIGEN0) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCCON3bits.DIGEN0) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC0 is %s\n\r", ADCCON3bits.DIGEN0 ? "digital enabled" : "digital disabled");
-    if (ADCCON3bits.DIGEN1) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCCON3bits.DIGEN1) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC1 is %s\n\r", ADCCON3bits.DIGEN1 ? "digital enabled" : "digital disabled");
-    if (ADCCON3bits.DIGEN2) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCCON3bits.DIGEN2) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC2 is %s\n\r", ADCCON3bits.DIGEN2 ? "digital enabled" : "digital disabled");
-    if (ADCCON3bits.DIGEN3) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCCON3bits.DIGEN3) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC3 is %s\n\r", ADCCON3bits.DIGEN3 ? "digital enabled" : "digital disabled");
-    if (ADCCON3bits.DIGEN4) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCCON3bits.DIGEN4) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC4 is %s\n\r", ADCCON3bits.DIGEN4 ? "digital enabled" : "digital disabled");
-    if (ADCCON3bits.DIGEN7) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCCON3bits.DIGEN7) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC7 is %s\n\r", ADCCON3bits.DIGEN7 ? "digital enabled" : "digital disabled");
     
     // print voltage reference selection
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Voltage reference selection: ");
     switch (ADCCON3bits.VREFSEL) {
      
@@ -639,51 +639,51 @@ void printADCStatus(void) {
     }
     
     // Print analog enable status    
-    if (ADCANCONbits.ANEN0) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.ANEN0) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC0 is %s\n\r", ADCANCONbits.ANEN0 ? "analog enabled" : "analog disabled");
-    if (ADCANCONbits.ANEN1) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.ANEN1) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC1 is %s\n\r", ADCANCONbits.ANEN1 ? "analog enabled" : "analog disabled");
-    if (ADCANCONbits.ANEN2) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.ANEN2) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC2 is %s\n\r", ADCANCONbits.ANEN2 ? "analog enabled" : "analog disabled");
-    if (ADCANCONbits.ANEN3) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.ANEN3) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC3 is %s\n\r", ADCANCONbits.ANEN3 ? "analog enabled" : "analog disabled");
-    if (ADCANCONbits.ANEN4) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.ANEN4) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC4 is %s\n\r", ADCANCONbits.ANEN4 ? "analog enabled" : "analog disabled");
-    if (ADCANCONbits.ANEN7) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.ANEN7) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC7 is %s\n\r", ADCANCONbits.ANEN7 ? "analog enabled" : "analog disabled");
     
     // print wakeup status bits
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC warmup count exponent = %d\n\r", ADCANCONbits.WKUPCLKCNT);
     
     // print wakeup status bits
-    if (ADCANCONbits.WKRDY0) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.WKRDY0) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC0 is %s\n\r", ADCANCONbits.WKRDY0 ? "warmed up" : "cold");
-    if (ADCANCONbits.WKRDY1) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.WKRDY1) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC1 is %s\n\r", ADCANCONbits.WKRDY1 ? "warmed up" : "cold");
-    if (ADCANCONbits.WKRDY2) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.WKRDY2) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC2 is %s\n\r", ADCANCONbits.WKRDY2 ? "warmed up" : "cold");
-    if (ADCANCONbits.WKRDY3) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.WKRDY3) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC3 is %s\n\r", ADCANCONbits.WKRDY3 ? "warmed up" : "cold");
-    if (ADCANCONbits.WKRDY4) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.WKRDY4) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC4 is %s\n\r", ADCANCONbits.WKRDY4 ? "warmed up" : "cold");
-    if (ADCANCONbits.WKRDY7) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (ADCANCONbits.WKRDY7) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC7 is %s\n\r", ADCANCONbits.WKRDY7 ? "warmed up" : "cold");
     
     // print configuration data
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    ADC0 config data: 0x%08X\n\r", ADC0CFG);
     printf("    ADC1 config data: 0x%08X\n\r", ADC1CFG);
     printf("    ADC2 config data: 0x%08X\n\r", ADC2CFG);

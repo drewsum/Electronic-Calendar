@@ -747,12 +747,12 @@ char * getRevisionIDString(uint8_t revision_ID) {
 void printClockStatus(uint32_t input_sysclk) {
 
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, BOLD);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, BOLD_FONT);
     
     // Print table heading
     printf("System Clock Settings:\n\r");
 
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     // Print SYSCLK setting
     printf("    SYSCLK (System Clock) is set to: %s\n\r",
             stringFromClockSetting(input_sysclk));
@@ -782,7 +782,7 @@ void printClockStatus(uint32_t input_sysclk) {
             break;
             
         case 0b110:
-            terminalTextAttributes(RED, BLACK, BOLD);
+            terminalTextAttributes(RED_COLOR, BLACK_COLOR, BOLD_FONT);
             printf("Back-up Fast RC (BFRC) Oscillator\n\r");
             terminalTextAttributesReset();
             
@@ -795,12 +795,12 @@ void printClockStatus(uint32_t input_sysclk) {
     }
     
     // Print dream mode status
-    if (OSCCONbits.DRMEN) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (OSCCONbits.DRMEN) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\r    Dream Mode %s\n\r", OSCCONbits.DRMEN ? "Enabled" : "Disabled");
     
     // Print boot PLL status
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\r    Boot PLL Input Divider is set to: %d\n\r", (DEVCFG2bits.FPLLIDIV + 1));
     printf("    Boot PLL Multiplier is set to: %d\n\r", (DEVCFG2bits.FPLLMULT + 1));
     printf("    Boot PLL Output Divider is set to: %d\n\r", (DEVCFG2bits.FPLLODIV + 1));
@@ -810,7 +810,7 @@ void printClockStatus(uint32_t input_sysclk) {
     
     
     // Print changed PLL status
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\r    Operational PLL Input Divider is set to: %d\n\r", (SPLLCONbits.PLLIDIV + 1));
     printf("    Operational PLL Multiplier is set to: %d\n\r", (SPLLCONbits.PLLMULT + 1));
     printf("    Operational PLL Output Divider is set to: %d\n\r", (SPLLCONbits.PLLODIV + 1));
@@ -822,14 +822,14 @@ void printClockStatus(uint32_t input_sysclk) {
     // Determine refclk1
     if (REFO1CONbits.ON == 0) {
      
-        terminalTextAttributes(RED, BLACK, NORMAL);
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("\n\r    REFCLK1 (Reference Clock 1) Disabled\n\r");
         
     }
     
     else {
      
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("    REFCLK1 (Reference Clock 1) is set to: %s\n\r",
                 stringFromClockSetting(input_sysclk / (REFO1CONbits.RODIV + 1)));
         
@@ -838,14 +838,14 @@ void printClockStatus(uint32_t input_sysclk) {
     // Determine refclk2
     if (REFO2CONbits.ON == 0) {
      
-        terminalTextAttributes(RED, BLACK, NORMAL);
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("    REFCLK2 (Reference Clock 2) Disabled\n\r");
         
     }
     
     else {
      
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("    REFCLK2 (Reference Clock 2) is set to: %s\n\r",
                 stringFromClockSetting(input_sysclk / (REFO2CONbits.RODIV + 1)));
         
@@ -854,14 +854,14 @@ void printClockStatus(uint32_t input_sysclk) {
     // Determine refclk3
     if (REFO3CONbits.ON == 0) {
      
-        terminalTextAttributes(RED, BLACK, NORMAL);
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("    REFCLK3 (Reference Clock 3) Disabled\n\r");
         
     }
     
     else {
      
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("    REFCLK3 (Reference Clock 3) is set to: %s\n\r",
                 stringFromClockSetting(input_sysclk / (REFO3CONbits.RODIV + 1)));
         
@@ -870,20 +870,20 @@ void printClockStatus(uint32_t input_sysclk) {
     // Determine refclk4
     if (REFO4CONbits.ON == 0) {
      
-        terminalTextAttributes(RED, BLACK, NORMAL);
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("    REFCLK4 (Reference Clock 4) Disabled\n\r");
         
     }
     
     else {
      
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("    REFCLK4 (Reference Clock 4) is set to: %s\n\r",
                 stringFromClockSetting(input_sysclk / (REFO4CONbits.RODIV + 1)));
         
     }
     
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     
     // Determine PBCLK1 (Cannot be disabled)
     printf("\n\r    PBCLK1 (Peripheral Bus Clock 1) is set to: %s\n\r",
@@ -906,11 +906,11 @@ void printClockStatus(uint32_t input_sysclk) {
             stringFromClockSetting(input_sysclk / (PB5DIVbits.PBDIV + 1)));
     
     // No PBCLK6
-    terminalTextAttributes(RED, BLACK, NORMAL);
+    terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    No Peripheral Bus Clock 6 Present\n\r");
     
     // Determine PBCLK7
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    PBCLK7 (Peripheral Bus Clock 7) is set to: %s\n\r",
             stringFromClockSetting(input_sysclk / (PB7DIVbits.PBDIV + 1)));
     
@@ -919,34 +919,34 @@ void printClockStatus(uint32_t input_sysclk) {
             stringFromClockSetting(input_sysclk / (PB8DIVbits.PBDIV + 1)));
     
     // Print clock lock status
-    if (OSCCONbits.CLKLOCK) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (OSCCONbits.CLKLOCK) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\r    Clock Lock: %s\n\r", OSCCONbits.CLKLOCK ? "Enabled" : "Disabled");
     
     // Print clock failure status
-    if (OSCCONbits.CF) terminalTextAttributes(RED, BLACK, NORMAL);
-    else terminalTextAttributes(GREEN, BLACK, NORMAL);
+    if (OSCCONbits.CF) terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\r    Clock Fail: %s\n\r", OSCCONbits.CF ? "Detected" : "Not Detected");
     
     // Print Sleep Mode status
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\r    WAIT instruction enters: %s Mode\n\r", OSCCONbits.CF ? "Sleep" : "Idle");
     
     // Print status of oscillators that are ready
-    if (CLKSTATbits.LPRCRDY) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (CLKSTATbits.LPRCRDY) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\r    LPRC Oscillator Status: %s\n\r", CLKSTATbits.LPRCRDY ? "Ready" : "Not Ready");
-    if (CLKSTATbits.SOSCRDY) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (CLKSTATbits.SOSCRDY) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    SOSC Oscillator Status: %s\n\r", CLKSTATbits.SOSCRDY ? "Ready" : "Not Ready");
-    if (CLKSTATbits.POSCRDY) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (CLKSTATbits.POSCRDY) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    POSC Oscillator Status: %s\n\r", CLKSTATbits.POSCRDY ? "Ready" : "Not Ready");
-    if (CLKSTATbits.DIVSPLLRDY) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (CLKSTATbits.DIVSPLLRDY) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    SPLL Oscillator Status: %s\n\r", CLKSTATbits.DIVSPLLRDY ? "Ready" : "Not Ready");
-    if (CLKSTATbits.FRCRDY) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (CLKSTATbits.FRCRDY) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    FRC Oscillator Status: %s\n\r", CLKSTATbits.FRCRDY ? "Ready" : "Not Ready");
 
     terminalTextAttributesReset();

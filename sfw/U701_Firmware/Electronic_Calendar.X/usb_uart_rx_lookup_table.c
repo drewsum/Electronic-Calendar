@@ -19,10 +19,10 @@
 usb_uart_command_function_t helpCommandFunction(char * input_str) {
 
     terminalTextAttributesReset();
-    terminalTextAttributes(YELLOW, BLACK, BOLD);
+    terminalTextAttributes(YELLOW_COLOR, BLACK_COLOR, BOLD_FONT);
     printf("Supported Commands:\n\r");
     
-    terminalTextAttributes(YELLOW, BLACK, NORMAL);
+    terminalTextAttributes(YELLOW_COLOR, BLACK_COLOR, NORMAL_FONT);
     
     // iterate over usb_uart_commands hash table and print the name of all commands and their help messages
     usb_uart_command_t  *current_command, *temp;
@@ -32,13 +32,13 @@ usb_uart_command_function_t helpCommandFunction(char * input_str) {
         
     }
     
-    terminalTextAttributes(YELLOW, BLACK, NORMAL);
+    terminalTextAttributes(YELLOW_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\r\nHelp messages and neutral responses appear in yellow\n\r");
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("System parameters and affirmative responses appear in green\n\r");
-    terminalTextAttributes(CYAN, BLACK, NORMAL);
+    terminalTextAttributes(CYAN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Measurement responses appear in cyan\n\r");
-    terminalTextAttributes(RED, BLACK, NORMAL);
+    terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Errors and negative responses appear in red\n\r");
     terminalTextAttributesReset();
     printf("User input appears in white\n\r");
@@ -61,7 +61,7 @@ usb_uart_command_function_t clearCommand(char * input_str) {
 
 usb_uart_command_function_t idnCommand(char * input_str) {
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Electronic Calendar by Drew Maatman, 2019\r\n");
     terminalTextAttributesReset();    
 }
@@ -69,7 +69,7 @@ usb_uart_command_function_t idnCommand(char * input_str) {
 usb_uart_command_function_t mcuIdCommand(char * input_str) {
     
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     
     // Print serial number
     printf("    PIC32MZ Serial Number retrieved from Flash: %s\n\r",
@@ -114,7 +114,7 @@ usb_uart_command_function_t clockStatusCommand(char * input_str) {
 usb_uart_command_function_t deviceOnTimeComand(char * input_str) {
  
     terminalTextAttributesReset();
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("On time since last device reset: %s\n\r", 
                 getStringSecondsAsTime(device_on_time_counter));
         terminalTextAttributesReset();
@@ -127,7 +127,7 @@ usb_uart_command_function_t errorStatusCommand(char * input_str) {
     printErrorHandlerStatus();
 
     // Print help message
-    terminalTextAttributes(YELLOW, BLACK, NORMAL);
+    terminalTextAttributes(YELLOW_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\rCall 'Clear Errors' command to clear any errors that have been set\n\r");
     terminalTextAttributesReset();
     
@@ -142,7 +142,7 @@ usb_uart_command_function_t clearErrorsCommand(char * input_str) {
     update_error_leds_flag = 1;
 
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Error Handler flags cleared\n\r");
     terminalTextAttributesReset();
     
@@ -162,13 +162,13 @@ usb_uart_command_function_t causeOfResetCOmmand(char * input_str) {
             reset_cause == External_Reset ||
             reset_cause == BOR_Reset) {
 
-        terminalTextAttributes(RED, BLACK, NORMAL);
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
 
     }
 
     else {
 
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
 
     }
 
@@ -187,9 +187,9 @@ usb_uart_command_function_t pmdStatusCommand(char * input_str) {
 usb_uart_command_function_t timeAndDateCommand(char * input_str) {
  
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, BOLD);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, BOLD_FONT);
     printf("Current system time and date:\r\n   ");
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printTimeAndDate();
     terminalTextAttributesReset();
     
@@ -208,7 +208,7 @@ usb_uart_command_function_t setDateCommand(char * input_str) {
 
         // print out what we just did
         terminalTextAttributesReset();
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("Set RTCC date as %02u/%02u/%04u\r\n", rtcc_shadow.month, rtcc_shadow.day, rtcc_shadow.year);
         terminalTextAttributesReset();
 
@@ -218,7 +218,7 @@ usb_uart_command_function_t setDateCommand(char * input_str) {
     else {
 
         terminalTextAttributesReset();
-        terminalTextAttributes(RED, BLACK, NORMAL);
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("Enter a valid date after 01/01/2000. User entered %02u/%02u/%04u\r\n", read_month, read_day, read_year);
         terminalTextAttributesReset();
 
@@ -236,7 +236,7 @@ usb_uart_command_function_t setTimeCommand(char * input_str) {
 
     // print out what we just did
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Set RTCC time as %02u:%02u:%02u\r\n", rtcc_shadow.hours, rtcc_shadow.minutes, rtcc_shadow.seconds);
     terminalTextAttributesReset();
     
@@ -261,7 +261,7 @@ usb_uart_command_function_t setWeekdayCommand(char * input_str) {
 
         // print out what we just did
         terminalTextAttributesReset();
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
         rtccWriteWeekday(read_weekday_enum);
         printf("Set RTCC weekday as %s\r\n", getDayOfWeek(rtcc_shadow.weekday));
         terminalTextAttributesReset();
@@ -271,7 +271,7 @@ usb_uart_command_function_t setWeekdayCommand(char * input_str) {
     else {
 
         terminalTextAttributesReset();
-        terminalTextAttributes(RED, BLACK, NORMAL);
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("Please enter a valid day of the weekday. Input is case sensitive\r\n");
         terminalTextAttributesReset();
 
@@ -290,7 +290,7 @@ usb_uart_command_function_t telemetryCommand(char * input_str) {
     if (error_handler.flags.ADC_configuration_error) {
          
             terminalTextAttributesReset();
-            terminalTextAttributes(RED, BLACK, NORMAL);
+            terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
             printf("ADC Configuration Error\n\r");
             terminalTextAttributesReset();
             
@@ -299,9 +299,9 @@ usb_uart_command_function_t telemetryCommand(char * input_str) {
         else {
 
             terminalTextAttributesReset();
-            terminalTextAttributes(CYAN, BLACK, BOLD);
+            terminalTextAttributes(CYAN_COLOR, BLACK_COLOR, BOLD_FONT);
             printf("Most recent system telemetry:\n\r");
-            terminalTextAttributes(CYAN, BLACK, NORMAL);
+            terminalTextAttributes(CYAN_COLOR, BLACK_COLOR, NORMAL_FONT);
             printf("    +12V Input Voltage: %+0.3f V\n\r", telemetry.current.params.pos12_voltage);
             printf("    +12V Input Current: %+0.3f A\n\r", telemetry.current.params.pos12_current);
             printf("    +12V Input MOSFET Temperature: %+0.3f C\n\r", telemetry.current.params.input_temperature);
@@ -325,7 +325,7 @@ usb_uart_command_function_t minTelemetryCommand(char * input_str) {
     if (error_handler.flags.ADC_configuration_error) {
          
             terminalTextAttributesReset();
-            terminalTextAttributes(RED, BLACK, NORMAL);
+            terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
             printf("ADC Configuration Error\n\r");
             terminalTextAttributesReset();
             
@@ -334,9 +334,9 @@ usb_uart_command_function_t minTelemetryCommand(char * input_str) {
         else {
 
             terminalTextAttributesReset();
-            terminalTextAttributes(CYAN, BLACK, BOLD);
+            terminalTextAttributes(CYAN_COLOR, BLACK_COLOR, BOLD_FONT);
             printf("Minimum system telemetry recorded:\n\r");
-            terminalTextAttributes(CYAN, BLACK, NORMAL);
+            terminalTextAttributes(CYAN_COLOR, BLACK_COLOR, NORMAL_FONT);
             printf("    +12V Input Voltage: %+0.3f V\n\r", telemetry.min.params.pos12_voltage);
             printf("    +12V Input Current: %+0.3f A\n\r", telemetry.min.params.pos12_current);
             printf("    +12V Input MOSFET Temperature: %+0.3f C\n\r", telemetry.min.params.input_temperature);
@@ -360,7 +360,7 @@ usb_uart_command_function_t maxTelemetryCommand(char * input_str) {
     if (error_handler.flags.ADC_configuration_error) {
          
             terminalTextAttributesReset();
-            terminalTextAttributes(RED, BLACK, NORMAL);
+            terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
             printf("ADC Configuration Error\n\r");
             terminalTextAttributesReset();
             
@@ -369,9 +369,9 @@ usb_uart_command_function_t maxTelemetryCommand(char * input_str) {
         else {
 
             terminalTextAttributesReset();
-            terminalTextAttributes(CYAN, BLACK, BOLD);
+            terminalTextAttributes(CYAN_COLOR, BLACK_COLOR, BOLD_FONT);
             printf("Maximum system telemetry recorded:\n\r");
-            terminalTextAttributes(CYAN, BLACK, NORMAL);
+            terminalTextAttributes(CYAN_COLOR, BLACK_COLOR, NORMAL_FONT);
             printf("    +12V Input Voltage: %+0.3f V\n\r", telemetry.max.params.pos12_voltage);
             printf("    +12V Input Current: %+0.3f A\n\r", telemetry.max.params.pos12_current);
             printf("    +12V Input MOSFET Temperature: %+0.3f C\n\r", telemetry.max.params.input_temperature);
@@ -405,7 +405,7 @@ usb_uart_command_function_t setUnixTimeCommand(char * input_str) {
 
     // print out what we just did
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Set RTCC time as %02u:%02u:%02u\r\n", rtcc_shadow.hours, rtcc_shadow.minutes, rtcc_shadow.seconds);
     printf("Set RTCC date as %02u/%02u/%04u\r\n", rtcc_shadow.month, rtcc_shadow.day, rtcc_shadow.year);
     printf("Set RTCC weekday as %s\r\n", getDayOfWeek(rtcc_shadow.weekday));
@@ -427,7 +427,7 @@ usb_uart_command_function_t vbatIsolateCommand(char * input_str) {
     
     if (read_isolation > 1) {
      
-        terminalTextAttributes(RED, BLACK, BOLD);
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, BOLD_FONT);
         printf("Please enter a valid VBAT isolation state: 1 for true (isolated) / 0 for false (connected)\r\n");
         
     }
@@ -436,8 +436,8 @@ usb_uart_command_function_t vbatIsolateCommand(char * input_str) {
      
         nVBAT_ISOLATE_PIN = (read_isolation & 0b1);
         pgood_status.VBAT_ISOLATE = !(nVBAT_ISOLATE_PIN);
-        if (pgood_status.VBAT_ISOLATE) terminalTextAttributes(GREEN, BLACK, NORMAL);
-        else terminalTextAttributes(RED, BLACK, NORMAL);
+        if (pgood_status.VBAT_ISOLATE) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+        else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("    Backup Battery is %s Ideal Diode\n\r", pgood_status.VBAT_ISOLATE ? "connected to" : "isolated from");
         
     }

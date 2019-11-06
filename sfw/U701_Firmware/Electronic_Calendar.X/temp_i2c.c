@@ -173,7 +173,7 @@ void TEMP_I2C_Initialize(void)
     
     // setup I2C clocking
     // clock source is PBCLK2
-    I2C1BRG = 0x001C;
+    I2C1BRG = 0x0020;
     
     // clear the interrupt flags
     clearInterruptFlag(I2C1_Bus_Collision_Event);

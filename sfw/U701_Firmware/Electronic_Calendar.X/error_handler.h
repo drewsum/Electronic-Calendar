@@ -25,7 +25,7 @@
 // set this flag high to update the error LEDs the next loop through main()
 uint8_t update_error_leds_flag;
 
-#define ERROR_HANDLER_NUM_FLAGS  24
+#define ERROR_HANDLER_NUM_FLAGS  21
 
 // Error handler structure
 // Follow the convention in XC32 user's guide section 8.6.2
@@ -49,10 +49,6 @@ union error_handler_u {
         unsigned ADC_configuration_error                : 8;    // ADC could not be configured properly
         unsigned ADC_reference_fault                    : 8;
         unsigned clock_failure                          : 8;
-        unsigned CPU_general_exception                  : 8;
-        unsigned CPU_TLB_refill_exception               : 8;
-        unsigned CPU_cache_exception                    : 8;
-        unsigned CPU_bootstrap_exception                : 8;
         unsigned temp_I2C_bus_collision                 : 8;
         unsigned input_temp_sens_I2C_fault              : 8;
         unsigned pos3p3_temp_sens_I2C_fault             : 8;
@@ -84,10 +80,6 @@ const char * const error_handler_flag_names[] = {
     "ADC Configuration",
     "ADC Reference",
     "Clock Failure",
-    "CPU General Exception",
-    "CPU TLB Refill Exception",
-    "CPU Cache Exception",
-    "CPU Bootstrap Exception",
     "Temp I2C Bus Collision",
     "Input Temperature Sensor I2C",
     "+3.3V Power Supply Temperature Sensor I2C",

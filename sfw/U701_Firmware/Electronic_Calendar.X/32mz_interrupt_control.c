@@ -7013,30 +7013,30 @@ char * getInterruptNameStringPadded(interrupt_source_t input_interrupt) {
 void printInterruptStatus(void) {
     
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, BOLD);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, BOLD_FONT);
     printf("Interrupt Controller Status:\n\r");
 
     terminalTextAttributesReset();
     
-    if (getGlobalInterruptsState()) terminalTextAttributes(GREEN, BLACK, NORMAL);
-            else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (getGlobalInterruptsState()) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+            else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Global Interrupt Enable: %s\n\r", getGlobalInterruptsState() ? "T" : "F");
     
     // Print interrupt vector mode
-    if (INTCONbits.MVEC) terminalTextAttributes(GREEN, BLACK, NORMAL);
-            else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (INTCONbits.MVEC) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+            else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Interrupt Vector Mode: %s\n\r", INTCONbits.MVEC ? "Multi-Vector" : "Single-Vector");
 
     // Print interrupt priority shadow register settings
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Interrupt Priority Shadow Register Setting: 0x%08X\n\r", PRISS);
     
-    terminalTextAttributes(GREEN, BLACK, REVERSE);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, REVERSE_FONT);
     printf("\n\rInterrupts in list are marked green if they are enabled or have IPL > 0\n\r");
     
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\rInterrupt sources:\n\r");
-    terminalTextAttributes(GREEN, BLACK, REVERSE);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, REVERSE_FONT);
     printf("###  Name                     EN?  IPL ISL IRQ?\n\r");
     
     terminalTextAttributesReset();
@@ -7048,15 +7048,15 @@ void printInterruptStatus(void) {
         if (i % 2 == 0) {
          
             
-            if (getInterruptEnable(i) || getInterruptPriority(i) > 0) terminalTextAttributes(GREEN, BLACK, NORMAL);
-            else terminalTextAttributes(RED, BLACK, NORMAL);
+            if (getInterruptEnable(i) || getInterruptPriority(i) > 0) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+            else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
             
         }
         
         else {
          
-            if (getInterruptEnable(i) || getInterruptPriority(i) > 0) terminalTextAttributes(GREEN, BLACK, REVERSE);
-            else terminalTextAttributes(RED, BLACK, REVERSE);
+            if (getInterruptEnable(i) || getInterruptPriority(i) > 0) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, REVERSE_FONT);
+            else terminalTextAttributes(RED_COLOR, BLACK_COLOR, REVERSE_FONT);
             
         }
         

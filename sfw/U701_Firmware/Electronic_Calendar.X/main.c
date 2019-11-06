@@ -65,7 +65,7 @@ void main(void) {
     terminalSetCursorHome();
     
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, BOLD);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, BOLD_FONT);
     printf("Electronic Calendar\r\n");
     printf("Created by Drew Maatman, 2019\r\n");
     terminalTextAttributesReset();
@@ -81,13 +81,13 @@ void main(void) {
             reset_cause == External_Reset ||
             reset_cause == BOR_Reset) {
     
-        terminalTextAttributes(RED, BLACK, NORMAL);
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
         
     }
     
     else {
      
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
         
     }
     
@@ -96,7 +96,7 @@ void main(void) {
     
     printf("\r\nCause of most recent device reset: %s\r\n\r\n", getResetCauseString(reset_cause));
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("Beginning Peripheral Initialization:\r\n");
     printf("    Oscillators, Phase-Locked Loop, and System Clocks Initialized\n\r");
     printf("    Interrupt Controller Initialized, Global Interrupts Enabled\n\r");
@@ -150,9 +150,9 @@ void main(void) {
             error_handler.flags.pos3p3_temp_sens_I2C_fault ||
             error_handler.flags.temp_I2C_bus_collision) {
         
-        terminalTextAttributes(RED, BLACK, NORMAL);
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("    Temperature Sensor I2C Bus Initialization  Failed\r\n");
-        terminalTextAttributes(GREEN, BLACK, NORMAL);
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
         
     }
     
@@ -161,7 +161,7 @@ void main(void) {
         printf("    Digital Temperature Sensors Initialized\r\n");
     
     }
-        
+    
     // Disable RESET LED
     RESET_LED_PIN = LOW;
     printf("    Reset LED Disabled\r\n");
@@ -171,7 +171,7 @@ void main(void) {
     printf("    Date Decoding Enabled\r\n");
     
     terminalTextAttributesReset();
-    terminalTextAttributes(YELLOW, BLACK, NORMAL);
+    terminalTextAttributes(YELLOW_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\rType 'Help' for list of supported commands\n\r\n\r");
     terminalTextAttributesReset();
     
@@ -209,8 +209,7 @@ void main(void) {
         }
         
         // check to see if we have a new usb uart string to parse
-        // if (usb_uart_rx_parse_request && strlen(usb_uart_rx_buffer) > 2) {
-        if (usb_uart_rx_parse_request) {
+        if (usb_uart_rx_parse_request && strlen(usb_uart_rx_buffer) > 2) {
         
             // Determine length of received string
             uint32_t length = strlen(usb_uart_rx_buffer);

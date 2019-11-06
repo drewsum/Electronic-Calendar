@@ -101,10 +101,10 @@ void verifyThumbTightEnough(void) {
 void printWatchdogStatus(void) {
 
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, BOLD);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, BOLD_FONT);
     printf("Watchdog Timer Status:\n\r");
 
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Postscalar: ");
     
     switch (DEVCFG1bits.WDTPS) {
@@ -232,8 +232,8 @@ void printWatchdogStatus(void) {
     }
     
     // Print if WDT is enabled
-    if (WDTCONbits.ON) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (WDTCONbits.ON) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("\n\r    WDT Enabled: %c\n\r",
             WDTCONbits.ON ? 'T' : 'F');
     
@@ -245,10 +245,10 @@ void printWatchdogStatus(void) {
 void printDeadmanStatus(void) {
 
     terminalTextAttributesReset();
-    terminalTextAttributes(GREEN, BLACK, BOLD);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, BOLD_FONT);
     printf("Deadman Timer Status:\n\r");
     
-    terminalTextAttributes(GREEN, BLACK, NORMAL);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    Instruction Fetch Count Limit: ");
     
     uint32_t deadmanCountLimit = (DEVCFG1bits.DMTCNT + 1) * 256;
@@ -298,8 +298,8 @@ void printDeadmanStatus(void) {
     }
     
     // Print if DMT is enabled
-    if (DMTCONbits.ON) terminalTextAttributes(GREEN, BLACK, NORMAL);
-    else terminalTextAttributes(RED, BLACK, NORMAL);
+    if (DMTCONbits.ON) terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    else terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
     printf("    DMT Enabled: %c\n\r",
             DMTCONbits.ON ? 'T' : 'F');
     

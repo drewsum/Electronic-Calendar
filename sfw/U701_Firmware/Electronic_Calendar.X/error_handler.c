@@ -45,9 +45,6 @@ void __attribute__((nomips16)) _general_exception_handler(void) {
     kickTheDog();
     holdThumbTighter();
     
-    // log error
-    error_handler.flags.CPU_general_exception = 1;
-    
     exceptionPrint(" \033[0;31;40mCPU General Exception! EXCCODE: ");
     
     uint8_t exception_code = (_CP0_GET_CAUSE() >> 2) & 0b11111;
@@ -71,9 +68,6 @@ void __attribute__((nomips16)) _simple_tlb_refill_exception_handler(void) {
     kickTheDog();
     holdThumbTighter();
     
-    // log error
-    error_handler.flags.CPU_TLB_refill_exception = 1;
-    
     exceptionPrint("\033[0;31;40mCPU TLB Refill Exception!\n\r");
     
     // Give up
@@ -91,9 +85,6 @@ void __attribute__((nomips16)) _cache_err_exception_handler(void) {
     // Clear watchdog to give user time to see error state
     kickTheDog();
     holdThumbTighter();
-    
-    // log error
-    error_handler.flags.CPU_cache_exception = 1;
     
     exceptionPrint("\033[0;31;40mCPU Cache Exception!\n\r");
     
@@ -113,9 +104,6 @@ void __attribute__((nomips16)) _bootstrap_exception_handler(void) {
     kickTheDog();
     holdThumbTighter();
     
-    // log error
-    error_handler.flags.CPU_bootstrap_exception = 1;
-    
     exceptionPrint("\033[0;31;40mCPU Bootstrap Exception!\n\r");
     
     // Give up
@@ -127,7 +115,7 @@ void __attribute__((nomips16)) _bootstrap_exception_handler(void) {
 // This function prints the status of the error handler flags
 void printErrorHandlerStatus(void) {
  
-    terminalTextAttributes(GREEN, BLACK, BOLD);
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, BOLD_FONT);
     
     // Print heading
     printf("Error Handler Status:\n\r");
@@ -136,8 +124,8 @@ void printErrorHandlerStatus(void) {
     uint32_t index;
     for (index = 0; index < ERROR_HANDLER_NUM_FLAGS; index++) {
 
-        if (error_handler.flag_array[index]) terminalTextAttributes(RED, BLACK, NORMAL);
-        else terminalTextAttributes(GREEN, BLACK, NORMAL);
+        if (error_handler.flag_array[index]) terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
+        else terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("    %s Error %s\n\r", 
                 error_handler_flag_names[index],
                 error_handler.flag_array[index] ? "has occurred" : "has not occurred");
@@ -175,7 +163,8 @@ void updateErrorLEDs(void) {
             error_handler.flags.amb_temp_sens_I2C_fault ||
             error_handler.flags.bckp_temp_sens_I2C_fault ||
             error_handler.flags.WDT_timeout ||
-            error_handler.flags.DMT_timeout) {
+            error_handler.flags.DMT_timeout ||
+            error_handler.flags.vdd_brownout) {
         
         OTHER_ERROR_LED_PIN = HIGH;
         
