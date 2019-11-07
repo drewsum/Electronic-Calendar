@@ -38,6 +38,10 @@ void main(void) {
     // Disable global interrupts so clocks can be initialized properly
     disableGlobalInterrupts();
     
+    // Save the cause of the most recent device reset
+    // This also checks for configuration errors
+    reset_cause = getResetCause();
+    
     // Initialize system clocks
     clockInitialize();
     
@@ -46,10 +50,6 @@ void main(void) {
     
     // Enable Global Interrupts
     enableGlobalInterrupts();
-    
-    // Save the cause of the most recent device reset
-    // This also checks for configuration errors
-    reset_cause = getResetCause();
     
     // Initialize GPIO pins to startup settings
     gpioInitialize();
@@ -123,7 +123,6 @@ void main(void) {
             
     // Setup the watchdog timer
     watchdogTimerInitialize();
-    kickTheDog();
     printf("    Watchdog Timer Initialized\n\r");
     
     // Startup the deadman timer
@@ -143,24 +142,6 @@ void main(void) {
     // setup temperature sensor I2C bus
     TEMP_I2C_Initialize();
     printf("    Temperature Sensor I2C Bus Initialized\r\n");
-    MCP9804TempSensorInitialize();
-    if (    error_handler.flags.amb_temp_sens_I2C_fault ||
-            error_handler.flags.bckp_temp_sens_I2C_fault ||
-            error_handler.flags.input_temp_sens_I2C_fault ||
-            error_handler.flags.pos3p3_temp_sens_I2C_fault ||
-            error_handler.flags.temp_I2C_bus_collision) {
-        
-        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
-        printf("    Temperature Sensor I2C Bus Initialization  Failed\r\n");
-        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
-        
-    }
-    
-    else {
-        
-        printf("    Digital Temperature Sensors Initialized\r\n");
-    
-    }
     
     // Disable RESET LED
     RESET_LED_PIN = LOW;

@@ -22,8 +22,8 @@ void prefetchInitialize(void) {
     // Set prefetch module access time to two wait states
     PRECONbits.PFMWS = 0b010;
     
-    // Enable predictive prefetch for any memory address
-    PRECONbits.PREFEN = 0b11;
+    // Enable predictive prefetch for CPU instructions only
+    PRECONbits.PREFEN = 0b01;
     
     // Enable prefetch SEC interrupt
     enableInterrupt(Prefetch_Module_SEC_Event);

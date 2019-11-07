@@ -131,13 +131,13 @@ void TEMP_I2C_Stop(TEMP_I2C_MESSAGE_STATUS completion_code);
  Section: Local Variables
 */
 
-static I2C_TR_QUEUE_ENTRY                  i2c2_tr_queue[TEMP_I2C_CONFIG_TR_QUEUE_LENGTH];
-static I2C_OBJECT                          i2c2_object;
-static I2C_MASTER_STATES                   i2c2_state = S_MASTER_IDLE;
-static uint8_t                             i2c2_trb_count = 0;
+static I2C_TR_QUEUE_ENTRY                  temp_i2c_tr_queue[TEMP_I2C_CONFIG_TR_QUEUE_LENGTH];
+static I2C_OBJECT                          temp_i2c_object;
+static I2C_MASTER_STATES                   temp_i2c_state = S_MASTER_IDLE;
+static uint8_t                             temp_i2c_trb_count = 0;
 
-static TEMP_I2C_TRANSACTION_REQUEST_BLOCK      *p_i2c2_trb_current = NULL;
-static volatile I2C_TR_QUEUE_ENTRY         *p_i2c2_current = NULL;
+static TEMP_I2C_TRANSACTION_REQUEST_BLOCK      *p_temp_i2c_trb_current = NULL;
+static volatile I2C_TR_QUEUE_ENTRY         *p_temp_i2c_current = NULL;
 
 
 /**
@@ -146,12 +146,12 @@ static volatile I2C_TR_QUEUE_ENTRY         *p_i2c2_current = NULL;
 
 void TEMP_I2C_Initialize(void)
 {
-    i2c2_object.pTrHead = i2c2_tr_queue;
-    i2c2_object.pTrTail = i2c2_tr_queue;
-    i2c2_object.trStatus.s.empty = true;
-    i2c2_object.trStatus.s.full = false;
+    temp_i2c_object.pTrHead = temp_i2c_tr_queue;
+    temp_i2c_object.pTrTail = temp_i2c_tr_queue;
+    temp_i2c_object.trStatus.s.empty = true;
+    temp_i2c_object.trStatus.s.full = false;
 
-    i2c2_object.i2cErrors = 0;
+    temp_i2c_object.i2cErrors = 0;
 
     disableInterrupt(I2C1_Master_Event);
     setInterruptPriority(I2C1_Master_Event, 4);
@@ -159,21 +159,21 @@ void TEMP_I2C_Initialize(void)
     
     disableInterrupt(I2C1_Bus_Collision_Event);
     setInterruptPriority(I2C1_Bus_Collision_Event, 4);
-    setInterruptSubpriority(I2C1_Bus_Collision_Event, 0);
+    setInterruptSubpriority(I2C1_Bus_Collision_Event, 1);
     
     // setup I2C1 CON register
-    I2C1CONbits.PCIE = 0;       // disable stop condition interrupt (slave mode only)
-    I2C1CONbits.SCIE = 0;       // disable start condition interrupt (slave mode only)
-    I2C1CONbits.BOEN = 0;       // disable buffer overwrite interrupt (slave mode only)
+    //I2C1CONbits.PCIE = 0;       // disable stop condition interrupt (slave mode only)
+    //I2C1CONbits.SCIE = 0;       // disable start condition interrupt (slave mode only)
+    //I2C1CONbits.BOEN = 0;       // disable buffer overwrite interrupt (slave mode only)
     I2C1CONbits.SDAHT = 0;      // 100 ns hold time after falling edge of SCL
-    I2C1CONbits.SBCDE = 0;      // disable slave bus collision interrupt
+    //I2C1CONbits.SBCDE = 0;      // disable slave bus collision interrupt
     I2C1CONbits.SIDL = 1;       // disable in IDLE mode
     I2C1CONbits.DISSLW = 0;     // enable slew rate control
     I2C1CONbits.SMEN = 0;       // disable SMBus threshold levels
     
     // setup I2C clocking
     // clock source is PBCLK2
-    I2C1BRG = 0x0020;
+    I2C1BRG = 0x0021;
     
     // clear the interrupt flags
     clearInterruptFlag(I2C1_Bus_Collision_Event);
@@ -193,11 +193,11 @@ uint8_t TEMP_I2C_ErrorCountGet(void)
 {
     uint8_t ret;
 
-    ret = i2c2_object.i2cErrors;
+    ret = temp_i2c_object.i2cErrors;
     return ret;
 }
 
-void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
+void __ISR(_I2C1_MASTER_VECTOR, IPL4SRS) TEMP_I2C_MASTER_ISR ( void )
 {
   
     static uint8_t  *pi2c_buf_ptr;
@@ -213,52 +213,52 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
     {
         // clear the Write colision
         TEMP_I2C_WRITE_COLLISION_STATUS_BIT = 0;
-        i2c2_state = S_MASTER_IDLE;
-        *(p_i2c2_current->pTrFlag) = TEMP_I2C_MESSAGE_FAIL;
+        temp_i2c_state = S_MASTER_IDLE;
+        *(p_temp_i2c_current->pTrFlag) = TEMP_I2C_MESSAGE_FAIL;
 
         // reset the buffer pointer
-        p_i2c2_current = NULL;
+        p_temp_i2c_current = NULL;
 
         return;
     }
 
     /* Handle the correct i2c state */
-    switch(i2c2_state)
+    switch(temp_i2c_state)
     {
         case S_MASTER_IDLE:    /* In reset state, waiting for data to send */
 
-            if(i2c2_object.trStatus.s.empty != true)
+            if(temp_i2c_object.trStatus.s.empty != true)
             {
                 // grab the item pointed by the head
-                p_i2c2_current     = i2c2_object.pTrHead;
-                i2c2_trb_count     = i2c2_object.pTrHead->count;
-                p_i2c2_trb_current = i2c2_object.pTrHead->ptrb_list;
+                p_temp_i2c_current     = temp_i2c_object.pTrHead;
+                temp_i2c_trb_count     = temp_i2c_object.pTrHead->count;
+                p_temp_i2c_trb_current = temp_i2c_object.pTrHead->ptrb_list;
 
-                i2c2_object.pTrHead++;
+                temp_i2c_object.pTrHead++;
 
                 // check if the end of the array is reached
-                if(i2c2_object.pTrHead == (i2c2_tr_queue + TEMP_I2C_CONFIG_TR_QUEUE_LENGTH))
+                if(temp_i2c_object.pTrHead == (temp_i2c_tr_queue + TEMP_I2C_CONFIG_TR_QUEUE_LENGTH))
                 {
                     // adjust to restart at the beginning of the array
-                    i2c2_object.pTrHead = i2c2_tr_queue;
+                    temp_i2c_object.pTrHead = temp_i2c_tr_queue;
                 }
 
                 // since we moved one item to be processed, we know
                 // it is not full, so set the full status to false
-                i2c2_object.trStatus.s.full = false;
+                temp_i2c_object.trStatus.s.full = false;
 
                 // check if the queue is empty
-                if(i2c2_object.pTrHead == i2c2_object.pTrTail)
+                if(temp_i2c_object.pTrHead == temp_i2c_object.pTrTail)
                 {
                     // it is empty so set the empty status to true
-                    i2c2_object.trStatus.s.empty = true;
+                    temp_i2c_object.trStatus.s.empty = true;
                 }
 
                 // send the start condition
                 TEMP_I2C_START_CONDITION_ENABLE_BIT = 1;
                 
                 // start the i2c request
-                i2c2_state = S_MASTER_SEND_ADDR;
+                temp_i2c_state = S_MASTER_SEND_ADDR;
             }
 
             break;
@@ -271,7 +271,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
             TEMP_I2C_REPEAT_START_CONDITION_ENABLE_BIT = 1;
 
             // start the i2c request
-            i2c2_state = S_MASTER_SEND_ADDR;
+            temp_i2c_state = S_MASTER_SEND_ADDR;
 
             break;
 
@@ -279,7 +279,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
 
             if(TEMP_I2C_ACKNOWLEDGE_STATUS_BIT)
             {
-                i2c2_object.i2cErrors++;
+                temp_i2c_object.i2cErrors++;
                 TEMP_I2C_Stop(TEMP_I2C_MESSAGE_ADDRESS_NO_ACK);
             }
             else
@@ -292,12 +292,12 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
                 {
                     // if this is a read we must repeat start
                     // the bus to perform a read
-                    i2c2_state = S_MASTER_10BIT_RESTART;
+                    temp_i2c_state = S_MASTER_10BIT_RESTART;
                 }
                 else
                 {
                     // this is a write continue writing data
-                    i2c2_state = S_MASTER_SEND_DATA;
+                    temp_i2c_state = S_MASTER_SEND_DATA;
                 }
             }
 
@@ -307,7 +307,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
 
             if(TEMP_I2C_ACKNOWLEDGE_STATUS_BIT)
             {
-                i2c2_object.i2cErrors++;
+                temp_i2c_object.i2cErrors++;
                 TEMP_I2C_Stop(TEMP_I2C_MESSAGE_ADDRESS_NO_ACK);
             }
             else
@@ -327,7 +327,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
                 i2c_10bit_address_restart = 1;
 
                 // Resend the address as a read
-                i2c2_state = S_MASTER_SEND_ADDR;
+                temp_i2c_state = S_MASTER_SEND_ADDR;
             }
 
             break;
@@ -348,9 +348,9 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
             if(i2c_10bit_address_restart != 1)
             {
                 // extract the information for this message
-                i2c_address    = p_i2c2_trb_current->address;
-                pi2c_buf_ptr   = p_i2c2_trb_current->pbuffer;
-                i2c_bytes_left = p_i2c2_trb_current->length;
+                i2c_address    = p_temp_i2c_trb_current->address;
+                pi2c_buf_ptr   = p_temp_i2c_trb_current->pbuffer;
+                i2c_bytes_left = p_temp_i2c_trb_current->length;
             }
 
             // check for 10-bit address
@@ -362,13 +362,13 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
                     // send bits<9:8>
                     // mask bit 0 as this is always a write                    
                     TEMP_I2C_TRANSMIT_REG = 0xF0 | ((i2c_address >> 8) & 0x0006);
-                    i2c2_state = S_MASTER_SEND_ADDR_10BIT_LSB;
+                    temp_i2c_state = S_MASTER_SEND_ADDR_10BIT_LSB;
                 }
                 else
                 {
                     // resending address bits<9:8> to trigger read
                     TEMP_I2C_TRANSMIT_REG = i2c_address;
-                    i2c2_state = S_MASTER_ACK_ADDR;
+                    temp_i2c_state = S_MASTER_ACK_ADDR;
                     // reset the flag so the next access is ok
                     i2c_10bit_address_restart = 0;
                 }
@@ -380,12 +380,12 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
                 if(i2c_address & 0x01)
                 {
                     // Next state is to wait for address to be acked
-                    i2c2_state = S_MASTER_ACK_ADDR;
+                    temp_i2c_state = S_MASTER_ACK_ADDR;
                 }
                 else
                 {
                     // Next state is transmit
-                    i2c2_state = S_MASTER_SEND_DATA;
+                    temp_i2c_state = S_MASTER_SEND_DATA;
                 }
             }
             break;
@@ -396,7 +396,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
             if(TEMP_I2C_ACKNOWLEDGE_STATUS_BIT)
             {
                 // Transmission was not acknowledged
-                i2c2_object.i2cErrors++;
+                temp_i2c_object.i2cErrors++;
 
                 // Reset the Ack flag
                 TEMP_I2C_ACKNOWLEDGE_STATUS_BIT = 0;
@@ -413,10 +413,10 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
                     // yup sent them all!
 
                     // update the trb pointer
-                    p_i2c2_trb_current++;
+                    p_temp_i2c_trb_current++;
 
                     // are we done with this string of requests?
-                    if(--i2c2_trb_count == 0)
+                    if(--temp_i2c_trb_count == 0)
                     {
                         TEMP_I2C_Stop(TEMP_I2C_MESSAGE_COMPLETE);
                     }
@@ -431,7 +431,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
                         TEMP_I2C_REPEAT_START_CONDITION_ENABLE_BIT = 1;
 
                         // start the i2c request
-                        i2c2_state = S_MASTER_SEND_ADDR;
+                        temp_i2c_state = S_MASTER_SEND_ADDR;
 
                     }
                 }
@@ -450,7 +450,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
             {
 
                 // Transmission was not acknowledged
-                i2c2_object.i2cErrors++;
+                temp_i2c_object.i2cErrors++;
 
                 // Send a stop flag and go back to idle
                 TEMP_I2C_Stop(TEMP_I2C_MESSAGE_ADDRESS_NO_ACK);
@@ -461,7 +461,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
             else
             {
                 TEMP_I2C_RECEIVE_ENABLE_BIT = 1;
-                i2c2_state = S_MASTER_ACK_RCV_DATA;
+                temp_i2c_state = S_MASTER_ACK_RCV_DATA;
             }
             break;
 
@@ -470,7 +470,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
             /* Acknowledge is completed.  Time for more data */
 
             // Next thing is to ack the data
-            i2c2_state = S_MASTER_ACK_RCV_DATA;
+            temp_i2c_state = S_MASTER_ACK_RCV_DATA;
 
             // Set up to receive a byte of data
             TEMP_I2C_RECEIVE_ENABLE_BIT = 1;
@@ -493,7 +493,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
                 TEMP_I2C_ACKNOWLEDGE_DATA_BIT = 0;
 
                 // Wait for the acknowledge to complete, then get more
-                i2c2_state = S_MASTER_RCV_DATA;
+                temp_i2c_state = S_MASTER_RCV_DATA;
             }
             else
             {
@@ -520,7 +520,7 @@ void __ISR(_I2C1_MASTER_VECTOR) TEMP_I2C_MASTER_ISR ( void )
 
             // This case should not happen, if it does then
             // terminate the transfer
-            i2c2_object.i2cErrors++;
+            temp_i2c_object.i2cErrors++;
             TEMP_I2C_Stop(TEMP_I2C_LOST_STATE);
             break;
 
@@ -531,16 +531,16 @@ void TEMP_I2C_FunctionComplete(void)
 {
 
     // update the trb pointer
-    p_i2c2_trb_current++;
+    p_temp_i2c_trb_current++;
 
     // are we done with this string of requests?
-    if(--i2c2_trb_count == 0)
+    if(--temp_i2c_trb_count == 0)
     {
-        i2c2_state = S_MASTER_SEND_STOP;
+        temp_i2c_state = S_MASTER_SEND_STOP;
     }
     else
     {
-        i2c2_state = S_MASTER_RESTART;
+        temp_i2c_state = S_MASTER_RESTART;
     }
 
 }
@@ -551,14 +551,14 @@ void TEMP_I2C_Stop(TEMP_I2C_MESSAGE_STATUS completion_code)
     TEMP_I2C_STOP_CONDITION_ENABLE_BIT = 1;
 
     // make sure the flag pointer is not NULL
-    if (p_i2c2_current->pTrFlag != NULL)
+    if (p_temp_i2c_current->pTrFlag != NULL)
     {
         // update the flag with the completion code
-        *(p_i2c2_current->pTrFlag) = completion_code;
+        *(p_temp_i2c_current->pTrFlag) = completion_code;
     }
 
     // Done, back to idle
-    i2c2_state = S_MASTER_IDLE;
+    temp_i2c_state = S_MASTER_IDLE;
     
 }
 
@@ -571,7 +571,7 @@ void TEMP_I2C_MasterWrite(
     static TEMP_I2C_TRANSACTION_REQUEST_BLOCK   trBlock;
 
     // check if there is space in the queue
-    if (i2c2_object.trStatus.s.full != true)
+    if (temp_i2c_object.trStatus.s.full != true)
     {
         TEMP_I2C_MasterWriteTRBBuild(&trBlock, pdata, length, address);
         TEMP_I2C_MasterTRBInsert(1, &trBlock, pflag);
@@ -593,7 +593,7 @@ void TEMP_I2C_MasterRead(
 
 
     // check if there is space in the queue
-    if (i2c2_object.trStatus.s.full != true)
+    if (temp_i2c_object.trStatus.s.full != true)
     {
         TEMP_I2C_MasterReadTRBBuild(&trBlock, pdata, length, address);
         TEMP_I2C_MasterTRBInsert(1, &trBlock, pflag);
@@ -608,7 +608,7 @@ void TEMP_I2C_MasterRead(
 
 inline void TEMP_I2C_WaitForLastPacketToComplete()
 {
-    while(i2c2_state != S_MASTER_IDLE)
+    while(temp_i2c_state != S_MASTER_IDLE)
     {
         // If your code gets stuck here it is because the last packet is never completing
         // Most likely cause is that your interrupt is not firing as it should. Check if you have
@@ -623,31 +623,31 @@ void TEMP_I2C_MasterTRBInsert(
 {
 
     // check if there is space in the queue
-    if (i2c2_object.trStatus.s.full != true)
+    if (temp_i2c_object.trStatus.s.full != true)
     {
         *pflag = TEMP_I2C_MESSAGE_PENDING;
 
-        i2c2_object.pTrTail->ptrb_list = ptrb_list;
-        i2c2_object.pTrTail->count     = count;
-        i2c2_object.pTrTail->pTrFlag   = pflag;
-        i2c2_object.pTrTail++;
+        temp_i2c_object.pTrTail->ptrb_list = ptrb_list;
+        temp_i2c_object.pTrTail->count     = count;
+        temp_i2c_object.pTrTail->pTrFlag   = pflag;
+        temp_i2c_object.pTrTail++;
 
         // check if the end of the array is reached
-        if (i2c2_object.pTrTail == (i2c2_tr_queue + TEMP_I2C_CONFIG_TR_QUEUE_LENGTH))
+        if (temp_i2c_object.pTrTail == (temp_i2c_tr_queue + TEMP_I2C_CONFIG_TR_QUEUE_LENGTH))
         {
             // adjust to restart at the beginning of the array
-            i2c2_object.pTrTail = i2c2_tr_queue;
+            temp_i2c_object.pTrTail = temp_i2c_tr_queue;
         }
 
         // since we added one item to be processed, we know
         // it is not empty, so set the empty status to false
-        i2c2_object.trStatus.s.empty = false;
+        temp_i2c_object.trStatus.s.empty = false;
 
         // check if full
-        if (i2c2_object.pTrHead == i2c2_object.pTrTail)
+        if (temp_i2c_object.pTrHead == temp_i2c_object.pTrTail)
         {
             // it is full, set the full status to true
-            i2c2_object.trStatus.s.full = true;
+            temp_i2c_object.trStatus.s.full = true;
         }
 
     }
@@ -696,12 +696,12 @@ void TEMP_I2C_MasterWriteTRBBuild(
 
 bool TEMP_I2C_MasterQueueIsEmpty(void)
 {
-    return(i2c2_object.trStatus.s.empty);
+    return(temp_i2c_object.trStatus.s.empty);
 }
 
 bool TEMP_I2C_MasterQueueIsFull(void)
 {
-    return(i2c2_object.trStatus.s.full);
+    return(temp_i2c_object.trStatus.s.full);
 }        
         
 void __ISR(_I2C1_BUS_VECTOR, IPL4SRS) TEMP_I2C_BusCollisionISR( void )

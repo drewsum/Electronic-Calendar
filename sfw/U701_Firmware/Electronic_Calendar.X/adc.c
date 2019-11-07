@@ -30,13 +30,13 @@ void ADCInitialize(void) {
     
     // Setup ADC end of scan interrupt
     disableInterrupt(ADC_End_Of_Scan_Ready);
-    setInterruptPriority(ADC_End_Of_Scan_Ready, 1);
+    setInterruptPriority(ADC_End_Of_Scan_Ready, 3);
     setInterruptSubpriority(ADC_End_Of_Scan_Ready, 1);
     clearInterruptFlag(ADC_End_Of_Scan_Ready);
     
     // setup ADC fault interrupt
     disableInterrupt(ADC_Fault);
-    setInterruptPriority(ADC_Fault, 1);
+    setInterruptPriority(ADC_Fault, 3);
     setInterruptSubpriority(ADC_Fault, 1);
     clearInterruptFlag(ADC_Fault);
     
@@ -415,7 +415,7 @@ void __ISR(_ADC_DATA4_VECTOR, IPL1SRS) ADCData49ISR(void) {
 
 
 // This is the ADC end of scan interrupt service routine
-void __ISR(_ADC_EOS_VECTOR, IPL1SRS) ADCEndOfScanISR(void) {
+void __ISR(_ADC_EOS_VECTOR, IPL3SRS) ADCEndOfScanISR(void) {
     
 
     // Make sure end of scan is complete
@@ -432,7 +432,7 @@ void __ISR(_ADC_EOS_VECTOR, IPL1SRS) ADCEndOfScanISR(void) {
 }
 
 // this is the ADC fault interrupt service routine
-void __ISR(_ADC_FAULT_VECTOR, IPL1SRS) ADCFaultISR(void) {
+void __ISR(_ADC_FAULT_VECTOR, IPL3SRS) ADCFaultISR(void) {
  
     // record error
     if (ADCCON2bits.REFFLT) error_handler.flags.ADC_reference_fault = 1;

@@ -56,7 +56,7 @@ struct MCP9804_temp_results_s {
 } MCP9804_temp_results;
 
 // This is a flag that starts the acquisition of data from the MCP9804 sensors
-bool MCP9804_start_flag;
+uint8_t MCP9804_start_flag;
 
 // This function initializes the three temperature sensors
 void MCP9804TempSensorInitialize(void);
