@@ -545,6 +545,11 @@ bool TEMP_I2C_MasterQueueIsFull(void);
 void __ISR(_I2C1_BUS_VECTOR, IPL4SRS) TEMP_I2C_BusCollisionISR( void );
 void __ISR(_I2C1_MASTER_VECTOR, IPL4SRS) TEMP_I2C_MASTER_ISR ( void );
 
+// this function returns if the temp I2C peripheral is currently turned on
+uint8_t getTempI2COnState(void);
+
+// this function resets Temp I2C on state, a workaround for errata
+void tempI2COnStateReset(void);
 
 #endif /* _TEMP_I2C_H */
 

@@ -96,7 +96,7 @@ typedef enum
 /* defined for TEMP_I2C */
 
 #ifndef TEMP_I2C_CONFIG_TR_QUEUE_LENGTH
-        #define TEMP_I2C_CONFIG_TR_QUEUE_LENGTH 1
+        #define TEMP_I2C_CONFIG_TR_QUEUE_LENGTH 32
 #endif
 
 
@@ -158,8 +158,8 @@ void TEMP_I2C_Initialize(void)
     setInterruptSubpriority(I2C1_Master_Event, 0);
     
     disableInterrupt(I2C1_Bus_Collision_Event);
-    setInterruptPriority(I2C1_Bus_Collision_Event, 4);
-    setInterruptSubpriority(I2C1_Bus_Collision_Event, 1);
+    //setInterruptPriority(I2C1_Bus_Collision_Event, 5);
+    //setInterruptSubpriority(I2C1_Bus_Collision_Event, 1);
     
     // setup I2C1 CON register
     //I2C1CONbits.PCIE = 0;       // disable stop condition interrupt (slave mode only)
@@ -181,7 +181,7 @@ void TEMP_I2C_Initialize(void)
 	
     // enable the interrupts
     enableInterrupt(I2C1_Master_Event);
-    enableInterrupt(I2C1_Bus_Collision_Event);
+    //enableInterrupt(I2C1_Bus_Collision_Event);
     
     // enable I2C1 module
     I2C1CONbits.ON = 1;
@@ -709,4 +709,28 @@ void __ISR(_I2C1_BUS_VECTOR, IPL4SRS) TEMP_I2C_BusCollisionISR( void )
     // enter bus collision handling code here
 	clearInterruptFlag(I2C1_Bus_Collision_Event);
     error_handler.flags.temp_I2C_bus_collision = 1;
+}
+
+// this function returns if the temp I2C peripheral is currently turned on
+uint8_t getTempI2COnState(void) {
+ 
+    return I2C1CONbits.ON;
+    
+}
+
+// this function resets Temp I2C on state, a workaround for errata
+void tempI2COnStateReset(void) {
+    
+    
+    // per Pic32MZ EF errata
+    I2C1CONbits.ON = 0;
+    
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    
+    I2C1CONbits.ON = 1;
+    
 }

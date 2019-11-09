@@ -66,7 +66,7 @@ typedef union telemetry_paramaters_u {
 } telemetry_parameters_t;
     
 // This structure holds minimum, maximum and current telemetry values
-struct telemetry_s {
+volatile struct telemetry_s {
     
     telemetry_parameters_t max;
     telemetry_parameters_t current;

@@ -70,7 +70,7 @@ void heartbeatTimerStop(void) {
 }
 
 // Heartbeat timer interrupt service routine
-void __ISR(_TIMER_1_VECTOR, IPL6AUTO) hearbeatTimerISR(void) {
+void __ISR(_TIMER_1_VECTOR, IPL6SRS) hearbeatTimerISR(void) {
 
     // Clear the watchdog timer
     kickTheDog();
@@ -89,10 +89,13 @@ void __ISR(_TIMER_1_VECTOR, IPL6AUTO) hearbeatTimerISR(void) {
     
     // Increment on time counter
     device_on_time_counter++;
-    
+        
+    // reset temp I2C peripheral, per device errata
+    // tempI2COnStateReset();
+
     // request new temp sensor data
     MCP9804_start_flag = 1;
-    
+        
     // Clear interrupt flag
     clearInterruptFlag(Timer1);
     

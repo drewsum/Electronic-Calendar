@@ -28,7 +28,7 @@
 
 
 // API Variables
-uint32_t device_on_time_counter;
+volatile uint32_t device_on_time_counter;
 
 
 // API Functions
@@ -42,7 +42,7 @@ void heartbeatTimerStart(void);
 void heartbeatTimerStop(void);
 
 // Heartbeat timer interrupt service routine
-void __ISR(_TIMER_1_VECTOR, IPL6AUTO) hearbeatTimerISR(void);
+void __ISR(_TIMER_1_VECTOR, IPL6SRS) hearbeatTimerISR(void);
 
 #endif /* _HEARTBEAT_TIMER_H */
 
