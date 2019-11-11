@@ -181,7 +181,7 @@ void TEMP_I2C_Initialize(void)
 	
     // enable the interrupts
     enableInterrupt(I2C1_Master_Event);
-    //enableInterrupt(I2C1_Bus_Collision_Event);
+    enableInterrupt(I2C1_Bus_Collision_Event);
     
     // enable I2C1 module
     I2C1CONbits.ON = 1;
@@ -197,15 +197,12 @@ uint8_t TEMP_I2C_ErrorCountGet(void)
     return ret;
 }
 
-void __ISR(_I2C1_MASTER_VECTOR, IPL4SRS) TEMP_I2C_MASTER_ISR ( void )
-{
-  
+void TEMP_I2C_MASTER_HANDLER(void) {
+ 
     static uint8_t  *pi2c_buf_ptr;
     static uint16_t i2c_address         = 0;
     static uint8_t  i2c_bytes_left      = 0;
     static uint8_t  i2c_10bit_address_restart = 0;
-
-    clearInterruptFlag(I2C1_Master_Event);
     
     // Check first if there was a collision.
     // If we have a Write Collision, reset and go to idle state */
@@ -525,6 +522,15 @@ void __ISR(_I2C1_MASTER_VECTOR, IPL4SRS) TEMP_I2C_MASTER_ISR ( void )
             break;
 
     }
+    
+}
+
+void __ISR(_I2C1_MASTER_VECTOR, IPL4SRS) TEMP_I2C_MASTER_ISR ( void )
+{
+  
+    TEMP_I2C_MASTER_HANDLER();
+    clearInterruptFlag(I2C1_Master_Event);
+    
 }
 
 void TEMP_I2C_FunctionComplete(void)
@@ -664,7 +670,7 @@ void TEMP_I2C_MasterTRBInsert(
         // The state machine has to be started manually because it runs only in the ISR.
         // If we called the ISR function here function duplication would double the code size
         //    because this function would be called both from interrupt and from mainline code.
-        setInterruptFlag(I2C1_Master_Event, 1);
+        TEMP_I2C_MASTER_HANDLER();
 
     }   // block until request is complete
 
@@ -707,8 +713,9 @@ bool TEMP_I2C_MasterQueueIsFull(void)
 void __ISR(_I2C1_BUS_VECTOR, IPL4SRS) TEMP_I2C_BusCollisionISR( void )
 {
     // enter bus collision handling code here
-	clearInterruptFlag(I2C1_Bus_Collision_Event);
     error_handler.flags.temp_I2C_bus_collision = 1;
+    clearInterruptFlag(I2C1_Bus_Collision_Event);
+    
 }
 
 // this function returns if the temp I2C peripheral is currently turned on

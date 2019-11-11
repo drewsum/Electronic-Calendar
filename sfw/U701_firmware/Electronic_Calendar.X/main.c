@@ -191,8 +191,8 @@ void main(void) {
         }
         
         // check to see if we have a new usb uart string to parse
-        if (usb_uart_rx_parse_request && strlen(usb_uart_rx_buffer) > 2) {
-        
+        // if (usb_uart_rx_parse_request && strlen(usb_uart_rx_buffer) > 2) {
+        if (usb_uart_rx_parse_request) {
             // Determine length of received string
             uint32_t length = strlen(usb_uart_rx_buffer);
             

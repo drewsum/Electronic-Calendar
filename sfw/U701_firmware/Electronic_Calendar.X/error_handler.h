@@ -36,27 +36,27 @@ volatile union error_handler_u {
     
     struct {
 
-        unsigned configuration_error                    : 8;    // error in device configuration at boot
-        unsigned USB_general_error                      : 8;    // Error with USB debugging interface
-        unsigned USB_framing_error                      : 8;    // usb uart framing error
-        unsigned USB_parity_error                       : 8;    // usb uart parity error
-        unsigned USB_overrun_error                      : 8;    // RX overrun error
-        unsigned USB_tx_dma_error                       : 8;    // Error with usb uart tx dma
-        unsigned USB_rx_dma_error                       : 8;    // Error with usb uart rx dma
-        unsigned DMT_error                              : 8;    // Deadman timer error
-        unsigned system_bus_protection_violation        : 8;    // System bus protection event occurred
-        unsigned prefetch_module_SEC                    : 8;    // Prefetch module recorded an SEC event
-        unsigned ADC_configuration_error                : 8;    // ADC could not be configured properly
-        unsigned ADC_reference_fault                    : 8;
-        unsigned clock_failure                          : 8;
-        unsigned temp_I2C_bus_collision                 : 8;
-        unsigned input_temp_sens_I2C_fault              : 8;
-        unsigned pos3p3_temp_sens_I2C_fault             : 8;
-        unsigned amb_temp_sens_I2C_fault                : 8;
-        unsigned bckp_temp_sens_I2C_fault               : 8;
-        unsigned WDT_timeout                            : 8;
-        unsigned DMT_timeout                            : 8;
-        unsigned vdd_brownout                           : 8;
+        uint8_t configuration_error;    // error in device configuration at boot
+        uint8_t USB_general_error;    // Error with USB debugging interface
+        uint8_t USB_framing_error;    // usb uart framing error
+        uint8_t USB_parity_error;    // usb uart parity error
+        uint8_t USB_overrun_error;    // RX overrun error
+        uint8_t USB_tx_dma_error;    // Error with usb uart tx dma
+        uint8_t USB_rx_dma_error;    // Error with usb uart rx dma
+        uint8_t DMT_error;    // Deadman timer error
+        uint8_t system_bus_protection_violation;    // System bus protection event occurred
+        uint8_t prefetch_module_SEC;    // Prefetch module recorded an SEC event
+        uint8_t ADC_configuration_error;    // ADC could not be configured properly
+        uint8_t ADC_reference_fault;
+        uint8_t clock_failure;
+        uint8_t temp_I2C_bus_collision;
+        uint8_t input_temp_sens_I2C_fault;
+        uint8_t pos3p3_temp_sens_I2C_fault;
+        uint8_t amb_temp_sens_I2C_fault;
+        uint8_t bckp_temp_sens_I2C_fault;
+        uint8_t WDT_timeout;
+        uint8_t DMT_timeout;
+        uint8_t vdd_brownout;
         
     } flags;
 
