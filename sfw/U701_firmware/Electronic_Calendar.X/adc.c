@@ -37,7 +37,7 @@ void ADCInitialize(void) {
     // setup ADC fault interrupt
     disableInterrupt(ADC_Fault);
     setInterruptPriority(ADC_Fault, 3);
-    setInterruptSubpriority(ADC_Fault, 1);
+    setInterruptSubpriority(ADC_Fault, 2);
     clearInterruptFlag(ADC_Fault);
     
     // Block ADC triggers for startup
@@ -126,14 +126,14 @@ void ADCInitialize(void) {
     setInterruptPriority(ADC_Data_44, 1);
     
     // set IRQ subpriorities
-    setInterruptSubpriority(ADC_Data_1, 1);
+    setInterruptSubpriority(ADC_Data_1, 0);
     setInterruptSubpriority(ADC_Data_2, 1);
-    setInterruptSubpriority(ADC_Data_3, 1);
-    setInterruptSubpriority(ADC_Data_4, 1);
-    setInterruptSubpriority(ADC_Data_10, 1);
+    setInterruptSubpriority(ADC_Data_3, 2);
+    setInterruptSubpriority(ADC_Data_4, 3);
+    setInterruptSubpriority(ADC_Data_10, 0);
     setInterruptSubpriority(ADC_Data_29, 1);
-    setInterruptSubpriority(ADC_Data_43, 1);
-    setInterruptSubpriority(ADC_Data_44, 1);
+    setInterruptSubpriority(ADC_Data_43, 2);
+    setInterruptSubpriority(ADC_Data_44, 3);
     
     /* Configure ADCCSSx */
     ADCCSS1 = 0;

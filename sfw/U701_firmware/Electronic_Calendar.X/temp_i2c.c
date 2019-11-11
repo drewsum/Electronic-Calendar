@@ -158,8 +158,8 @@ void TEMP_I2C_Initialize(void)
     setInterruptSubpriority(I2C1_Master_Event, 0);
     
     disableInterrupt(I2C1_Bus_Collision_Event);
-    //setInterruptPriority(I2C1_Bus_Collision_Event, 5);
-    //setInterruptSubpriority(I2C1_Bus_Collision_Event, 1);
+    setInterruptPriority(I2C1_Bus_Collision_Event, 5);
+    setInterruptSubpriority(I2C1_Bus_Collision_Event, 1);
     
     // setup I2C1 CON register
     //I2C1CONbits.PCIE = 0;       // disable stop condition interrupt (slave mode only)
@@ -710,7 +710,7 @@ bool TEMP_I2C_MasterQueueIsFull(void)
     return(temp_i2c_object.trStatus.s.full);
 }        
         
-void __ISR(_I2C1_BUS_VECTOR, IPL4SRS) TEMP_I2C_BusCollisionISR( void )
+void __ISR(_I2C1_BUS_VECTOR, IPL5SRS) TEMP_I2C_BusCollisionISR( void )
 {
     // enter bus collision handling code here
     error_handler.flags.temp_I2C_bus_collision = 1;
