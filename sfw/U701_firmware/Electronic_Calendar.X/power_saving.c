@@ -89,11 +89,11 @@ void PMDInitialize(void) {
     // Enable real time clock/calendar
     PMD6bits.RTCCMD = 0;
     
-    // Disable all reference clocks
-    PMD6bits.REFO1MD = 1;
-    PMD6bits.REFO2MD = 1;
-    PMD6bits.REFO3MD = 1;
-    PMD6bits.REFO4MD = 1;
+    // Enable all reference clocks, per device errate
+    PMD6bits.REFO1MD = 0;
+    PMD6bits.REFO2MD = 0;
+    PMD6bits.REFO3MD = 0;
+    PMD6bits.REFO4MD = 0;
     
     // Disable peripheral master port
     PMD6bits.PMPMD = 1;
