@@ -163,7 +163,7 @@ void MCP9804AcquisitionHandler(void) {
     */
     
     // reset temp I2C peripheral, per device errata
-    tempI2COnStateReset();
+    //tempI2COnStateReset();
     
     // Convert acquired data to floating point variables
     MCP9804Convert();

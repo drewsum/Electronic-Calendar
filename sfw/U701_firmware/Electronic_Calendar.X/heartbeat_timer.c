@@ -76,10 +76,10 @@ void __ISR(_TIMER_1_VECTOR, IPL6SRS) hearbeatTimerISR(void) {
     kickTheDog();
     
     // Clear the deadman timer
-    holdThumbTighter();
+    //holdThumbTighter();
     
     // Check to see if DMT actually cleared
-    verifyThumbTightEnough();
+    //verifyThumbTightEnough();
 
     // Toggle heartbeat LED
     HEARTBEAT_LED_PIN = !(HEARTBEAT_LED_PIN);
@@ -91,7 +91,7 @@ void __ISR(_TIMER_1_VECTOR, IPL6SRS) hearbeatTimerISR(void) {
     device_on_time_counter++;
         
     // reset temp I2C peripheral, per device errata
-    // tempI2COnStateReset();
+    tempI2COnStateReset();
 
     // request new temp sensor data
     MCP9804_start_flag = 1;

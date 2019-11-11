@@ -42,7 +42,7 @@ volatile uint32_t telemetry_extremes_update_flag;
 // unless otherwise noted, voltage measurements are in volts, and
 // current measurements are in amps
 // unionizing allows looping over all params
-typedef union telemetry_paramaters_u {
+typedef volatile union telemetry_paramaters_u {
     
     struct params_s {
 

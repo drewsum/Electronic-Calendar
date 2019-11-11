@@ -32,7 +32,7 @@ volatile uint32_t update_error_leds_flag;
 // Each flag indicates if the described error has occurred
 // This is used for controlling status LEDs and USB debugging
 // Access a flag like any C structure
-union error_handler_u {
+volatile union error_handler_u {
     
     struct {
 
