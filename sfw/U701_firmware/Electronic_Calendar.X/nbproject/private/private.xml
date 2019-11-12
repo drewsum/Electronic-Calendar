@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_Firmware/Electronic_Calendar.X/main.c</file>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_Firmware/Electronic_Calendar.X/heartbeat_timer.c</file>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_Firmware/Electronic_Calendar.X/heartbeat_timer.h</file>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_Firmware/Electronic_Calendar.X/adc.h</file>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_Firmware/Electronic_Calendar.X/error_handler.h</file>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_Firmware/Electronic_Calendar.X/usb_uart.h</file>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_Firmware/Electronic_Calendar.X/rtcc.h</file>
+            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/rtcc.c</file>
+            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/telemetry.c</file>
+            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/main.c</file>
+            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/adc.h</file>
+            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/telemetry.h</file>
+            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/adc.c</file>
+            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/mcp9804_temp_sensor.c</file>
         </group>
     </open-files>
 </project-private>

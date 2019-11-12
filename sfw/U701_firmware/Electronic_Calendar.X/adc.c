@@ -74,7 +74,7 @@ void ADCInitialize(void) {
     /* Configure ADCCON2 */
     ADCCON2 = 0;
     /* Select ADC7 sample time and conversion clock */
-    ADCCON2bits.ADCDIV = 100;
+    ADCCON2bits.ADCDIV = 40;
     ADCCON2bits.SAMC = 8;
     ADCCON1bits.SELRES = 3;     // 12 bit result
     
@@ -150,25 +150,25 @@ void ADCInitialize(void) {
     // Configure ADC1 timing
     ADC1TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC1TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC1TIMEbits.ADCDIV = 2;        // input clock divider is / 2 
+    ADC1TIMEbits.ADCDIV = 10;        // input clock divider is / 2 
     ADC1TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
     
     // Configure ADC2 timing
     ADC2TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC2TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC2TIMEbits.ADCDIV = 5;        // input clock divider is / 5
+    ADC2TIMEbits.ADCDIV = 10;        // input clock divider is / 5
     ADC2TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
     
     // Configure ADC3 timing
     ADC3TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC3TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC3TIMEbits.ADCDIV = 5;        // input clock divider is / 5
+    ADC3TIMEbits.ADCDIV = 10;        // input clock divider is / 5
     ADC3TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
     
     // Configure ADC4 timing
     ADC4TIMEbits.ADCEIS = 0b000;    // data ready IRQ is fired 1 adc clock before end of conversion
     ADC4TIMEbits.SELRES = 0b11;     // 12 bit result
-    ADC4TIMEbits.ADCDIV = 5;        // input clock divider is / 5
+    ADC4TIMEbits.ADCDIV = 10;        // input clock divider is / 5
     ADC4TIMEbits.SAMC = 5;          // conversion takes 5 clk cycles
     
     /* Configure ADCCMPCONx */
@@ -188,7 +188,7 @@ void ADCInitialize(void) {
     
     /* Set up the trigger sources */
     ADCCON1bits.STRGLVL = 0;            // Edge trigger mode
-    ADCCON1bits.STRGSRC = 0b00110;      // Trigger source is Timer3
+    ADCCON1bits.STRGSRC = 0b00101;      // Trigger source is Timer1
     ADCTRGSNSbits.LVL1 = 0;             // trigger on edge
     ADCTRGSNSbits.LVL2 = 0;             // trigger on edge
     ADCTRGSNSbits.LVL3 = 0;             // trigger on edge
@@ -251,8 +251,8 @@ void ADCInitialize(void) {
     enableInterrupt(ADC_End_Of_Scan_Ready);
     
     // enable ADC fault interrupt
-    ADCCON2bits.REFFLTIEN = 1;
-    enableInterrupt(ADC_Fault);
+    // ADCCON2bits.REFFLTIEN = 1;
+    //enableInterrupt(ADC_Fault);
     
 }
 
@@ -292,7 +292,7 @@ void __ISR(_ADC_DATA10_VECTOR, IPL1SRS) ADCData10ISR(void) {
     if (ADCDSTAT1bits.ARDY10) {
      
         // copy ADC conversion result into telemetry
-        telemetry.current.params.vbat_voltage = (double) (ADCDATA10 * ADC_VOLTS_PER_LSB * adc_cal_gain * VBAT_CHANNEL_GAIN);;
+        telemetry.current.params.vbat_voltage = (double) (ADCDATA10 * ADC_VOLTS_PER_LSB * adc_cal_gain * VBAT_CHANNEL_GAIN);
         VBAT_ADC_ENABLE_PIN = 0;
         
     }

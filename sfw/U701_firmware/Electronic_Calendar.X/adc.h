@@ -38,7 +38,7 @@
 #define ADC_VOLTS_PER_LSB           0.000805861
 
 // This is an ADC result scaling factor calculated using the internal reference voltage
-double adc_cal_gain = 1.0;
+volatile double adc_cal_gain = 1.0;
 
 // This function initializes the ADC modules
 void ADCInitialize(void);

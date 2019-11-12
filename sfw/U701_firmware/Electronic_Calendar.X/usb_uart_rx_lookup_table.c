@@ -67,6 +67,32 @@ usb_uart_command_function_t idnCommand(char * input_str) {
     terminalTextAttributesReset();    
 }
 
+usb_uart_command_function_t causeOfResetCommand(char * input_str) {
+    // Print cause of reset
+    if (    reset_cause == Undefined ||
+            reset_cause == Primary_Config_Registers_Error ||
+            reset_cause == Primary_Secondary_Config_Registers_Error ||
+            reset_cause == Config_Mismatch ||
+            reset_cause == DMT_Reset ||
+            reset_cause == WDT_Reset ||
+            reset_cause == Software_Reset ||
+            reset_cause == External_Reset ||
+            reset_cause == BOR_Reset) {
+    
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
+        
+    }
+    
+    else {
+     
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+        
+    }
+    
+    printf("Cause of most recent device reset: %s\r\n", getResetCauseString(reset_cause));
+    terminalTextAttributesReset();
+}
+
 usb_uart_command_function_t mcuIdCommand(char * input_str) {
     
     terminalTextAttributesReset();
@@ -457,6 +483,9 @@ void usbUartHashTableInitialize(void) {
     usbUartAddCommand("Reset", 
             "Executes an MCU software reset", 
             resetCommand);
+    usbUartAddCommand("Cause of Reset?",
+            "Prints the cause of the most recent device reset",
+            causeOfResetCommand);
     usbUartAddCommand("Clear Screen", 
             "Clears the serial port terminal", 
             clearCommand);

@@ -81,6 +81,10 @@ void rtccInitialize(void) {
     // Set clock source as INTOSC
     RTCCONbits.RTCCLKSEL = 0b00;
     
+    // clear seconds value per reference manual
+    RTCTIMEbits.SEC01 = 0;
+    RTCTIMEbits.SEC10 = 0;
+    
     // Disable RTCC clock
     RTCCONbits.RTCCLKON = 0;
     
@@ -140,7 +144,13 @@ void rtccClear(void) {
     
     // Write 0's everywhere
     RTCTIME = 0x00000000;
-    RTCDATE = 0x00000000;
+    RTCDATEbits.DAY01 = 1;
+    RTCDATEbits.DAY10 = 0;
+    RTCDATEbits.MONTH01 = 1;
+    RTCDATEbits.MONTH10 = 0;
+    RTCDATEbits.WDAY01 = 0;
+    RTCDATEbits.YEAR01 = 0;
+    RTCDATEbits.YEAR10 = 0;
     
     // Copy values from RTCC into ram shadow register
     rtcc_shadow.weekday     = RTCDATEbits.WDAY01;
