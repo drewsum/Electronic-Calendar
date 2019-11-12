@@ -208,7 +208,7 @@ void main(void) {
         }
         
         // if we need to grab new temp sensor data, do it
-        // if (MCP9804_start_flag) MCP9804AcquisitionHandler();
+        if (MCP9804_start_flag) MCP9804AcquisitionHandler();
         
         // update minimum and maximum measured telemetry
         if (telemetry_extremes_update_flag) telemetryUpdateExtremes();
