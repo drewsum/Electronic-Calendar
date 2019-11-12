@@ -234,9 +234,6 @@ void ADCInitialize(void) {
     // Unblock triggers
     ADCCON3bits.TRGSUSP = 0;
     
-    // Setup ADC Trigger Timer
-    ADCTriggerTimerInitialize();
-    
     // enable data ready interrupts
     enableInterrupt(ADC_Data_1);
     enableInterrupt(ADC_Data_2);
@@ -251,37 +248,8 @@ void ADCInitialize(void) {
     enableInterrupt(ADC_End_Of_Scan_Ready);
     
     // enable ADC fault interrupt
-    // ADCCON2bits.REFFLTIEN = 1;
-    //enableInterrupt(ADC_Fault);
-    
-}
-
-// This function initializes Timer3 as the ADC trigger timer
-void ADCTriggerTimerInitialize(void) {
- 
-    // Stop timer 3
-    T3CONbits.ON = 0;
-    
-    // Stop timer 3 in idle
-    T3CONbits.SIDL = 1;
-    
-    // Disable gated time accumulation
-    T3CONbits.TGATE = 0;
-    
-    // Set timer 3 prescalar to 5
-    T3CONbits.TCKPS = 0b011;
-    
-    // Set timer clock input as PBCLK3
-    T3CONbits.TCS = 0;
-    
-    // Clear timer 3
-    TMR3 = 0x0000;
-    
-    // Set timer 3 period match to 16000
-    PR3 = 16000;
-    
-    // Start timer 3
-    T3CONbits.ON = 1;
+    ADCCON2bits.REFFLTIEN = 1;
+    enableInterrupt(ADC_Fault);
     
 }
 

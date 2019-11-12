@@ -43,9 +43,6 @@ volatile double adc_cal_gain = 1.0;
 // This function initializes the ADC modules
 void ADCInitialize(void);
 
-// This function initializes Timer3 as the ADC trigger timer
-void ADCTriggerTimerInitialize(void);
-
 // these ISRs are triggered when data for their respective ADC channel is ready
 void __ISR(_ADC_DATA10_VECTOR, IPL1SRS) ADCData10ISR(void);
 void __ISR(_ADC_DATA29_VECTOR, IPL1SRS) ADCData29ISR(void);
