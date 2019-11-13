@@ -95,7 +95,7 @@ typedef enum
 /* defined for TEMP_I2C */
 
 #ifndef TEMP_I2C_CONFIG_TR_QUEUE_LENGTH
-        #define TEMP_I2C_CONFIG_TR_QUEUE_LENGTH 32
+        #define TEMP_I2C_CONFIG_TR_QUEUE_LENGTH 64
 #endif
 
 
@@ -105,8 +105,6 @@ typedef enum
 // The following control bits are used in the I2C state machine to manage
 // the I2C module and determine next states.
 #define TEMP_I2C_WRITE_COLLISION_STATUS_BIT         I2C1STATbits.IWCOL     // Defines the write collision status bit.
-// #define TEMP_I2C_MODE_SELECT_BITS                   SSP2CON1bits.SSPM     // I2C Master Mode control bit.
-//#define TEMP_I2C_MASTER_ENABLE_CONTROL_BITS         SSP2CON1bits.SSPEN    // I2C port enable control bit.
 
 #define TEMP_I2C_START_CONDITION_ENABLE_BIT         I2C1CONbits.SEN      // I2C START control bit.
 #define TEMP_I2C_REPEAT_START_CONDITION_ENABLE_BIT  I2C1CONbits.RSEN     // I2C Repeated START control bit.
@@ -172,7 +170,7 @@ void TEMP_I2C_Initialize(void)
 
     // setup I2C clocking
     // clock source is PBCLK2
-    I2C1BRG = 0x0020;
+    I2C1BRG = 0x001E;
     
     // clear the interrupt flags
     clearInterruptFlag(I2C1_Bus_Collision_Event);

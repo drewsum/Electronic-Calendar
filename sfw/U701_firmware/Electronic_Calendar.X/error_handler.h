@@ -25,7 +25,7 @@
 // set this flag high to update the error LEDs the next loop through main()
 volatile uint32_t update_error_leds_flag;
 
-#define ERROR_HANDLER_NUM_FLAGS  21
+#define ERROR_HANDLER_NUM_FLAGS  18
 
 // Error handler structure
 // Follow the convention in XC32 user's guide section 8.6.2
@@ -50,10 +50,7 @@ volatile union error_handler_u {
         uint8_t ADC_reference_fault;
         uint8_t clock_failure;
         uint8_t temp_I2C_bus_collision;
-        uint8_t input_temp_sens_I2C_fault;
-        uint8_t pos3p3_temp_sens_I2C_fault;
-        uint8_t amb_temp_sens_I2C_fault;
-        uint8_t bckp_temp_sens_I2C_fault;
+        uint8_t temp_i2c_stall;
         uint8_t WDT_timeout;
         uint8_t DMT_timeout;
         uint8_t vdd_brownout;
@@ -81,10 +78,7 @@ const char *  error_handler_flag_names[] = {
     "ADC Reference",
     "Clock Failure",
     "Temp I2C Bus Collision",
-    "Input Temperature Sensor I2C",
-    "+3.3V Power Supply Temperature Sensor I2C",
-    "Ambient Temperature Sensor I2C",
-    "Backup Diode Temperature Sensor I2C",
+    "Temp I2C Bus Stall",
     "Watchdog Timer Timeout",
     "Deadman Timer Timeout",
     "MCU VDD Brownout"

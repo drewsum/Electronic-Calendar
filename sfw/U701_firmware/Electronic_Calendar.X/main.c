@@ -169,6 +169,9 @@ void main(void) {
         // check to see if a PGOOD fault has occurred and latch it
         powerGoodCheck();
         
+        // convert raw temp results into floating point telemetry
+        MCP9804BatchConvert();
+        
         // set LEDs if changes are pending
         if (led_update_request_flag) {
          

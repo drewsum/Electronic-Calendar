@@ -61,12 +61,14 @@ volatile uint32_t MCP9804_start_flag;
 // This function initializes the three temperature sensors
 void MCP9804TempSensorInitialize(void);
 
+// this function converts the ray two byte data return from MCP9804 to a double representing temperature
+double MCP9804BytesToFloat(uint8_t input_array[2]);
+
 // This function accesses temperature sensor data over I2C
 void MCP9804AcquisitionHandler(void);
 
-// This function converts raw data from the LM73 to a floating point number
-void MCP9804Convert(void);
-
+// This function converts all raw byte value of temperature into floats for telemetry
+void MCP9804BatchConvert(void);
 
 #endif /* _MCP9804_TEMP_SENSOR_H */
 
