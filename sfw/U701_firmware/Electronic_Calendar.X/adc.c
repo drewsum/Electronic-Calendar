@@ -390,7 +390,7 @@ void __ISR(_ADC_EOS_VECTOR, IPL3SRS) ADCEndOfScanISR(void) {
     if (ADCCON2bits.EOSRDY) {
         
         // track min and max values on next loop through main();
-        telemetry_extremes_update_flag = 1;
+        telemetry_update_flag_adc = 1;
         
     }
 

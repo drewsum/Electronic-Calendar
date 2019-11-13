@@ -51,6 +51,7 @@ void telemetryUpdateExtremes(void) {
         
     }
     
-    telemetry_extremes_update_flag = 0;
+    telemetry_update_flag_adc = 0;
+    telemetry_update_flag_i2c = 0;
     
 }

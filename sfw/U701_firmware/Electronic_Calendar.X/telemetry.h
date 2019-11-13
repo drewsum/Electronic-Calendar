@@ -34,7 +34,8 @@
 #define ADC_TEMP_SENS_OFFSET        -100.0
 
 // This flag keeps track of if we need to update min and max values
-volatile uint32_t telemetry_extremes_update_flag;
+volatile uint32_t telemetry_update_flag_adc;
+volatile uint32_t telemetry_update_flag_i2c;
 
 #define TEL_NUM_PARAMS              12
 

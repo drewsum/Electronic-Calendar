@@ -142,6 +142,8 @@ void main(void) {
     // setup temperature sensor I2C bus
     TEMP_I2C_Initialize();
     printf("    Temperature Sensor I2C Bus Initialized\r\n");
+    MCP9804TempSensorInitialize();
+    printf("    I2C Digital Temperature Sensors Initialized\r\n");
     
     // Disable RESET LED
     RESET_LED_PIN = LOW;
@@ -211,7 +213,7 @@ void main(void) {
         if (MCP9804_start_flag) MCP9804AcquisitionHandler();
         
         // update minimum and maximum measured telemetry
-        if (telemetry_extremes_update_flag) telemetryUpdateExtremes();
+        if (telemetry_update_flag_adc && telemetry_update_flag_i2c) telemetryUpdateExtremes();
         
         // update error LEDs if needed
         if (update_error_leds_flag) updateErrorLEDs();

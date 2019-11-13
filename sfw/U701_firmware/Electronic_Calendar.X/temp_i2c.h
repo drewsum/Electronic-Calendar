@@ -1,15 +1,11 @@
 /* ************************************************************************** */
 /** Descriptive File Name
-
   @Company
     Company Name
-
   @File Name
     filename.h
-
   @Summary
     Brief description of the file.
-
   @Description
     Describe the purpose of this file.
  */
@@ -79,7 +75,7 @@ typedef struct
     uint8_t   length;           // the # of bytes in the buffer
     uint8_t   *pbuffer;         // a pointer to a buffer of length bytes
 } TEMP_I2C_TRANSACTION_REQUEST_BLOCK;
-        
+
 /**
   Section: Interface Routines
 */
@@ -161,7 +157,7 @@ typedef struct
         }
     </code>
 */
-        
+
 void TEMP_I2C_Initialize(void);
 
 /**
@@ -542,7 +538,7 @@ bool TEMP_I2C_MasterQueueIsEmpty(void);
 
 bool TEMP_I2C_MasterQueueIsFull(void);
 
-void __ISR(_I2C1_BUS_VECTOR, IPL5SRS) TEMP_I2C_BusCollisionISR( void );
+void __ISR(_I2C1_BUS_VECTOR, IPL4SRS) TEMP_I2C_BusCollisionISR( void );
 void __ISR(_I2C1_MASTER_VECTOR, IPL4SRS) TEMP_I2C_MASTER_ISR ( void );
 
 // this function returns if the temp I2C peripheral is currently turned on

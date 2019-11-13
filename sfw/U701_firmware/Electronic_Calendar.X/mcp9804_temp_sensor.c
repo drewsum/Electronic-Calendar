@@ -87,6 +87,8 @@ double MCP9804BytesToFloat(uint8_t input_array[2]) {
 // This function accesses temperature sensor data over I2C
 void MCP9804AcquisitionHandler(void) {
     
+    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    
     // input temp sensor
     // Write temp reg addr to read back temp sensor data
     uint8_t data_reg_pointer[1];
@@ -100,44 +102,46 @@ void MCP9804AcquisitionHandler(void) {
     if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.input_temp_sens_I2C_fault = 1;
     telemetry.current.params.input_temperature = MCP9804BytesToFloat(MCP9804_temp_results.input_temp_raw);
     
-//    // pos3p3 temp sensor
-//    // Write temp reg addr to read back temp sensor data
-//    data_reg_pointer[0] = MCP9804_TA_REG;
-//    TEMP_I2C_MasterWrite(data_reg_pointer, 1, POS3P3_TEMP_SENS_ADDR, &I2C_STATUS);
-//    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
-//    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.pos3p3_temp_sens_I2C_fault = 1;
-//    // Read two bytes from temp reg
-//    TEMP_I2C_MasterRead(MCP9804_temp_results.pos3p3_temp_raw, 2, POS3P3_TEMP_SENS_ADDR, &I2C_STATUS);
-//    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
-//    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.pos3p3_temp_sens_I2C_fault = 1;
-//    telemetry.current.params.pos3p3_temperature = MCP9804BytesToFloat(MCP9804_temp_results.pos3p3_temp_raw);
-//    
-//    // amb temp sensor
-//    // Write temp reg addr to read back temp sensor data
-//    data_reg_pointer[0] = MCP9804_TA_REG;
-//    TEMP_I2C_MasterWrite(data_reg_pointer, 1, AMB_TEMP_SENS_ADDR, &I2C_STATUS);
-//    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
-//    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.amb_temp_sens_I2C_fault = 1;
-//    // Read two bytes from temp reg
-//    TEMP_I2C_MasterRead(MCP9804_temp_results.amb_temp_raw, 2, AMB_TEMP_SENS_ADDR, &I2C_STATUS);
-//    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
-//    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.amb_temp_sens_I2C_fault = 1;
-//    telemetry.current.params.input_temperature = MCP9804BytesToFloat(MCP9804_temp_results.amb_temp_raw);
-//    
-//    // bckp temp sensor
-//    // Write temp reg addr to read back temp sensor data
-//    data_reg_pointer[0] = MCP9804_TA_REG;
-//    TEMP_I2C_MasterWrite(data_reg_pointer, 1, BCKP_TEMP_SENS_ADDR, &I2C_STATUS);
-//    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
-//    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.bckp_temp_sens_I2C_fault = 1;
-//    // Read two bytes from temp reg
-//    TEMP_I2C_MasterRead(MCP9804_temp_results.bckp_temp_raw, 2, BCKP_TEMP_SENS_ADDR, &I2C_STATUS);
-//    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
-//    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.bckp_temp_sens_I2C_fault = 1;
-//    telemetry.current.params.input_temperature = MCP9804BytesToFloat(MCP9804_temp_results.bckp_temp_raw);
+    // pos3p3 temp sensor
+    // Write temp reg addr to read back temp sensor data
+    data_reg_pointer[0] = MCP9804_TA_REG;
+    TEMP_I2C_MasterWrite(data_reg_pointer, 1, POS3P3_TEMP_SENS_ADDR, &I2C_STATUS);
+    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.pos3p3_temp_sens_I2C_fault = 1;
+    // Read two bytes from temp reg
+    TEMP_I2C_MasterRead(MCP9804_temp_results.pos3p3_temp_raw, 2, POS3P3_TEMP_SENS_ADDR, &I2C_STATUS);
+    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.pos3p3_temp_sens_I2C_fault = 1;
+    telemetry.current.params.pos3p3_temperature = MCP9804BytesToFloat(MCP9804_temp_results.pos3p3_temp_raw);
+    
+    // amb temp sensor
+    // Write temp reg addr to read back temp sensor data
+    data_reg_pointer[0] = MCP9804_TA_REG;
+    TEMP_I2C_MasterWrite(data_reg_pointer, 1, AMB_TEMP_SENS_ADDR, &I2C_STATUS);
+    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.amb_temp_sens_I2C_fault = 1;
+    // Read two bytes from temp reg
+    TEMP_I2C_MasterRead(MCP9804_temp_results.amb_temp_raw, 2, AMB_TEMP_SENS_ADDR, &I2C_STATUS);
+    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.amb_temp_sens_I2C_fault = 1;
+    telemetry.current.params.ambient_temperature = MCP9804BytesToFloat(MCP9804_temp_results.amb_temp_raw);
+    
+    // bckp temp sensor
+    // Write temp reg addr to read back temp sensor data
+    data_reg_pointer[0] = MCP9804_TA_REG;
+    TEMP_I2C_MasterWrite(data_reg_pointer, 1, BCKP_TEMP_SENS_ADDR, &I2C_STATUS);
+    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.bckp_temp_sens_I2C_fault = 1;
+    // Read two bytes from temp reg
+    TEMP_I2C_MasterRead(MCP9804_temp_results.bckp_temp_raw, 2, BCKP_TEMP_SENS_ADDR, &I2C_STATUS);
+    while(I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    if (I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.bckp_temp_sens_I2C_fault = 1;
+    telemetry.current.params.backup_temperature = MCP9804BytesToFloat(MCP9804_temp_results.bckp_temp_raw);
     
         
     // we're done acquiring new data
     MCP9804_start_flag = 0;
+    
+    telemetry_update_flag_i2c = 1;
     
 }
