@@ -6801,7 +6801,7 @@ char * getInterruptNameStringPadded(interrupt_source_t input_interrupt) {
         "Input Capture 2 Error     ",
         "Input Capture 2           ",
         "Output Compare 2          ",
-        "External Intt 2           ",
+        "External Int 2            ",
         "Timer3                    ",
         "Input Capture 3 Error     ",
         "Input Capture 3           ",

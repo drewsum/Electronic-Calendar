@@ -351,3 +351,91 @@ void printPMDStatus(void) {
     terminalTextAttributesReset();
     
 }
+
+// this function initializes INT2 for use with the cap touch power toggle pushbutton
+void capTouchPowerInitialize(void) {
+ 
+    // INT2 polarity is rising edge
+    INTCONbits.INT2EP = 1;
+    
+    disableInterrupt(External_Interrupt_2);
+    setInterruptPriority(External_Interrupt_2, 7);
+    setInterruptSubpriority(External_Interrupt_2, 1);
+    clearInterruptFlag(External_Interrupt_2);
+    enableInterrupt(External_Interrupt_2);
+    
+    powerToggleDebounceTimerIntialize();
+    
+}
+
+// This function initializes the heartbeat timer
+void powerToggleDebounceTimerIntialize(void) {
+    
+    // Stop timer 8
+    T8CONbits.ON = 0;
+    
+    // stop timer 8 in idle
+    T8CONbits.SIDL = 1;
+    
+    // Disable gated time accumulation
+    T8CONbits.TGATE = 0;
+    
+    // set Timer 8 prescaler
+    T8CONbits.TCKPS = 0b111;
+    
+    // Set timer clock input as PBCLK3
+    T8CONbits.TCS = 0;
+    
+    // Clear timer 8
+    TMR8 = 0x0000;
+    
+    // Set timer 8 period match - this combined with prescaler adds up to how 
+    // long a user would hold their finger on the cap touch pad
+    PR8 = 0x4FFF;
+    
+    // Clear Timer8 Interrupt Flag
+    clearInterruptFlag(Timer8);
+    
+    // Set Timer 8 interrupt priority
+    setInterruptPriority(Timer8, 3);
+    setInterruptSubpriority(Timer8, 3);
+    
+    // Enable timer 8 interrupt
+    enableInterrupt(Timer8);
+    
+}
+
+// this is the cap touch power toggle button interrupt service routine
+void __ISR(_EXTERNAL_2_VECTOR, IPL7SRS) capTouchPowerToggleISR(void) {
+ 
+    terminalTextAttributes(MAGENTA_COLOR, BLACK_COLOR, BOLD_FONT);
+    printf("User pressed power toggle button\r\n");
+    terminalTextAttributesReset();
+    
+    // start debounce timer
+    TMR8 = 0;
+    T8CONbits.ON = 1;
+    
+    // clear IRQ
+    clearInterruptFlag(External_Interrupt_2);
+    disableInterrupt(External_Interrupt_2);
+    
+}
+
+// power toggle debounce timer ISR
+void __ISR(_TIMER_8_VECTOR, IPL3SRS) powerToggleDebounceISR(void) {
+ 
+    // disable Timer 8
+    T8CONbits.ON = 0;
+    
+    // clear Timer 8
+    TMR8 = 0;
+    
+    // enable INT2 interrupt
+    clearInterruptFlag(External_Interrupt_2);
+    enableInterrupt(External_Interrupt_2);
+    
+    // clear this IRQ
+    clearInterruptFlag(Timer8);
+    
+}

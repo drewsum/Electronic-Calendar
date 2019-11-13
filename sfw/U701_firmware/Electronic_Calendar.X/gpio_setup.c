@@ -447,6 +447,7 @@ void portGGPIOInitialize (void) {
     LATGbits.LATG6      = LAT_LOW;
     ODCGbits.ODCG6      = ODC_DISABLE;
     ANSELGbits.ANSG6    = ANALOG_DISABLE;
+    INT2Rbits.INT2R     = 0b0001;               // Assign INT2 to RPG6
     
     // Setup RG7
     TRISGbits.TRISG7    = TRIS_INPUT;

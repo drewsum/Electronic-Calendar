@@ -120,7 +120,7 @@ void main(void) {
     // Disable unused peripherals for power savings
     PMDInitialize();
     printf("    Unused Peripheral Modules Disabled\n\r");
-            
+    
     // Setup the watchdog timer
     watchdogTimerInitialize();
     printf("    Watchdog Timer Initialized\n\r");
@@ -144,6 +144,10 @@ void main(void) {
     printf("    Temperature Sensor I2C Bus Initialized\r\n");
     MCP9804TempSensorInitialize();
     printf("    I2C Digital Temperature Sensors Initialized\r\n");
+    
+    // setup power toggle cap touch button
+    capTouchPowerInitialize();
+    printf("    Power Toggle Capacitive Pushbutton Initialized\r\n");
     
     // Disable RESET LED
     RESET_LED_PIN = LOW;
