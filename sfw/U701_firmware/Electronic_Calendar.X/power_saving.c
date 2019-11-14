@@ -6,6 +6,11 @@
 #include "power_saving.h"
 #include "terminal_control.h"
 
+#include "temp_i2c.h"
+#include "pin_macros.h"
+#include "rtcc.h"
+#include "calendar_leds.h"
+#include "binary_clock.h"
 
 // This function disables unused peripherals on startup for power savings
 // THIS FUNCTION CAN ONLY BE CALLED ONCE DUE TO PMD LOCKOUT AFTER ONE WRITE SESSION
@@ -89,7 +94,7 @@ void PMDInitialize(void) {
     // Enable real time clock/calendar
     PMD6bits.RTCCMD = 0;
     
-    // Enable all reference clocks, per device errate
+    // Enable all reference clocks, per device errata
     PMD6bits.REFO1MD = 0;
     PMD6bits.REFO2MD = 0;
     PMD6bits.REFO3MD = 0;
@@ -364,57 +369,13 @@ void capTouchPowerInitialize(void) {
     clearInterruptFlag(External_Interrupt_2);
     enableInterrupt(External_Interrupt_2);
     
-    powerToggleDebounceTimerIntialize();
-    
-}
-
-// This function initializes the heartbeat timer
-void powerToggleDebounceTimerIntialize(void) {
-    
-    // Stop timer 8
-    T8CONbits.ON = 0;
-    
-    // stop timer 8 in idle
-    T8CONbits.SIDL = 1;
-    
-    // Disable gated time accumulation
-    T8CONbits.TGATE = 0;
-    
-    // set Timer 8 prescaler
-    T8CONbits.TCKPS = 0b111;
-    
-    // Set timer clock input as PBCLK3
-    T8CONbits.TCS = 0;
-    
-    // Clear timer 8
-    TMR8 = 0x0000;
-    
-    // Set timer 8 period match - this combined with prescaler adds up to how 
-    // long a user would hold their finger on the cap touch pad
-    PR8 = 0x4FFF;
-    
-    // Clear Timer8 Interrupt Flag
-    clearInterruptFlag(Timer8);
-    
-    // Set Timer 8 interrupt priority
-    setInterruptPriority(Timer8, 3);
-    setInterruptSubpriority(Timer8, 3);
-    
-    // Enable timer 8 interrupt
-    enableInterrupt(Timer8);
-    
 }
 
 // this is the cap touch power toggle button interrupt service routine
 void __ISR(_EXTERNAL_2_VECTOR, IPL7SRS) capTouchPowerToggleISR(void) {
- 
-    terminalTextAttributes(MAGENTA_COLOR, BLACK_COLOR, BOLD_FONT);
-    printf("User pressed power toggle button\r\n");
-    terminalTextAttributesReset();
     
-    // start debounce timer
-    TMR8 = 0;
-    T8CONbits.ON = 1;
+    if (sleep_state == 0) pushbutton_shutdown_request = 1;
+    else pushbutton_wakeup_request = 1;
     
     // clear IRQ
     clearInterruptFlag(External_Interrupt_2);
@@ -422,20 +383,177 @@ void __ISR(_EXTERNAL_2_VECTOR, IPL7SRS) capTouchPowerToggleISR(void) {
     
 }
 
-// power toggle debounce timer ISR
-void __ISR(_TIMER_8_VECTOR, IPL3SRS) powerToggleDebounceISR(void) {
+// this function shuts down the MCU when the power toggle button is pressed
+void capToughPowerToggleShutdown(void) {
  
-    // disable Timer 8
-    T8CONbits.ON = 0;
+    // Clear WDT and shut it off
+    kickTheDog();
+    WDTCONbits.ON = 0;
     
-    // clear Timer 8
-    TMR8 = 0;
+    terminalTextAttributes(MAGENTA_COLOR, BLACK_COLOR, BOLD_FONT);
+    printf("Feeling sleepy, entering Idle mode\r\n");
+    terminalTextAttributesReset();
     
-    // enable INT2 interrupt
+    // send previous print message and wait until USB UART is cleared
+    while(U3STAbits.TRMT == 0);
+    
+    // shut down I2C
+    while (TEMP_I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
+    
+    // disable interrupts that could wake from sleep
+    disableInterrupt(Real_Time_Clock);
+    disableInterrupt(I2C1_Master_Event);
+    disableInterrupt(I2C1_Bus_Collision_Event);
+    disableInterrupt(Timer1);
+    disableInterrupt(ADC_End_Of_Scan_Ready);
+    disableInterrupt(ADC_Data_10);
+    disableInterrupt(ADC_Data_29);
+    disableInterrupt(ADC_Data_43);
+    disableInterrupt(ADC_Data_44);
+    disableInterrupt(ADC_Data_1);
+    disableInterrupt(ADC_Data_2);
+    disableInterrupt(ADC_Data_3);
+    disableInterrupt(ADC_Data_4);
+    disableInterrupt(DMA_Channel_0);
+    disableInterrupt(DMA_Channel_1);
+    disableInterrupt(UART3_Fault);
+    
+    // Disable calendar and status LEDs
+    STATUS_LED_ENABLE_PIN = 0;
+    DATE_DECODE_ENABLE_PIN = 0;
+    nDATE_DECODE_1_PIN = 1;
+    nDATE_DECODE_2_PIN = 1;
+    nDATE_DECODE_3_PIN = 1;
+    nDATE_DECODE_4_PIN = 1;
+    nSECONDS0_LED_PIN = 1;
+    nSECONDS1_LED_PIN = 1;
+    nSECONDS2_LED_PIN = 1;
+    nSECONDS3_LED_PIN = 1;
+    nSECONDS4_LED_PIN = 1;
+    nSECONDS5_LED_PIN = 1;
+    nSECONDS6_LED_PIN = 1;
+    nMINUTES0_LED_PIN = 1;
+    nMINUTES1_LED_PIN = 1;
+    nMINUTES2_LED_PIN = 1;
+    nMINUTES3_LED_PIN = 1;
+    nMINUTES4_LED_PIN = 1;
+    nMINUTES5_LED_PIN = 1;
+    nMINUTES6_LED_PIN = 1;
+    nHOURS0_LED_PIN = 1;
+    nHOURS1_LED_PIN = 1;
+    nHOURS2_LED_PIN = 1;
+    nHOURS3_LED_PIN = 1;
+    nHOURS4_LED_PIN = 1;
+    nHOURS5_LED_PIN = 1;
+    nHOURS6_LED_PIN = 1;
+    DATE_B0_PIN = 0;
+    DATE_B1_PIN = 0;
+    DATE_B2_PIN = 0;
+    YEAR_B0_PIN = 0;
+    YEAR_B1_PIN = 0;
+    YEAR_B2_PIN = 0;
+    nJAN_LED_PIN = 1;
+    nFEB_LED_PIN = 1;
+    nMAR_LED_PIN = 1;
+    nAPR_LED_PIN = 1;
+    nMAY_LED_PIN = 1;
+    nJUN_LED_PIN = 1;
+    nJUL_LED_PIN = 1;
+    nAUG_LED_PIN = 1;
+    nSEP_LED_PIN = 1;
+    nOCT_LED_PIN = 1;
+    nNOV_LED_PIN = 1;
+    nDEC_LED_PIN = 1;
+    nSUN_LED_PIN = 1;
+    nMON_LED_PIN = 1;
+    nTUE_LED_PIN = 1;
+    nWED_LED_PIN = 1;
+    nTHUR_LED_PIN = 1;
+    nFRI_LED_PIN = 1;
+    nSAT_LED_PIN = 1;
+    
+    softwareDelay(10000000);
+    
     clearInterruptFlag(External_Interrupt_2);
     enableInterrupt(External_Interrupt_2);
     
-    // clear this IRQ
-    clearInterruptFlag(Timer8);
+    sleep_state = 1;
+    pushbutton_shutdown_request = 0;
+    
+    // Enter idle mode
+    deviceUnlock();
+    OSCCONCLR = 0x10; // Set the power-saving mode to an idle mode
+    deviceLock();
+    asm volatile ( "wait" ); // Put device into Idle mode
+    
+}
+
+// this function wakes up the MCU when the power toggle button is pressed
+void capToughPowerToggleWakeup(void) {
+ 
+    // Clear WDT and turn it on
+    kickTheDog();
+    WDTCONbits.ON = 1;
+    
+    // Clear heartbeat timer
+    TMR1 = 0;
+    
+    // enable interrupts that could wake from sleep
+    enableInterrupt(Real_Time_Clock);
+    enableInterrupt(I2C1_Master_Event);
+    enableInterrupt(I2C1_Bus_Collision_Event);
+    enableInterrupt(Timer1);
+    enableInterrupt(ADC_End_Of_Scan_Ready);
+    enableInterrupt(ADC_Data_10);
+    enableInterrupt(ADC_Data_29);
+    enableInterrupt(ADC_Data_43);
+    enableInterrupt(ADC_Data_44);
+    enableInterrupt(ADC_Data_1);
+    enableInterrupt(ADC_Data_2);
+    enableInterrupt(ADC_Data_3);
+    enableInterrupt(ADC_Data_4);
+    enableInterrupt(DMA_Channel_0);
+    enableInterrupt(DMA_Channel_1);
+    enableInterrupt(UART3_Fault);
+    
+    // print to user that we're waking up
+    terminalTextAttributes(MAGENTA_COLOR, BLACK_COLOR, BOLD_FONT);
+    printf("Wakey Wakey, eggs and bakey: exiting Idle mode\r\n");
+    terminalTextAttributesReset();
+    
+    // Wait for sync to go low, signifying we can do an RTCC read
+    while (RTCCONbits.RTCSYNC == 1);
+    
+    // Copy values from RTCC into ram shadow register
+    rtcc_shadow.weekday     = RTCDATEbits.WDAY01;
+    rtcc_shadow.day         = (RTCDATEbits.DAY10 * 10) + RTCDATEbits.DAY01;
+    rtcc_shadow.month       = (RTCDATEbits.MONTH10 * 10) + RTCDATEbits.MONTH01;
+    rtcc_shadow.year        = (RTCDATEbits.YEAR10 * 10) + RTCDATEbits.YEAR01 + 2000;
+    rtcc_shadow.hours       = (RTCTIMEbits.HR10 * 10) + RTCTIMEbits.HR01;
+    rtcc_shadow.minutes     = (RTCTIMEbits.MIN10 * 10) + RTCTIMEbits.MIN01;
+    rtcc_shadow.seconds     = (RTCTIMEbits.SEC10 * 10) + RTCTIMEbits.SEC01;
+    
+    // update values displayed on binary clock LEDs
+    updateBinaryClockLEDs(rtcc_shadow.hours, rtcc_shadow.minutes, rtcc_shadow.seconds);
+    // update value displayed on month LEDs
+    updateMonthLEDs(rtcc_shadow.month);
+    // update value displayed on weekday LEDs
+    updateWeekdayLEDs(rtcc_shadow.weekday);
+    // update value displayed on year LEDs
+    updateYearLEDs(rtcc_shadow.year);
+    // update value displayed on day LEDs
+    updateDateLEDs(rtcc_shadow.day);
+    
+    // enable calendar and status LEDs
+    STATUS_LED_ENABLE_PIN = 1;
+    DATE_DECODE_ENABLE_PIN = 1;
+    
+    softwareDelay(10000000);
+    
+    clearInterruptFlag(External_Interrupt_2);
+    enableInterrupt(External_Interrupt_2);
+    
+    sleep_state = 0;
+    pushbutton_wakeup_request = 0;
     
 }

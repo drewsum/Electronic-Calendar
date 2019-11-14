@@ -54,7 +54,7 @@ typedef enum
     TEMP_I2C_LOST_STATE
 } TEMP_I2C_MESSAGE_STATUS;
 
-TEMP_I2C_MESSAGE_STATUS I2C_STATUS;
+TEMP_I2C_MESSAGE_STATUS TEMP_I2C_STATUS;
 
 /**
   I2C Driver Transaction Request Block (TRB) type definition.

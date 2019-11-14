@@ -13,15 +13,6 @@ void heartbeatTimerInitialize(void) {
     // Stop timer 1
     T1CONbits.ON = 0;
     
-    // Continue timer 1 in idle (not sure if this will be used)
-    T1CONbits.SIDL = 0;
-    
-    // Disable continuous writes
-    T1CONbits.TWDIS = 1;
-    
-    // Disable gated time accumulation
-    T1CONbits.TGATE = 0;
-    
     // Set timer 1 prescalar to 256
     T1CONbits.TCKPS = 0b11;
     
@@ -76,10 +67,10 @@ void __ISR(_TIMER_1_VECTOR, IPL6SRS) hearbeatTimerISR(void) {
     kickTheDog();
     
     // Clear the deadman timer
-    //holdThumbTighter();
+    holdThumbTighter();
     
     // Check to see if DMT actually cleared
-    //verifyThumbTightEnough();
+    verifyThumbTightEnough();
 
     // Toggle heartbeat LED
     HEARTBEAT_LED_PIN = !(HEARTBEAT_LED_PIN);
@@ -96,6 +87,9 @@ void __ISR(_TIMER_1_VECTOR, IPL6SRS) hearbeatTimerISR(void) {
     // request new temp sensor data
     MCP9804_start_flag = 1;
         
+    // clear Timer 1
+    TMR1 = 0;
+    
     // Clear interrupt flag
     clearInterruptFlag(Timer1);
     

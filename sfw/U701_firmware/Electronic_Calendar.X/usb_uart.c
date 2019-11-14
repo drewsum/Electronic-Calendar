@@ -166,8 +166,8 @@ void usbUartInitialize(void) {
     // Turn off UART 3 for configuration
     U3MODEbits.ON = 0;
     
-    // Enable UART 3 operation in IDLE mode
-    U3MODEbits.SIDL = 0;
+    // stop UART 3 operation in IDLE mode
+    U3MODEbits.SIDL = 1;
     
     // Disable IrDA encoding
     U3MODEbits.IREN = 0;

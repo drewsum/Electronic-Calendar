@@ -125,10 +125,6 @@ void main(void) {
     watchdogTimerInitialize();
     printf("    Watchdog Timer Initialized\n\r");
     
-    // Startup the deadman timer
-    //deadmanTimerInitialize();
-    //printf("    Deadman Timer Initialized\n\r");
-    
     // Setup the real time clock-calendar
     rtccInitialize();
     if (reset_cause == POR_Reset) rtccClear();
@@ -224,6 +220,12 @@ void main(void) {
         
         // update error LEDs if needed
         if (update_error_leds_flag) updateErrorLEDs();
+        
+        // if we need to shut down due to a pushbutton toggle
+        if (pushbutton_shutdown_request) capToughPowerToggleShutdown();
+        
+        // if we need to wakeup do to a pushbutton toggle, wakey wakey eggs and bakey
+        if (pushbutton_wakeup_request) capToughPowerToggleWakeup();
         
     }
     
