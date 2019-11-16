@@ -371,7 +371,14 @@ void usbUartRxLUTInterface(char * cmd_string) {
         
         // if the current entry that we've found in the hash table matches cmd_string,
         // call the function pointed to by the current entry in the hash table
-        if (strcomp(cmd_string, current_command->command_name) == 0) {
+        if (strcmp(cmd_string, current_command->command_name) == 0) {
+         
+            current_command->func(cmd_string);
+            break;
+            
+        }
+        
+        else if (strcomp(cmd_string, current_command->command_name) == 0) {
          
             current_command->func(cmd_string);
             break;

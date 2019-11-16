@@ -110,6 +110,11 @@ void printTimeAndDate(void);
 // Real Time Clock-Calendar interrupt service routine
 void __ISR(_RTCC_VECTOR, ipl2SRS) rtccISR(void);
 
+// this function returns the raw 10 bit value of the RTC calibration setting
+uint16_t getRTCCCalibration(void);
+
+// this function sets the RTCC calibration from raw 10 bit value
+void setRTCCCalibration(uint16_t input_cal);
 
 #endif /* _RTCC_H */
 

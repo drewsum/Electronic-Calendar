@@ -475,6 +475,45 @@ usb_uart_command_function_t vbatIsolateCommand(char * input_str) {
     
 }
 
+usb_uart_command_function_t getRTCCCalCommand(char * input_str) {
+ 
+    terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+    printf("RTCC Calibration Value currently set to 0x%03X\r\n", getRTCCCalibration());
+    terminalTextAttributesReset();
+    
+}
+
+usb_uart_command_function_t setRTCCCalCommand(char * input_str) {
+ 
+    // Snipe out received string
+    uint32_t read_cal;
+    sscanf(input_str, "Set RTCC Calibration: 0x%03X", &read_cal);
+    
+    if (read_cal > 0x3FF) {
+     
+        terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
+        printf("Please enter a valid 10 bit hexadecimal calibration value, up to 0x3FF\r\n");
+        printf("See PIC32 reference menu for determining calibration value\r\n");
+        terminalTextAttributesReset();
+        
+    }
+    
+    else {
+
+        terminalTextAttributes(GREEN_COLOR, BLACK_COLOR, NORMAL_FONT);
+        printf("Calibrating RTCC, please wait...\r\n");
+
+        setRTCCCalibration(read_cal);
+
+        printf("RTCC Calibration Value set to 0x%03X\r\n", getRTCCCalibration());
+        terminalTextAttributesReset();
+
+    }
+        
+}
+
+
+
 usb_uart_command_function_t easterEggCommand(char * input_str) {
  
     terminalClearScreen();
@@ -642,6 +681,12 @@ void usbUartHashTableInitialize(void) {
     usbUartAddCommand("Set Unix Time: ",
             "\b\b<decimal unix time>, <hour offset from UTC to local time>: sets the RTCC to the supplied UNIX time with hour offset from UTC",
             setUnixTimeCommand);
+    usbUartAddCommand("RTCC Calibration?",
+            "Prints the current setting of the 10 bit RTCC calibration value",
+            getRTCCCalCommand);
+    usbUartAddCommand("Set RTCC Calibration: ",
+            "\b\b<10 bit hex calibration value>: Sets the RTCC calibration value",
+            setRTCCCalCommand);
     usbUartAddCommand("Easter Egg",
             "Prints a surprise\r\n",
             easterEggCommand);

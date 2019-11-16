@@ -394,3 +394,46 @@ void __ISR(_RTCC_VECTOR, ipl2SRS) rtccISR(void) {
     clearInterruptFlag(Real_Time_Clock);
     
 }
+
+// this function returns the raw 10 bit value of the RTC calibration setting
+uint16_t getRTCCCalibration(void) {
+
+    return RTCCONbits.CAL;
+    
+}
+
+
+// this function sets the RTCC calibration from raw 10 bit value
+void setRTCCCalibration(uint16_t input_cal) {
+    
+    // mask
+    input_cal = input_cal & 0x3FF;
+    
+    // literally copied from RTC ref manual
+    if(RTCCON & 0x8000)
+    { // RTCC is ON
+    
+        unsigned int t0, t1;
+    
+        do
+        {
+
+            t0 = RTCTIME;
+            t1 = RTCTIME;
+
+        } while (t0 != t1); // read valid time value
+
+        if((t0 & 0xFF) == 00)
+
+        { // we're at second 00, wait auto-adjust to be performed
+
+            while (!(RTCCON & 0x2)); // wait until second half...
+
+        }
+    
+    }
+    
+    // set calibration
+    RTCCONbits.CAL = input_cal;
+    
+}
