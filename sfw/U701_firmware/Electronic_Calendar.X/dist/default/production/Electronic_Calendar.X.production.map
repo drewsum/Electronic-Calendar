@@ -165,7 +165,6 @@ pgood_status        0x5               build/default/production/main.o
 telemetry_update_flag_adc
                     0x4               build/default/production/main.o
 rtcc_shadow         0xc               build/default/production/main.o
-error_handler       0x12              build/default/production/main.o
 MCP9804_temp_results
                     0x8               build/default/production/main.o
 telemetry           0x90              build/default/production/main.o
@@ -359,41 +358,42 @@ section                    address  length [bytes]      (dec)  Description
 kseg0 Data-Memory Usage
 section                    address  length [bytes]      (dec)  Description
 -------                 ----------  -------------------------  -----------
-.sdata                  0x80000000           0x38          56  Small init data 
-.sbss                   0x80000038           0xb8         184  Small uninit data 
-.bss                    0x800000f0           0xb0         176  Uninitialized data 
-.data                   0x8000d9a0          0x410        1040  Initialized data 
-.bss                    0x8000ddb0          0x30c         780  Uninitialized data 
-.data                   0x8000e0bc           0xd4         212  Initialized data 
-.bss                    0x8000e190           0x88         136  Uninitialized data 
-.data                   0x8000e218           0x78         120  Initialized data 
-.bss                    0x8000e290           0x50          80  Uninitialized data 
-.data                   0x8000e2e0           0x90         144  Initialized data 
-.data                   0x8000e370           0x90         144  Initialized data 
-.data                   0x8000e400           0x90         144  Initialized data 
-.data                   0x8000e490           0x90         144  Initialized data 
-.data                   0x8000e520           0x90         144  Initialized data 
-.bss                    0x8000e5b0           0x34          52  Uninitialized data 
-.data                   0x8000e5e4           0x58          88  Initialized data 
-.bss                    0x8000e63c           0x2c          44  Uninitialized data 
-.data                   0x8000e668           0x2c          44  Initialized data 
-.bss                    0x8000e694           0x54          84  Uninitialized data 
-.bss                    0x8000e6e8           0x24          36  Uninitialized data 
-.data                   0x8000e70c           0x20          32  Initialized data 
-.bss                    0x8000e72c            0x8           8  Uninitialized data 
-.bss                    0x8000e734            0x4           4  Uninitialized data 
-.COHERENTBSS$           0x800001a0         0xd800       55296   
-         Total kseg0_data_mem used  :      0xe738       59192  11.3% of 0x80000
+.persist                0x80000000           0xdc         220   
+.sdata                  0x800000dc           0x38          56  Small init data 
+.sbss                   0x80000114           0xb8         184  Small uninit data 
+.bss                    0x800001cc           0x9c         156  Uninitialized data 
+.bss                    0x80000268            0x8           8  Uninitialized data 
+.data                   0x8000da70          0x410        1040  Initialized data 
+.bss                    0x8000de80          0x30c         780  Uninitialized data 
+.data                   0x8000e18c           0xd4         212  Initialized data 
+.bss                    0x8000e260           0x88         136  Uninitialized data 
+.data                   0x8000e2e8           0x78         120  Initialized data 
+.bss                    0x8000e360           0x50          80  Uninitialized data 
+.data                   0x8000e3b0           0x90         144  Initialized data 
+.data                   0x8000e440           0x90         144  Initialized data 
+.data                   0x8000e4d0           0x90         144  Initialized data 
+.data                   0x8000e560           0x90         144  Initialized data 
+.data                   0x8000e5f0           0x90         144  Initialized data 
+.bss                    0x8000e680           0x34          52  Uninitialized data 
+.data                   0x8000e6b4           0x58          88  Initialized data 
+.bss                    0x8000e70c           0x2c          44  Uninitialized data 
+.data                   0x8000e738           0x2c          44  Initialized data 
+.bss                    0x8000e764           0x54          84  Uninitialized data 
+.bss                    0x8000e7b8           0x24          36  Uninitialized data 
+.data                   0x8000e7dc           0x20          32  Initialized data 
+.bss                    0x8000e7fc            0x4           4  Uninitialized data 
+.COHERENTBSS$           0x80000270         0xd800       55296   
+         Total kseg0_data_mem used  :      0xe800       59392  11.3% of 0x80000
         --------------------------------------------------------------------------
-            Total Data Memory used  :      0xe738       59192  11.3% of 0x80000
+            Total Data Memory used  :      0xe800       59392  11.3% of 0x80000
         --------------------------------------------------------------------------
 
 
 Dynamic Data-Memory Reservation
 section                    address  length [bytes]      (dec)  Description
 -------                 ----------  -------------------------  -----------
-heap                    0x8000e740         0x8000       32768  Reserved for heap 
-stack                   0x80016758        0x698a0      432288  Reserved for stack 
+heap                    0x8000e808         0x8000       32768  Reserved for heap 
+stack                   0x80016820        0x697d8      432088  Reserved for stack 
 
         --------------------------------------------------------------------------
 
@@ -2146,116 +2146,127 @@ END GROUP
  *(.gcc_except_table .gcc_except_table.*)
                 0x80000000                . = ALIGN (0x4)
 
-.persist        0x80000000        0x0
+.persist        0x80000000       0xdc
                 0x80000000                _persist_begin = .
  *(.persist .persist.*)
  *(.pbss .pbss.*)
-                0x80000000                . = ALIGN (0x4)
-                0x80000000                _persist_end = .
+ .pbss          0x80000000       0x14 build/default/production/main.o
+                0x80000000                error_handler
+ .pbss          0x80000014       0x14 build/default/production/prefetch.o
+ .pbss          0x80000028       0x14 build/default/production/cause_of_reset.o
+ .pbss          0x8000003c       0x14 build/default/production/error_handler.o
+ .pbss          0x80000050       0x14 build/default/production/watchdog_timer.o
+ .pbss          0x80000064       0x14 build/default/production/heartbeat_timer.o
+ .pbss          0x80000078       0x14 build/default/production/usb_uart.o
+ .pbss          0x8000008c       0x14 build/default/production/usb_uart_rx_lookup_table.o
+ .pbss          0x800000a0       0x14 build/default/production/adc.o
+ .pbss          0x800000b4       0x14 build/default/production/mcp9804_temp_sensor.o
+ .pbss          0x800000c8       0x14 build/default/production/temp_i2c.o
+                0x800000dc                . = ALIGN (0x4)
+                0x800000dc                _persist_end = .
 
-.data           0x80000000        0x0
+.data           0x800000dc        0x0
  *(.gnu.linkonce.d.*)
  *(.data1)
-                0x80000000                . = ALIGN (0x4)
-                0x80000000                . = .
-                0x80007ff0                _gp = (ALIGN (0x10) + 0x7ff0)
+                0x800000dc                . = ALIGN (0x4)
+                0x800000dc                . = .
+                0x800080d0                _gp = (ALIGN (0x10) + 0x7ff0)
 
-.got            0x80000000        0x0
+.got            0x800000dc        0x0
  *(.got.plt)
  *(.got)
-                0x80000000                . = ALIGN (0x4)
+                0x800000dc                . = ALIGN (0x4)
 
-.sdata          0x80000000       0x38
-                0x80000000                _sdata_begin = .
+.sdata          0x800000dc       0x38
+                0x800000dc                _sdata_begin = .
  *(.sdata .sdata.* .gnu.linkonce.s.*)
- .sdata         0x80000000        0x4 build/default/production/main.o
-                0x80000000                adc_cal_gain
- .sdata         0x80000004        0x4 build/default/production/usb_uart_rx_lookup_table.o
- .sdata         0x80000008        0x4 build/default/production/adc.o
- .sdata         0x8000000c       0x24 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(pic32_init_cache.o)
-                0x8000000c                __pic32_icache_size
-                0x80000010                __pic32_icache_linesize
-                0x80000014                __pic32_icache_ways
-                0x80000018                __pic32_dcache_size
-                0x8000001c                __pic32_dcache_linesize
-                0x80000020                __pic32_dcache_ways
-                0x80000024                __pic32_scache_size
-                0x80000028                __pic32_scache_linesize
-                0x8000002c                __pic32_scache_ways
- .sdata         0x80000030        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(_iobdata.o)
-                0x80000030                _libc_data
- .sdata         0x80000034        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(xc32_uart.o)
-                0x80000034                __XC_UART
-                0x80000038                . = ALIGN (0x4)
-                0x80000038                _sdata_end = .
+ .sdata         0x800000dc        0x4 build/default/production/main.o
+                0x800000dc                adc_cal_gain
+ .sdata         0x800000e0        0x4 build/default/production/usb_uart_rx_lookup_table.o
+ .sdata         0x800000e4        0x4 build/default/production/adc.o
+ .sdata         0x800000e8       0x24 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(pic32_init_cache.o)
+                0x800000e8                __pic32_icache_size
+                0x800000ec                __pic32_icache_linesize
+                0x800000f0                __pic32_icache_ways
+                0x800000f4                __pic32_dcache_size
+                0x800000f8                __pic32_dcache_linesize
+                0x800000fc                __pic32_dcache_ways
+                0x80000100                __pic32_scache_size
+                0x80000104                __pic32_scache_linesize
+                0x80000108                __pic32_scache_ways
+ .sdata         0x8000010c        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(_iobdata.o)
+                0x8000010c                _libc_data
+ .sdata         0x80000110        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(xc32_uart.o)
+                0x80000110                __XC_UART
+                0x80000114                . = ALIGN (0x4)
+                0x80000114                _sdata_end = .
 
 .lit8
  *(.lit8)
 
 .lit4
  *(.lit4)
-                0x80000038                . = ALIGN (0x4)
-                0x80000038                _data_end = .
-                0x80000038                _bss_begin = .
+                0x80000114                . = ALIGN (0x4)
+                0x80000114                _data_end = .
+                0x80000114                _bss_begin = .
 
-.sbss           0x80000038       0xb8
-                0x80000038                _sbss_begin = .
+.sbss           0x80000114       0xb8
+                0x80000114                _sbss_begin = .
  *(.dynsbss)
  *(.sbss .sbss.* .gnu.linkonce.sb.*)
- .sbss          0x80000038       0x1c build/default/production/main.o
-                0x80000038                usb_uart_tx_buffer_head
-                0x8000003c                usb_uart_commands
-                0x80000040                usb_uart_rx_parse_request
-                0x80000044                pushbutton_shutdown_request
-                0x80000048                pushbutton_wakeup_request
-                0x8000004c                sleep_state
-                0x80000050                led_update_request_flag
- .sbss          0x80000054       0x18 build/default/production/usb_uart.o
- .sbss          0x8000006c       0x10 build/default/production/usb_uart_rx_lookup_table.o
- .sbss          0x8000007c       0x10 build/default/production/power_saving.o
- .sbss          0x8000008c        0x4 build/default/production/rtcc.o
- .sbss          0x80000090        0x4 build/default/production/calendar_leds.o
- .sbss          0x80000094       0x2c build/default/production/temp_i2c.o
- .sbss          0x800000c0        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(errno.o)
-                0x800000c0                errno
+ .sbss          0x80000114       0x1c build/default/production/main.o
+                0x80000114                usb_uart_tx_buffer_head
+                0x80000118                usb_uart_commands
+                0x8000011c                usb_uart_rx_parse_request
+                0x80000120                pushbutton_shutdown_request
+                0x80000124                pushbutton_wakeup_request
+                0x80000128                sleep_state
+                0x8000012c                led_update_request_flag
+ .sbss          0x80000130       0x18 build/default/production/usb_uart.o
+ .sbss          0x80000148       0x10 build/default/production/usb_uart_rx_lookup_table.o
+ .sbss          0x80000158       0x10 build/default/production/power_saving.o
+ .sbss          0x80000168        0x4 build/default/production/rtcc.o
+ .sbss          0x8000016c        0x4 build/default/production/calendar_leds.o
+ .sbss          0x80000170       0x2c build/default/production/temp_i2c.o
+ .sbss          0x8000019c        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(errno.o)
+                0x8000019c                errno
  *(.scommon)
- .scommon       0x800000c4       0x2c build/default/production/main.o
-                0x800000c4                telemetry_update_flag_i2c
-                0x800000c8                update_error_leds_flag
-                0x800000cc                MCP9804_start_flag
-                0x800000d0                TEMP_I2C_STATUS
-                0x800000d4                reset_cause
-                0x800000d8                pgood_status
-                0x800000e0                telemetry_update_flag_adc
-                0x800000e4                MCP9804_temp_results
-                0x800000ec                device_on_time_counter
- .scommon       0x800000f0        0x0 build/default/production/prefetch.o
- .scommon       0x800000f0        0x0 build/default/production/cause_of_reset.o
- .scommon       0x800000f0        0x0 build/default/production/error_handler.o
- .scommon       0x800000f0        0x0 build/default/production/watchdog_timer.o
- .scommon       0x800000f0        0x0 build/default/production/heartbeat_timer.o
- .scommon       0x800000f0        0x0 build/default/production/usb_uart.o
- .scommon       0x800000f0        0x0 build/default/production/usb_uart_rx_lookup_table.o
- .scommon       0x800000f0        0x0 build/default/production/power_saving.o
- .scommon       0x800000f0        0x0 build/default/production/adc.o
- .scommon       0x800000f0        0x0 build/default/production/mcp9804_temp_sensor.o
- .scommon       0x800000f0        0x0 build/default/production/temp_i2c.o
- .scommon       0x800000f0        0x0 build/default/production/misc_IO_functions.o
- .scommon       0x800000f0        0x0 build/default/production/telemetry.o
-                0x800000f0                _sbss_end = .
-                0x800000f0                . = ALIGN (0x4)
+ .scommon       0x800001a0       0x2c build/default/production/main.o
+                0x800001a0                telemetry_update_flag_i2c
+                0x800001a4                update_error_leds_flag
+                0x800001a8                MCP9804_start_flag
+                0x800001ac                TEMP_I2C_STATUS
+                0x800001b0                reset_cause
+                0x800001b4                pgood_status
+                0x800001bc                telemetry_update_flag_adc
+                0x800001c0                MCP9804_temp_results
+                0x800001c8                device_on_time_counter
+ .scommon       0x800001cc        0x0 build/default/production/prefetch.o
+ .scommon       0x800001cc        0x0 build/default/production/cause_of_reset.o
+ .scommon       0x800001cc        0x0 build/default/production/error_handler.o
+ .scommon       0x800001cc        0x0 build/default/production/watchdog_timer.o
+ .scommon       0x800001cc        0x0 build/default/production/heartbeat_timer.o
+ .scommon       0x800001cc        0x0 build/default/production/usb_uart.o
+ .scommon       0x800001cc        0x0 build/default/production/usb_uart_rx_lookup_table.o
+ .scommon       0x800001cc        0x0 build/default/production/power_saving.o
+ .scommon       0x800001cc        0x0 build/default/production/adc.o
+ .scommon       0x800001cc        0x0 build/default/production/mcp9804_temp_sensor.o
+ .scommon       0x800001cc        0x0 build/default/production/temp_i2c.o
+ .scommon       0x800001cc        0x0 build/default/production/misc_IO_functions.o
+ .scommon       0x800001cc        0x0 build/default/production/telemetry.o
+                0x800001cc                _sbss_end = .
+                0x800001cc                . = ALIGN (0x4)
 
-.bss            0x800000f0       0xb0
+.bss            0x800001cc       0x9c
  *(.dynbss)
  *(COMMON)
- COMMON         0x800000f0       0xb0 build/default/production/main.o
-                0x800000f0                rtcc_shadow
-                0x800000fc                error_handler
-                0x80000110                telemetry
-                0x800001a0                . = ALIGN ((. != 0x0)?0x4:0x1)
-                0x800001a0                . = ALIGN (0x4)
-                0x800001a0                _end = .
-                0x800001a0                _bss_end = .
+ COMMON         0x800001cc       0x9c build/default/production/main.o
+                0x800001cc                rtcc_shadow
+                0x800001d8                telemetry
+                0x80000268                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x80000268                . = ALIGN (0x4)
+                0x80000268                _end = .
+                0x80000268                _bss_end = .
                 0x00080000                _bmxdudba_address = 0x80000
                 0x00080000                _bmxdupba_address = 0x80000
 
@@ -3092,8 +3103,8 @@ LOAD data_init
 .reginfo        0x00000000       0x18
  .reginfo       0x00000000       0x18 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MZ2048EFG100/crt0_mips32r2.o
 
-.stack          0x80016758      0x400
- .stack         0x80016758      0x400 stack
+.stack          0x80016820      0x400
+ .stack         0x80016820      0x400 stack
 
 .__vector_offset_BF810540_data
                 0xbf810540      0x178
@@ -3145,101 +3156,101 @@ LOAD data_init
  .__vector_offset_BF810894_data
                 0xbf810894        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MZ2048EFG100\vector_offset_init.o
 
-.COHERENTBSS$   0xa00001a0     0xd800
- .COHERENTBSS$  0xa00001a0     0x4000 build/default/production/main.o
-                0xa00001a0                usb_uart_tx_buffer
+.COHERENTBSS$   0xa0000270     0xd800
+ .COHERENTBSS$  0xa0000270     0x4000 build/default/production/main.o
+                0xa0000270                usb_uart_tx_buffer
  .bss.usb_uart_tx_buffer.usb_uart_tx_buffer
-                0xa00041a0     0x4000 build/default/production/usb_uart.o
+                0xa0004270     0x4000 build/default/production/usb_uart.o
  .bss.usb_uart_tx_buffer.usb_uart_tx_buffer
-                0xa00081a0     0x4000 build/default/production/usb_uart_rx_lookup_table.o
+                0xa0008270     0x4000 build/default/production/usb_uart_rx_lookup_table.o
  .bss.usb_uart_rx_buffer.usb_uart_rx_buffer
-                0xa000c1a0      0x800 build/default/production/main.o
-                0xa000c1a0                usb_uart_rx_buffer
+                0xa000c270      0x800 build/default/production/main.o
+                0xa000c270                usb_uart_rx_buffer
  .bss.usb_uart_rx_buffer.usb_uart_rx_buffer
-                0xa000c9a0      0x800 build/default/production/usb_uart.o
+                0xa000ca70      0x800 build/default/production/usb_uart.o
  .bss.usb_uart_rx_buffer.usb_uart_rx_buffer
-                0xa000d1a0      0x800 build/default/production/usb_uart_rx_lookup_table.o
+                0xa000d270      0x800 build/default/production/usb_uart_rx_lookup_table.o
 
-.data           0x8000d9a0      0x410
- .data          0x8000d9a0      0x410 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(malloc.o)
-                0x8000d9a0                malloc_sbrk_base
-                0x8000d9a4                malloc_trim_threshold
-                0x8000d9a8                malloc_av_
+.data           0x8000da70      0x410
+ .data          0x8000da70      0x410 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(malloc.o)
+                0x8000da70                malloc_sbrk_base
+                0x8000da74                malloc_trim_threshold
+                0x8000da78                malloc_av_
 
-.bss            0x8000ddb0      0x30c
- .bss           0x8000ddb0      0x30c build/default/production/temp_i2c.o
+.bss            0x8000de80      0x30c
+ .bss           0x8000de80      0x30c build/default/production/temp_i2c.o
 
-.data           0x8000e0bc       0xd4
- .data          0x8000e0bc       0xd4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(_iobdata.o)
+.data           0x8000e18c       0xd4
+ .data          0x8000e18c       0xd4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(_iobdata.o)
 
-.bss            0x8000e190       0x88
- .bss           0x8000e190       0x88 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(_iobdata.o)
+.bss            0x8000e260       0x88
+ .bss           0x8000e260       0x88 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(_iobdata.o)
 
-.data           0x8000e218       0x78
- .data          0x8000e218       0x78 build/default/production/cause_of_reset.o
+.data           0x8000e2e8       0x78
+ .data          0x8000e2e8       0x78 build/default/production/cause_of_reset.o
 
-.bss            0x8000e290       0x50
- .bss           0x8000e290       0x50 build/default/production/usb_uart.o
+.bss            0x8000e360       0x50
+ .bss           0x8000e360       0x50 build/default/production/usb_uart.o
 
-.data           0x8000e2e0       0x90
- .data          0x8000e2e0       0x48 build/default/production/main.o
-                0x8000e2e0                error_handler_flag_names
- .data          0x8000e328       0x48 build/default/production/prefetch.o
+.data           0x8000e3b0       0x90
+ .data          0x8000e3b0       0x48 build/default/production/main.o
+                0x8000e3b0                error_handler_flag_names
+ .data          0x8000e3f8       0x48 build/default/production/prefetch.o
 
-.data           0x8000e370       0x90
- .data          0x8000e370       0x48 build/default/production/error_handler.o
- .data          0x8000e3b8       0x48 build/default/production/watchdog_timer.o
+.data           0x8000e440       0x90
+ .data          0x8000e440       0x48 build/default/production/error_handler.o
+ .data          0x8000e488       0x48 build/default/production/watchdog_timer.o
 
-.data           0x8000e400       0x90
- .data          0x8000e400       0x48 build/default/production/heartbeat_timer.o
- .data          0x8000e448       0x48 build/default/production/usb_uart.o
+.data           0x8000e4d0       0x90
+ .data          0x8000e4d0       0x48 build/default/production/heartbeat_timer.o
+ .data          0x8000e518       0x48 build/default/production/usb_uart.o
 
-.data           0x8000e490       0x90
- .data          0x8000e490       0x48 build/default/production/usb_uart_rx_lookup_table.o
- .data          0x8000e4d8       0x48 build/default/production/adc.o
+.data           0x8000e560       0x90
+ .data          0x8000e560       0x48 build/default/production/usb_uart_rx_lookup_table.o
+ .data          0x8000e5a8       0x48 build/default/production/adc.o
 
-.data           0x8000e520       0x90
- .data          0x8000e520       0x48 build/default/production/mcp9804_temp_sensor.o
- .data          0x8000e568       0x48 build/default/production/temp_i2c.o
+.data           0x8000e5f0       0x90
+ .data          0x8000e5f0       0x48 build/default/production/mcp9804_temp_sensor.o
+ .data          0x8000e638       0x48 build/default/production/temp_i2c.o
 
-.bss            0x8000e5b0       0x34
- .bss           0x8000e5b0       0x34 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(malloc.o)
-                0x8000e5b0                malloc_current_mallinfo
-                0x8000e5d8                malloc_max_total_mem
-                0x8000e5dc                malloc_max_sbrked_mem
-                0x8000e5e0                malloc_top_pad
+.bss            0x8000e680       0x34
+ .bss           0x8000e680       0x34 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(malloc.o)
+                0x8000e680                malloc_current_mallinfo
+                0x8000e6a8                malloc_max_total_mem
+                0x8000e6ac                malloc_max_sbrked_mem
+                0x8000e6b0                malloc_top_pad
 
-.data           0x8000e5e4       0x58
- .data          0x8000e5e4       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(strtok.o)
- .data          0x8000e610       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(gmtime.o)
+.data           0x8000e6b4       0x58
+ .data          0x8000e6b4       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(strtok.o)
+ .data          0x8000e6e0       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(gmtime.o)
 
-.bss            0x8000e63c       0x2c
- .bss           0x8000e63c       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(gmtime.o)
+.bss            0x8000e70c       0x2c
+ .bss           0x8000e70c       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(gmtime.o)
 
-.data           0x8000e668       0x2c
- .data          0x8000e668       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(offtime.o)
+.data           0x8000e738       0x2c
+ .data          0x8000e738       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(offtime.o)
 
-.bss            0x8000e694       0x54
- .bss           0x8000e694       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(offtime.o)
- .bss           0x8000e6c0       0x28 build/default/production/device_control.o
+.bss            0x8000e764       0x54
+ .bss           0x8000e764       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(offtime.o)
+ .bss           0x8000e790       0x28 build/default/production/device_control.o
 
-.bss            0x8000e6e8       0x24
- .bss           0x8000e6e8       0x24 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(sbrk.o)
-                0x8000e704                _maxbrk
-                0x8000e708                _minbrk
+.bss            0x8000e7b8       0x24
+ .bss           0x8000e7b8       0x24 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(sbrk.o)
+                0x8000e7d4                _maxbrk
+                0x8000e7d8                _minbrk
 
-.data           0x8000e70c       0x20
- .data          0x8000e70c       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(fullexit.o)
-                0x8000e70c                __exfun_mx
+.data           0x8000e7dc       0x20
+ .data          0x8000e7dc       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(fullexit.o)
+                0x8000e7dc                __exfun_mx
 
-.bss            0x8000e72c        0x8
- .bss           0x8000e72c        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(strtok.o)
- .bss           0x8000e730        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(stubs.o)
-                0x8000e730                __isthreaded
+.bss            0x80000268        0x8
+ .bss           0x80000268        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(strtok.o)
+ .bss           0x8000026c        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(stubs.o)
+                0x8000026c                __isthreaded
 
-.bss            0x8000e734        0x4
- .bss           0x8000e734        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(_cleanup.o)
-                0x8000e734                __cleanup
+.bss            0x8000e7fc        0x4
+ .bss           0x8000e7fc        0x4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\liblega-c.a(_cleanup.o)
+                0x8000e7fc                __cleanup
 
 .bss%z1         0x00000000        0x0
  .bss           0x00000000        0x0 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/fpu64\libpic32.a(xc32_uart.o)
