@@ -605,11 +605,23 @@ void TEMP_I2C_MasterRead(
 
 inline void TEMP_I2C_WaitForLastPacketToComplete()
 {
-    while(i2c2_state != S_MASTER_IDLE)
+    
+    uint32_t timeout = 0xFFFFFFFF;
+    while(i2c2_state != S_MASTER_IDLE && timeout != 0)
     {
         // If your code gets stuck here it is because the last packet is never completing
         // Most likely cause is that your interrupt is not firing as it should. Check if you have
         //   correctly enabled all MSSP, Peripheral and GIE interrupt settings.
+        timeout--;
+        
+    }
+    
+    if (timeout == 0) {
+     
+        error_handler.flags.temp_i2c_stall = 1;
+        clearInterruptFlag(I2C1_Master_Event);
+        
+        
     }
 }
 
