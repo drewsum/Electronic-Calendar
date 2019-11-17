@@ -6,6 +6,7 @@
 #include "power_saving.h"
 #include "terminal_control.h"
 
+#include "device_control.h"
 #include "temp_i2c.h"
 #include "pin_macros.h"
 #include "rtcc.h"
@@ -480,10 +481,40 @@ void capToughPowerToggleShutdown(void) {
     sleep_state = 1;
     pushbutton_shutdown_request = 0;
     
+    // disable unused PBCLKs
+    PB2DIVbits.ON = 0;
+    PB3DIVbits.ON = 0;
+    PB5DIVbits.ON = 0;
+    PB8DIVbits.ON = 0;
+    
+    // switch SYSCLK to LPRC, only do the switch if we're not already clocked off of LPRC
+    if (OSCCONbits.COSC != 0b101) {
+        
+        // unlock the device
+        deviceUnlock();
+
+        // unlock clock and PLL settings
+        OSCCONbits.CLKLOCK = 0;
+        
+        // new oscillator select is LPRC
+        OSCCONbits.NOSC = 0b101;
+        
+        // start a clock change and wait until complete
+        OSCCONbits.OSWEN = 1;
+        while (OSCCONbits.OSWEN);
+        
+        // lock clock and PLL settings
+        OSCCONbits.CLKLOCK = 1;
+        
+        // lock device
+        deviceLock();
+        
+    }
+    
     // Enter idle mode
-    deviceUnlock();
-    OSCCONCLR = 0x10; // Set the power-saving mode to an idle mode
-    deviceLock();
+    //deviceUnlock();
+    //OSCCONCLR = 0x10; // Set the power-saving mode to an idle mode
+    //deviceLock();
     asm volatile ( "wait" ); // Put device into Idle mode
     
 }
@@ -497,6 +528,36 @@ void capToughPowerToggleWakeup(void) {
     
     // Clear heartbeat timer
     TMR1 = 0;
+    
+    // switch SYSCLK to SPLL, only do the switch if we're not already clocked off of SPLL
+    if (OSCCONbits.COSC != 0b001) {
+        
+        // unlock the device
+        deviceUnlock();
+
+        // unlock clock and PLL settings
+        OSCCONbits.CLKLOCK = 0;
+        
+        // new oscillator select is SPLL
+        OSCCONbits.NOSC = 0b001;
+        
+        // start a clock change and wait until complete
+        OSCCONbits.OSWEN = 1;
+        while (OSCCONbits.OSWEN);
+        
+        // lock clock and PLL settings
+        OSCCONbits.CLKLOCK = 1;
+        
+        // lock device
+        deviceLock();
+        
+    }
+    
+    // enable unused PBCLKs
+    PB2DIVbits.ON = 1;
+    PB3DIVbits.ON = 1;
+    PB5DIVbits.ON = 1;
+    PB8DIVbits.ON = 1;
     
     // enable interrupts that could wake from sleep
     enableInterrupt(Real_Time_Clock);
