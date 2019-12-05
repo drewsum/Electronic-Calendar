@@ -493,7 +493,7 @@ usb_uart_command_function_t setRTCCCalCommand(char * input_str) {
      
         terminalTextAttributes(RED_COLOR, BLACK_COLOR, NORMAL_FONT);
         printf("Please enter a valid 10 bit hexadecimal calibration value, up to 0x3FF\r\n");
-        printf("See PIC32 reference menu for determining calibration value\r\n");
+        printf("See PIC32 reference manual for determining calibration value\r\n");
         terminalTextAttributesReset();
         
     }

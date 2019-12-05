@@ -27,6 +27,8 @@
 
 #include "pin_macros.h"
 
+volatile uint32_t clock_drift_comp_request = 1;
+
 // this flag is set when we want to update the time/date LEDs
 volatile uint32_t led_update_request_flag = 0;
 

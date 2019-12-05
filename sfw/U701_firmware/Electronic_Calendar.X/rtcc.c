@@ -387,11 +387,22 @@ void __ISR(_RTCC_VECTOR, ipl2SRS) rtccISR(void) {
     rtcc_shadow.minutes     = (RTCTIMEbits.MIN10 * 10) + RTCTIMEbits.MIN01;
     rtcc_shadow.seconds     = (RTCTIMEbits.SEC10 * 10) + RTCTIMEbits.SEC01;
     
+    if (clock_drift_comp_request && rtcc_shadow.seconds == 1) {
+     
+        rtccWriteTime(rtcc_shadow.hours, rtcc_shadow.minutes, 0);
+        rtcc_shadow.seconds = 0;
+        clock_drift_comp_request = 0;
+        
+    }
+    
+    else if (rtcc_shadow.seconds == 59) clock_drift_comp_request = 1;
+    
     // request an LED update
     led_update_request_flag = 1;
     
     // Clear IRQ flag
     clearInterruptFlag(Real_Time_Clock);
+    
     
 }
 
