@@ -4,11 +4,11 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 13 17
-Title ""
-Date ""
-Rev ""
-Comp ""
+Sheet 12 16
+Title "Electronic Calendar"
+Date "2019-07-25"
+Rev "A"
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -390,7 +390,7 @@ Connection ~ 6550 3250
 Wire Wire Line
 	6550 3250 6550 3150
 $Comp
-L Custom_Library:+3.3V #PWR?
+L power:+3.3V #PWR?
 U 1 1 5D01195B
 P 6550 2670
 AR Path="/5CF09D4A/5D01195B" Ref="#PWR?"  Part="1" 
@@ -1179,47 +1179,47 @@ Wire Wire Line
 	6550 4050 6550 3950
 Wire Wire Line
 	6550 4150 6550 4050
-Text GLabel 4240 2750 0    40   Input ~ 8
+Text GLabel 4240 2750 0    40   Input ~ 0
 ~Hours0_LED
-Text GLabel 4240 2850 0    40   Input ~ 8
+Text GLabel 4240 2850 0    40   Input ~ 0
 ~Hours1_LED
-Text GLabel 4240 2950 0    40   Input ~ 8
+Text GLabel 4240 2950 0    40   Input ~ 0
 ~Hours2_LED
-Text GLabel 4240 3050 0    40   Input ~ 8
+Text GLabel 4240 3050 0    40   Input ~ 0
 ~Hours3_LED
-Text GLabel 4240 3150 0    40   Input ~ 8
+Text GLabel 4240 3150 0    40   Input ~ 0
 ~Hours4_LED
-Text GLabel 4240 3250 0    40   Input ~ 8
+Text GLabel 4240 3250 0    40   Input ~ 0
 ~Hours5_LED
-Text GLabel 4240 3350 0    40   Input ~ 8
+Text GLabel 4240 3350 0    40   Input ~ 0
 ~Hours6_LED
-Text GLabel 4240 3550 0    40   Input ~ 8
+Text GLabel 4240 3550 0    40   Input ~ 0
 ~Minutes0_LED
-Text GLabel 4240 3650 0    40   Input ~ 8
+Text GLabel 4240 3650 0    40   Input ~ 0
 ~Minutes1_LED
-Text GLabel 4240 3750 0    40   Input ~ 8
+Text GLabel 4240 3750 0    40   Input ~ 0
 ~Minutes2_LED
-Text GLabel 4240 3850 0    40   Input ~ 8
+Text GLabel 4240 3850 0    40   Input ~ 0
 ~Minutes3_LED
-Text GLabel 4240 3950 0    40   Input ~ 8
+Text GLabel 4240 3950 0    40   Input ~ 0
 ~Minutes4_LED
-Text GLabel 4240 4050 0    40   Input ~ 8
+Text GLabel 4240 4050 0    40   Input ~ 0
 ~Minutes5_LED
-Text GLabel 4240 4150 0    40   Input ~ 8
+Text GLabel 4240 4150 0    40   Input ~ 0
 ~Minutes6_LED
-Text GLabel 4240 4350 0    40   Input ~ 8
+Text GLabel 4240 4350 0    40   Input ~ 0
 ~Seconds0_LED
-Text GLabel 4240 4450 0    40   Input ~ 8
+Text GLabel 4240 4450 0    40   Input ~ 0
 ~Seconds1_LED
-Text GLabel 4240 4550 0    40   Input ~ 8
+Text GLabel 4240 4550 0    40   Input ~ 0
 ~Seconds2_LED
-Text GLabel 4240 4650 0    40   Input ~ 8
+Text GLabel 4240 4650 0    40   Input ~ 0
 ~Seconds3_LED
-Text GLabel 4240 4750 0    40   Input ~ 8
+Text GLabel 4240 4750 0    40   Input ~ 0
 ~Seconds4_LED
-Text GLabel 4240 4850 0    40   Input ~ 8
+Text GLabel 4240 4850 0    40   Input ~ 0
 ~Seconds5_LED
-Text GLabel 4240 4950 0    40   Input ~ 8
+Text GLabel 4240 4950 0    40   Input ~ 0
 ~Seconds6_LED
 Wire Wire Line
 	4240 3250 5620 3250
@@ -1245,4 +1245,6 @@ Wire Wire Line
 	6550 4150 6550 4350
 Connection ~ 6550 4150
 Connection ~ 6550 4350
+Text Notes 540  690  0    100  ~ 20
+12. Binary Clock LEDs
 $EndSCHEMATC

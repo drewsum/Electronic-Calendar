@@ -4,11 +4,11 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 15 17
-Title "QI Charger"
-Date "2019-01-03"
+Sheet 14 16
+Title "Electronic Calendar"
+Date "2019-07-25"
 Rev "A"
-Comp ""
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -249,10 +249,10 @@ Wire Wire Line
 Connection ~ 1000 3590
 Wire Wire Line
 	1000 3590 1000 3680
-Text GLabel 4170 3590 2    50   UnSpc ~ 0
-~USB_ACTIVE
+Text GLabel 4170 3590 2    40   UnSpc ~ 0
+~USB_TRAFFIC
 Text GLabel 6640 5270 3    50   UnSpc ~ 0
-~USB_ACTIVE
+~USB_TRAFFIC
 $Comp
 L Custom_Library:R_Custom R1510
 U 1 1 5BB07016
@@ -616,20 +616,8 @@ Wire Wire Line
 Wire Wire Line
 	4640 2220 5180 2220
 Connection ~ 5180 2220
-$Comp
-L Custom_Library:TP TP1502
-U 1 1 5C3553C3
-P 9880 4440
-F 0 "TP1502" H 9880 4590 50  0000 C CNN
-F 1 "TP" H 9880 4590 50  0001 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_1x01_Pitch2.54mm" H 9880 4440 60  0001 C CNN
-F 3 "" H 9880 4440 60  0000 C CNN
-F 4 "S1111EC-01-ND" H 9880 4440 50  0001 C CNN "Digi-Key PN"
-	1    9880 4440
-	1    0    0    -1  
-$EndComp
 Text Notes 540  690  0    100  ~ 20
-10. USB UART Bridge
+14. USB UART Bridge
 $Comp
 L power:GND #PWR01528
 U 1 1 5D1A491C
@@ -650,17 +638,6 @@ F 1 "GND" H 9980 3680 50  0000 C CNN
 F 2 "" H 9980 3830 50  0001 C CNN
 F 3 "" H 9980 3830 50  0001 C CNN
 	1    9980 3830
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR01529
-U 1 1 5D1A524C
-P 9880 4440
-F 0 "#PWR01529" H 9880 4190 50  0001 C CNN
-F 1 "GND" H 9880 4290 50  0000 C CNN
-F 2 "" H 9880 4440 50  0001 C CNN
-F 3 "" H 9880 4440 50  0001 C CNN
-	1    9880 4440
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -875,7 +852,7 @@ Connection ~ 2220 3190
 Wire Wire Line
 	2220 3190 2000 3190
 $Comp
-L Custom_Library:+3.3V #PWR01506
+L power:+3.3V #PWR01506
 U 1 1 5D1C314B
 P 2770 2580
 F 0 "#PWR01506" H 2770 2430 50  0001 C CNN
@@ -886,7 +863,7 @@ F 3 "" H 2770 2580 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01505
+L power:+3.3V #PWR01505
 U 1 1 5D1C3706
 P 2220 2580
 F 0 "#PWR01505" H 2220 2430 50  0001 C CNN
@@ -896,10 +873,8 @@ F 3 "" H 2220 2580 50  0001 C CNN
 	1    2220 2580
 	1    0    0    -1  
 $EndComp
-Text Notes 3220 2460 0    50   ~ 0
-Tie VCCIO to +3.3V???
 $Comp
-L Custom_Library:+3.3V #PWR01507
+L power:+3.3V #PWR01507
 U 1 1 5D1C5426
 P 2790 6240
 F 0 "#PWR01507" H 2790 6090 50  0001 C CNN
@@ -910,7 +885,7 @@ F 3 "" H 2790 6240 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01511
+L power:+3.3V #PWR01511
 U 1 1 5D1C5BDF
 P 3470 6090
 F 0 "#PWR01511" H 3470 5940 50  0001 C CNN
@@ -921,7 +896,7 @@ F 3 "" H 3470 6090 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Custom_Library:+3.3V #PWR01512
+L power:+3.3V #PWR01512
 U 1 1 5D1C6CBE
 P 3540 7400
 F 0 "#PWR01512" H 3540 7250 50  0001 C CNN
@@ -935,4 +910,26 @@ Text GLabel 3550 6590 2    50   Output ~ 0
 POS5_USB_PGOOD
 Wire Wire Line
 	3550 6590 3470 6590
+$Comp
+L power:+3.3V #PWR0101
+U 1 1 5D3A880F
+P 3420 2890
+F 0 "#PWR0101" H 3420 2740 50  0001 C CNN
+F 1 "+3.3V" H 3370 3030 50  0000 C CNN
+F 2 "" H 3420 2890 50  0001 C CNN
+F 3 "" H 3420 2890 50  0001 C CNN
+	1    3420 2890
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0102
+U 1 1 5D3A8F35
+P 3280 4690
+F 0 "#PWR0102" H 3280 4540 50  0001 C CNN
+F 1 "+3.3V" H 3280 4830 50  0000 C CNN
+F 2 "" H 3280 4690 50  0001 C CNN
+F 3 "" H 3280 4690 50  0001 C CNN
+	1    3280 4690
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

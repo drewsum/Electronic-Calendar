@@ -4,11 +4,11 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 11 17
-Title ""
-Date ""
-Rev ""
-Comp ""
+Sheet 10 16
+Title "Electronic Calendar"
+Date "2019-07-25"
+Rev "A"
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -96,17 +96,6 @@ F 7 "RMCF0603FT1K00CT-ND" H 4340 2890 60  0001 C CNN "Digi-Key PN"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L power:+3.3V #PWR01111
-U 1 1 5CB7D870
-P 4040 2340
-F 0 "#PWR01111" H 4040 2190 50  0001 C CNN
-F 1 "+3.3V" H 4040 2480 50  0000 C CNN
-F 2 "" H 4040 2340 50  0001 C CNN
-F 3 "" H 4040 2340 50  0001 C CNN
-	1    4040 2340
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3.3V #PWR01107
 U 1 1 5CB7DB1C
 P 3470 2960
@@ -188,7 +177,7 @@ Wire Wire Line
 	3170 3060 2920 3060
 Wire Wire Line
 	2920 3060 2920 3140
-Text GLabel 2840 3060 0    50   Input ~ 10
+Text GLabel 2840 3060 0    50   Input ~ 0
 Heartbeat_LED
 Wire Wire Line
 	2840 3060 2920 3060
@@ -275,17 +264,6 @@ F 7 "RMCF0603FT1K00CT-ND" H 6340 2890 60  0001 C CNN "Digi-Key PN"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L power:+3.3V #PWR01123
-U 1 1 5CBCC6FB
-P 6040 2340
-F 0 "#PWR01123" H 6040 2190 50  0001 C CNN
-F 1 "+3.3V" H 6040 2480 50  0000 C CNN
-F 2 "" H 6040 2340 50  0001 C CNN
-F 3 "" H 6040 2340 50  0001 C CNN
-	1    6040 2340
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3.3V #PWR01119
 U 1 1 5CBCC705
 P 5470 2960
@@ -352,7 +330,7 @@ F 7 "RMCF0603FT10K0CT-ND" H 4920 2830 50  0001 C CNN "Digi-Key PN"
 	1    4920 2830
 	-1   0    0    -1  
 $EndComp
-Text GLabel 4840 3060 0    50   Input ~ 10
+Text GLabel 4840 3060 0    50   Input ~ 0
 Reset_LED
 Wire Wire Line
 	4840 3060 4920 3060
@@ -436,17 +414,6 @@ F 7 "RMCF0603FT1K00CT-ND" H 8340 2890 60  0001 C CNN "Digi-Key PN"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L power:+3.3V #PWR01135
-U 1 1 5CBD5260
-P 8040 2340
-F 0 "#PWR01135" H 8040 2190 50  0001 C CNN
-F 1 "+3.3V" H 8040 2480 50  0000 C CNN
-F 2 "" H 8040 2340 50  0001 C CNN
-F 3 "" H 8040 2340 50  0001 C CNN
-	1    8040 2340
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3.3V #PWR01131
 U 1 1 5CBD526A
 P 7470 2960
@@ -528,7 +495,7 @@ Wire Wire Line
 	7170 3060 6920 3060
 Wire Wire Line
 	6920 3060 6920 3140
-Text GLabel 6840 3060 0    50   Input ~ 10
+Text GLabel 6840 3060 0    50   Input ~ 0
 USB_Error_LED
 Wire Wire Line
 	6840 3060 6920 3060
@@ -613,17 +580,6 @@ F 6 "1/10W" H 8110 4420 50  0000 L CNN "Wattage"
 F 7 "RMCF0603FT1K00CT-ND" H 8340 4890 60  0001 C CNN "Digi-Key PN"
 	1    8040 4490
 	-1   0    0    -1  
-$EndComp
-$Comp
-L power:+3.3V #PWR01136
-U 1 1 5CBEACB8
-P 8040 4340
-F 0 "#PWR01136" H 8040 4190 50  0001 C CNN
-F 1 "+3.3V" H 8040 4480 50  0000 C CNN
-F 2 "" H 8040 4340 50  0001 C CNN
-F 3 "" H 8040 4340 50  0001 C CNN
-	1    8040 4340
-	1    0    0    -1  
 $EndComp
 $Comp
 L power:+3.3V #PWR01133
@@ -792,17 +748,6 @@ F 7 "RMCF0603FT1K00CT-ND" H 4340 4890 60  0001 C CNN "Digi-Key PN"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L power:+3.3V #PWR01112
-U 1 1 5CC2548A
-P 4040 4340
-F 0 "#PWR01112" H 4040 4190 50  0001 C CNN
-F 1 "+3.3V" H 4040 4480 50  0000 C CNN
-F 2 "" H 4040 4340 50  0001 C CNN
-F 3 "" H 4040 4340 50  0001 C CNN
-	1    4040 4340
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3.3V #PWR01109
 U 1 1 5CC25494
 P 3470 4960
@@ -884,7 +829,7 @@ Wire Wire Line
 	3170 5060 2920 5060
 Wire Wire Line
 	2920 5060 2920 5140
-Text GLabel 2840 5060 0    50   Input ~ 10
+Text GLabel 2840 5060 0    50   Input ~ 0
 Analog_Error_LED
 Wire Wire Line
 	2840 5060 2920 5060
@@ -971,17 +916,6 @@ F 7 "RMCF0603FT1K00CT-ND" H 6340 4890 60  0001 C CNN "Digi-Key PN"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L power:+3.3V #PWR01124
-U 1 1 5CC2550C
-P 6040 4340
-F 0 "#PWR01124" H 6040 4190 50  0001 C CNN
-F 1 "+3.3V" H 6040 4480 50  0000 C CNN
-F 2 "" H 6040 4340 50  0001 C CNN
-F 3 "" H 6040 4340 50  0001 C CNN
-	1    6040 4340
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3.3V #PWR01121
 U 1 1 5CC25516
 P 5470 4960
@@ -1063,9 +997,6 @@ Wire Wire Line
 	5170 5060 4920 5060
 Wire Wire Line
 	4920 5060 4920 5140
-Wire Wire Line
-	4840 5060 4920 5060
-Connection ~ 4920 5060
 $Comp
 L Device:LED D?
 U 1 1 5CC2555B
@@ -1084,8 +1015,79 @@ F 4 "160-1447-1-ND" H 6040 4790 50  0001 C CNN "Digi-Key PN"
 	1    6040 4790
 	0    -1   -1   0   
 $EndComp
-Text GLabel 4840 5060 0    50   Input ~ 10
-Exception_LED
-Text GLabel 6840 5060 0    50   Input ~ 10
+Text GLabel 6840 5060 0    50   Input ~ 0
 Other_Error_LED
+Text Notes 540  690  0    100  ~ 20
+10. Status LEDs
+$Comp
+L Custom_Library:+3.3V_STAT #PWR01003
+U 1 1 5D4E321B
+P 4040 2340
+F 0 "#PWR01003" H 4040 2190 50  0001 C CNN
+F 1 "+3.3V_STAT" H 4040 2480 50  0000 C CNN
+F 2 "" H 4040 2340 50  0001 C CNN
+F 3 "" H 4040 2340 50  0001 C CNN
+	1    4040 2340
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom_Library:+3.3V_STAT #PWR01007
+U 1 1 5D4E3C3F
+P 6040 2340
+F 0 "#PWR01007" H 6040 2190 50  0001 C CNN
+F 1 "+3.3V_STAT" H 6040 2480 50  0000 C CNN
+F 2 "" H 6040 2340 50  0001 C CNN
+F 3 "" H 6040 2340 50  0001 C CNN
+	1    6040 2340
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom_Library:+3.3V_STAT #PWR01009
+U 1 1 5D4E4160
+P 8040 2340
+F 0 "#PWR01009" H 8040 2190 50  0001 C CNN
+F 1 "+3.3V_STAT" H 8040 2480 50  0000 C CNN
+F 2 "" H 8040 2340 50  0001 C CNN
+F 3 "" H 8040 2340 50  0001 C CNN
+	1    8040 2340
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom_Library:+3.3V_STAT #PWR01010
+U 1 1 5D4E47C9
+P 8040 4340
+F 0 "#PWR01010" H 8040 4190 50  0001 C CNN
+F 1 "+3.3V_STAT" H 8040 4480 50  0000 C CNN
+F 2 "" H 8040 4340 50  0001 C CNN
+F 3 "" H 8040 4340 50  0001 C CNN
+	1    8040 4340
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom_Library:+3.3V_STAT #PWR01008
+U 1 1 5D4E4EE7
+P 6040 4340
+F 0 "#PWR01008" H 6040 4190 50  0001 C CNN
+F 1 "+3.3V_STAT" H 6040 4480 50  0000 C CNN
+F 2 "" H 6040 4340 50  0001 C CNN
+F 3 "" H 6040 4340 50  0001 C CNN
+	1    6040 4340
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom_Library:+3.3V_STAT #PWR01004
+U 1 1 5D4E579B
+P 4040 4340
+F 0 "#PWR01004" H 4040 4190 50  0001 C CNN
+F 1 "+3.3V_STAT" H 4040 4480 50  0000 C CNN
+F 2 "" H 4040 4340 50  0001 C CNN
+F 3 "" H 4040 4340 50  0001 C CNN
+	1    4040 4340
+	1    0    0    -1  
+$EndComp
+Text GLabel 4840 5060 0    50   Input ~ 0
+Exception_LED
+Connection ~ 4920 5060
+Wire Wire Line
+	4840 5060 4920 5060
 $EndSCHEMATC

@@ -4,11 +4,11 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 8 17
-Title ""
-Date ""
-Rev ""
-Comp ""
+Sheet 7 16
+Title "Electronic Calendar"
+Date "2019-07-25"
+Rev "A"
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -830,6 +830,52 @@ F 1 "+3.3V_BCKP" V 7980 3630 50  0000 L CNN
 F 2 "" H 7980 3490 50  0000 C CNN
 F 3 "" H 7980 3490 50  0000 C CNN
 	1    7980 3490
+	0    -1   -1   0   
+$EndComp
+Text Notes 540  690  0    100  ~ 20
+08. Microcontroller Bypass
+$Comp
+L power:+3.3VA #PWR0103
+U 1 1 5D3F6D1C
+P 9380 3490
+F 0 "#PWR0103" H 9380 3340 50  0001 C CNN
+F 1 "+3.3VA" V 9380 3630 50  0000 L CNN
+F 2 "" H 9380 3490 50  0001 C CNN
+F 3 "" H 9380 3490 50  0001 C CNN
+	1    9380 3490
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GNDA #PWR0104
+U 1 1 5D3F6D26
+P 9380 4050
+F 0 "#PWR0104" H 9380 3800 50  0001 C CNN
+F 1 "GNDA" V 9380 3900 50  0000 R CNN
+F 2 "" H 9380 4050 50  0001 C CNN
+F 3 "" H 9380 4050 50  0001 C CNN
+	1    9380 4050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0102
+U 1 1 5D3FC5F0
+P 9380 4050
+F 0 "#FLG0102" H 9380 4125 50  0001 C CNN
+F 1 "PWR_FLAG" V 9380 4200 50  0000 L CNN
+F 2 "" H 9380 4050 50  0001 C CNN
+F 3 "~" H 9380 4050 50  0001 C CNN
+	1    9380 4050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0103
+U 1 1 5D3FCCE4
+P 9380 3490
+F 0 "#FLG0103" H 9380 3565 50  0001 C CNN
+F 1 "PWR_FLAG" V 9380 3640 50  0000 L CNN
+F 2 "" H 9380 3490 50  0001 C CNN
+F 3 "~" H 9380 3490 50  0001 C CNN
+	1    9380 3490
 	0    -1   -1   0   
 $EndComp
 $EndSCHEMATC

@@ -4,11 +4,11 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 12 17
-Title ""
-Date ""
-Rev ""
-Comp ""
+Sheet 11 16
+Title "Electronic Calendar"
+Date "2019-07-25"
+Rev "A"
+Comp "Drew Maatman"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -226,29 +226,29 @@ Wire Wire Line
 	2280 3930 2680 3930
 Wire Wire Line
 	2280 4130 2680 4130
-Text GLabel 2280 3130 0    40   Input ~ 8
+Text GLabel 2280 3130 0    40   Input ~ 0
 ~JAN_LED
-Text GLabel 2280 3230 0    40   Input ~ 8
+Text GLabel 2280 3230 0    40   Input ~ 0
 ~FEB_LED
-Text GLabel 2280 3330 0    40   Input ~ 8
+Text GLabel 2280 3330 0    40   Input ~ 0
 ~MAR_LED
-Text GLabel 2280 3430 0    40   Input ~ 8
+Text GLabel 2280 3430 0    40   Input ~ 0
 ~APR_LED
-Text GLabel 2280 3530 0    40   Input ~ 8
+Text GLabel 2280 3530 0    40   Input ~ 0
 ~MAY_LED
-Text GLabel 2280 3630 0    40   Input ~ 8
+Text GLabel 2280 3630 0    40   Input ~ 0
 ~JUN_LED
-Text GLabel 2280 3730 0    40   Input ~ 8
+Text GLabel 2280 3730 0    40   Input ~ 0
 ~JUL_LED
-Text GLabel 2280 3830 0    40   Input ~ 8
+Text GLabel 2280 3830 0    40   Input ~ 0
 ~AUG_LED
-Text GLabel 2280 3930 0    40   Input ~ 8
+Text GLabel 2280 3930 0    40   Input ~ 0
 ~SEP_LED
-Text GLabel 2280 4030 0    40   Input ~ 8
+Text GLabel 2280 4030 0    40   Input ~ 0
 ~OCT_LED
-Text GLabel 2280 4130 0    40   Input ~ 8
+Text GLabel 2280 4130 0    40   Input ~ 0
 ~NOV_LED
-Text GLabel 2280 4230 0    40   Input ~ 8
+Text GLabel 2280 4230 0    40   Input ~ 0
 ~DEC_LED
 $Comp
 L Device:LED D?
@@ -652,45 +652,45 @@ F 4 "160-1447-1-ND" H 7080 3660 50  0001 C CNN "Digi-Key PN"
 $EndComp
 Wire Wire Line
 	5550 1760 5950 1760
-Text GLabel 5550 1760 0    40   Input ~ 8
+Text GLabel 5550 1760 0    40   Input ~ 0
 ~Date1_LED
-Text GLabel 5550 1860 0    40   Input ~ 8
+Text GLabel 5550 1860 0    40   Input ~ 0
 ~Date2_LED
-Text GLabel 5550 1960 0    40   Input ~ 8
+Text GLabel 5550 1960 0    40   Input ~ 0
 ~Date3_LED
-Text GLabel 5550 2060 0    40   Input ~ 8
+Text GLabel 5550 2060 0    40   Input ~ 0
 ~Date4_LED
-Text GLabel 5550 2160 0    40   Input ~ 8
+Text GLabel 5550 2160 0    40   Input ~ 0
 ~Date5_LED
-Text GLabel 5550 2260 0    40   Input ~ 8
+Text GLabel 5550 2260 0    40   Input ~ 0
 ~Date6_LED
-Text GLabel 5550 2360 0    40   Input ~ 8
+Text GLabel 5550 2360 0    40   Input ~ 0
 ~Date7_LED
-Text GLabel 5550 2460 0    40   Input ~ 8
+Text GLabel 5550 2460 0    40   Input ~ 0
 ~Date8_LED
-Text GLabel 5550 2560 0    40   Input ~ 8
+Text GLabel 5550 2560 0    40   Input ~ 0
 ~Date9_LED
-Text GLabel 5550 2660 0    40   Input ~ 8
+Text GLabel 5550 2660 0    40   Input ~ 0
 ~Date10_LED
-Text GLabel 5550 2760 0    40   Input ~ 8
+Text GLabel 5550 2760 0    40   Input ~ 0
 ~Date11_LED
-Text GLabel 5550 2860 0    40   Input ~ 8
+Text GLabel 5550 2860 0    40   Input ~ 0
 ~Date12_LED
-Text GLabel 5550 2960 0    40   Input ~ 8
+Text GLabel 5550 2960 0    40   Input ~ 0
 ~Date13_LED
-Text GLabel 5550 3060 0    40   Input ~ 8
+Text GLabel 5550 3060 0    40   Input ~ 0
 ~Date14_LED
-Text GLabel 5550 3160 0    40   Input ~ 8
+Text GLabel 5550 3160 0    40   Input ~ 0
 ~Date15_LED
-Text GLabel 5550 3260 0    40   Input ~ 8
+Text GLabel 5550 3260 0    40   Input ~ 0
 ~Date16_LED
-Text GLabel 5550 3360 0    40   Input ~ 8
+Text GLabel 5550 3360 0    40   Input ~ 0
 ~Date17_LED
-Text GLabel 5550 3460 0    40   Input ~ 8
+Text GLabel 5550 3460 0    40   Input ~ 0
 ~Date18_LED
-Text GLabel 5550 3560 0    40   Input ~ 8
+Text GLabel 5550 3560 0    40   Input ~ 0
 ~Date19_LED
-Text GLabel 5550 3660 0    40   Input ~ 8
+Text GLabel 5550 3660 0    40   Input ~ 0
 ~Date20_LED
 $Comp
 L Device:LED D?
@@ -902,27 +902,27 @@ F 4 "160-1447-1-ND" H 7080 4660 50  0001 C CNN "Digi-Key PN"
 	1    7080 4660
 	1    0    0    -1  
 $EndComp
-Text GLabel 5550 3760 0    40   Input ~ 8
+Text GLabel 5550 3760 0    40   Input ~ 0
 ~Date21_LED
-Text GLabel 5550 3860 0    40   Input ~ 8
+Text GLabel 5550 3860 0    40   Input ~ 0
 ~Date22_LED
-Text GLabel 5550 3960 0    40   Input ~ 8
+Text GLabel 5550 3960 0    40   Input ~ 0
 ~Date23_LED
-Text GLabel 5550 4060 0    40   Input ~ 8
+Text GLabel 5550 4060 0    40   Input ~ 0
 ~Date24_LED
-Text GLabel 5550 4160 0    40   Input ~ 8
+Text GLabel 5550 4160 0    40   Input ~ 0
 ~Date25_LED
-Text GLabel 5550 4260 0    40   Input ~ 8
+Text GLabel 5550 4260 0    40   Input ~ 0
 ~Date26_LED
-Text GLabel 5550 4360 0    40   Input ~ 8
+Text GLabel 5550 4360 0    40   Input ~ 0
 ~Date27_LED
-Text GLabel 5550 4460 0    40   Input ~ 8
+Text GLabel 5550 4460 0    40   Input ~ 0
 ~Date28_LED
-Text GLabel 5550 4560 0    40   Input ~ 8
+Text GLabel 5550 4560 0    40   Input ~ 0
 ~Date29_LED
-Text GLabel 5550 4660 0    40   Input ~ 8
+Text GLabel 5550 4660 0    40   Input ~ 0
 ~Date30_LED
-Text GLabel 5550 4760 0    40   Input ~ 8
+Text GLabel 5550 4760 0    40   Input ~ 0
 ~Date31_LED
 $Comp
 L Device:LED D?
@@ -1092,19 +1092,19 @@ F 4 "160-1447-1-ND" H 7080 5460 50  0001 C CNN "Digi-Key PN"
 	1    7080 5460
 	1    0    0    -1  
 $EndComp
-Text GLabel 5550 4860 0    40   Input ~ 8
+Text GLabel 5550 4860 0    40   Input ~ 0
 ~SUN_LED
-Text GLabel 5550 4960 0    40   Input ~ 8
+Text GLabel 5550 4960 0    40   Input ~ 0
 ~MON_LED
-Text GLabel 5550 5060 0    40   Input ~ 8
+Text GLabel 5550 5060 0    40   Input ~ 0
 ~TUE_LED
-Text GLabel 5550 5160 0    40   Input ~ 8
+Text GLabel 5550 5160 0    40   Input ~ 0
 ~WED_LED
-Text GLabel 5550 5260 0    40   Input ~ 8
+Text GLabel 5550 5260 0    40   Input ~ 0
 ~THR_LED
-Text GLabel 5550 5360 0    40   Input ~ 8
+Text GLabel 5550 5360 0    40   Input ~ 0
 ~FRI_LED
-Text GLabel 5550 5460 0    40   Input ~ 8
+Text GLabel 5550 5460 0    40   Input ~ 0
 ~SAT_LED
 $Comp
 L Device:LED D?
@@ -1274,21 +1274,21 @@ F 4 "160-1447-1-ND" H 7080 6260 50  0001 C CNN "Digi-Key PN"
 	1    7080 6260
 	1    0    0    -1  
 $EndComp
-Text GLabel 5550 5560 0    40   Input ~ 8
+Text GLabel 5550 5560 0    40   Input ~ 0
 ~Year2019_LED
-Text GLabel 5550 5660 0    40   Input ~ 8
+Text GLabel 5550 5660 0    40   Input ~ 0
 ~Year2020_LED
-Text GLabel 5550 5760 0    40   Input ~ 8
+Text GLabel 5550 5760 0    40   Input ~ 0
 ~Year2021_LED
-Text GLabel 5550 5860 0    40   Input ~ 8
+Text GLabel 5550 5860 0    40   Input ~ 0
 ~Year2022_LED
-Text GLabel 5550 5960 0    40   Input ~ 8
+Text GLabel 5550 5960 0    40   Input ~ 0
 ~Year2023_LED
-Text GLabel 5550 6060 0    40   Input ~ 8
+Text GLabel 5550 6060 0    40   Input ~ 0
 ~Year2024_LED
-Text GLabel 5550 6160 0    40   Input ~ 8
+Text GLabel 5550 6160 0    40   Input ~ 0
 ~Year2025_LED
-Text GLabel 5550 6260 0    40   Input ~ 8
+Text GLabel 5550 6260 0    40   Input ~ 0
 ~Year2026_LED
 Wire Wire Line
 	2980 3130 4590 3130
@@ -1858,4 +1858,6 @@ Wire Wire Line
 Connection ~ 8870 6160
 Wire Wire Line
 	8870 6160 8870 6060
+Text Notes 540  690  0    100  ~ 20
+11. Calendar LEDs
 $EndSCHEMATC

@@ -4,9 +4,9 @@ EELAYER 29 0
 EELAYER END
 $Descr A 11000 8500
 encoding utf-8
-Sheet 16 17
-Title ""
-Date "2019-04-11"
+Sheet 15 16
+Title "Electronic Calendar"
+Date "2019-07-25"
 Rev "A"
 Comp "Drew Maatman"
 Comment1 ""
@@ -113,50 +113,6 @@ Wire Wire Line
 	2670 1540 2670 1830
 Wire Wire Line
 	2670 1830 2790 1830
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CB2CD4A
-P 1380 1730
-AR Path="/5BAAE2B6/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CB2CD4A" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CB2CD4A" Ref="R1605"  Part="1" 
-F 0 "R1605" V 1340 1590 50  0000 R CNN
-F 1 "100" V 1380 1730 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1380 1730 50  0001 C CNN
-F 3 "" H 1380 1730 50  0001 C CNN
-F 4 "0603" V 1480 1730 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1580 1730 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1680 1730 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1680 2130 60  0001 C CNN "Digi-Key PN"
-	1    1380 1730
-	0    -1   1    0   
-$EndComp
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CB2CD54
-P 1380 1830
-AR Path="/5BAAE2B6/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CB2CD54" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CB2CD54" Ref="R1606"  Part="1" 
-F 0 "R1606" V 1340 1690 50  0000 R CNN
-F 1 "100" V 1380 1830 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1380 1830 50  0001 C CNN
-F 3 "" H 1380 1830 50  0001 C CNN
-F 4 "0603" V 1480 1830 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1580 1830 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1680 1830 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1680 2230 60  0001 C CNN "Digi-Key PN"
-	1    1380 1830
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	1970 1730 2790 1730
 Wire Wire Line
@@ -264,7 +220,7 @@ U 1 1 5CD4221A
 P 3180 3870
 F 0 "U1601" H 2930 4320 50  0000 C CNN
 F 1 "MCP9804_DFN" H 3580 4320 50  0000 C CNN
-F 2 "Package_DFN_QFN:DFN-8-1EP_3x3mm_P0.65mm_EP1.55x2.4mm" H 2080 3370 50  0001 C CNN
+F 2 "Housings_DFN_QFN:DFN-8-1EP_3x3mm_Pitch0.65mm" H 2080 3370 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/22203b.pdf" H 2930 4320 50  0001 C CNN
 F 4 "MCP9804T-E/MCCT-ND" H 3180 3870 50  0001 C CNN "Digi-Key PN"
 	1    3180 3870
@@ -369,50 +325,6 @@ Wire Wire Line
 	2660 3380 2660 3670
 Wire Wire Line
 	2660 3670 2780 3670
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CD42274
-P 1370 3570
-AR Path="/5BAAE2B6/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CD42274" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CD42274" Ref="R1601"  Part="1" 
-F 0 "R1601" V 1330 3430 50  0000 R CNN
-F 1 "100" V 1370 3570 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1370 3570 50  0001 C CNN
-F 3 "" H 1370 3570 50  0001 C CNN
-F 4 "0603" V 1470 3570 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1570 3570 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1670 3570 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1670 3970 60  0001 C CNN "Digi-Key PN"
-	1    1370 3570
-	0    -1   1    0   
-$EndComp
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CD42282
-P 1370 3670
-AR Path="/5BAAE2B6/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CD42282" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CD42282" Ref="R1602"  Part="1" 
-F 0 "R1602" V 1330 3530 50  0000 R CNN
-F 1 "100" V 1370 3670 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1370 3670 50  0001 C CNN
-F 3 "" H 1370 3670 50  0001 C CNN
-F 4 "0603" V 1470 3670 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1570 3670 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1670 3670 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1670 4070 60  0001 C CNN "Digi-Key PN"
-	1    1370 3670
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	1960 3570 2780 3570
 Wire Wire Line
@@ -520,7 +432,7 @@ U 1 1 5CD4CEA8
 P 3180 5720
 F 0 "U1602" H 2930 6170 50  0000 C CNN
 F 1 "MCP9804_DFN" H 3580 6170 50  0000 C CNN
-F 2 "Package_DFN_QFN:DFN-8-1EP_3x3mm_P0.65mm_EP1.55x2.4mm" H 2080 5220 50  0001 C CNN
+F 2 "Housings_DFN_QFN:DFN-8-1EP_3x3mm_Pitch0.65mm" H 2080 5220 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/22203b.pdf" H 2930 6170 50  0001 C CNN
 F 4 "MCP9804T-E/MCCT-ND" H 3180 5720 50  0001 C CNN "Digi-Key PN"
 	1    3180 5720
@@ -625,50 +537,6 @@ Wire Wire Line
 	2660 5230 2660 5520
 Wire Wire Line
 	2660 5520 2780 5520
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CD4CF02
-P 1370 5420
-AR Path="/5BAAE2B6/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CD4CF02" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CD4CF02" Ref="R1603"  Part="1" 
-F 0 "R1603" V 1330 5280 50  0000 R CNN
-F 1 "100" V 1370 5420 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1370 5420 50  0001 C CNN
-F 3 "" H 1370 5420 50  0001 C CNN
-F 4 "0603" V 1470 5420 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1570 5420 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1670 5420 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1670 5820 60  0001 C CNN "Digi-Key PN"
-	1    1370 5420
-	0    -1   1    0   
-$EndComp
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5CD4CF10
-P 1370 5520
-AR Path="/5BAAE2B6/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5CD4CF10" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5CD4CF10" Ref="R1604"  Part="1" 
-F 0 "R1604" V 1330 5380 50  0000 R CNN
-F 1 "100" V 1370 5520 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 1370 5520 50  0001 C CNN
-F 3 "" H 1370 5520 50  0001 C CNN
-F 4 "0603" V 1470 5520 50  0001 C CNN "display_footprint"
-F 5 "1%" V 1570 5520 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 1670 5520 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 1670 5920 60  0001 C CNN "Digi-Key PN"
-	1    1370 5520
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	1960 5420 2780 5420
 Wire Wire Line
@@ -677,9 +545,9 @@ Connection ~ 1960 5420
 Wire Wire Line
 	1520 5520 2660 5520
 Connection ~ 2660 5520
-Text GLabel 1220 5420 0    50   BiDi ~ 0
+Text GLabel 1520 5420 0    50   BiDi ~ 0
 TEMP_I2C_SDA
-Text GLabel 1220 5520 0    50   Input ~ 0
+Text GLabel 1520 5520 0    50   Input ~ 0
 TEMP_I2C_SCL
 $Comp
 L power:GND #PWR01604
@@ -774,13 +642,13 @@ Wire Wire Line
 	1750 6300 2070 6300
 Wire Wire Line
 	1750 6300 1750 6340
-Text GLabel 1220 3570 0    50   BiDi ~ 0
+Text GLabel 1520 3570 0    50   BiDi ~ 0
 TEMP_I2C_SDA
-Text GLabel 1220 3670 0    50   Input ~ 0
+Text GLabel 1520 3670 0    50   Input ~ 0
 TEMP_I2C_SCL
-Text GLabel 1230 1730 0    50   BiDi ~ 0
+Text GLabel 1530 1730 0    50   BiDi ~ 0
 TEMP_I2C_SDA
-Text GLabel 1230 1830 0    50   Input ~ 0
+Text GLabel 1530 1830 0    50   Input ~ 0
 TEMP_I2C_SCL
 Text Notes 3780 1890 0    50   ~ 0
 Place near Input MOSFETs
@@ -790,24 +658,18 @@ U 1 1 5CB2647F
 P 3190 2030
 F 0 "U1603" H 2940 2480 50  0000 C CNN
 F 1 "MCP9804_DFN" H 3590 2480 50  0000 C CNN
-F 2 "Package_DFN_QFN:DFN-8-1EP_3x3mm_P0.65mm_EP1.55x2.4mm" H 2090 1530 50  0001 C CNN
+F 2 "Housings_DFN_QFN:DFN-8-1EP_3x3mm_Pitch0.65mm" H 2090 1530 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/22203b.pdf" H 2940 2480 50  0001 C CNN
 F 4 "MCP9804T-E/MCCT-ND" H 3190 2030 50  0001 C CNN "Digi-Key PN"
 	1    3190 2030
 	1    0    0    -1  
 $EndComp
-Text GLabel 3590 2030 2    50   Output ~ 0
-Input_FET_Overtemp
-Text GLabel 3580 3870 2    50   Output ~ 0
-POS3P3_Buck_Overtemp
-Text GLabel 3580 5720 2    50   Output ~ 0
-Ambient_Overtemp
 $Comp
 L Custom_Library:I2C_Address DOC1601
 U 1 1 5CD6FF85
 P 4070 2420
 F 0 "DOC1601" H 4070 2670 60  0001 C CNN
-F 1 "I2C_Address" H 3620 2420 60  0000 L CNN
+F 1 "0x18" H 3620 2420 60  0000 L CNN
 F 2 "" H 4070 2770 60  0001 C CNN
 F 3 "" H 4070 2770 60  0001 C CNN
 	1    4070 2420
@@ -818,7 +680,7 @@ L Custom_Library:I2C_Address DOC1602
 U 1 1 5CD7067E
 P 4070 4270
 F 0 "DOC1602" H 4070 4520 60  0001 C CNN
-F 1 "I2C_Address" H 3620 4270 60  0000 L CNN
+F 1 "0x19" H 3620 4270 60  0000 L CNN
 F 2 "" H 4070 4620 60  0001 C CNN
 F 3 "" H 4070 4620 60  0001 C CNN
 	1    4070 4270
@@ -829,7 +691,7 @@ L Custom_Library:I2C_Address DOC1603
 U 1 1 5CD70A85
 P 4070 6120
 F 0 "DOC1603" H 4070 6370 60  0001 C CNN
-F 1 "I2C_Address" H 3620 6120 60  0000 L CNN
+F 1 "0x1A" H 3620 6120 60  0000 L CNN
 F 2 "" H 4070 6470 60  0001 C CNN
 F 3 "" H 4070 6470 60  0001 C CNN
 	1    4070 6120
@@ -938,50 +800,6 @@ Wire Wire Line
 	7670 1540 7670 1830
 Wire Wire Line
 	7670 1830 7790 1830
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5D0E5B6D
-P 6380 1730
-AR Path="/5BAAE2B6/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5D0E5B6D" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5D0E5B6D" Ref="R1613"  Part="1" 
-F 0 "R1613" V 6340 1590 50  0000 R CNN
-F 1 "100" V 6380 1730 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 6380 1730 50  0001 C CNN
-F 3 "" H 6380 1730 50  0001 C CNN
-F 4 "0603" V 6480 1730 50  0001 C CNN "display_footprint"
-F 5 "1%" V 6580 1730 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 6680 1730 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 6680 2130 60  0001 C CNN "Digi-Key PN"
-	1    6380 1730
-	0    -1   1    0   
-$EndComp
-$Comp
-L Custom_Library:R_Custom R?
-U 1 1 5D0E5B7B
-P 6380 1830
-AR Path="/5BAAE2B6/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5BB6CF6D/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5BBE424C/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5BAAE1DC/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5CAD2DA3/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5B3E071A/5D0E5B7B" Ref="R?"  Part="1" 
-AR Path="/5CD3BBF8/5D0E5B7B" Ref="R1614"  Part="1" 
-F 0 "R1614" V 6340 1690 50  0000 R CNN
-F 1 "100" V 6380 1830 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" H 6380 1830 50  0001 C CNN
-F 3 "" H 6380 1830 50  0001 C CNN
-F 4 "0603" V 6480 1830 50  0001 C CNN "display_footprint"
-F 5 "1%" V 6580 1830 50  0001 C CNN "Tolerance"
-F 6 "1/10W" V 6680 1830 50  0001 C CNN "Wattage"
-F 7 "A106047CT-ND" H 6680 2230 60  0001 C CNN "Digi-Key PN"
-	1    6380 1830
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	6970 1730 7790 1730
 Wire Wire Line
@@ -1083,9 +901,9 @@ Wire Wire Line
 	6760 2610 7080 2610
 Wire Wire Line
 	6760 2610 6760 2650
-Text GLabel 6230 1730 0    50   BiDi ~ 0
+Text GLabel 6530 1730 0    50   BiDi ~ 0
 TEMP_I2C_SDA
-Text GLabel 6230 1830 0    50   Input ~ 0
+Text GLabel 6530 1830 0    50   Input ~ 0
 TEMP_I2C_SCL
 Text Notes 8780 1890 0    50   ~ 0
 Place near +3.3V BCKP Supply
@@ -1095,20 +913,18 @@ U 1 1 5D0E5D63
 P 8190 2030
 F 0 "U1604" H 7940 2480 50  0000 C CNN
 F 1 "MCP9804_DFN" H 8590 2480 50  0000 C CNN
-F 2 "Package_DFN_QFN:DFN-8-1EP_3x3mm_P0.65mm_EP1.55x2.4mm" H 7090 1530 50  0001 C CNN
+F 2 "Housings_DFN_QFN:DFN-8-1EP_3x3mm_Pitch0.65mm" H 7090 1530 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/22203b.pdf" H 7940 2480 50  0001 C CNN
 F 4 "MCP9804T-E/MCCT-ND" H 8190 2030 50  0001 C CNN "Digi-Key PN"
 	1    8190 2030
 	1    0    0    -1  
 $EndComp
-Text GLabel 8590 2030 2    50   Output ~ 0
-POS3P3_BCKP_Overtemp
 $Comp
 L Custom_Library:I2C_Address DOC1604
 U 1 1 5D0E5D70
 P 9070 2420
 F 0 "DOC1604" H 9070 2670 60  0001 C CNN
-F 1 "I2C_Address" H 8620 2420 60  0000 L CNN
+F 1 "0x1B" H 8620 2420 60  0000 L CNN
 F 2 "" H 9070 2770 60  0001 C CNN
 F 3 "" H 9070 2770 60  0001 C CNN
 	1    9070 2420
@@ -1160,7 +976,7 @@ Wire Wire Line
 	2700 4070 2700 4170
 Connection ~ 2700 4170
 $Comp
-L Custom_Library:+3.3V #PWR01614
+L power:+3.3V #PWR01614
 U 1 1 5D134038
 P 2700 3890
 F 0 "#PWR01614" H 2700 3740 50  0001 C CNN
@@ -1195,7 +1011,7 @@ Wire Wire Line
 	2700 5820 2700 6020
 Connection ~ 2700 6020
 $Comp
-L Custom_Library:+3.3V #PWR01610
+L power:+3.3V #PWR01610
 U 1 1 5D13F22F
 P 2620 5840
 F 0 "#PWR01610" H 2620 5690 50  0001 C CNN
@@ -1225,7 +1041,7 @@ Wire Wire Line
 Wire Wire Line
 	7710 2330 7790 2330
 $Comp
-L Custom_Library:+3.3V #PWR01628
+L power:+3.3V #PWR01628
 U 1 1 5D146C63
 P 7710 2050
 F 0 "#PWR01628" H 7710 1900 50  0001 C CNN
@@ -1244,4 +1060,10 @@ Wire Wire Line
 Connection ~ 7710 2130
 Wire Wire Line
 	7710 2130 7710 2230
+Text Notes 540  690  0    100  ~ 20
+15. Temperature Sensors
+NoConn ~ 3590 2030
+NoConn ~ 3580 3870
+NoConn ~ 3580 5720
+NoConn ~ 8590 2030
 $EndSCHEMATC
