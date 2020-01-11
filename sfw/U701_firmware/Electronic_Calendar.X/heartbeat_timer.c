@@ -66,12 +66,6 @@ void __ISR(_TIMER_1_VECTOR, IPL6SRS) hearbeatTimerISR(void) {
     // Clear the watchdog timer
     kickTheDog();
     
-    // Clear the deadman timer
-    holdThumbTighter();
-    
-    // Check to see if DMT actually cleared
-    verifyThumbTightEnough();
-
     // Toggle heartbeat LED
     HEARTBEAT_LED_PIN = !(HEARTBEAT_LED_PIN);
     

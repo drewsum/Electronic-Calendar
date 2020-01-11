@@ -60,7 +60,6 @@ void usbUartTrasmitDmaInitialize(void) {
     
     // Set DMA0 source location
     DCH0SSA = KVA_TO_PA((void *) &usb_uart_tx_buffer);
-    // DCH0SSA = KVA_TO_PA((void *) "Hello World\r\n");
     // Set DMA0 destination location
     DCH0DSA = KVA_TO_PA((void*)&U3TXREG);
     // Set source size to size of transmit buffer

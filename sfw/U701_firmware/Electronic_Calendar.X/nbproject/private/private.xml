@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/gpio_setup.c</file>
             <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/usb_uart_rx_lookup_table.c</file>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/power_saving.c</file>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/adc.c</file>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/gpio_setup.h</file>
-            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/pin_macros.h</file>
+            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/heartbeat_timer.c</file>
+            <file>file:/C:/Users/Drew%20Maatman/Documents/KiCad%20Projects/Projects/Electronic-Calendar/sfw/U701_firmware/Electronic_Calendar.X/usb_uart.c</file>
         </group>
     </open-files>
 </project-private>
