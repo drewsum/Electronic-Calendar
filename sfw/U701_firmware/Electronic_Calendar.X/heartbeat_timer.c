@@ -76,13 +76,13 @@ void __ISR(_TIMER_1_VECTOR, IPL6SRS) hearbeatTimerISR(void) {
     device_on_time_counter++;
         
     // reset temp I2C peripheral, per device errata
-    if (getTempI2COnState) tempI2COnStateReset();
+    // if (getTempI2COnState) tempI2COnStateReset();
     
     // request new temp sensor data
     MCP9804_start_flag = 1;
         
     // clear Timer 1
-    TMR1 = 0;
+    // TMR1 = 0;
     
     // Clear interrupt flag
     clearInterruptFlag(Timer1);
