@@ -19,22 +19,22 @@ void MCP9804TempSensorInitialize(void) {
     length = 3;    
     TEMP_I2C_MasterWrite(output_data_array, length, INPUT_TEMP_SENS_ADDR, &TEMP_I2C_STATUS);
     while(TEMP_I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
-    if (TEMP_I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.temp_i2c_stall = 1;
+    if (TEMP_I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.pos12_temp_error = 1;
     
     // Write config data to config register on pos3p3 power supply temp sensor
     TEMP_I2C_MasterWrite(output_data_array, length, POS3P3_TEMP_SENS_ADDR, &TEMP_I2C_STATUS);
     while(TEMP_I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
-    if (TEMP_I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.temp_i2c_stall = 1;
+    if (TEMP_I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.pos3p3_temp_error = 1;
     
     // Write config data to config register on ambient temp sensor
     TEMP_I2C_MasterWrite(output_data_array, length, AMB_TEMP_SENS_ADDR, &TEMP_I2C_STATUS);
     while(TEMP_I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
-    if (TEMP_I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.temp_i2c_stall = 1;
+    if (TEMP_I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.ambient_temp_error = 1;
     
     // Write config data to config register on bckp temp sensor
     TEMP_I2C_MasterWrite(output_data_array, length, BCKP_TEMP_SENS_ADDR, &TEMP_I2C_STATUS);
     while(TEMP_I2C_STATUS == TEMP_I2C_MESSAGE_PENDING);
-    if (TEMP_I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.temp_i2c_stall = 1;
+    if (TEMP_I2C_STATUS != TEMP_I2C_MESSAGE_COMPLETE) error_handler.flags.diode_temp_error = 1;
     
 }
 
@@ -69,7 +69,7 @@ void MCP9804AcquisitionHandler(void) {
         error_handler.flags.temp_i2c_stall = 1;
         
         // reset the I2C controller if it's enabled
-        if (getTempI2COnState) tempI2COnStateReset();
+        // if (getTempI2COnState) tempI2COnStateReset();
         
     }
     
