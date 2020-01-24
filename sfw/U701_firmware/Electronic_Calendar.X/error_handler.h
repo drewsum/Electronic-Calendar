@@ -52,7 +52,7 @@ volatile uint32_t update_error_leds_flag;
         uint8_t temp_I2C_bus_collision;
         uint8_t temp_i2c_stall;
         uint8_t ambient_temp_error;
-        uint8_t diode_temp_error;
+        uint8_t bckp_temp_error;
         uint8_t pos3p3_temp_error;
         uint8_t pos12_temp_error;
         uint8_t WDT_timeout;
@@ -63,7 +63,7 @@ volatile uint32_t update_error_leds_flag;
 
     uint8_t flag_array[ERROR_HANDLER_NUM_FLAGS];
     
-} error_handler;
+} error_handler __attribute__((persistent));
     
 // this array holds the names of error handler flags
 const char *  error_handler_flag_names[] = {

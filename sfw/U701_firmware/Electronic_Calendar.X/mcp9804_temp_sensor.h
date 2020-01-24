@@ -44,17 +44,6 @@
 #define MCP9804_CONFIG_LSB          0
 #define MCP9804_CONFIG_MSB          0
 
-
-// This structure holds calculated temperatures and raw 14 bit conversion results
-struct MCP9804_temp_results_s {
-    
-    uint8_t input_temp_raw[2];
-    uint8_t pos3p3_temp_raw[2];
-    uint8_t amb_temp_raw[2];
-    uint8_t bckp_temp_raw[2];
-
-} MCP9804_temp_results;
-
 // This is a flag that starts the acquisition of data from the MCP9804 sensors
 volatile uint32_t MCP9804_start_flag;
 
@@ -67,8 +56,8 @@ double MCP9804BytesToFloat(uint8_t input_array[2]);
 // This function accesses temperature sensor data over I2C
 void MCP9804AcquisitionHandler(void);
 
-// This function converts all raw byte value of temperature into floats for telemetry
-void MCP9804BatchConvert(void);
+// this function gets data over I2C from the given I2C address and returns the converted temperature
+double MCP9804GetTemperature(uint8_t input_address);
 
 #endif /* _MCP9804_TEMP_SENSOR_H */
 

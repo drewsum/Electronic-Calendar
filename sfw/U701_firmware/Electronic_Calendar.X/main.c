@@ -105,8 +105,8 @@ void main(void) {
     printf("    USB UART Initialized, DMA buffer method used\n\r");
     
     // Setup error handling
-    errorHandlerInitialize();
-    printf("    Error Handler Initialized\n\r");
+    // errorHandlerInitialize();
+    // printf("    Error Handler Initialized\n\r");
     
     
     // Setup heartbeat timer
@@ -163,12 +163,6 @@ void main(void) {
     // Main loop
     while (true) {
         
-        // check to see if a clock fail has occurred and latch it
-        clockFailCheck();
-        
-        // check to see if a PGOOD fault has occurred and latch it
-        powerGoodCheck();
-        
         // set LEDs if changes are pending
         if (led_update_request_flag) {
          
@@ -191,6 +185,14 @@ void main(void) {
             
         }
         
+        
+        // check to see if a clock fail has occurred and latch it
+        clockFailCheck();
+        
+        // check to see if a PGOOD fault has occurred and latch it
+        powerGoodCheck();
+        
+        
         // check to see if we have a new usb uart string to parse
         // if (usb_uart_rx_parse_request && strlen(usb_uart_rx_buffer) > 2) {
         if (usb_uart_rx_parse_request) {
@@ -210,14 +212,8 @@ void main(void) {
         }
         
         // if we need to grab new temp sensor data, do it
-        if (MCP9804_start_flag) {
+        if (MCP9804_start_flag) MCP9804AcquisitionHandler();
             
-        MCP9804AcquisitionHandler();
-        
-        // convert raw temp results into floating point telemetry
-        MCP9804BatchConvert();
-        
-        }
             
         
         // update minimum and maximum measured telemetry
